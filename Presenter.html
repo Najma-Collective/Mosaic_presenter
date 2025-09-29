@@ -1528,6 +1528,198 @@
                     }
                 ]
             },
+            b2TestLesson: {
+                id: "b2-integrated-skill-check",
+                label: "B2 integrated skills test prep",
+                meta: {
+                    eyebrow: "Upper-Intermediate English",
+                    descriptor: "Lesson flow for preparing learners to succeed on a B2 integrated skills assessment.",
+                    pageTitle: "B2 Integrated Skills Test Prep – Instructional Slides"
+                },
+                sections: [
+                    { title: "Welcome & Goals", slideKeys: ["b2-hero", "b2-objectives"] },
+                    { title: "Test Overview", slideKeys: ["b2-format", "b2-reading-strategies", "b2-reading-quiz"] },
+                    { title: "Listening & Grammar", slideKeys: ["b2-listening-process", "b2-grammar-review"] },
+                    { title: "Productive Tasks", slideKeys: ["b2-writing-task", "b2-speaking"] },
+                    { title: "Plan & Reflect", slideKeys: ["b2-next-steps"] }
+                ],
+                slides: [
+                    {
+                        key: "b2-hero",
+                        type: "hero",
+                        title: "B2 Integrated Skills Test Preparation",
+                        subtitle: "Confidence, strategy, and practice for success.",
+                        image: {
+                            src: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Adult students reviewing notes together in a bright classroom"
+                        },
+                        nav: { hidePrev: true, nextLabel: "Begin", nextIcon: "fas fa-play" }
+                    },
+                    {
+                        key: "b2-objectives",
+                        type: "content",
+                        icon: "fas fa-bullseye",
+                        title: "Lesson Objectives",
+                        image: {
+                            src: "https://images.pexels.com/photos/5453079/pexels-photo-5453079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Teacher pointing to a learning objective on an interactive board"
+                        },
+                        body: [
+                            "Set the tone for collaborative preparation and clarify what learners can expect during the session.",
+                            "Anchor the lesson in concrete strategies the group can reuse when studying independently."
+                        ],
+                        list: [
+                            "Clarify the structure and timing of each B2 exam component.",
+                            "Practise applying targeted reading and listening strategies to authentic prompts.",
+                            "Plan next steps for productive tasks—writing and speaking."
+                        ]
+                    },
+                    {
+                        key: "b2-format",
+                        type: "cards",
+                        icon: "fas fa-layer-group",
+                        title: "Test Format Snapshot",
+                        subtitle: "Four papers, one integrated skills journey.",
+                        cards: [
+                            { icon: "fas fa-book-open", title: "Reading", description: "Multiple texts with gap fill, matching, and short answer tasks." },
+                            { icon: "fas fa-headphones", title: "Listening", description: "Four parts covering monologues and dialogues at natural speed." },
+                            { icon: "fas fa-pen-nib", title: "Writing", description: "Two tasks: formal response and opinion-based composition." },
+                            { icon: "fas fa-comments", title: "Speaking", description: "Interview, collaborative task, and individual turn with examiner." }
+                        ]
+                    },
+                    {
+                        key: "b2-reading-strategies",
+                        type: "content",
+                        icon: "fas fa-eye",
+                        title: "Reading Strategies",
+                        image: {
+                            src: "https://images.pexels.com/photos/716411/pexels-photo-716411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Student highlighting key phrases in a reading passage"
+                        },
+                        body: [
+                            "Guide learners to approach texts with purpose: skim for structure, scan for detail, and infer tone using context clues.",
+                            "Model annotation techniques that keep track of opinions, contrasts, and references within long passages."
+                        ],
+                        list: [
+                            { icon: "fas fa-stopwatch", strong: "Timed Skimming:", text: "Spend 60–90 seconds scanning headings and topic sentences." },
+                            { icon: "fas fa-highlighter", strong: "Signal Language:", text: "Mark discourse markers (however, in addition) that guide meaning." },
+                            { icon: "fas fa-link", strong: "Reference Chains:", text: "Connect pronouns back to key nouns to avoid distractors." }
+                        ]
+                    },
+                    {
+                        key: "b2-reading-quiz",
+                        type: "quiz",
+                        icon: "fas fa-question-circle",
+                        title: "Quick Check: Reading Moves",
+                        questions: [
+                            {
+                                id: "b2-read-q1",
+                                prompt: "When you skim a new text at B2 level, what is your primary goal?",
+                                options: [
+                                    { value: "detail", label: "Understand every unfamiliar word before moving on." },
+                                    { value: "overview", label: "Capture the main idea and organisation of the text." },
+                                    { value: "translate", label: "Translate each paragraph into your first language." }
+                                ],
+                                answer: "overview",
+                                correctFeedback: "Yes—skimming helps you map the structure before focusing on detail.",
+                                incorrectFeedback: "Try again. Skimming is about big-picture organisation, not translation."
+                            },
+                            {
+                                id: "b2-read-q2",
+                                prompt: "What should you track while scanning for specific information?",
+                                options: [
+                                    { value: "grammar", label: "Every grammar tense used in the text." },
+                                    { value: "keywords", label: "Keywords, numbers, and names connected to the question." },
+                                    { value: "opinions", label: "Only the author’s personal opinions." }
+                                ],
+                                answer: "keywords",
+                                correctFeedback: "Exactly. Let the question stem guide which words and details to scan for.",
+                                incorrectFeedback: "Look again—effective scanning follows the question’s keywords."
+                            }
+                        ]
+                    },
+                    {
+                        key: "b2-listening-process",
+                        type: "process",
+                        icon: "fas fa-wave-square",
+                        title: "Listening Strategy Flow",
+                        body: [
+                            "Support learners to manage cognitive load during fast, authentic audio clips. Encourage note-taking shorthand that captures relationships, not full sentences."
+                        ],
+                        steps: [
+                            { title: "Preview & Predict", description: "Underline task words and predict possible vocabulary or situations before audio starts." },
+                            { title: "First Listen", description: "Focus on gist and the attitude of speakers; avoid pausing for missed words." },
+                            { title: "Second Listen", description: "Confirm answers, track paraphrased information, and update notes with keywords." }
+                        ]
+                    },
+                    {
+                        key: "b2-grammar-review",
+                        type: "content",
+                        icon: "fas fa-gears",
+                        title: "Grammar in Use",
+                        image: {
+                            src: "https://images.pexels.com/photos/5905715/pexels-photo-5905715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Notebook showing grammar examples highlighted in different colours"
+                        },
+                        body: [
+                            "Refresh language structures that frequently appear across the test papers and reinforce accuracy expectations for B2.",
+                            "Encourage peer correction and explain how complex grammar supports clarity in spoken and written responses."
+                        ],
+                        list: [
+                            "Relative clauses for adding precise detail in descriptions.",
+                            "Complex comparatives to show nuanced differences (\"far more reliable than\").",
+                            "Modal verbs in past forms for speculation and deduction (\"may have been\")."
+                        ]
+                    },
+                    {
+                        key: "b2-writing-task",
+                        type: "content",
+                        icon: "fas fa-pen-to-square",
+                        title: "Writing Task Toolkit",
+                        image: {
+                            src: "https://images.pexels.com/photos/3184665/pexels-photo-3184665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Learner drafting an essay outline with sticky notes"
+                        },
+                        body: [
+                            "Demonstrate how to analyse the task rubric, generate ideas quickly, and plan paragraphs using linking language.",
+                            "Share a success checklist covering tone, organisation, and accurate language."
+                        ],
+                        list: [
+                            { icon: "fas fa-list-ol", strong: "Plan (5 minutes):", text: "Brainstorm purpose, audience, and two supporting points." },
+                            { icon: "fas fa-align-left", strong: "Draft (20 minutes):", text: "Write clear topic sentences and use cohesive devices between ideas." },
+                            { icon: "fas fa-search", strong: "Review (5 minutes):", text: "Check for register, complex sentences, and accurate grammar." }
+                        ]
+                    },
+                    {
+                        key: "b2-speaking",
+                        type: "cards",
+                        icon: "fas fa-microphone",
+                        title: "Speaking Paper Highlights",
+                        subtitle: "Use interaction to demonstrate range and control.",
+                        cards: [
+                            { icon: "fas fa-user", title: "Interview", description: "Respond to personal and abstract prompts using extended answers." },
+                            { icon: "fas fa-people-arrows", title: "Collaborative Task", description: "Negotiate solutions, inviting your partner’s ideas and building on them." },
+                            { icon: "fas fa-lightbulb", title: "Long Turn", description: "Compare visuals, speculate, and give reasons using linking phrases." }
+                        ],
+                        list: [
+                            "Show active listening: paraphrase your partner and ask follow-up questions.",
+                            "Use opinion phrases (\"From my perspective\") and hedging (\"It seems like\")."
+                        ]
+                    },
+                    {
+                        key: "b2-next-steps",
+                        type: "reflection",
+                        icon: "fas fa-road",
+                        title: "Next Steps & Practice Log",
+                        fields: [
+                            { id: "b2-action-reading", label: "Reading strategy I will practise this week", placeholder: "e.g., Timed skimming using a news article" },
+                            { id: "b2-action-listening", label: "Listening resource & focus", placeholder: "e.g., Podcast episode – focus on note-taking symbols" },
+                            { id: "b2-action-productive", label: "Productive task to schedule", placeholder: "e.g., Write Task 2 response or record a speaking rehearsal" }
+                        ],
+                        nav: { nextAction: "restart", nextLabel: "Finish & Restart", nextIcon: "fas fa-check" }
+                    }
+                ]
+            },
             eltLesson: {
                 id: "elt-lesson-template",
                 label: "ELT descriptive language lesson",
