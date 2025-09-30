@@ -1,52 +1,38 @@
-# Reusing the lesson shell for new materials
+# Building lessons in Mosaic Presenter
 
-The mentoring deck is now driven entirely from the `lessonLibrary` object defined near the bottom of `mentoring.html`. Each top-level key inside `lessonLibrary` becomes a selectable template in the "Lesson template" dropdown, and the associated data is what renders the slides, slide map, and saved notes.
+The Presenter shell reads from the `lessonLibrary` object near the end of `Presenter.html`. Each top-level key inside `lessonLibrary` becomes a selectable template in the **Lesson template** dropdown, and the associated data drives the slides, slide map, and saved notes for that lesson.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L1433-L1516】
 
-## 1. Add a new lesson entry
-1. Open `mentoring/mentoring.html` and locate the `lessonLibrary` constant (search for `const lessonLibrary = {`).
-2. Duplicate one of the existing lesson objects (e.g., `mentoringOrientation` or `eltLessonTemplate`) and give it a new key. The key is what the selector uses internally.
-3. Update the `id`, `label`, and `meta` fields:
-   - `id` should be unique; it is also used to namespace saved slide notes in `localStorage`.
-   - `label` is what appears in the dropdown.
-   - `meta` is optional but lets you customise the eyebrow text, descriptive line under the title, and the browser page title.【F:mentoring/mentoring.html†L1209-L1268】【F:mentoring/mentoring.html†L1739-L1767】
+## 1. Add or update a lesson entry
+1. Open `Presenter.html` and locate the `const lessonLibrary = { ... }` declaration.【F:Presenter.html†L1433-L1446】
+2. Duplicate one of the existing lesson objects (for example `mentoringOrientation`, `eltLesson`, or `questionTypesShowcase`) and give it a new key; that key is what the selector uses internally.【F:Presenter.html†L1433-L1948】
+3. Update the `id`, `label`, and optional `meta` fields:
+   - `id` must be unique and is appended to the notes storage key so each lesson keeps separate annotations.【F:Presenter.html†L1433-L1446】【F:Presenter.html†L2709-L2734】
+   - `label` is the name that appears in the dropdown control.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4355-L4378】
+   - `meta` lets you customise the eyebrow text, descriptor, and browser page title for the active lesson.【F:Presenter.html†L1437-L1443】【F:Presenter.html†L4306-L4342】
 
-## 2. Define slide map sections (optional but recommended)
-Set the `sections` array to control the headings that appear in the slide map. Each section needs a `title` and the `slideKeys` that belong to it. The keys must match the `key` property for each slide configuration you define later.【F:mentoring/mentoring.html†L1218-L1234】
+## 2. Organise slide map sections
+Populate the `sections` array to define the headings shown in the slide map. Each section requires a `title` and `slideKeys` list. Keys must match the `key` property on each slide configuration so the slide map can group entries correctly.【F:Presenter.html†L1445-L1471】【F:Presenter.html†L2735-L2814】
 
-## 3. Supply the slide configurations
-Add objects to the `slides` array in the order you want them to appear. Every slide object needs at least a unique `key` and a `type`. Supported slide types and their fields are:
+## 3. Configure slides
+Add objects to the `slides` array in the order they should appear. Every slide object needs a unique `key` and `type`. If `type` is omitted the renderer falls back to the standard content layout.【F:Presenter.html†L1472-L1939】【F:Presenter.html†L4255-L4291】
 
-### `hero`
-Use for the opening slide. Accepts `title`, `subtitle`, and an `image` object with `src` and `alt`. The optional `nav.hidePrev`, `nav.nextLabel`, and `nav.nextIcon` fields customise the navigation buttons.【F:mentoring/mentoring.html†L1235-L1252】【F:mentoring/mentoring.html†L3102-L3131】
+### Standard slide types
+- `hero`: Supports `icon`, `title`, `subtitle`, and an `image` object with `src`/`alt` attributes. Ideal for opening slides.【F:Presenter.html†L3258-L3280】【F:Presenter.html†L1472-L1501】
+- `content`: Renders paragraphs, optional imagery, and flexible lists. Provide `body`, `image`, `list`, and `listStyle` as needed.【F:Presenter.html†L3281-L3313】【F:Presenter.html†L1518-L1608】
+- `cards`: Supply a `cards` array where each item can include `icon`, `title`, and `description` to display multiple callouts.【F:Presenter.html†L3963-L4000】【F:Presenter.html†L1609-L1684】
+- `story`: Combines quotes, narrative paragraphs, and optional process/outcome callouts defined on the slide object.【F:Presenter.html†L4001-L4043】【F:Presenter.html†L1685-L1754】
+- `process`: Use for multi-step flows. Add a `steps` array with `title`, `description`, and optional `duration` for each stage.【F:Presenter.html†L4044-L4099】【F:Presenter.html†L1755-L1838】
+- `quiz`: Configure single-answer questions by providing `questions`, each with `id`, `prompt`, `options`, `answer`, and feedback strings. Buttons are wired automatically.【F:Presenter.html†L4100-L4161】【F:Presenter.html†L1502-L1547】
+- `reflection`: Creates rich text areas for planning notes. Pass a `fields` array where each field defines `id`, `label`, and optional `placeholder`. You can also override the navigation via the slide’s `nav` settings.【F:Presenter.html†L4162-L4254】【F:Presenter.html†L1839-L1939】
 
-### `content`
-Displays rich text with optional media and lists. Fields include `icon`, `title`, `subtitle`, `image`, `body` (array of paragraphs), and `list`. Lists can be a simple array of strings or an array of objects with `letter`/`text` pairs when you set `listStyle` (e.g., SMART goals).【F:mentoring/mentoring.html†L1253-L1397】【F:mentoring/mentoring.html†L2800-L2827】
+### Interactive assessment slide types
+- `gapfill`: Build a `paragraph` array that mixes text segments with gap objects. Gaps support `answer`, `options`, `placeholder`, `feedbackTitle`, and `explanation`. Optional `instructions`, `feedbackSummary`, `checkLabel`, and `resetLabel` customise the experience.【F:Presenter.html†L3314-L3463】【F:Presenter.html†L1949-L1995】
+- `ranking`: Provide an `items` array where each entry has an `id`, `label`, `correctRank`, and optional `explanation`. You can seed an `initialOrder`, override control labels, and supply custom instructions.【F:Presenter.html†L3464-L3648】【F:Presenter.html†L1996-L2042】
+- `grouping`: Define `categories` and `items`. Each item references a target category via `item.category` and can include an explanatory string. Placeholders, summaries, and button labels are configurable just like the other activities.【F:Presenter.html†L3649-L3795】【F:Presenter.html†L2043-L2132】
+- `matching`: Set up `columns` and `rows` to create a multiple-choice grid. Each row specifies `correctColumn` and optional `explanation`. Global instructions, feedback summaries, and button labels work the same way.【F:Presenter.html†L3796-L3962】【F:Presenter.html†L2133-L2219】
 
-### `cards`
-Shows multiple callouts side by side. Provide `cards`, an array of objects with optional `icon`, `title`, and `description` values.【F:mentoring/mentoring.html†L1362-L1379】【F:mentoring/mentoring.html†L2829-L2856】
+## 4. Launch your lesson
+Open `Presenter.html` in a browser and use the **Lesson template** dropdown to select your lesson. The slide deck, slide map, and notes panel refresh instantly when you change templates.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4311-L4342】
 
-### `story`
-Combines a quote, imagery, and short narrative paragraphs. The optional `process` and `outcome` objects display bold labels followed by explanatory text.【F:mentoring/mentoring.html†L1370-L1388】【F:mentoring/mentoring.html†L2858-L2896】
-
-### `process`
-Ideal for flows or procedures. Supply `steps`, an array where each item can include `title`, `description`, and `duration`. Any `image` or `body` content you add will render above the stepper.【F:mentoring/mentoring.html†L1398-L1427】【F:mentoring/mentoring.html†L2898-L2953】
-
-### `quiz`
-Renders single-answer checks for understanding. Each question needs an `id`, `prompt`, `options` (array of `{ value, label }`), an `answer`, plus feedback strings. The button wiring is automatic.【F:mentoring/mentoring.html†L1428-L1458】【F:mentoring/mentoring.html†L2955-L3023】
-
-### `reflection`
-Creates textarea fields for planning notes or reflections. Pass a `fields` array where each entry can define `id`, `label`, and `placeholder`. Navigation defaults to a "Finish & Restart" button on the last slide, but you can override it via the slide's `nav` object.【F:mentoring/mentoring.html†L1677-L1695】【F:mentoring/mentoring.html†L3025-L3073】
-
-If you omit a `type`, the slide falls back to the `content` renderer.
-
-## 4. Load your lesson in the browser
-Once your lesson object is defined:
-1. Open `mentoring/mentoring.html` in a browser.
-2. Use the "Lesson template" dropdown at the top of the page to switch to your new template. The slides, slide map, and notes panel will regenerate instantly with your data.【F:mentoring/mentoring.html†L1160-L1168】【F:mentoring/mentoring.html†L3146-L3204】
-
-Because notes are stored per lesson `id`, switching templates will keep your annotations separate for each lesson. You can export and import notes from the toolbar as before.【F:mentoring/mentoring.html†L2549-L2569】
-
-## 5. Reusing assets
-Images are linked by URL. If you need local assets, host them in the repository (e.g., under `mentoring/assets`) and point the `image.src` to the relative path. Make sure every image has meaningful alt text for accessibility.
-
-With these steps, you can duplicate the mentoring deck structure for any other instructional purpose—ELT lessons, professional learning sessions, or completely different subjects—without editing the rendering logic.
+## 5. Notes and reusable assets
+Slide notes are stored per-lesson in `localStorage` using the lesson `id`, so switching templates keeps annotations separate. Import/export controls remain available from the toolbar. Images can point to remote URLs or relative paths in the repository; be sure to include descriptive alt text for accessibility.【F:Presenter.html†L2687-L2734】【F:Presenter.html†L1455-L1939】

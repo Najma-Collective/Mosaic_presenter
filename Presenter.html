@@ -737,6 +737,230 @@
             border-radius: var(--radius);
             margin-bottom: var(--space-6);
         }
+        .activity-feedback {
+            margin-top: var(--space-6);
+            background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+            border: 1px solid rgba(122, 132, 113, 0.16);
+            border-radius: var(--radius);
+            padding: clamp(20px, 3vw, 32px);
+            display: grid;
+            gap: var(--space-4);
+        }
+        .activity-feedback__summary {
+            margin: 0;
+            font-weight: 700;
+            color: var(--forest-shadow);
+        }
+        .activity-feedback__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: var(--space-4);
+        }
+        .activity-feedback__item {
+            border-left: 4px solid color-mix(in srgb, var(--secondary-sage) 70%, var(--primary-sage) 30%);
+            padding-left: var(--space-4);
+        }
+        .activity-feedback__item strong { color: var(--forest-shadow); }
+        .activity-feedback__item p { margin: 0; }
+        .activity-feedback__item p + p { margin-top: var(--space-2); }
+        .activity-feedback__item.is-incorrect { border-left-color: #C76B5E; }
+        .activity-feedback__item.is-correct { border-left-color: var(--secondary-sage); }
+
+        /* Gap-fill activity */
+        .gapfill-activity {
+            display: grid;
+            gap: var(--space-5);
+        }
+        .gapfill-paragraph {
+            background: color-mix(in srgb, var(--warm-cream) 85%, white 15%);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            border-radius: var(--radius);
+            padding: clamp(20px, 3vw, 32px);
+            font-size: var(--step-1);
+            line-height: 1.8;
+        }
+        .gapfill-gap {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 var(--space-1);
+            border-radius: 10px;
+            padding: 0 var(--space-1);
+        }
+        .gapfill-gap select {
+            min-width: 140px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 2px solid var(--tertiary-sage);
+            background: #fff;
+            font-weight: 600;
+            color: var(--primary-sage);
+            cursor: pointer;
+            transition: border-color var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+        .gapfill-gap select:focus-visible {
+            border-color: var(--secondary-sage);
+            box-shadow: var(--ring);
+            outline: none;
+        }
+        .gapfill-gap.is-correct select {
+            border-color: color-mix(in srgb, var(--secondary-sage) 80%, var(--primary-sage) 20%);
+            background: color-mix(in srgb, var(--soft-white) 85%, var(--secondary-sage) 15%);
+        }
+        .gapfill-gap.is-incorrect select {
+            border-color: #C76B5E;
+            background: color-mix(in srgb, #fff 85%, #F7D8D6 15%);
+        }
+
+        /* Ranking activity */
+        .ranking-activity {
+            display: grid;
+            gap: var(--space-5);
+        }
+        .ranking-intro { margin: 0; font-size: var(--step-0); color: var(--ink-muted); }
+        .ranking-list {
+            list-style: none;
+            counter-reset: ranking-counter;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: var(--space-4);
+        }
+        .ranking-item {
+            counter-increment: ranking-counter;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            padding-left: clamp(56px, 6vw, 72px);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+            box-shadow: var(--shadow-1);
+        }
+        .ranking-item::before {
+            content: counter(ranking-counter);
+            position: absolute;
+            left: clamp(16px, 2vw, 24px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--secondary-sage) 85%, var(--primary-sage) 15%);
+            color: var(--soft-white);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+        .ranking-item.is-correct {
+            border-color: color-mix(in srgb, var(--secondary-sage) 80%, var(--primary-sage) 20%);
+            background: color-mix(in srgb, var(--soft-white) 85%, var(--secondary-sage) 15%);
+        }
+        .ranking-item.is-incorrect {
+            border-color: #C76B5E;
+            background: color-mix(in srgb, #fff 85%, #F7D8D6 15%);
+        }
+        .ranking-label { font-weight: 700; font-size: var(--step-0); color: var(--forest-shadow); }
+        .ranking-controls { display: inline-flex; gap: var(--space-2); }
+        .ranking-controls button {
+            min-height: var(--target-min);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--tertiary-sage);
+            background: #fff;
+            color: var(--primary-sage);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background var(--dur-2) var(--ease-ambient), border-color var(--dur-2) var(--ease-ambient), transform var(--dur-1) var(--ease-ambient);
+        }
+        .ranking-controls button:hover { background: var(--hover-sage); }
+        .ranking-controls button:focus-visible { outline: none; box-shadow: var(--ring); }
+
+        /* Grouping activity */
+        .grouping-activity {
+            display: grid;
+            gap: var(--space-5);
+        }
+        .grouping-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+        @media (min-width: 720px) {
+            .grouping-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        .grouping-item {
+            display: grid;
+            gap: var(--space-2);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            padding: var(--space-4);
+        }
+        .grouping-item strong { font-size: var(--step-0); }
+        .grouping-item.is-correct { border-color: color-mix(in srgb, var(--secondary-sage) 80%, var(--primary-sage) 20%); background: color-mix(in srgb, var(--soft-white) 85%, var(--secondary-sage) 15%); }
+        .grouping-item.is-incorrect { border-color: #C76B5E; background: color-mix(in srgb, #fff 85%, #F7D8D6 15%); }
+
+        /* Matching grid activity */
+        .matching-activity { display: grid; gap: var(--space-5); }
+        .matching-table-wrapper { overflow-x: auto; }
+        .matching-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 520px;
+        }
+        .matching-table th,
+        .matching-table td {
+            padding: var(--space-3);
+            border-bottom: 1px solid rgba(122, 132, 113, 0.16);
+            text-align: center;
+        }
+        .matching-table thead th {
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-size: 0.85rem;
+            color: var(--ink-muted);
+        }
+        .matching-table tbody th {
+            text-align: left;
+            color: var(--forest-shadow);
+            font-weight: 700;
+        }
+        .matching-table tbody tr.is-correct { background: color-mix(in srgb, var(--soft-white) 85%, var(--secondary-sage) 15%); }
+        .matching-table tbody tr.is-incorrect { background: color-mix(in srgb, #fff 85%, #F7D8D6 15%); }
+        .matching-radio { display: inline-flex; align-items: center; justify-content: center; cursor: pointer; width: 28px; height: 28px; }
+        .matching-radio input { display: none; }
+        .matching-radio-indicator {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 2px solid var(--tertiary-sage);
+            transition: border-color var(--dur-2) var(--ease-ambient), transform var(--dur-1) var(--ease-ambient);
+            position: relative;
+        }
+        .matching-radio:hover .matching-radio-indicator { border-color: var(--primary-sage); }
+        .matching-radio input:checked + .matching-radio-indicator {
+            border-color: var(--primary-sage);
+        }
+        .matching-radio-indicator::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: inherit;
+            background: var(--primary-sage);
+            transform: scale(0);
+            transition: transform var(--dur-2) var(--ease-ambient);
+        }
+        .matching-radio input:checked + .matching-radio-indicator::after { transform: scale(1); }
+
+        @media (max-width: 767px) {
+            .ranking-item { flex-direction: column; align-items: flex-start; }
+            .ranking-controls { justify-content: flex-start; }
+        }
         .slide-list {
             list-style: none;
             padding-left: 0;
@@ -1710,6 +1934,220 @@
                             { id: "elt-followup", label: "Follow-up idea", placeholder: "Capture homework, extension, or differentiation options." }
                         ],
                         nav: { nextAction: "restart", nextLabel: "Finish & Restart", nextIcon: "fas fa-check" }
+                    }
+                ]
+            },
+            questionTypesShowcase: {
+                id: "question-types-showcase",
+                label: "Interactive question types",
+                meta: {
+                    eyebrow: "Mosaic Presenter",
+                    descriptor: "Interactive templates converted from standalone activities.",
+                    pageTitle: "Interactive Question Types – Instructional Slides"
+                },
+                sections: [
+                    { title: "Gap-fill dropdown", slideKeys: ["roman-gapfill"] },
+                    { title: "Ordering task", slideKeys: ["writing-process-ranking"] },
+                    { title: "Categorising language", slideKeys: ["discourse-grouping"] },
+                    { title: "Multiple-choice grid", slideKeys: ["states-of-matter-grid"] }
+                ],
+                slides: [
+                    {
+                        key: "roman-gapfill",
+                        type: "gapfill",
+                        icon: "fas fa-landmark",
+                        title: "The Roman Empire",
+                        subtitle: "Fill in the gaps to complete each sentence.",
+                        image: {
+                            src: "https://images.pexels.com/photos/208636/pexels-photo-208636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Exterior of the Roman Colosseum at sunset"
+                        },
+                        instructions: "Select the best answer in each dropdown before checking your work.",
+                        paragraph: [
+                            { type: "text", content: "The famous amphitheater in the center of the city, known for its gladiator contests, is called the " },
+                            {
+                                type: "gap",
+                                id: "roman-gap-1",
+                                answer: "Colosseum",
+                                options: ["Colosseum", "Pantheon", "Forum"],
+                                feedbackTitle: "The famous amphitheater is the Colosseum",
+                                explanation: "The Colosseum was the largest amphitheater ever built and was used for gladiatorial contests and public spectacles."
+                            },
+                            { type: "text", content: ". The governing and advisory assembly of the aristocracy in the ancient Roman Republic was the " },
+                            {
+                                type: "gap",
+                                id: "roman-gap-2",
+                                answer: "Senate",
+                                options: ["Assembly", "Senate", "Council"],
+                                feedbackTitle: "The governing assembly was the Senate",
+                                explanation: "The Senate was a permanent and powerful institution in the Roman government, composed of the most prominent men in Rome."
+                            },
+                            { type: "text", content: ". A " },
+                            {
+                                type: "gap",
+                                id: "roman-gap-3",
+                                answer: "legion",
+                                options: ["battalion", "phalanx", "legion"],
+                                feedbackTitle: "The largest Roman army unit was the legion",
+                                explanation: "The legion was the backbone of the Roman military machine, known for its discipline and effectiveness in battle."
+                            },
+                            { type: "text", content: " was the largest unit of the Roman army. According to legend, the city of " },
+                            {
+                                type: "gap",
+                                id: "roman-gap-4",
+                                answer: "Rome",
+                                options: ["Athens", "Carthage", "Rome"],
+                                feedbackTitle: "The city founded by twins was Rome",
+                                explanation: "The founding myth of Rome, involving twin brothers Romulus and Remus, is a cornerstone of Roman culture and history."
+                            },
+                            { type: "text", content: " was founded by the twin brothers Romulus and Remus in 753 BC." }
+                        ]
+                    },
+                    {
+                        key: "writing-process-ranking",
+                        type: "ranking",
+                        icon: "fas fa-list-ol",
+                        title: "The Writing Process",
+                        subtitle: "Arrange the stages from first to last.",
+                        image: {
+                            src: "https://images.pexels.com/photos/670723/pexels-photo-670723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Writer planning ideas with a notebook and laptop"
+                        },
+                        instructions: "Move the stages until they are in the correct order, then check your work.",
+                        items: [
+                            {
+                                id: "prewriting",
+                                label: "Prewriting",
+                                correctRank: 1,
+                                explanation: "Prewriting is the first step, where you brainstorm ideas, research, and outline your topic before you begin writing."
+                            },
+                            {
+                                id: "drafting",
+                                label: "Drafting",
+                                correctRank: 2,
+                                explanation: "Drafting is the second stage. This is where you write the first version of your text, focusing on getting your ideas down on paper."
+                            },
+                            {
+                                id: "revising",
+                                label: "Revising",
+                                correctRank: 3,
+                                explanation: "Revising is the third stage. Here, you review the content, organization, and clarity of your draft, making significant changes to improve the overall piece."
+                            },
+                            {
+                                id: "editing",
+                                label: "Editing & Proofreading",
+                                correctRank: 4,
+                                explanation: "Editing & Proofreading is the fourth stage. After revising the big picture, you focus on correcting grammar, spelling, punctuation, and formatting errors."
+                            },
+                            {
+                                id: "publishing",
+                                label: "Publishing",
+                                correctRank: 5,
+                                explanation: "Publishing is the final stage, where you share your polished work with its intended audience."
+                            }
+                        ],
+                        initialOrder: ["revising", "prewriting", "publishing", "drafting", "editing"],
+                        checkLabel: "Check order",
+                        resetLabel: "Reset order"
+                    },
+                    {
+                        key: "discourse-grouping",
+                        type: "grouping",
+                        icon: "fas fa-language",
+                        title: "Discourse Markers",
+                        subtitle: "Categorise these linking words by their function.",
+                        image: {
+                            src: "https://images.pexels.com/photos/159775/books-college-library-learning-159775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Stacks of books on a library table"
+                        },
+                        instructions: "Assign each linking word to the function it best represents.",
+                        categories: [
+                            { id: "addition", label: "Addition" },
+                            { id: "contrast", label: "Contrast" },
+                            { id: "consequence", label: "Consequence" }
+                        ],
+                        items: [
+                            {
+                                id: "however",
+                                label: "However",
+                                category: "contrast",
+                                explanation: "'However' is used to introduce a statement that contrasts with or seems to contradict something that has been said previously."
+                            },
+                            {
+                                id: "furthermore",
+                                label: "Furthermore",
+                                category: "addition",
+                                explanation: "'Furthermore' adds another piece of information to the point you are making."
+                            },
+                            {
+                                id: "therefore",
+                                label: "Therefore",
+                                category: "consequence",
+                                explanation: "'Therefore' indicates that a statement is the logical consequence of the one that came before it."
+                            },
+                            {
+                                id: "on-the-other-hand",
+                                label: "On the other hand",
+                                category: "contrast",
+                                explanation: "'On the other hand' is used to present a contrasting point of view."
+                            },
+                            {
+                                id: "as-a-result",
+                                label: "As a result",
+                                category: "consequence",
+                                explanation: "'As a result' shows that the second statement is a result of the first."
+                            },
+                            {
+                                id: "moreover",
+                                label: "Moreover",
+                                category: "addition",
+                                explanation: "'Moreover' is used to introduce a piece of information that adds to or supports the previous one."
+                            }
+                        ]
+                    },
+                    {
+                        key: "states-of-matter-grid",
+                        type: "matching",
+                        icon: "fas fa-table",
+                        title: "States of Matter",
+                        subtitle: "Match each state to its defining properties.",
+                        image: {
+                            src: "https://images.pexels.com/photos/590570/pexels-photo-590570.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Scientist working with a glowing plasma ball"
+                        },
+                        instructions: "For each state of matter, choose the property that best fits before checking your answers.",
+                        columns: [
+                            { id: "col-1", label: "Definite Shape & Volume" },
+                            { id: "col-2", label: "Definite Volume" },
+                            { id: "col-3", label: "Indefinite Shape & Volume" },
+                            { id: "col-4", label: "Ionized Gas" }
+                        ],
+                        rows: [
+                            {
+                                id: "solid",
+                                label: "Solid",
+                                correctColumn: "col-1",
+                                explanation: "A solid's particles are tightly packed in a fixed structure, giving it a definite shape and volume."
+                            },
+                            {
+                                id: "liquid",
+                                label: "Liquid",
+                                correctColumn: "col-2",
+                                explanation: "A liquid's particles can slide past one another, allowing it to take the shape of its container, but its volume remains constant."
+                            },
+                            {
+                                id: "gas",
+                                label: "Gas",
+                                correctColumn: "col-3",
+                                explanation: "A gas's particles are far apart and move randomly, allowing it to expand to fill any container, giving it an indefinite shape and volume."
+                            },
+                            {
+                                id: "plasma",
+                                label: "Plasma",
+                                correctColumn: "col-4",
+                                explanation: "Plasma is a superheated state of matter where atoms are stripped of their electrons, creating an ionized gas."
+                            }
+                        ]
                     }
                 ]
             }
@@ -2752,6 +3190,71 @@
             return list;
         }
 
+        function createActivityControls({ onCheck, onReset, checkLabel = "Check answers", resetLabel = "Reset" } = {}) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "activity-controls animate-on-scroll";
+
+            let checkButton = null;
+            if (typeof onCheck === "function") {
+                checkButton = document.createElement("button");
+                checkButton.type = "button";
+                checkButton.className = "activity-btn";
+                checkButton.textContent = checkLabel;
+                checkButton.addEventListener("click", onCheck);
+                wrapper.appendChild(checkButton);
+            }
+
+            let resetButton = null;
+            if (typeof onReset === "function") {
+                resetButton = document.createElement("button");
+                resetButton.type = "button";
+                resetButton.className = "activity-btn secondary";
+                resetButton.textContent = resetLabel;
+                resetButton.addEventListener("click", onReset);
+                wrapper.appendChild(resetButton);
+            }
+
+            return { wrapper, checkButton, resetButton };
+        }
+
+        function createActivityFeedback(initialSummary = "Check your work to see detailed feedback.") {
+            const wrapper = document.createElement("div");
+            wrapper.className = "activity-feedback animate-on-scroll";
+
+            const summary = document.createElement("p");
+            summary.className = "activity-feedback__summary";
+            summary.textContent = initialSummary;
+
+            const list = document.createElement("ul");
+            list.className = "activity-feedback__list";
+
+            wrapper.appendChild(summary);
+            wrapper.appendChild(list);
+
+            return { wrapper, summary, list };
+        }
+
+        function formatOrdinal(value) {
+            const number = Number(value);
+            if (!Number.isFinite(number)) {
+                return String(value);
+            }
+            const absValue = Math.abs(number);
+            const suffix = absValue % 100 >= 11 && absValue % 100 <= 13
+                ? "th"
+                : { 1: "st", 2: "nd", 3: "rd" }[absValue % 10] || "th";
+            return `${number}${suffix}`;
+        }
+
+        function shuffleArray(sourceArray = []) {
+            const array = Array.from(sourceArray);
+            for (let i = array.length - 1; i > 0; i -= 1) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
         function renderHeroSlide(slideElement, config) {
             if (config.image) {
                 const wrapper = document.createElement("div");
@@ -2805,6 +3308,655 @@
             if (list) {
                 content.appendChild(list);
             }
+            slideElement.appendChild(content);
+        }
+
+        function renderGapfillSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content gapfill-activity";
+
+            if (config.image) {
+                const img = createImageElement(config.image);
+                if (img) {
+                    img.classList.add("animate-on-scroll");
+                    content.appendChild(img);
+                }
+            }
+
+            if (config.instructions) {
+                content.appendChild(createParagraph(config.instructions));
+            }
+
+            const paragraph = document.createElement("p");
+            paragraph.className = "gapfill-paragraph animate-on-scroll";
+            const segments = Array.isArray(config.paragraph) ? config.paragraph : [];
+            const gaps = [];
+            segments.forEach((segment, index) => {
+                if (typeof segment === "string") {
+                    paragraph.appendChild(document.createTextNode(segment));
+                } else if (segment && segment.type === "text") {
+                    paragraph.appendChild(document.createTextNode(segment.content || ""));
+                } else if (segment && segment.type === "gap") {
+                    const wrapper = document.createElement("span");
+                    wrapper.className = "gapfill-gap";
+                    const select = document.createElement("select");
+                    const placeholder = document.createElement("option");
+                    placeholder.value = "";
+                    placeholder.textContent = segment.placeholder || "Select an option";
+                    select.appendChild(placeholder);
+                    (segment.options || []).forEach((option) => {
+                        const optionElement = document.createElement("option");
+                        if (typeof option === "string") {
+                            optionElement.value = option;
+                            optionElement.textContent = option;
+                        } else if (option && typeof option === "object") {
+                            optionElement.value = option.value;
+                            optionElement.textContent = option.label || option.value;
+                        }
+                        select.appendChild(optionElement);
+                    });
+                    wrapper.appendChild(select);
+                    paragraph.appendChild(wrapper);
+                    gaps.push({
+                        wrapper,
+                        select,
+                        data: {
+                            id: segment.id || `${config.key || "gapfill"}-gap-${index + 1}`,
+                            answer: segment.answer,
+                            feedbackTitle: segment.feedbackTitle || segment.label,
+                            explanation: segment.explanation
+                        }
+                    });
+                }
+            });
+            content.appendChild(paragraph);
+
+            const initialSummary = config.feedbackSummary || "Check your work to see detailed feedback.";
+            const feedback = createActivityFeedback(initialSummary);
+
+            const evaluate = () => {
+                let attempted = 0;
+                let correct = 0;
+                feedback.list.innerHTML = "";
+                gaps.forEach((gap) => {
+                    const { wrapper, select, data } = gap;
+                    wrapper.classList.remove("is-correct", "is-incorrect");
+                    const value = select.value;
+                    if (!value) {
+                        return;
+                    }
+                    attempted += 1;
+                    const isCorrect = value === data.answer;
+                    if (isCorrect) {
+                        correct += 1;
+                    }
+                    wrapper.classList.add(isCorrect ? "is-correct" : "is-incorrect");
+                    const selectedLabel = select.options[select.selectedIndex]?.textContent || value;
+
+                    const item = document.createElement("li");
+                    item.className = `activity-feedback__item ${isCorrect ? "is-correct" : "is-incorrect"}`;
+
+                    const title = document.createElement("p");
+                    const strong = document.createElement("strong");
+                    strong.textContent = data.feedbackTitle || `Blank ${data.id}`;
+                    title.appendChild(strong);
+                    item.appendChild(title);
+
+                    const yourAnswer = document.createElement("p");
+                    yourAnswer.innerHTML = `<strong>Your answer:</strong> ${selectedLabel}`;
+                    item.appendChild(yourAnswer);
+
+                    if (!isCorrect) {
+                        const correctAnswer = document.createElement("p");
+                        correctAnswer.innerHTML = `<strong>Correct answer:</strong> ${data.answer}`;
+                        item.appendChild(correctAnswer);
+                    }
+
+                    if (data.explanation) {
+                        const explanation = document.createElement("p");
+                        explanation.textContent = data.explanation;
+                        item.appendChild(explanation);
+                    }
+
+                    feedback.list.appendChild(item);
+                });
+
+                feedback.summary.textContent = attempted
+                    ? `You answered ${correct} of ${attempted} correctly.`
+                    : "Choose an answer for at least one blank to see feedback.";
+            };
+
+            const reset = () => {
+                gaps.forEach((gap) => {
+                    gap.wrapper.classList.remove("is-correct", "is-incorrect");
+                    gap.select.value = "";
+                });
+                feedback.list.innerHTML = "";
+                feedback.summary.textContent = initialSummary;
+            };
+
+            const controls = createActivityControls({
+                onCheck: evaluate,
+                onReset: reset,
+                checkLabel: config.checkLabel || "Check answers",
+                resetLabel: config.resetLabel || "Reset"
+            });
+
+            content.appendChild(controls.wrapper);
+            content.appendChild(feedback.wrapper);
+
+            slideElement.appendChild(content);
+        }
+
+        function renderRankingSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content ranking-activity";
+
+            if (config.image) {
+                const img = createImageElement(config.image);
+                if (img) {
+                    img.classList.add("animate-on-scroll");
+                    content.appendChild(img);
+                }
+            }
+
+            if (config.instructions) {
+                const intro = document.createElement("p");
+                intro.className = "ranking-intro animate-on-scroll";
+                intro.textContent = config.instructions;
+                content.appendChild(intro);
+            }
+
+            const list = document.createElement("ol");
+            list.className = "ranking-list";
+
+            const items = Array.isArray(config.items) ? config.items : [];
+            const itemMap = new Map();
+            items.forEach((item) => {
+                if (item && item.id) {
+                    itemMap.set(item.id, item);
+                }
+            });
+            const correctOrder = items
+                .slice()
+                .sort((a, b) => (a.correctRank ?? 0) - (b.correctRank ?? 0))
+                .map((item) => item.id);
+            const initialOrder = Array.isArray(config.initialOrder) && config.initialOrder.length === correctOrder.length
+                ? config.initialOrder.filter((id) => itemMap.has(id))
+                : shuffleArray(correctOrder);
+            const resolvedOrder = initialOrder.length === correctOrder.length ? initialOrder : correctOrder;
+
+            const createListItem = (item) => {
+                const li = document.createElement("li");
+                li.className = "ranking-item animate-on-scroll";
+                li.dataset.itemId = item.id;
+
+                const label = document.createElement("span");
+                label.className = "ranking-label";
+                label.textContent = item.label;
+                li.appendChild(label);
+
+                const controls = document.createElement("div");
+                controls.className = "ranking-controls";
+
+                const moveUp = document.createElement("button");
+                moveUp.type = "button";
+                moveUp.textContent = "Move up";
+                moveUp.setAttribute("aria-label", `Move ${item.label} up`);
+                moveUp.addEventListener("click", () => {
+                    const previous = li.previousElementSibling;
+                    if (previous) {
+                        list.insertBefore(li, previous);
+                    }
+                });
+
+                const moveDown = document.createElement("button");
+                moveDown.type = "button";
+                moveDown.textContent = "Move down";
+                moveDown.setAttribute("aria-label", `Move ${item.label} down`);
+                moveDown.addEventListener("click", () => {
+                    const next = li.nextElementSibling?.nextElementSibling;
+                    if (next) {
+                        list.insertBefore(li, next);
+                    } else {
+                        list.appendChild(li);
+                    }
+                });
+
+                controls.appendChild(moveUp);
+                controls.appendChild(moveDown);
+                li.appendChild(controls);
+                return li;
+            };
+
+            resolvedOrder.forEach((id) => {
+                const item = itemMap.get(id);
+                if (item) {
+                    list.appendChild(createListItem(item));
+                }
+            });
+
+            const baselineOrder = Array.from(list.children).map((child) => child.dataset.itemId);
+            content.appendChild(list);
+
+            const initialSummary = config.feedbackSummary || "Check your work to see detailed feedback.";
+            const feedback = createActivityFeedback(initialSummary);
+
+            const evaluate = () => {
+                const itemsInDom = Array.from(list.children);
+                let correct = 0;
+                feedback.list.innerHTML = "";
+                itemsInDom.forEach((element, index) => {
+                    const itemId = element.dataset.itemId;
+                    const item = itemMap.get(itemId);
+                    if (!item) {
+                        return;
+                    }
+                    element.classList.remove("is-correct", "is-incorrect");
+                    const expectedId = correctOrder[index];
+                    const isCorrect = expectedId === itemId;
+                    if (isCorrect) {
+                        correct += 1;
+                    }
+                    element.classList.add(isCorrect ? "is-correct" : "is-incorrect");
+
+                    const detail = document.createElement("li");
+                    detail.className = `activity-feedback__item ${isCorrect ? "is-correct" : "is-incorrect"}`;
+
+                    const heading = document.createElement("p");
+                    const strong = document.createElement("strong");
+                    strong.textContent = item.label;
+                    heading.appendChild(strong);
+                    detail.appendChild(heading);
+
+                    const yourAnswer = document.createElement("p");
+                    yourAnswer.innerHTML = `<strong>Your order:</strong> ${formatOrdinal(index + 1)}`;
+                    detail.appendChild(yourAnswer);
+
+                    if (!isCorrect) {
+                        const correctAnswer = document.createElement("p");
+                        const targetPosition = item.correctRank ?? (correctOrder.indexOf(itemId) + 1);
+                        correctAnswer.innerHTML = `<strong>Correct order:</strong> ${formatOrdinal(targetPosition)}`;
+                        detail.appendChild(correctAnswer);
+                    }
+
+                    if (item.explanation) {
+                        const explanation = document.createElement("p");
+                        explanation.textContent = item.explanation;
+                        detail.appendChild(explanation);
+                    }
+
+                    feedback.list.appendChild(detail);
+                });
+
+                const attempted = itemsInDom.length;
+                feedback.summary.textContent = attempted
+                    ? `You placed ${correct} of ${attempted} stages correctly.`
+                    : "Reorder the stages to check your understanding.";
+            };
+
+            const reset = () => {
+                baselineOrder.forEach((itemId) => {
+                    const element = Array.from(list.children).find((child) => child.dataset.itemId === itemId);
+                    if (element) {
+                        element.classList.remove("is-correct", "is-incorrect");
+                        list.appendChild(element);
+                    }
+                });
+                feedback.list.innerHTML = "";
+                feedback.summary.textContent = initialSummary;
+            };
+
+            const controls = createActivityControls({
+                onCheck: evaluate,
+                onReset: reset,
+                checkLabel: config.checkLabel || "Check order",
+                resetLabel: config.resetLabel || "Reset order"
+            });
+
+            content.appendChild(controls.wrapper);
+            content.appendChild(feedback.wrapper);
+
+            slideElement.appendChild(content);
+        }
+
+        function renderGroupingSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content grouping-activity";
+
+            if (config.image) {
+                const img = createImageElement(config.image);
+                if (img) {
+                    img.classList.add("animate-on-scroll");
+                    content.appendChild(img);
+                }
+            }
+
+            if (config.instructions) {
+                content.appendChild(createParagraph(config.instructions));
+            }
+
+            const grid = document.createElement("div");
+            grid.className = "grouping-grid";
+
+            const categories = Array.isArray(config.categories) ? config.categories : [];
+            const categoryMap = new Map();
+            categories.forEach((category) => {
+                if (category && category.id) {
+                    categoryMap.set(category.id, category.label || category.id);
+                }
+            });
+
+            const items = Array.isArray(config.items) ? config.items : [];
+            const itemEntries = [];
+            items.forEach((item, index) => {
+                if (!item || !item.id) {
+                    return;
+                }
+                const wrapper = document.createElement("div");
+                wrapper.className = "grouping-item animate-on-scroll";
+
+                const label = document.createElement("strong");
+                label.textContent = item.label;
+                wrapper.appendChild(label);
+
+                const select = document.createElement("select");
+                select.id = `${slideElement.id}-grouping-${index + 1}`;
+                const placeholder = document.createElement("option");
+                placeholder.value = "";
+                placeholder.textContent = config.placeholder || "Choose a category";
+                select.appendChild(placeholder);
+                categories.forEach((category) => {
+                    const option = document.createElement("option");
+                    option.value = category.id;
+                    option.textContent = category.label;
+                    select.appendChild(option);
+                });
+                wrapper.appendChild(select);
+                grid.appendChild(wrapper);
+                itemEntries.push({ wrapper, select, item });
+            });
+
+            content.appendChild(grid);
+
+            const initialSummary = config.feedbackSummary || "Check your work to see detailed feedback.";
+            const feedback = createActivityFeedback(initialSummary);
+
+            const evaluate = () => {
+                let attempted = 0;
+                let correct = 0;
+                feedback.list.innerHTML = "";
+                itemEntries.forEach(({ wrapper, select, item }) => {
+                    wrapper.classList.remove("is-correct", "is-incorrect");
+                    const value = select.value;
+                    if (!value) {
+                        return;
+                    }
+                    attempted += 1;
+                    const isCorrect = value === item.category;
+                    if (isCorrect) {
+                        correct += 1;
+                    }
+                    wrapper.classList.add(isCorrect ? "is-correct" : "is-incorrect");
+
+                    const detail = document.createElement("li");
+                    detail.className = `activity-feedback__item ${isCorrect ? "is-correct" : "is-incorrect"}`;
+
+                    const heading = document.createElement("p");
+                    const strong = document.createElement("strong");
+                    strong.textContent = item.label;
+                    heading.appendChild(strong);
+                    detail.appendChild(heading);
+
+                    const yourAnswer = document.createElement("p");
+                    yourAnswer.innerHTML = `<strong>Your category:</strong> ${categoryMap.get(value) || value}`;
+                    detail.appendChild(yourAnswer);
+
+                    if (!isCorrect) {
+                        const correctAnswer = document.createElement("p");
+                        correctAnswer.innerHTML = `<strong>Correct category:</strong> ${categoryMap.get(item.category) || item.category}`;
+                        detail.appendChild(correctAnswer);
+                    }
+
+                    if (item.explanation) {
+                        const explanation = document.createElement("p");
+                        explanation.textContent = item.explanation;
+                        detail.appendChild(explanation);
+                    }
+
+                    feedback.list.appendChild(detail);
+                });
+
+                feedback.summary.textContent = attempted
+                    ? `You sorted ${correct} of ${attempted} items correctly.`
+                    : "Choose a category for at least one item to see feedback.";
+            };
+
+            const reset = () => {
+                itemEntries.forEach(({ wrapper, select }) => {
+                    wrapper.classList.remove("is-correct", "is-incorrect");
+                    select.value = "";
+                });
+                feedback.list.innerHTML = "";
+                feedback.summary.textContent = initialSummary;
+            };
+
+            const controls = createActivityControls({
+                onCheck: evaluate,
+                onReset: reset,
+                checkLabel: config.checkLabel || "Check categories",
+                resetLabel: config.resetLabel || "Reset"
+            });
+
+            content.appendChild(controls.wrapper);
+            content.appendChild(feedback.wrapper);
+
+            slideElement.appendChild(content);
+        }
+
+        function renderMatchingSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content matching-activity";
+
+            if (config.image) {
+                const img = createImageElement(config.image);
+                if (img) {
+                    img.classList.add("animate-on-scroll");
+                    content.appendChild(img);
+                }
+            }
+
+            if (config.instructions) {
+                content.appendChild(createParagraph(config.instructions));
+            }
+
+            const tableWrapper = document.createElement("div");
+            tableWrapper.className = "matching-table-wrapper";
+            const table = document.createElement("table");
+            table.className = "matching-table animate-on-scroll";
+
+            const columns = Array.isArray(config.columns) ? config.columns : [];
+            const rows = Array.isArray(config.rows) ? config.rows : [];
+            const columnMap = new Map(columns.map((column) => [column.id, column.label]));
+
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            const blankHeader = document.createElement("th");
+            blankHeader.scope = "col";
+            blankHeader.textContent = "";
+            headerRow.appendChild(blankHeader);
+            columns.forEach((column) => {
+                const th = document.createElement("th");
+                th.scope = "col";
+                th.textContent = column.label;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            const rowEntries = [];
+            rows.forEach((row, rowIndex) => {
+                const tr = document.createElement("tr");
+                tr.dataset.correctColumn = row.correctColumn;
+
+                const th = document.createElement("th");
+                th.scope = "row";
+                th.textContent = row.label;
+                tr.appendChild(th);
+
+                columns.forEach((column) => {
+                    const td = document.createElement("td");
+                    const label = document.createElement("label");
+                    label.className = "matching-radio";
+
+                    const input = document.createElement("input");
+                    input.type = "radio";
+                    input.name = `${slideElement.id}-row-${rowIndex + 1}`;
+                    input.value = column.id;
+
+                    const indicator = document.createElement("span");
+                    indicator.className = "matching-radio-indicator";
+
+                    label.appendChild(input);
+                    label.appendChild(indicator);
+                    td.appendChild(label);
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+                rowEntries.push({ row, element: tr });
+            });
+            table.appendChild(tbody);
+            tableWrapper.appendChild(table);
+            content.appendChild(tableWrapper);
+
+            const initialSummary = config.feedbackSummary || "Check your work to see detailed feedback.";
+            const feedback = createActivityFeedback(initialSummary);
+
+            const evaluate = () => {
+                let attempted = 0;
+                let correct = 0;
+                feedback.list.innerHTML = "";
+                rowEntries.forEach(({ row, element }) => {
+                    element.classList.remove("is-correct", "is-incorrect");
+                    const selected = element.querySelector("input[type=\"radio\"]:checked");
+                    if (!selected) {
+                        return;
+                    }
+                    attempted += 1;
+                    const isCorrect = selected.value === row.correctColumn;
+                    if (isCorrect) {
+                        correct += 1;
+                    }
+                    element.classList.add(isCorrect ? "is-correct" : "is-incorrect");
+
+                    const detail = document.createElement("li");
+                    detail.className = `activity-feedback__item ${isCorrect ? "is-correct" : "is-incorrect"}`;
+
+                    const heading = document.createElement("p");
+                    const strong = document.createElement("strong");
+                    strong.textContent = row.label;
+                    heading.appendChild(strong);
+                    detail.appendChild(heading);
+
+                    const yourAnswer = document.createElement("p");
+                    yourAnswer.innerHTML = `<strong>Your answer:</strong> ${columnMap.get(selected.value) || selected.value}`;
+                    detail.appendChild(yourAnswer);
+
+                    if (!isCorrect) {
+                        const correctAnswer = document.createElement("p");
+                        correctAnswer.innerHTML = `<strong>Correct answer:</strong> ${columnMap.get(row.correctColumn) || row.correctColumn}`;
+                        detail.appendChild(correctAnswer);
+                    }
+
+                    if (row.explanation) {
+                        const explanation = document.createElement("p");
+                        explanation.textContent = row.explanation;
+                        detail.appendChild(explanation);
+                    }
+
+                    feedback.list.appendChild(detail);
+                });
+
+                feedback.summary.textContent = attempted
+                    ? `You answered ${correct} of ${attempted} correctly.`
+                    : "Select an answer for at least one row to see feedback.";
+            };
+
+            const reset = () => {
+                rowEntries.forEach(({ element }) => {
+                    element.classList.remove("is-correct", "is-incorrect");
+                    element.querySelectorAll("input[type=\"radio\"]").forEach((input) => {
+                        input.checked = false;
+                    });
+                });
+                feedback.list.innerHTML = "";
+                feedback.summary.textContent = initialSummary;
+            };
+
+            const controls = createActivityControls({
+                onCheck: evaluate,
+                onReset: reset,
+                checkLabel: config.checkLabel || "Check answers",
+                resetLabel: config.resetLabel || "Reset"
+            });
+
+            content.appendChild(controls.wrapper);
+            content.appendChild(feedback.wrapper);
+
             slideElement.appendChild(content);
         }
 
@@ -3101,6 +4253,18 @@
             switch (config.type) {
                 case "hero":
                     renderHeroSlide(slideElement, config);
+                    break;
+                case "gapfill":
+                    renderGapfillSlide(slideElement, config);
+                    break;
+                case "ranking":
+                    renderRankingSlide(slideElement, config);
+                    break;
+                case "grouping":
+                    renderGroupingSlide(slideElement, config);
+                    break;
+                case "matching":
+                    renderMatchingSlide(slideElement, config);
                     break;
                 case "cards":
                     renderCardsSlide(slideElement, config);
