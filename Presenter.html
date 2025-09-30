@@ -12,6 +12,8 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
+    <script src="data/lesson-library.js" defer></script>
+
     <style>
         /* =====================================================================
            Organic Sage UI — Mobile-first, stable, and soothing
@@ -1882,19 +1884,37 @@
         }
 
         async function fetchLessonLibraryData() {
-            const response = await fetch("data/lesson-library.json", {
-                headers: {
-                    "Accept": "application/json"
+            const fallbackData = typeof window !== "undefined" ? window.__LESSON_LIBRARY__ : null;
+            const isFileProtocol = typeof window !== "undefined" && window.location?.protocol === "file:";
+
+            if (isFileProtocol) {
+                if (fallbackData && typeof fallbackData === "object") {
+                    return fallbackData;
                 }
-            });
-            if (!response.ok) {
-                throw new Error(`Lesson library request failed: ${response.status}`);
+                console.warn("Lesson library fallback data was not found when using the file protocol.");
             }
-            const data = await response.json();
-            if (!data || typeof data !== "object" || Array.isArray(data)) {
-                throw new Error("Lesson library response was not a valid object");
+
+            try {
+                const response = await fetch("data/lesson-library.json", {
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Lesson library request failed: ${response.status}`);
+                }
+                const data = await response.json();
+                if (!data || typeof data !== "object" || Array.isArray(data)) {
+                    throw new Error("Lesson library response was not a valid object");
+                }
+                return data;
+            } catch (error) {
+                if (fallbackData && typeof fallbackData === "object") {
+                    console.warn("Falling back to embedded lesson library data due to a fetch error.", error);
+                    return fallbackData;
+                }
+                throw error;
             }
-            return data;
         }
 
         const highlightScope = document.getElementById("activity-container");
