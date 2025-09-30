@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Eco-Activist's Toolkit</title>
-    <!-- External Dependencies: Font Awesome for icons and Google Fonts for typography -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- External Dependencies: Font Awesome Kit for icons and Google Fonts for typography -->
+    <script src="https://kit.fontawesome.com/58a810656e.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Questrial&display=swap" rel="stylesheet">
@@ -2027,12 +2027,137 @@
         .feedback.correct { background: #e9f5ec; color: #28a745; }
         .feedback.incorrect { background: #fbe9eb; color: #dc3545; }
 
+        .annotation-highlight {
+          background: var(--annotation-color, rgba(198, 170, 119, 0.35));
+          color: var(--ink);
+          border-radius: 6px;
+          padding: 0 2px;
+          box-decoration-break: clone;
+          cursor: pointer;
+          transition:
+            box-shadow var(--dur-2) var(--ease-ambient),
+            background var(--dur-2) var(--ease-ambient);
+        }
+        .annotation-highlight:hover {
+          box-shadow: 0 0 0 2px rgba(47, 58, 43, 0.15);
+        }
+        .annotation-highlight:focus-visible {
+          outline: none;
+          box-shadow: var(--ring);
+        }
+
+        #annotation-popover {
+          position: fixed;
+          z-index: 70;
+          display: none;
+          width: min(360px, 92vw);
+          padding: clamp(20px, 3vw, 28px);
+          border-radius: var(--radius-lg);
+          border: 1px solid rgba(122, 132, 113, 0.2);
+          background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+          box-shadow: var(--shadow-3);
+        }
+        #annotation-popover[aria-hidden="true"] {
+          display: none;
+        }
+        .annotation-popover__form {
+          display: grid;
+          gap: var(--space-4);
+        }
+        .annotation-popover__field {
+          display: grid;
+          gap: var(--space-2);
+        }
+        .annotation-popover__label {
+          font-size: var(--step--1);
+          font-weight: 700;
+          color: var(--forest-shadow);
+        }
+        .annotation-popover__textarea {
+          min-height: 96px;
+          resize: vertical;
+          border-radius: var(--radius-sm);
+          border: 1px solid rgba(122, 132, 113, 0.24);
+          padding: var(--space-3);
+          font: inherit;
+          background: rgba(255, 255, 255, 0.92);
+        }
+        .annotation-popover__color-input {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          flex-wrap: wrap;
+        }
+        .annotation-popover__color-picker {
+          width: 48px;
+          height: 48px;
+          border-radius: var(--radius-sm);
+          border: 1px solid rgba(122, 132, 113, 0.24);
+          background: rgba(255, 255, 255, 0.95);
+          cursor: pointer;
+        }
+        .annotation-popover__hint {
+          margin: 0;
+          font-size: var(--step--2);
+          color: var(--ink-muted);
+        }
+        .annotation-popover__actions {
+          display: flex;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+          gap: var(--space-2);
+        }
+
+        #annotation-tooltip {
+          position: fixed;
+          z-index: 60;
+          display: none;
+          max-width: min(320px, 70vw);
+          padding: var(--space-3);
+          border-radius: var(--radius-sm);
+          border: 1px solid rgba(122, 132, 113, 0.24);
+          background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
+          box-shadow: var(--shadow-2);
+          font-size: var(--step--1);
+          color: var(--forest-shadow);
+          pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
     <div id="app-wrapper">
         <div id="activity-shell">
             <main id="activity-container">
+
+                <header class="presentation-header" aria-label="Session tools">
+                    <details class="workspace-menu" id="presentation-tools">
+                        <summary class="workspace-menu__summary" aria-label="Open session tools">
+                            <span class="workspace-menu__summary-icon">
+                                <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                                <span class="visually-hidden">Open session tools</span>
+                            </span>
+                        </summary>
+                        <div class="workspace-menu__panel">
+                            <div class="workspace-tools">
+                                <div class="workspace-tools__header">
+                                    <h2 class="workspace-tools__title">Session tools</h2>
+                                    <p class="workspace-tools__hint">Save or restore your annotated slides.</p>
+                                </div>
+                                <div class="workspace-tools__actions">
+                                    <button type="button" class="activity-btn" id="save-annotations-btn">
+                                        <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save annotations
+                                    </button>
+                                    <button type="button" class="activity-btn secondary" id="load-annotations-btn">
+                                        <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Load annotations
+                                    </button>
+                                    <input type="file" id="load-annotations-input" accept="application/json" hidden>
+                                    <p class="workspace-tools__hint">Loading will replace the current slide content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </header>
 
                 <div id="slides-root">
                     <!-- SLIDE 1: Title Slide -->
@@ -2080,66 +2205,64 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 3: Pre-Task 1 - Core Concepts -->
+                    <!-- SLIDE 3: Vocabulary Matching -->
                     <div class="slide" id="slide-3">
-                        <div class="slide-content layout--columns">
-                            <!-- Activity Type: Linking (Matching words to definitions) -->
-                            <div class="slide-section" id="matching-activity-1">
-                                <div class="section-intro">
-                                    <h3 class="section-intro__title">Part A: Core Concepts</h3>
-                                    <p class="section-intro__descriptor">Match the words to their definitions. Click a word, then click its definition.</p>
-                                </div>
-                                <div class="matching-activity">
-                                    <ul class="matching-list">
-                                        <li class="match-item" data-match="1">1. Petition</li>
-                                        <li class="match-item" data-match="2">2. Boycott</li>
-                                        <li class="match-item" data-match="3">3. Protest</li>
-                                        <li class="match-item" data-match="4">4. Conservation</li>
-                                        <li class="match-item" data-match="5">5. Awareness</li>
-                                    </ul>
-                                    <ul class="matching-list">
-                                        <li class="match-item" data-match="2">a. To refuse to buy, use, or participate in something as a form of protest.</li>
-                                        <li class="match-item" data-match="3">b. A public event where people show their opposition to something.</li>
-                                        <li class="match-item" data-match="5">c. Knowledge or perception of a situation or fact.</li>
-                                        <li class="match-item" data-match="4">d. The protection of animals, plants, and natural resources.</li>
-                                        <li class="match-item" data-match="1">e. A formal written request, typically signed by many people, appealing to authority.</li>
-                                    </ul>
-                                </div>
-                                <div class="feedback"></div>
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-layer-group"></i> Key Campaign Vocabulary</h2>
+                            <div class="section-intro">
+                                <h3 class="section-intro__title">Match the Core Concepts</h3>
+                                <p class="section-intro__descriptor">Match the words to their definitions. Click a word, then click its definition.</p>
                             </div>
+                            <div class="matching-activity" id="matching-activity-1">
+                                <ul class="matching-list">
+                                    <li class="match-item" data-match="1">1. Petition</li>
+                                    <li class="match-item" data-match="2">2. Boycott</li>
+                                    <li class="match-item" data-match="3">3. Protest</li>
+                                    <li class="match-item" data-match="4">4. Conservation</li>
+                                    <li class="match-item" data-match="5">5. Awareness</li>
+                                </ul>
+                                <ul class="matching-list">
+                                    <li class="match-item" data-match="2">a. To refuse to buy, use, or participate in something as a form of protest.</li>
+                                    <li class="match-item" data-match="3">b. A public event where people show their opposition to something.</li>
+                                    <li class="match-item" data-match="5">c. Knowledge or perception of a situation or fact.</li>
+                                    <li class="match-item" data-match="4">d. The protection of animals, plants, and natural resources.</li>
+                                    <li class="match-item" data-match="1">e. A formal written request, typically signed by many people, appealing to authority.</li>
+                                </ul>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+                    </div>
 
-                            <!-- Activity Type: Multiple Choice (Contextual gap-fill) -->
-                            <div class="slide-section" id="mcq-activity-1">
-                                <div class="section-intro">
-                                    <h3 class="section-intro__title">Part B: In Context</h3>
-                                    <p class="section-intro__descriptor">Choose the best word to complete each sentence.</p>
-                                </div>
-                                <div class="interactive-module__steps">
-                                    <p>6. The main goal of their campaign is to raise _______ about the dangers of single-use plastics.
-                                        <select data-answer="awareness"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
-                                    </p>
-                                    <p>7. Thousands of people joined the _______ in the city centre to demand government action on climate change.
-                                        <select data-answer="protest"><option>Select...</option><option>boycott</option><option>protest</option><option>conservation</option></select>
-                                    </p>
-                                    <p>8. Many consumers are starting to _______ brands that use unsustainable palm oil in their products.
-                                        <select data-answer="boycott"><option>Select...</option><option>boycott</option><option>protest</option><option>petition</option></select>
-                                    </p>
-                                    <p>9. The online _______ to save the local forest has already gathered over 50,000 signatures.
-                                        <select data-answer="petition"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
-                                    </p>
-                                    <p>10. The national park is dedicated to the _______ of endangered species and their habitats.
-                                        <select data-answer="conservation"><option>Select...</option><option>boycott</option><option>protest</option><option>conservation</option></select>
-                                    </p>
-                                </div>
-                                <div class="activity-actions">
-                                    <button class="activity-btn" onclick="checkSelectAnswers('mcq-activity-1')">Check Answers</button>
-                                </div>
+                    <!-- SLIDE 4: Contextual Practice -->
+                    <div class="slide" id="slide-4">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-book-open-reader"></i> Words in Action</h2>
+                            <p class="section-intro__descriptor">Choose the best word to complete each sentence.</p>
+                            <div class="interactive-module__steps" id="mcq-activity-1">
+                                <p>6. The main goal of their campaign is to raise _______ about the dangers of single-use plastics.
+                                    <select data-answer="awareness"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
+                                </p>
+                                <p>7. Thousands of people joined the _______ in the city centre to demand government action on climate change.
+                                    <select data-answer="protest"><option>Select...</option><option>boycott</option><option>protest</option><option>conservation</option></select>
+                                </p>
+                                <p>8. Many consumers are starting to _______ brands that use unsustainable palm oil in their products.
+                                    <select data-answer="boycott"><option>Select...</option><option>boycott</option><option>protest</option><option>petition</option></select>
+                                </p>
+                                <p>9. The online _______ to save the local forest has already gathered over 50,000 signatures.
+                                    <select data-answer="petition"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
+                                </p>
+                                <p>10. The national park is dedicated to the _______ of endangered species and their habitats.
+                                    <select data-answer="conservation"><option>Select...</option><option>boycott</option><option>protest</option><option>conservation</option></select>
+                                </p>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkSelectAnswers('mcq-activity-1')">Check Answers</button>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- SLIDE 4: Task 1 - Ranking Actions -->
-                    <div class="slide" id="slide-4">
+
+                    <!-- SLIDE 5: Task 1 - Ranking Actions -->
+                    <div class="slide" id="slide-5">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-arrow-up-9-1"></i> What's Most Effective?</h2>
                             <p class="section-intro__descriptor">With a partner, rank these actions from 1 (most effective) to 5 (least effective) for creating real change. Drag and drop to reorder. Be prepared to justify your ranking.</p>
@@ -2159,13 +2282,15 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 5: Pre-Task 2 - Types of Action -->
-                    <div class="slide" id="slide-5">
-                        <div class="slide-content layout--columns">
-                             <!-- Activity Type: Classifying / Grouping (Drag and Drop) -->
-                            <div class="slide-section" id="drag-drop-activity-1">
-                                <h3 class="section-intro__title">Part A: Types of Action</h3>
+                    <!-- SLIDE 6: Classifying Actions -->
+                    <div class="slide" id="slide-6">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-diagram-project"></i> Sort the Strategies</h2>
+                            <div class="section-intro">
+                                <h3 class="section-intro__title">Types of Action</h3>
                                 <p class="section-intro__descriptor">Drag the actions from the bank into the correct category.</p>
+                            </div>
+                            <div id="drag-drop-activity-1">
                                 <div class="draggable-bank">
                                     <div class="draggable" draggable="true" data-category="political">lobbying politicians</div>
                                     <div class="draggable" draggable="true" data-category="community">organizing a beach clean-up</div>
@@ -2179,29 +2304,35 @@
                                     <div class="drop-zone" data-category="community"><h4>Community Action</h4></div>
                                     <div class="drop-zone" data-category="consumer"><h4>Consumer Action</h4></div>
                                 </div>
-                                <div class="activity-actions">
-                                    <button class="activity-btn" onclick="checkDragDrop('drag-drop-activity-1')">Check Answers</button>
-                                </div>
                             </div>
-                            <!-- Activity Type: Drop-down (Collocation practice) -->
-                            <div class="slide-section" id="collocation-activity-1">
-                                <h3 class="section-intro__title">Part B: Common Collocations</h3>
-                                <p class="section-intro__descriptor">Choose the correct verb to complete each phrase.</p>
-                                <div class="interactive-module__steps">
-                                    <p>7. <select data-answer="Launch"><option>Select...</option><option>Launch</option><option>Hold</option><option>Write</option></select> a campaign</p>
-                                    <p>8. <select data-answer="Stage"><option>Select...</option><option>Stage</option><option>Raise</option><option>Write</option></select> a demonstration</p>
-                                    <p>9. <select data-answer="Hold"><option>Select...</option><option>Hold</option><option>Launch</option><option>Lobby</option></select> a company accountable</p>
-                                    <p>10. <select data-answer="Distribute"><option>Select...</option><option>Distribute</option><option>Stage</option><option>Raise</option></select> leaflets</p>
-                                </div>
-                                <div class="activity-actions">
-                                    <button class="activity-btn" onclick="checkSelectAnswers('collocation-activity-1')">Check Answers</button>
-                                </div>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkDragDrop('drag-drop-activity-1')">Check Answers</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 6: Task 2 - Personal Activist Profile -->
-                    <div class="slide" id="slide-6">
+                    <!-- SLIDE 7: Collocation Practice -->
+                    <div class="slide" id="slide-7">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-spell-check"></i> Speak Like an Activist</h2>
+                            <div class="section-intro">
+                                <h3 class="section-intro__title">Common Collocations</h3>
+                                <p class="section-intro__descriptor">Choose the correct verb to complete each phrase.</p>
+                            </div>
+                            <div class="interactive-module__steps" id="collocation-activity-1">
+                                <p>7. <select data-answer="Launch"><option>Select...</option><option>Launch</option><option>Hold</option><option>Write</option></select> a campaign</p>
+                                <p>8. <select data-answer="Stage"><option>Select...</option><option>Stage</option><option>Raise</option><option>Write</option></select> a demonstration</p>
+                                <p>9. <select data-answer="Hold"><option>Select...</option><option>Hold</option><option>Launch</option><option>Lobby</option></select> a company accountable</p>
+                                <p>10. <select data-answer="Distribute"><option>Select...</option><option>Distribute</option><option>Stage</option><option>Raise</option></select> leaflets</p>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkSelectAnswers('collocation-activity-1')">Check Answers</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 8: Task 2 - Personal Activist Profile -->
+                    <div class="slide" id="slide-8">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-user-check"></i> What Kind of Activist Are You?</h2>
                             <p class="section-intro__descriptor">Rate how likely you would be to do each action. Then, discuss your choices with a partner, explaining why some actions appeal to you more than others.</p>
@@ -2254,53 +2385,57 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 7: Pre-Task 3 - A Success Story -->
-                    <div class="slide" id="slide-7">
+                    <!-- SLIDE 9: Case Study - The Riverwood Cleanup -->
+                    <div class="slide" id="slide-9">
                         <div class="slide-content layout--columns">
                             <div class="slide-section">
-                                <h3 class="section-intro__title">Case Study: The Riverwood Cleanup</h3>
+                                <h2 class="slide-title"><i class="fa-solid fa-people-group"></i> The Riverwood Guardians</h2>
+                                <p class="section-intro__descriptor">Explore how one community combined different actions to drive change.</p>
                                 <div class="callout-card">
-                                    <p class="callout-card__body">The town of Riverwood was facing a crisis: its beautiful river was heavily polluted by a local factory. A group of concerned citizens, calling themselves the "Riverwood Guardians," decided to act. In 2022, they launched a campaign that combined several methods. First, they organized weekly clean-ups, which raised awareness and got the local media involved. Next, they started a petition that gained 10,000 signatures, demanding the factory install better filters. Finally, they lobbied local politicians, presenting scientific evidence of the pollution. After six months of sustained pressure, the factory agreed to invest in new, cleaner technology. The Riverwood Guardians proved that a small group could hold a large corporation accountable.</p>
-                                </div>
-                                <!-- Activity Type: Table Completion -->
-                                <div id="table-completion-1">
-                                    <h4 class="section-intro__title">Part A: Complete the Table</h4>
-                                    <p>Who: <input type="text" data-answer="Riverwood Guardians"></p>
-                                    <p>What was the problem: <input type="text" data-answer="river was polluted"></p>
-                                    <p>When did it start: <input type="text" data-answer="2022"></p>
-                                    <p>Methods Used: <input type="text" data-answer="clean-ups, petition, lobbying"></p>
-                                    <p>Final Result: <input type="text" data-answer="factory installed cleaner technology"></p>
+                                    <p class="callout-card__body">The town of Riverwood faced a polluted river caused by a local factory. A citizen group, the "Riverwood Guardians," organized weekly clean-ups to raise awareness, gathered 10,000 signatures on a petition demanding better filters, and lobbied politicians with scientific evidence. After six months of pressure, the factory installed cleaner technology, proving how coordinated action can deliver results.</p>
                                 </div>
                             </div>
-                            <div class="slide-section" id="mcq-activity-2">
-                                <!-- Activity Type: Multiple Choice (Reading for detail) -->
-                                <h4 class="section-intro__title">Part B: Reading for Detail</h4>
-                                <div class="interactive-module__steps">
-                                    <p>6. What was the first action the Riverwood Guardians took?
-                                        <select data-answer="c"><option>Select...</option><option value="a">a) They started a petition.</option><option value="b">b) They lobbied politicians.</option><option value="c">c) They organized clean-ups.</option></select>
-                                    </p>
-                                    <p>7. The main purpose of the petition was to:
-                                        <select data-answer="b"><option>Select...</option><option value="a">a) Raise awareness.</option><option value="b">b) Demand the factory install filters.</option><option value="c">c) Get media attention.</option></select>
-                                    </p>
-                                    <p>8. What did they use when lobbying politicians?
-                                        <select data-answer="b"><option>Select...</option><option value="a">a) Media articles.</option><option value="b">b) Scientific evidence.</option><option value="c">c) The petition signatures.</option></select>
-                                    </p>
-                                    <p>9. How long did the campaign last?
-                                        <select data-answer="b"><option>Select...</option><option value="a">a) One year.</option><option value="b">b) Six months.</option><option value="c">c) A few weeks.</option></select>
-                                    </p>
-                                    <p>10. The campaign's success shows that:
-                                        <select data-answer="c"><option>Select...</option><option value="a">a) Lobbying is the only effective method.</option><option value="b">b) Factories are always willing to change.</option><option value="c">c) Persistent community action can work.</option></select>
-                                    </p>
-                                </div>
-                                <div class="activity-actions">
-                                    <button class="activity-btn" onclick="checkSelectAnswers('mcq-activity-2')">Check Answers</button>
-                                </div>
+                            <div class="slide-section" id="table-completion-1">
+                                <h3 class="section-intro__title">Complete the Campaign Snapshot</h3>
+                                <p>Who: <input type="text" data-answer="Riverwood Guardians"></p>
+                                <p>What was the problem: <input type="text" data-answer="river was polluted"></p>
+                                <p>When did it start: <input type="text" data-answer="2022"></p>
+                                <p>Methods Used: <input type="text" data-answer="clean-ups, petition, lobbying"></p>
+                                <p>Final Result: <input type="text" data-answer="factory installed cleaner technology"></p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 8: Task 3 - Interview an Activist -->
-                    <div class="slide" id="slide-8">
+                    <!-- SLIDE 10: Reading for Detail -->
+                    <div class="slide" id="slide-10">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Check Your Understanding</h2>
+                            <p class="section-intro__descriptor">Answer the questions about the Riverwood campaign.</p>
+                            <div class="interactive-module__steps" id="mcq-activity-2">
+                                <p>6. What was the first action the Riverwood Guardians took?
+                                    <select data-answer="c"><option>Select...</option><option value="a">a) They started a petition.</option><option value="b">b) They lobbied politicians.</option><option value="c">c) They organized clean-ups.</option></select>
+                                </p>
+                                <p>7. The main purpose of the petition was to:
+                                    <select data-answer="b"><option>Select...</option><option value="a">a) Raise awareness.</option><option value="b">b) Demand the factory install filters.</option><option value="c">c) Get media attention.</option></select>
+                                </p>
+                                <p>8. What did they use when lobbying politicians?
+                                    <select data-answer="b"><option>Select...</option><option value="a">a) Media articles.</option><option value="b">b) Scientific evidence.</option><option value="c">c) The petition signatures.</option></select>
+                                </p>
+                                <p>9. How long did the campaign last?
+                                    <select data-answer="b"><option>Select...</option><option value="a">a) One year.</option><option value="b">b) Six months.</option><option value="c">c) A few weeks.</option></select>
+                                </p>
+                                <p>10. The campaign's success shows that:
+                                    <select data-answer="c"><option>Select...</option><option value="a">a) Lobbying is the only effective method.</option><option value="b">b) Factories are always willing to change.</option><option value="c">c) Persistent community action can work.</option></select>
+                                </p>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkSelectAnswers('mcq-activity-2')">Check Answers</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 11: Task 3 - Interview an Activist -->
+                    <div class="slide" id="slide-11">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-microphone-lines"></i> Behind the Campaign</h2>
                             <p class="section-intro__descriptor">Work in pairs. Student A: You are a journalist. Student B: You are a member of the Riverwood Guardians. The journalist will interview the activist about the campaign. Use the prompts to help you. Swap roles after 5 minutes.</p>
@@ -2329,53 +2464,53 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 9: Pre-Task 4 - Language for Planning -->
-                    <div class="slide" id="slide-9">
-                        <div class="slide-content layout--columns">
-                            <!-- Activity Type: Drag and Drop (Sentence ordering) -->
-                            <div class="slide-section">
-                                <h3 class="section-intro__title">Part A: Planning a Conversation</h3>
-                                <p class="section-intro__descriptor">Put the sentences in the correct order to create a planning conversation. Drag and drop to reorder.</p>
-                                <ul class="ordering-list" id="ordering-list-1">
-                                    <li class="order-item" draggable="true" data-order="4"><i class="fa-solid fa-grip-vertical order-handle"></i> B: I agree. So, we should focus on raising awareness first.</li>
-                                    <li class="order-item" draggable="true" data-order="2"><i class="fa-solid fa-grip-vertical order-handle"></i> A: How about we start a petition to ban plastic bags in our town?</li>
-                                    <li class="order-item" draggable="true" data-order="3"><i class="fa-solid fa-grip-vertical order-handle"></i> B: That's a good idea, but maybe we should start with something smaller.</li>
-                                    <li class="order-item" draggable="true" data-order="1"><i class="fa-solid fa-grip-vertical order-handle"></i> A: Okay, so the first issue to tackle is plastic waste.</li>
-                                    <li class="order-item" draggable="true" data-order="5"><i class="fa-solid fa-grip-vertical order-handle"></i> A: Exactly. We could create some posters for local shops.</li>
-                                </ul>
-                                <div class="activity-actions">
-                                    <button class="activity-btn" onclick="checkOrdering('ordering-list-1')">Check Order</button>
-                                    <div class="feedback"></div>
-                                </div>
-                            </div>
-                            <!-- Activity Type: Gap-fill (Using functional language) -->
-                            <div class="slide-section" id="gap-fill-1">
-                                <h3 class="section-intro__title">Part B: Functional Language</h3>
-                                <p class="section-intro__descriptor">Complete the sentences with the best phrase from the box.</p>
-                                <div class="gap-fill-box">
-                                    <p>Phrases:</p>
-                                    <span>What if we...</span>
-                                    <span>We need to consider...</span>
-                                    <span>My main concern is...</span>
-                                    <span>I suggest that...</span>
-                                    <span>Another point is that...</span>
-                                </div>
-                                <div class="interactive-module__steps">
-                                    <p>6. <select data-answer="My main concern is..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we don't have enough volunteers.</p>
-                                    <p>7. <select data-answer="We need to consider..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> the budget for printing materials.</p>
-                                    <p>8. <select data-answer="I suggest that..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we create a social media page first.</p>
-                                    <p>9. <select data-answer="What if we..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> organized a community litter pick?</p>
-                                    <p>10. <select data-answer="Another point is that..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we need permission from the council for some activities.</p>
-                                </div>
-                                <div class="activity-actions">
-                                    <button class="activity-btn" onclick="checkSelectAnswers('gap-fill-1')">Check Answers</button>
-                                </div>
+                    <!-- SLIDE 12: Planning the Conversation -->
+                    <div class="slide" id="slide-12">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-people-arrows"></i> Sequence the Strategy Talk</h2>
+                            <p class="section-intro__descriptor">Put the sentences in order to build a logical planning conversation.</p>
+                            <ul class="ordering-list" id="ordering-list-1">
+                                <li class="order-item" draggable="true" data-order="4"><i class="fa-solid fa-grip-vertical order-handle"></i> B: I agree. So, we should focus on raising awareness first.</li>
+                                <li class="order-item" draggable="true" data-order="2"><i class="fa-solid fa-grip-vertical order-handle"></i> A: How about we start a petition to ban plastic bags in our town?</li>
+                                <li class="order-item" draggable="true" data-order="3"><i class="fa-solid fa-grip-vertical order-handle"></i> B: That's a good idea, but maybe we should start with something smaller.</li>
+                                <li class="order-item" draggable="true" data-order="1"><i class="fa-solid fa-grip-vertical order-handle"></i> A: Okay, so the first issue to tackle is plastic waste.</li>
+                                <li class="order-item" draggable="true" data-order="5"><i class="fa-solid fa-grip-vertical order-handle"></i> A: Exactly. We could create some posters for local shops.</li>
+                            </ul>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkOrdering('ordering-list-1')">Check Order</button>
+                                <div class="feedback"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 10: Task 4 - Your Eco-Action Plan -->
-                    <div class="slide" id="slide-10">
+                    <!-- SLIDE 13: Functional Language Focus -->
+                    <div class="slide" id="slide-13">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-language"></i> Choose the Best Phrase</h2>
+                            <p class="section-intro__descriptor">Complete each sentence with the most appropriate planning phrase.</p>
+                            <div class="gap-fill-box">
+                                <p>Phrases:</p>
+                                <span>What if we...</span>
+                                <span>We need to consider...</span>
+                                <span>My main concern is...</span>
+                                <span>I suggest that...</span>
+                                <span>Another point is that...</span>
+                            </div>
+                            <div class="interactive-module__steps" id="gap-fill-1">
+                                <p>6. <select data-answer="My main concern is..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we don't have enough volunteers.</p>
+                                <p>7. <select data-answer="We need to consider..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> the budget for printing materials.</p>
+                                <p>8. <select data-answer="I suggest that..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we create a social media page first.</p>
+                                <p>9. <select data-answer="What if we..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> organized a community litter pick?</p>
+                                <p>10. <select data-answer="Another point is that..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we need permission from the council for some activities.</p>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkSelectAnswers('gap-fill-1')">Check Answers</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 14: Task 4 - Your Eco-Action Plan -->
+                    <div class="slide" id="slide-14">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-clipboard-list"></i> Design Your Campaign</h2>
                             <p class="section-intro__descriptor">In small groups, choose a local environmental issue (e.g., too much traffic, not enough recycling bins, a park in need of care). Use the framework below to create a simple action plan for a campaign. Prepare to present your main ideas to the class.</p>
@@ -2406,8 +2541,8 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 11: Lesson Reflection -->
-                    <div class="slide" id="slide-11">
+                    <!-- SLIDE 15: Lesson Reflection -->
+                    <div class="slide" id="slide-15">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-lightbulb"></i> Final Thoughts</h2>
                             <p class="section-intro__descriptor">Individually, think about these questions. Share one thought with your partner.</p>
@@ -2431,6 +2566,35 @@
                     </div>
                 </div>
 
+                <div id="annotation-popover" role="dialog" aria-hidden="true" aria-label="Add or edit annotation">
+                    <form id="annotation-form" class="annotation-popover__form" autocomplete="off">
+                        <div class="annotation-popover__field">
+                            <label class="annotation-popover__label" for="annotation-comment">Annotation</label>
+                            <textarea id="annotation-comment" class="annotation-popover__textarea" placeholder="Add a note about this highlight"></textarea>
+                        </div>
+                        <div class="annotation-popover__field">
+                            <span class="annotation-popover__label">Highlight colour</span>
+                            <div class="annotation-popover__color-input">
+                                <input type="color" id="annotation-color" class="annotation-popover__color-picker" value="#d9cdb4" aria-label="Choose highlight colour">
+                                <span class="annotation-popover__hint">Adjust the shade to organise your notes.</span>
+                            </div>
+                        </div>
+                        <p class="annotation-popover__hint">Select text to create a highlight. Click an existing highlight to edit or remove it.</p>
+                        <div class="annotation-popover__actions">
+                            <button type="button" class="activity-btn secondary" id="annotation-delete" hidden>
+                                <i class="fa-solid fa-trash-can" aria-hidden="true"></i> Remove
+                            </button>
+                            <button type="button" class="activity-btn secondary" id="annotation-cancel">
+                                <i class="fa-solid fa-xmark" aria-hidden="true"></i> Cancel
+                            </button>
+                            <button type="submit" class="activity-btn" id="annotation-save">
+                                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div id="annotation-tooltip" role="tooltip" aria-hidden="true"></div>
+
                 <!-- SLIDE NAVIGATION -->
                 <div class="slide-status-bar">
                     <div class="slide-status-bar__progress">
@@ -2439,7 +2603,7 @@
                         </div>
                     </div>
                     <div class="slide-status-bar__row">
-                        <p class="slide-status-bar__count" id="slide-counter">Slide 1 of 11</p>
+                        <p class="slide-status-bar__count" id="slide-counter">Slide 1 of 15</p>
                         <div class="slide-status-bar__actions">
                             <button class="activity-btn secondary" id="prev-btn" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
                             <button class="activity-btn" id="next-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
@@ -2453,21 +2617,55 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.slide');
+    const slidesRoot = document.getElementById('slides-root');
     const nextBtn = document.getElementById('next-btn');
     const prevBtn = document.getElementById('prev-btn');
     const slideCounter = document.getElementById('slide-counter');
     const progressFill = document.getElementById('progress-fill');
+    const saveAnnotationsBtn = document.getElementById('save-annotations-btn');
+    const loadAnnotationsBtn = document.getElementById('load-annotations-btn');
+    const loadAnnotationsInput = document.getElementById('load-annotations-input');
+    const annotationPopover = document.getElementById('annotation-popover');
+    const annotationForm = document.getElementById('annotation-form');
+    const annotationComment = document.getElementById('annotation-comment');
+    const annotationColor = document.getElementById('annotation-color');
+    const annotationCancelBtn = document.getElementById('annotation-cancel');
+    const annotationDeleteBtn = document.getElementById('annotation-delete');
+    const annotationTooltip = document.getElementById('annotation-tooltip');
+    const defaultHighlightColor = '#d9cdb4';
+
+    let slides = [];
+    let totalSlides = 0;
     let currentSlide = 0;
-    const totalSlides = slides.length;
+    let pendingRange = null;
+    let activeHighlight = null;
+    let annotationMode = 'create';
+
+    function refreshSlides() {
+        slides = Array.from(slidesRoot.querySelectorAll('.slide'));
+        totalSlides = slides.length;
+        if (!totalSlides) {
+            slideCounter.textContent = 'Slide 0 of 0';
+            progressFill.style.setProperty('--progress', '0%');
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            return;
+        }
+
+        const activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
+        currentSlide = activeIndex >= 0 ? activeIndex : Math.min(currentSlide, totalSlides - 1);
+        updateSlideView();
+    }
 
     function updateSlideView() {
+        if (!slides.length) return;
+
         slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === currentSlide);
         });
-        
+
         slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
-        const progressPercentage = ((currentSlide) / (totalSlides - 1)) * 100;
+        const progressPercentage = totalSlides <= 1 ? 100 : (currentSlide / (totalSlides - 1)) * 100;
         progressFill.style.setProperty('--progress', `${progressPercentage}%`);
 
         prevBtn.disabled = currentSlide === 0;
@@ -2476,38 +2674,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nextBtn.addEventListener('click', () => {
         if (currentSlide < totalSlides - 1) {
-            currentSlide++;
+            currentSlide += 1;
             updateSlideView();
         }
     });
 
     prevBtn.addEventListener('click', () => {
         if (currentSlide > 0) {
-            currentSlide--;
+            currentSlide -= 1;
             updateSlideView();
         }
     });
 
-    updateSlideView();
+    refreshSlides();
+    initializeActivities();
 
-    // --- INTERACTIVE ACTIVITY SCRIPTS ---
+    if (saveAnnotationsBtn) {
+        saveAnnotationsBtn.addEventListener('click', () => {
+            const exportPayload = {
+                savedAt: new Date().toISOString(),
+                documentTitle: document.title,
+                slidesHtml: slidesRoot.innerHTML
+            };
+            const blob = new Blob([JSON.stringify(exportPayload, null, 2)], {
+                type: 'application/json'
+            });
+            const fileName = `eco-activist-annotations-${Date.now()}.json`;
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        });
+    }
 
-    // Matching Activity (Slide 3)
-    const matchingActivity = document.getElementById('matching-activity-1');
-    if (matchingActivity) {
+    if (loadAnnotationsBtn && loadAnnotationsInput) {
+        loadAnnotationsBtn.addEventListener('click', () => {
+            loadAnnotationsInput.click();
+        });
+
+        loadAnnotationsInput.addEventListener('change', event => {
+            const [file] = event.target.files || [];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = loadEvent => {
+                try {
+                    const payload = JSON.parse(loadEvent.target.result);
+                    if (payload && typeof payload.slidesHtml === 'string') {
+                        if (isPopoverOpen()) {
+                            closeAnnotationPopover();
+                        }
+                        hideAnnotationTooltip();
+                        slidesRoot.innerHTML = payload.slidesHtml;
+                        refreshSlides();
+                        initializeActivities();
+                    } else {
+                        window.alert('The selected file does not contain any slides to load.');
+                    }
+                } catch (error) {
+                    console.error('Unable to load annotations', error);
+                    window.alert('We could not load that file. Please choose a valid annotations export.');
+                } finally {
+                    loadAnnotationsInput.value = '';
+                }
+            };
+            reader.readAsText(file);
+        });
+    }
+
+    if (
+        annotationPopover &&
+        annotationForm &&
+        annotationComment &&
+        annotationColor &&
+        annotationCancelBtn &&
+        annotationDeleteBtn &&
+        annotationTooltip
+    ) {
+        annotationPopover.setAttribute('aria-hidden', 'true');
+        annotationTooltip.setAttribute('aria-hidden', 'true');
+
+        slidesRoot.addEventListener('mouseup', handleSelectionMouseUp);
+        slidesRoot.addEventListener('click', handleHighlightClick);
+        slidesRoot.addEventListener('mouseover', handleHighlightHover);
+        slidesRoot.addEventListener('mouseout', handleHighlightLeave);
+        slidesRoot.addEventListener('focusin', handleHighlightFocus);
+        slidesRoot.addEventListener('focusout', handleHighlightBlur);
+
+        annotationForm.addEventListener('submit', handleAnnotationSave);
+        annotationCancelBtn.addEventListener('click', () => closeAnnotationPopover());
+        annotationDeleteBtn.addEventListener('click', handleAnnotationDelete);
+
+        document.addEventListener('click', handleDocumentClick);
+        document.addEventListener('keydown', handleKeydown);
+        document.addEventListener('scroll', handleViewportShift, true);
+        window.addEventListener('resize', handleViewportShift);
+    }
+
+    function initializeActivities() {
+        initializeMatching();
+        enableDragSort('ranking-list-1');
+        enableDragSort('ordering-list-1');
+        initializeDragDropCategories();
+    }
+
+    function initializeMatching() {
+        const matchingActivity = document.getElementById('matching-activity-1');
+        if (!matchingActivity || matchingActivity.dataset.initialized === 'true') return;
+
         const items = matchingActivity.querySelectorAll('.match-item');
         let selected = null;
 
         items.forEach(item => {
             item.addEventListener('click', () => {
                 if (!selected) {
-                    // First selection
                     selected = item;
                     item.classList.add('selected');
                 } else {
-                    // Second selection
                     if (selected.dataset.match === item.dataset.match && selected !== item) {
-                        // Correct match
                         selected.classList.add('correct');
                         item.classList.add('correct');
                         selected.classList.remove('selected');
@@ -2515,11 +2802,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         item.style.pointerEvents = 'none';
                         selected = null;
                     } else {
-                        // Incorrect match or same item clicked
                         selected.classList.add('incorrect');
                         item.classList.add('incorrect');
                         setTimeout(() => {
-                            selected.classList.remove('incorrect', 'selected');
+                            if (selected) {
+                                selected.classList.remove('incorrect', 'selected');
+                            }
                             item.classList.remove('incorrect');
                             selected = null;
                         }, 800);
@@ -2527,48 +2815,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+
+        matchingActivity.dataset.initialized = 'true';
     }
 
-    // Drag and Drop Ranking/Ordering Lists
     function enableDragSort(listId) {
         const list = document.getElementById(listId);
-        if(!list) return;
+        if (!list || list.dataset.dragSortBound === 'true') return;
 
-        let draggingEle;
-        let placeholder;
+        let draggingItem = null;
 
-        const isAbove = (nodeA, nodeB) => {
-            const rectA = nodeA.getBoundingClientRect();
-            const rectB = nodeB.getBoundingClientRect();
-            return rectA.top + rectA.height / 2 < rectB.top + rectB.height / 2;
-        };
-
-        const swap = (nodeA, nodeB) => {
-            const parentA = nodeA.parentNode;
-            const siblingA = nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
-            nodeB.parentNode.insertBefore(nodeA, nodeB);
-            parentA.insertBefore(nodeB, siblingA);
-        };
-        
         list.querySelectorAll('li').forEach(item => {
-            item.addEventListener('dragstart', (e) => {
-                draggingEle = e.target;
-                e.dataTransfer.effectAllowed = 'move';
+            item.addEventListener('dragstart', event => {
+                draggingItem = event.target;
+                event.dataTransfer.effectAllowed = 'move';
             });
-            item.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                const bounding = e.target.closest('li').getBoundingClientRect();
+
+            item.addEventListener('dragover', event => {
+                event.preventDefault();
+                const targetItem = event.target.closest('li');
+                if (!draggingItem || !targetItem || draggingItem === targetItem) return;
+
+                const bounding = targetItem.getBoundingClientRect();
                 const offset = bounding.y + bounding.height / 2;
-                if(e.clientY - offset > 0) {
-                     e.target.closest('li').after(draggingEle);
+                if (event.clientY - offset > 0) {
+                    targetItem.after(draggingItem);
                 } else {
-                     e.target.closest('li').before(draggingEle);
+                    targetItem.before(draggingItem);
                 }
                 updateRankingNumbers(listId);
             });
         });
+
+        list.dataset.dragSortBound = 'true';
     }
-    
+
     function updateRankingNumbers(listId) {
         const list = document.getElementById(listId);
         if (!list) return;
@@ -2578,29 +2859,308 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    enableDragSort('ranking-list-1');
-    enableDragSort('ordering-list-1');
+    function initializeDragDropCategories() {
+        const container = document.getElementById('drag-drop-activity-1');
+        if (!container || container.dataset.dragBound === 'true') return;
 
-    // Drag and Drop Categories (Slide 5)
-    const draggables = document.querySelectorAll('#drag-drop-activity-1 .draggable');
-    const dropZones = document.querySelectorAll('#drag-drop-activity-1 .drop-zone');
+        const draggables = container.querySelectorAll('.draggable');
+        const dropZones = container.querySelectorAll('.drop-zone');
 
-    draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', () => {
-            draggable.classList.add('dragging');
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('dragging');
+            });
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+            });
         });
-        draggable.addEventListener('dragend', () => {
-            draggable.classList.remove('dragging');
-        });
-    });
 
-    dropZones.forEach(zone => {
-        zone.addEventListener('dragover', e => {
-            e.preventDefault();
-            const draggable = document.querySelector('.dragging');
-            zone.appendChild(draggable);
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', event => {
+                event.preventDefault();
+                const draggable = container.querySelector('.dragging');
+                if (draggable) {
+                    zone.appendChild(draggable);
+                }
+            });
+
+            zone.addEventListener('drop', event => {
+                event.preventDefault();
+                const draggable = container.querySelector('.dragging');
+                if (draggable) {
+                    zone.appendChild(draggable);
+                }
+            });
         });
-    });
+
+        container.dataset.dragBound = 'true';
+    }
+
+    function handleSelectionMouseUp() {
+        if (!annotationPopover || annotationPopover.getAttribute('aria-hidden') === 'false') return;
+
+        setTimeout(() => {
+            const range = getValidRange();
+            if (!range) return;
+
+            const startHighlight = range.startContainer.parentElement && range.startContainer.parentElement.closest('.annotation-highlight');
+            const endHighlight = range.endContainer.parentElement && range.endContainer.parentElement.closest('.annotation-highlight');
+
+            if (startHighlight && startHighlight === endHighlight) {
+                openEditPopover(startHighlight);
+                window.getSelection().removeAllRanges();
+                return;
+            }
+
+            pendingRange = range;
+            openCreatePopover(range);
+        }, 0);
+    }
+
+    function getValidRange() {
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return null;
+
+        const range = selection.getRangeAt(0).cloneRange();
+        if (!slidesRoot.contains(range.startContainer) || !slidesRoot.contains(range.endContainer)) {
+            return null;
+        }
+
+        return range.toString().trim() ? range : null;
+    }
+
+    function openCreatePopover(range) {
+        annotationMode = 'create';
+        activeHighlight = null;
+        annotationForm.reset();
+        annotationColor.value = defaultHighlightColor;
+        annotationDeleteBtn.hidden = true;
+        hideAnnotationTooltip();
+        showPopover(getRectFromRange(range));
+        window.getSelection().removeAllRanges();
+    }
+
+    function openEditPopover(highlight) {
+        annotationMode = 'edit';
+        activeHighlight = highlight;
+        pendingRange = null;
+        annotationComment.value = highlight.dataset.comment || '';
+        annotationColor.value = highlight.dataset.color || defaultHighlightColor;
+        annotationDeleteBtn.hidden = false;
+        hideAnnotationTooltip();
+        showPopover(highlight.getBoundingClientRect());
+        window.getSelection().removeAllRanges();
+    }
+
+    function showPopover(rect) {
+        if (!rect) return;
+        annotationPopover.style.display = 'block';
+        annotationPopover.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => {
+            positionPopover(rect);
+            annotationComment.focus({ preventScroll: true });
+        });
+    }
+
+    function positionPopover(rect) {
+        const padding = 16;
+        const popoverWidth = annotationPopover.offsetWidth;
+        const popoverHeight = annotationPopover.offsetHeight;
+        let top = rect.bottom + window.scrollY + 12;
+        if (top + popoverHeight > window.scrollY + window.innerHeight - padding) {
+            top = rect.top + window.scrollY - popoverHeight - 12;
+        }
+        top = Math.max(window.scrollY + padding, top);
+
+        let left = rect.left + window.scrollX;
+        if (left + popoverWidth > window.scrollX + window.innerWidth - padding) {
+            left = window.scrollX + window.innerWidth - popoverWidth - padding;
+        }
+        left = Math.max(window.scrollX + padding, left);
+
+        annotationPopover.style.top = `${top}px`;
+        annotationPopover.style.left = `${left}px`;
+    }
+
+    function getRectFromRange(range) {
+        const rects = range.getClientRects();
+        if (rects.length) {
+            return rects[0];
+        }
+        return range.getBoundingClientRect();
+    }
+
+    function closeAnnotationPopover() {
+        annotationPopover.style.display = 'none';
+        annotationPopover.setAttribute('aria-hidden', 'true');
+        annotationForm.reset();
+        annotationColor.value = defaultHighlightColor;
+        annotationDeleteBtn.hidden = true;
+        pendingRange = null;
+        activeHighlight = null;
+        annotationMode = 'create';
+    }
+
+    function handleAnnotationSave(event) {
+        event.preventDefault();
+        const comment = annotationComment.value.trim();
+        const color = annotationColor.value || defaultHighlightColor;
+
+        if (annotationMode === 'create' && pendingRange) {
+            createHighlight(pendingRange, comment, color);
+        } else if (annotationMode === 'edit' && activeHighlight) {
+            updateHighlight(activeHighlight, comment, color);
+        }
+
+        hideAnnotationTooltip();
+        window.getSelection().removeAllRanges();
+        closeAnnotationPopover();
+    }
+
+    function createHighlight(range, comment, color) {
+        const highlight = document.createElement('span');
+        highlight.className = 'annotation-highlight';
+        highlight.dataset.annotationId = `annotation-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        highlight.dataset.comment = comment;
+        highlight.dataset.color = color;
+        highlight.style.setProperty('--annotation-color', color || defaultHighlightColor);
+        highlight.setAttribute('tabindex', '0');
+        highlight.setAttribute('role', 'note');
+        highlight.setAttribute('aria-label', comment ? `Annotation: ${comment}` : 'Annotation highlight');
+
+        const fragment = range.extractContents();
+        highlight.appendChild(fragment);
+        range.insertNode(highlight);
+        highlight.normalize();
+        slidesRoot.normalize();
+    }
+
+    function updateHighlight(highlight, comment, color) {
+        highlight.dataset.comment = comment;
+        highlight.dataset.color = color;
+        highlight.style.setProperty('--annotation-color', color || defaultHighlightColor);
+        highlight.setAttribute('aria-label', comment ? `Annotation: ${comment}` : 'Annotation highlight');
+    }
+
+    function handleAnnotationDelete() {
+        if (!activeHighlight) return;
+        const highlight = activeHighlight;
+        closeAnnotationPopover();
+        unwrapHighlight(highlight);
+        hideAnnotationTooltip();
+    }
+
+    function unwrapHighlight(highlight) {
+        const parent = highlight.parentNode;
+        while (highlight.firstChild) {
+            parent.insertBefore(highlight.firstChild, highlight);
+        }
+        highlight.remove();
+        parent.normalize();
+    }
+
+    function handleHighlightClick(event) {
+        const highlight = event.target.closest('.annotation-highlight');
+        if (!highlight || !annotationPopover) return;
+        event.preventDefault();
+        openEditPopover(highlight);
+    }
+
+    function handleHighlightHover(event) {
+        if (!annotationTooltip || isPopoverOpen()) return;
+        const highlight = event.target.closest('.annotation-highlight');
+        if (!highlight) return;
+        showAnnotationTooltip(highlight);
+    }
+
+    function handleHighlightLeave(event) {
+        if (!annotationTooltip) return;
+        const highlight = event.target.closest('.annotation-highlight');
+        if (!highlight) return;
+        const relatedHighlight = event.relatedTarget && event.relatedTarget.closest('.annotation-highlight');
+        if (relatedHighlight === highlight) return;
+        hideAnnotationTooltip();
+    }
+
+    function handleHighlightFocus(event) {
+        const highlight = event.target.closest('.annotation-highlight');
+        if (!highlight || !annotationTooltip) return;
+        showAnnotationTooltip(highlight);
+    }
+
+    function handleHighlightBlur() {
+        hideAnnotationTooltip();
+    }
+
+    function showAnnotationTooltip(highlight) {
+        const comment = highlight.dataset.comment;
+        if (!comment) {
+            hideAnnotationTooltip();
+            return;
+        }
+        annotationTooltip.textContent = comment;
+        annotationTooltip.style.display = 'block';
+        annotationTooltip.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => {
+            positionTooltip(highlight.getBoundingClientRect());
+        });
+    }
+
+    function hideAnnotationTooltip() {
+        if (!annotationTooltip) return;
+        annotationTooltip.style.display = 'none';
+        annotationTooltip.setAttribute('aria-hidden', 'true');
+        annotationTooltip.textContent = '';
+    }
+
+    function positionTooltip(rect) {
+        const padding = 12;
+        const tooltipWidth = annotationTooltip.offsetWidth;
+        const tooltipHeight = annotationTooltip.offsetHeight;
+        let top = rect.top + window.scrollY - tooltipHeight - 12;
+        if (top < window.scrollY + padding) {
+            top = rect.bottom + window.scrollY + 12;
+        }
+        let left = rect.left + window.scrollX;
+        if (left + tooltipWidth > window.scrollX + window.innerWidth - padding) {
+            left = window.scrollX + window.innerWidth - tooltipWidth - padding;
+        }
+        left = Math.max(window.scrollX + padding, left);
+        annotationTooltip.style.top = `${top}px`;
+        annotationTooltip.style.left = `${left}px`;
+    }
+
+    function handleDocumentClick(event) {
+        if (!isPopoverOpen()) return;
+        if (annotationPopover.contains(event.target)) return;
+        if (event.target.closest('.annotation-highlight')) return;
+        closeAnnotationPopover();
+    }
+
+    function handleKeydown(event) {
+        if (event.key === 'Escape' && isPopoverOpen()) {
+            closeAnnotationPopover();
+            hideAnnotationTooltip();
+        }
+    }
+
+    function handleViewportShift() {
+        if (isPopoverOpen()) {
+            if (annotationMode === 'edit' && activeHighlight) {
+                positionPopover(activeHighlight.getBoundingClientRect());
+            } else if (annotationMode === 'create' && pendingRange) {
+                const rect = getRectFromRange(pendingRange);
+                if (rect) {
+                    positionPopover(rect);
+                }
+            }
+        }
+        hideAnnotationTooltip();
+    }
+
+    function isPopoverOpen() {
+        return annotationPopover && annotationPopover.getAttribute('aria-hidden') === 'false';
+    }
 });
 
 // --- GLOBAL CHECKING FUNCTIONS ---
