@@ -556,9 +556,12 @@
 
         /* ------------------------------- App shell ----------------------------------*/
         #app-wrapper {
-            display: flex; justify-content: center; align-items: stretch;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: max(var(--space-7), env(safe-area-inset-top)) var(--space-4) var(--space-7);
-            width: 100%; min-height: 100dvh;
+            width: 100%;
+            min-height: 100dvh;
             background: radial-gradient(800px 600px at 20% 0%, rgba(156,175,136,0.08) 0%, transparent 70%),
                         radial-gradient(700px 500px at 80% 100%, rgba(90,107,82,0.06) 0%, transparent 65%);
         }
@@ -579,18 +582,35 @@
             transform: translate(-50%, 0);
         }
         #activity-shell {
-            width: min(100%, var(--workspace-max));
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-6);
-            align-items: start;
+            width: min(100%, calc(100vw - (var(--space-4) * 2)));
+            max-width: calc(100vw - (var(--space-4) * 2));
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            gap: clamp(24px, 4vw, 48px);
+            margin: 0 auto;
         }
         #activity-container {
-            width: 100%; max-width: var(--container-max);
+            flex: 6 1 0;
+            max-width: none;
             background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
-            padding: clamp(24px, 3.2vw, 48px); border-radius: var(--radius-lg);
-            border: 1px solid rgba(122, 132, 113, 0.12); box-shadow: var(--shadow-2);
-            position: relative; isolation: isolate; container-type: inline-size;
+            padding: clamp(24px, 3.2vw, 48px);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 132, 113, 0.12);
+            box-shadow: var(--shadow-2);
+            position: relative;
+            isolation: isolate;
+            container-type: inline-size;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        #slides-root {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+            overflow: visible;
         }
         @supports (backdrop-filter: blur(6px)) {
             #activity-container {
@@ -851,24 +871,22 @@
         .accent-card--frost { background: color-mix(in srgb, rgba(122, 132, 113, 0.12) 40%, white 60%); backdrop-filter: blur(12px); }
 
         .presentation-header {
-            position: sticky;
-            top: 0;
-            z-index: 3;
-            background: linear-gradient(180deg, rgba(248, 246, 240, 0.92) 0%, rgba(248, 246, 240, 0.65) 85%, transparent 100%);
-            backdrop-filter: blur(6px);
-            padding: clamp(12px, 1.6vw, 18px) clamp(24px, 3vw, 36px);
-            margin: calc(var(--space-6) * -1) calc(clamp(24px, 3.2vw, 48px) * -1) var(--space-4);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-            border-bottom: 1px solid rgba(122, 132, 113, 0.12);
-            box-shadow: 0 12px 28px rgba(62, 74, 58, 0.16);
+            position: static;
+            margin: 0 0 var(--space-4);
+            padding: 0;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            display: flex;
+            justify-content: flex-start;
         }
         .workspace-menu {
-            display: block;
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(122, 132, 113, 0.16);
-            background: rgba(255, 255, 255, 0.88);
-            box-shadow: var(--shadow-1);
-            overflow: hidden;
+            display: inline-block;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(122, 132, 113, 0.2);
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: none;
+            overflow: visible;
         }
         .workspace-menu[open] {
             box-shadow: var(--shadow-2);
@@ -877,10 +895,15 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: var(--space-4);
-            padding: var(--space-4);
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-4);
             cursor: pointer;
             list-style: none;
+            min-width: 0;
+            font-size: var(--step--1);
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
         .workspace-menu__summary::-webkit-details-marker { display: none; }
         .workspace-menu__summary:focus-visible {
@@ -888,30 +911,16 @@
             box-shadow: var(--ring);
         }
         .workspace-menu__summary-text {
-            display: grid;
+            display: inline-flex;
+            flex-direction: column;
             gap: var(--space-1);
             min-width: 0;
         }
-        .workspace-menu__summary-eyebrow {
-            font-size: var(--step--2);
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--primary-sage);
-        }
-        .workspace-menu__summary-title {
-            font-family: var(--font-display);
-            font-size: var(--step-1);
-            font-weight: 700;
+        .workspace-menu__label {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
             color: var(--forest-shadow);
-        }
-        .workspace-menu__summary-descriptor {
-            font-size: var(--step--1);
-            color: var(--ink-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: clamp(220px, 40vw, 520px);
         }
         .workspace-menu__summary-indicator {
             display: inline-flex;
@@ -922,7 +931,7 @@
         }
         .workspace-menu__summary-indicator i { color: var(--primary-sage); }
         .workspace-menu__summary-hint {
-            font-size: var(--step--1);
+            font-size: var(--step--2);
             color: var(--ink-muted);
         }
         .workspace-menu__summary i {
@@ -934,7 +943,15 @@
         .workspace-menu__panel {
             display: grid;
             gap: var(--space-5);
-            padding: 0 var(--space-4) var(--space-5);
+            padding: var(--space-4);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
+            width: clamp(280px, 32vw, 420px);
+            max-height: min(70vh, 520px);
+            overflow-y: auto;
+            margin: var(--space-3) 0 0;
+            box-shadow: var(--shadow-2);
         }
         .workspace-menu__intro {
             display: flex;
@@ -1343,26 +1360,32 @@
             .workspace-tools__actions { justify-content: flex-start; }
         }
         @media (min-width: 1024px) {
-            #activity-container { box-shadow: var(--shadow-3); }
+            #activity-container {
+                box-shadow: var(--shadow-3);
+                height: calc(87.5vh);
+            }
+            #notes-dock {
+                height: calc(87.5vh);
+            }
             h1 { letter-spacing: 0.3px; }
-            .presentation-header { padding: clamp(20px, 2.4vw, 32px) clamp(28px, 3.2vw, 48px); margin: calc(var(--space-6) * -1) calc(clamp(28px, 3.2vw, 48px) * -1) var(--space-5); }
             #slide-map-list { gap: var(--space-4); }
         }
-        @media (min-width: 1180px) {
-            #activity-shell { grid-template-columns: minmax(0, 2.35fr) minmax(280px, 1fr); gap: var(--space-7); }
-            #activity-container { max-width: none; }
-            #notes-dock {
-                align-self: start;
-                max-width: 440px;
-                position: sticky;
-                top: clamp(24px, 3.5vw, 48px);
-                max-height: calc(100dvh - (clamp(24px, 3.5vw, 48px) * 2));
-                overflow: hidden;
+        @media (max-width: 1023px) {
+            #app-wrapper {
+                align-items: stretch;
             }
-            #notes-panels {
-                flex: 1 1 auto;
-                overflow: auto;
-                padding-right: var(--space-1);
+            #activity-shell {
+                flex-direction: column;
+                gap: var(--space-6);
+            }
+            #activity-container {
+                flex: none;
+                max-width: 100%;
+                min-height: auto;
+            }
+            #notes-dock {
+                flex: none;
+                max-width: 100%;
             }
         }
         @media (max-width: 767px) {
@@ -1371,9 +1394,14 @@
             h1 { font-size: clamp(1.75rem, 5vw, 2rem); }
             h2.rubric { font-size: var(--step--1); margin-bottom: 20px; }
             .slide-map-button { padding-inline: var(--space-3); }
-            .workspace-menu__summary { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
-            .workspace-menu__summary-indicator { width: 100%; justify-content: space-between; }
-            .workspace-menu__summary-descriptor { max-width: 100%; white-space: normal; }
+            .workspace-menu__summary {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+            .workspace-menu__summary-indicator {
+                width: auto;
+            }
             .lesson-selector { width: 100%; }
             .lesson-selector select { width: 100%; min-width: 0; }
         }
@@ -2154,8 +2182,8 @@
         }
         /* ------------------------------- Collaborative text boxes ----------------------------------*/
         #notes-dock {
-            width: 100%;
-            max-width: min(100%, 460px);
+            flex: 2 1 0;
+            max-width: min(100%, 28rem);
             background: color-mix(in srgb, var(--soft-white) 90%, white 10%);
             border-radius: var(--radius-lg);
             border: 1px solid rgba(122, 132, 113, 0.14);
@@ -2165,6 +2193,7 @@
             flex-direction: column;
             gap: var(--space-5);
             min-height: 0;
+            overflow: hidden;
         }
         .notes-dock-header {
             display: grid;
@@ -2195,6 +2224,8 @@
             gap: var(--space-4);
             flex: 1 1 auto;
             min-height: 0;
+            overflow: auto;
+            padding-right: var(--space-1);
         }
         .notes-panel {
             display: none;
@@ -2374,13 +2405,14 @@
             <header class="presentation-header" id="presentation-header">
                 <details class="workspace-menu" id="workspace-menu">
                     <summary class="workspace-menu__summary">
-                        <span class="workspace-menu__summary-text">
+                        <span class="workspace-menu__label">Session controls</span>
+                        <span class="workspace-menu__summary-text visually-hidden">
                             <span class="workspace-menu__summary-eyebrow" id="presentation-eyebrow">Instructional Session</span>
                             <span class="workspace-menu__summary-title" id="workspace-summary-title">Select a lesson template</span>
                             <span class="workspace-menu__summary-descriptor" id="presentation-descriptor">Choose a template to populate the slides.</span>
                         </span>
                         <span class="workspace-menu__summary-indicator" aria-hidden="true">
-                            <span class="workspace-menu__summary-hint">Open workspace menu</span>
+                            <span class="workspace-menu__summary-hint visually-hidden">Open session controls</span>
                             <i class="fas fa-chevron-down"></i>
                         </span>
                     </summary>
@@ -2463,7 +2495,7 @@
         let embeddedLessonLibrary = null;
         if (workspaceMenu && workspaceSummaryHint) {
             const updateWorkspaceSummaryHint = () => {
-                workspaceSummaryHint.textContent = workspaceMenu.open ? "Close workspace menu" : "Open workspace menu";
+                workspaceSummaryHint.textContent = workspaceMenu.open ? "Collapse session controls" : "Open session controls";
             };
             workspaceMenu.addEventListener("toggle", updateWorkspaceSummaryHint);
             updateWorkspaceSummaryHint();
