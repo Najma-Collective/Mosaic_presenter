@@ -461,6 +461,198 @@
         ]
       }
     ]
+  },
+  "slideTypeShowcase": {
+    "id": "slide-type-showcase",
+    "label": "Slide Type Inspiration Pack",
+    "meta": {
+      "eyebrow": "Facilitation toolkit",
+      "descriptor": "Showcase slides that spark discussion, calm energy, and track progress across a workshop.",
+      "pageTitle": "Slide Type Inspiration Pack"
+    },
+    "sections": [
+      {
+        "title": "Launch",
+        "slideKeys": [
+          "lesson-orientation"
+        ]
+      },
+      {
+        "title": "Modelled interactions",
+        "slideKeys": [
+          "mentoring-dialogue",
+          "calm-reset"
+        ]
+      },
+      {
+        "title": "Guided thinking",
+        "slideKeys": [
+          "decision-map",
+          "discussion-rounds"
+        ]
+      },
+      {
+        "title": "Closure",
+        "slideKeys": [
+          "confidence-check"
+        ]
+      }
+    ],
+    "slides": [
+      {
+        "key": "lesson-orientation",
+        "type": "lessonAim",
+        "title": "Session orientation",
+        "headline": "Where are we heading?",
+        "badge": "45 min",
+        "aims": [
+          "Surface existing knowledge and needs.",
+          "Model active listening language.",
+          "Equip mentors with calm-down tools."
+        ],
+        "successCriteria": [
+          "Learners can describe one active-listening move.",
+          "Pairs name at least two grounding prompts they will try."
+        ],
+        "agenda": [
+          "Explore a mentor/mentee dialogue model.",
+          "Practise grounding prompts with partners.",
+          "Plan how to invite reflective questions."
+        ],
+        "tip": "Invite participants to co-create their own aims before revealing yours."
+      },
+      {
+        "key": "mentoring-dialogue",
+        "type": "dialogue",
+        "title": "Mentor language in action",
+        "subtitle": "Notice how tone and body language soften resistance.",
+        "dialogue": [
+          {
+            "speaker": "Mentor Sam",
+            "side": "left",
+            "lines": [
+              "I noticed you paused before sharing. What was happening for you in that moment?"
+            ]
+          },
+          {
+            "speaker": "Mentee Aisha",
+            "side": "right",
+            "lines": [
+              "I was worried my idea would sound naive.",
+              "Everyone else seems so sure already."
+            ],
+            "note": "Invite mentees to narrate their internal dialogue without judgement."
+          },
+          {
+            "speaker": "Mentor Sam",
+            "side": "left",
+            "lines": [
+              "Thank you for trusting us with that.",
+              "Can we try sketching the idea together so we can react to something concrete?"
+            ]
+          }
+        ],
+        "body": [
+          "Ask observers to identify the invitation, validation, and action moves in the exchange."
+        ]
+      },
+      {
+        "key": "calm-reset",
+        "type": "grounding",
+        "title": "Grounding break",
+        "mantra": "Breathe in for four, hold for four, breathe out for six.",
+        "promptTitle": "Choose a reset that works for you",
+        "prompts": [
+          "Drop your shoulders and unclench your jaw.",
+          "Notice five colours around you.",
+          "Place both feet flat on the floor and feel the support.",
+          "Share one word that captures how you want to feel when we resume."
+        ],
+        "timer": "90 seconds",
+        "image": {
+          "src": "https://images.pexels.com/photos/3560044/pexels-photo-3560044.jpeg",
+          "alt": "A calm sunrise over a misty forest."
+        }
+      },
+      {
+        "key": "decision-map",
+        "type": "flowchart",
+        "title": "Escalation decision map",
+        "subtitle": "Guide mentees through tricky conversations with a clear process.",
+        "orientation": "horizontal",
+        "steps": [
+          {
+            "title": "Listen and label",
+            "description": "Reflect back what you heard and name the emotion you notice.",
+            "icon": "fas fa-ear-listen"
+          },
+          {
+            "title": "Assess safety",
+            "description": "Ask if anyone feels at risk and what support they need right now.",
+            "icon": "fas fa-shield-heart"
+          },
+          {
+            "title": "Co-create next steps",
+            "description": "Offer two options and invite the mentee to choose or adapt them.",
+            "icon": "fas fa-route"
+          },
+          {
+            "title": "Document & follow up",
+            "description": "Record the decision and schedule a check-in within 48 hours.",
+            "icon": "fas fa-clipboard-check"
+          }
+        ]
+      },
+      {
+        "key": "discussion-rounds",
+        "type": "questionPrompts",
+        "title": "Dialogue starters",
+        "subtitle": "Use these rounds to keep the group energised and reflective.",
+        "prompts": [
+          {
+            "title": "Round 1: Celebrate",
+            "text": "Share one micro-win you've observed in your mentee recently.",
+            "action": "Invite quick snaps or emojis in the chat."
+          },
+          {
+            "title": "Round 2: Stretch",
+            "text": "What is one conversation topic you tend to avoid with mentees? Why?",
+            "stems": [
+              "I notice I hesitate when...",
+              "A question that could open this up is..."
+            ]
+          },
+          {
+            "title": "Round 3: Commit",
+            "text": "Choose a prompt you will try in your next session and pair-share why it matters.",
+            "action": "Partners jot a reminder card before the break."
+          }
+        ]
+      },
+      {
+        "key": "confidence-check",
+        "type": "checkpoint",
+        "title": "Confidence check",
+        "subtitle": "Before we leave, where do you feel solid and where do you want backup?",
+        "checkpoints": [
+          {
+            "title": "I can name our session aims in my own words.",
+            "action": "Thumbs up/down in the room or chat."
+          },
+          {
+            "title": "I have at least two grounding prompts to offer.",
+            "action": "Write them in your notes before you go."
+          },
+          {
+            "title": "I know how to escalate a concern collaboratively.",
+            "action": "Flag a scenario you want to rehearse next time."
+          }
+        ],
+        "body": [
+          "Invite participants to mark any items needing more support; use that data to plan follow-up resources."
+        ]
+      }
+    ]
   }
 }
     </script>
@@ -2163,6 +2355,259 @@
             font-size: var(--step-0);
         }
         .process-step-content strong { color: var(--forest-shadow); }
+
+        .dialogue-stack {
+            display: grid;
+            gap: var(--space-4);
+            margin-top: var(--space-5);
+        }
+        .dialogue-exchange {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-3);
+            align-items: flex-start;
+        }
+        .dialogue-exchange.dialogue-exchange--right {
+            grid-template-columns: 1fr auto;
+        }
+        .dialogue-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--secondary-sage) 25%, white 75%);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: var(--forest-shadow);
+            border: 2px solid rgba(122, 132, 113, 0.25);
+            box-shadow: var(--shadow-1);
+        }
+        .dialogue-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+        }
+        .dialogue-bubble {
+            padding: var(--space-4);
+            border-radius: 20px;
+            background: #fff;
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            box-shadow: var(--shadow-1);
+            position: relative;
+            font-size: var(--step-0);
+        }
+        .dialogue-bubble::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: inherit;
+            border: inherit;
+            border-left: none;
+            border-bottom: none;
+            transform: rotate(45deg);
+            top: 22px;
+        }
+        .dialogue-exchange--left .dialogue-bubble::after {
+            left: -8px;
+            box-shadow: -3px 3px 6px rgba(34, 41, 32, 0.08);
+        }
+        .dialogue-exchange--right .dialogue-bubble::after {
+            right: -8px;
+            box-shadow: 3px -3px 6px rgba(34, 41, 32, 0.08);
+        }
+        .dialogue-speaker {
+            font-weight: 700;
+            color: var(--forest-shadow);
+            margin-bottom: var(--space-2);
+        }
+
+        .grounding-slide {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            min-height: clamp(360px, 60vh, 560px);
+            display: grid;
+            align-items: end;
+            background: var(--ink-muted);
+            color: #fff;
+        }
+        .grounding-slide img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.9);
+        }
+        .grounding-overlay {
+            position: relative;
+            backdrop-filter: blur(6px);
+            background: color-mix(in srgb, rgba(34, 41, 32, 0.72) 70%, rgba(198, 170, 119, 0.45) 30%);
+            padding: clamp(24px, 4vw, 48px);
+            display: grid;
+            gap: var(--space-4);
+        }
+        .grounding-prompts {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .grounding-prompts li {
+            list-style: none;
+            position: relative;
+            padding-left: var(--space-6);
+            font-size: var(--step-1);
+        }
+        .grounding-prompts li::before {
+            content: "\f5a4";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            color: var(--amber);
+        }
+
+        .flowchart {
+            display: grid;
+            gap: var(--space-5);
+            margin-top: var(--space-5);
+        }
+        .flowchart.flowchart--horizontal {
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(200px, 1fr);
+            align-items: stretch;
+        }
+        .flowchart-step {
+            background: #fff;
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-1);
+            position: relative;
+        }
+        .flowchart-step::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            border: 2px solid rgba(122, 132, 113, 0.25);
+            border-left-color: transparent;
+            border-right-color: transparent;
+            top: 50%;
+            right: -45px;
+            transform: translateY(-50%);
+            display: none;
+        }
+        .flowchart.flowchart--horizontal .flowchart-step::after {
+            display: block;
+        }
+        .flowchart-step:last-child::after { display: none; }
+        .flowchart-step-number {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            color: var(--primary-sage);
+            margin-bottom: var(--space-2);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        .flowchart-step-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--secondary-sage) 30%, white 70%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--forest-shadow);
+            font-size: var(--step-0);
+        }
+
+        .question-prompts {
+            display: grid;
+            gap: var(--space-4);
+            margin-top: var(--space-5);
+        }
+        .question-prompts .question-card {
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            background: color-mix(in srgb, var(--soft-white) 94%, rgba(198, 170, 119, 0.3) 6%);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            box-shadow: var(--shadow-1);
+        }
+        .question-prompts .question-card h4 {
+            margin: 0 0 var(--space-2);
+            font-size: var(--step-1);
+        }
+
+        .lesson-aim {
+            display: grid;
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            background: color-mix(in srgb, var(--soft-white) 92%, rgba(156, 175, 136, 0.4) 8%);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            box-shadow: var(--shadow-1);
+        }
+        .lesson-aim-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--space-3);
+            justify-content: space-between;
+        }
+        .lesson-aim-badge {
+            padding: var(--space-1) var(--space-3);
+            border-radius: 999px;
+            background: var(--primary-sage);
+            color: var(--soft-white);
+            font-weight: 700;
+            font-size: var(--step--1);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .lesson-aim ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: var(--space-2);
+        }
+        .lesson-aim ul li {
+            position: relative;
+            padding-left: var(--space-6);
+        }
+        .lesson-aim ul li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0.15rem;
+            color: var(--primary-sage);
+        }
+
+        .checkpoint-stack {
+            display: grid;
+            gap: var(--space-3);
+            margin-top: var(--space-4);
+        }
+        .checkpoint-card {
+            border-radius: var(--radius);
+            border: 1px dashed rgba(122, 132, 113, 0.35);
+            background: color-mix(in srgb, var(--soft-white) 92%, rgba(156, 175, 136, 0.2) 8%);
+            padding: var(--space-4);
+            display: grid;
+            gap: var(--space-2);
+        }
+        .checkpoint-card h4 {
+            margin: 0;
+            font-size: var(--step-0);
+        }
 
         /* Navigation controls styling */
         .navigation {
@@ -4957,6 +5402,448 @@
             slideElement.appendChild(content);
         }
 
+        function renderDialogueSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
+
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+
+            if (Array.isArray(config.dialogue) && config.dialogue.length) {
+                const stack = document.createElement("div");
+                stack.className = "dialogue-stack";
+                config.dialogue.forEach((turn, index) => {
+                    const side = turn.side === "right" || turn.align === "right" ? "right" : "left";
+                    const exchange = document.createElement("div");
+                    exchange.className = `dialogue-exchange dialogue-exchange--${side} animate-on-scroll`;
+
+                    const avatar = document.createElement("div");
+                    avatar.className = "dialogue-avatar";
+                    if (turn.avatar && turn.avatar.src) {
+                        const avatarImg = createImageElement(turn.avatar);
+                        if (avatarImg) {
+                            avatarImg.alt = turn.avatar.alt || `${turn.speaker || "Speaker"} avatar`;
+                            avatar.appendChild(avatarImg);
+                        }
+                    } else if (turn.avatar && turn.avatar.label) {
+                        avatar.textContent = turn.avatar.label;
+                    } else if (turn.initials) {
+                        avatar.textContent = turn.initials;
+                    } else if (turn.speaker) {
+                        avatar.textContent = turn.speaker
+                            .split(/\s+/)
+                            .map((part) => part.charAt(0).toUpperCase())
+                            .join("")
+                            .slice(0, 2) || "";
+                    } else {
+                        avatar.textContent = String.fromCharCode(65 + (index % 26));
+                    }
+
+                    const bubble = document.createElement("div");
+                    bubble.className = "dialogue-bubble";
+                    if (turn.speaker) {
+                        const speaker = document.createElement("p");
+                        speaker.className = "dialogue-speaker";
+                        speaker.textContent = turn.speaker;
+                        bubble.appendChild(speaker);
+                    }
+                    const lines = Array.isArray(turn.lines) ? turn.lines : turn.body || (turn.text ? [turn.text] : []);
+                    lines.forEach((line) => {
+                        const paragraph = createParagraph(line);
+                        if (paragraph) {
+                            bubble.appendChild(paragraph);
+                        }
+                    });
+                    if (turn.note) {
+                        const note = createParagraph({ html: `<span class="text-muted text-sm">${turn.note}</span>` });
+                        if (note) {
+                            bubble.appendChild(note);
+                        }
+                    }
+
+                    if (side === "right") {
+                        exchange.appendChild(bubble);
+                        exchange.appendChild(avatar);
+                    } else {
+                        exchange.appendChild(avatar);
+                        exchange.appendChild(bubble);
+                    }
+                    stack.appendChild(exchange);
+                });
+                content.appendChild(stack);
+            }
+
+            slideElement.appendChild(content);
+        }
+
+        function renderGroundingSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            const grounding = document.createElement("div");
+            grounding.className = "grounding-slide animate-on-scroll";
+
+            if (config.image) {
+                const img = createImageElement(config.image);
+                if (img) {
+                    grounding.appendChild(img);
+                }
+            }
+
+            const overlay = document.createElement("div");
+            overlay.className = "grounding-overlay";
+
+            if (config.mantra) {
+                const mantra = document.createElement("p");
+                mantra.className = "text-lg fw-semibold";
+                mantra.textContent = config.mantra;
+                overlay.appendChild(mantra);
+            }
+
+            if (config.promptTitle) {
+                const promptHeading = document.createElement("h3");
+                promptHeading.className = "text-xl";
+                promptHeading.textContent = config.promptTitle;
+                overlay.appendChild(promptHeading);
+            }
+
+            const prompts = Array.isArray(config.prompts) ? config.prompts : [];
+            if (prompts.length) {
+                const list = document.createElement("ul");
+                list.className = "grounding-prompts";
+                prompts.forEach((prompt) => {
+                    const item = document.createElement("li");
+                    if (typeof prompt === "object" && prompt !== null && "html" in prompt) {
+                        item.innerHTML = prompt.html;
+                    } else if (typeof prompt === "object" && prompt !== null) {
+                        item.textContent = prompt.text || "";
+                    } else {
+                        item.textContent = String(prompt ?? "");
+                    }
+                    list.appendChild(item);
+                });
+                overlay.appendChild(list);
+            }
+
+            if (config.timer) {
+                const timer = document.createElement("p");
+                timer.className = "text-sm text-soft";
+                timer.textContent = `Suggested duration: ${config.timer}`;
+                overlay.appendChild(timer);
+            }
+
+            grounding.appendChild(overlay);
+            slideElement.appendChild(grounding);
+        }
+
+        function renderFlowchartSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
+
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+
+            const steps = Array.isArray(config.steps) && config.steps.length
+                ? config.steps
+                : Array.isArray(config.nodes)
+                ? config.nodes
+                : [];
+            if (steps.length) {
+                const flow = document.createElement("div");
+                const orientation = config.orientation === "horizontal" ? "horizontal" : "vertical";
+                flow.className = `flowchart flowchart--${orientation}`;
+                steps.forEach((step, index) => {
+                    const card = document.createElement("article");
+                    card.className = "flowchart-step animate-on-scroll";
+                    const numberLabel = step.step || step.number || index + 1;
+                    const title = step.title || step.label;
+
+                    const number = document.createElement("p");
+                    number.className = "flowchart-step-number";
+                    number.textContent = typeof numberLabel === "string" ? numberLabel : `Step ${numberLabel}`;
+                    if (step.icon) {
+                        const icon = document.createElement("span");
+                        icon.className = "flowchart-step-icon";
+                        icon.innerHTML = `<i class="${step.icon}"></i>`;
+                        number.appendChild(icon);
+                    }
+                    card.appendChild(number);
+
+                    if (title) {
+                        const heading = document.createElement("h4");
+                        heading.textContent = title;
+                        card.appendChild(heading);
+                    }
+
+                    const descriptionBlocks = Array.isArray(step.body)
+                        ? step.body
+                        : step.description
+                        ? [step.description]
+                        : [];
+                    descriptionBlocks.forEach((block) => {
+                        const paragraph = createParagraph(block);
+                        if (paragraph) {
+                            card.appendChild(paragraph);
+                        }
+                    });
+
+                    if (Array.isArray(step.actions) && step.actions.length) {
+                        const list = createListElement(step.actions, step.listOptions || { style: "plain" });
+                        if (list) {
+                            card.appendChild(list);
+                        }
+                    }
+
+                    flow.appendChild(card);
+                });
+                content.appendChild(flow);
+            }
+
+            slideElement.appendChild(content);
+        }
+
+        function renderQuestionPromptsSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
+
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+
+            if (Array.isArray(config.prompts) && config.prompts.length) {
+                const promptStack = document.createElement("div");
+                promptStack.className = "question-prompts";
+                config.prompts.forEach((prompt, index) => {
+                    const card = document.createElement("article");
+                    card.className = "question-card animate-on-scroll";
+                    if (prompt && typeof prompt === "object" && (prompt.title || prompt.heading)) {
+                        const heading = document.createElement("h4");
+                        heading.textContent = prompt.title || prompt.heading || `Prompt ${index + 1}`;
+                        card.appendChild(heading);
+                    } else {
+                        const heading = document.createElement("h4");
+                        heading.textContent = `Prompt ${index + 1}`;
+                        card.appendChild(heading);
+                    }
+
+                    const promptCopy = prompt && typeof prompt === "object"
+                        ? prompt.text || prompt.prompt || ""
+                        : prompt;
+                    const paragraph = createParagraph(promptCopy);
+                    if (paragraph) {
+                        card.appendChild(paragraph);
+                    }
+
+                    if (prompt && typeof prompt === "object" && Array.isArray(prompt.stems) && prompt.stems.length) {
+                        const stems = createListElement(prompt.stems, { style: "plain" });
+                        if (stems) {
+                            card.appendChild(stems);
+                        }
+                    }
+
+                    if (prompt && typeof prompt === "object" && prompt.action) {
+                        const action = createParagraph({ html: `<span class="text-sm text-muted">${prompt.action}</span>` });
+                        if (action) {
+                            card.appendChild(action);
+                        }
+                    }
+
+                    promptStack.appendChild(card);
+                });
+                content.appendChild(promptStack);
+            }
+
+            slideElement.appendChild(content);
+        }
+
+        function renderLessonAimSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+
+            const block = document.createElement("section");
+            block.className = "lesson-aim animate-on-scroll";
+
+            const header = document.createElement("div");
+            header.className = "lesson-aim-header";
+
+            const heading = document.createElement("h3");
+            heading.textContent = config.headline || config.subtitle || "Today's aims";
+            header.appendChild(heading);
+
+            if (config.duration || config.badge) {
+                const badge = document.createElement("span");
+                badge.className = "lesson-aim-badge";
+                badge.textContent = config.badge || `~ ${config.duration}`;
+                header.appendChild(badge);
+            }
+
+            block.appendChild(header);
+
+            const aims = Array.isArray(config.aims) ? config.aims : [];
+            if (aims.length) {
+                const listHeading = document.createElement("h4");
+                listHeading.textContent = config.aimsLabel || "Learning aims";
+                block.appendChild(listHeading);
+
+                const list = document.createElement("ul");
+                aims.forEach((aim) => {
+                    const item = document.createElement("li");
+                    item.textContent = typeof aim === "string" ? aim : aim?.text || "";
+                    list.appendChild(item);
+                });
+                block.appendChild(list);
+            }
+
+            if (Array.isArray(config.successCriteria) && config.successCriteria.length) {
+                const successHeading = document.createElement("h4");
+                successHeading.textContent = config.successLabel || "Success looks like";
+                block.appendChild(successHeading);
+
+                const list = document.createElement("ul");
+                config.successCriteria.forEach((criterion) => {
+                    const item = document.createElement("li");
+                    item.textContent = typeof criterion === "string" ? criterion : criterion?.text || "";
+                    list.appendChild(item);
+                });
+                block.appendChild(list);
+            }
+
+            if (Array.isArray(config.agenda) && config.agenda.length) {
+                const agendaHeading = document.createElement("h4");
+                agendaHeading.textContent = config.agendaLabel || "We will";
+                block.appendChild(agendaHeading);
+
+                const list = createListElement(config.agenda, { style: "ordered" });
+                if (list) {
+                    block.appendChild(list);
+                }
+            }
+
+            if (config.tip) {
+                const tip = createParagraph({ html: `<span class="text-muted text-sm">${config.tip}</span>` });
+                if (tip) {
+                    block.appendChild(tip);
+                }
+            }
+
+            slideElement.appendChild(block);
+        }
+
+        function renderCheckpointSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
+
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+
+            if (Array.isArray(config.checkpoints) && config.checkpoints.length) {
+                const stack = document.createElement("div");
+                stack.className = "checkpoint-stack";
+                config.checkpoints.forEach((item, index) => {
+                    const card = document.createElement("article");
+                    card.className = "checkpoint-card animate-on-scroll";
+                    const title = item.title || item.label || `Checkpoint ${index + 1}`;
+                    const heading = document.createElement("h4");
+                    heading.textContent = title;
+                    card.appendChild(heading);
+
+                    const description = createParagraph(item.text || item.description || item.prompt || "");
+                    if (description) {
+                        card.appendChild(description);
+                    }
+
+                    if (item.action) {
+                        const action = createParagraph({ html: `<span class="text-sm text-muted">${item.action}</span>` });
+                        if (action) {
+                            card.appendChild(action);
+                        }
+                    }
+
+                    stack.appendChild(card);
+                });
+                content.appendChild(stack);
+            }
+
+            slideElement.appendChild(content);
+        }
+
         function renderStorySlide(slideElement, config) {
             if (config.title) {
                 const headingWrapper = document.createElement("div");
@@ -5239,6 +6126,28 @@
                     break;
                 case "cards":
                     renderCardsSlide(slideElement, config);
+                    break;
+                case "dialogue":
+                    renderDialogueSlide(slideElement, config);
+                    break;
+                case "grounding":
+                    renderGroundingSlide(slideElement, config);
+                    break;
+                case "flowchart":
+                case "flow":
+                    renderFlowchartSlide(slideElement, config);
+                    break;
+                case "questionPrompts":
+                case "discussion":
+                    renderQuestionPromptsSlide(slideElement, config);
+                    break;
+                case "lessonAim":
+                case "lessonAims":
+                    renderLessonAimSlide(slideElement, config);
+                    break;
+                case "checkpoint":
+                case "checkpoints":
+                    renderCheckpointSlide(slideElement, config);
                     break;
                 case "story":
                     renderStorySlide(slideElement, config);

@@ -1,0 +1,41 @@
+{
+  "type": "questionPrompts",
+  "description": "Stacks engaging discussion prompts in card-style callouts.",
+  "required": ["key", "type", "prompts"],
+  "fields": {
+    "title": "Optional heading for the slide.",
+    "subtitle": "Optional framing text.",
+    "body": "Optional array of introductory paragraphs.",
+    "prompts": "Array of prompt objects or strings."
+  },
+  "promptSchema": {
+    "title": "Label for the prompt card.",
+    "text": "Main prompt copy displayed in paragraph form.",
+    "stems": "Optional array of sentence starters rendered as a plain list.",
+    "action": "Optional facilitator action rendered as muted helper text."
+  },
+  "example": {
+    "key": "discussion-rounds",
+    "type": "questionPrompts",
+    "title": "Dialogue starters",
+    "prompts": [
+      {
+        "title": "Round 1: Celebrate",
+        "text": "Share one micro-win from the past week."
+      },
+      {
+        "title": "Round 2: Stretch",
+        "text": "Which conversation do you keep postponing with learners?",
+        "stems": [
+          "I notice I avoid it when...",
+          "One question that could unlock it is..."
+        ]
+      },
+      {
+        "title": "Round 3: Commit",
+        "text": "Choose a prompt you will try next time and pair-share why.",
+        "action": "Write your commitment in the shared doc before the break."
+      }
+    ]
+  }
+}

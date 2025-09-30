@@ -1,0 +1,35 @@
+{
+  "type": "checkpoint",
+  "description": "Provides a stack of progress checks or exit ticket prompts with facilitator actions.",
+  "required": ["key", "type", "checkpoints"],
+  "fields": {
+    "title": "Optional heading.",
+    "subtitle": "Optional framing question.",
+    "body": "Optional array of paragraphs preceding the checkpoint cards.",
+    "checkpoints": "Array of card objects."
+  },
+  "checkpointSchema": {
+    "title": "Statement or question for participants to respond to.",
+    "text": "Longer description (optional).",
+    "action": "Facilitator direction (optional)."
+  },
+  "example": {
+    "key": "confidence-check",
+    "type": "checkpoint",
+    "title": "Confidence check",
+    "subtitle": "Where do you feel ready and where do you want backup?",
+    "checkpoints": [
+      {
+        "title": "I can summarise today's aim in my own words.",
+        "action": "Thumbs up/down in chat."
+      },
+      {
+        "title": "I have two grounding prompts to offer.",
+        "action": "Write them in your notes now."
+      }
+    ],
+    "body": [
+      "Collect this data to prioritise follow-up resources."
+    ]
+  }
+}

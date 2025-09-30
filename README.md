@@ -7,6 +7,9 @@ The Presenter shell reads from the `lessonLibrary` object near the end of `Prese
 - Collaborative text boxes stay docked to the right-hand rail so there is still room for note taking alongside the slide canvas.
 - All facilitator tools—including the lesson selector, session planner, slide map, and notes import/export actions—live inside a compact **Session controls** bar at the top of the slide workspace. Open the menu to adjust your session resources and collapse it again to reclaim vertical space.
 
+## Slide type cheat sheets
+- Browse the `slide-types/` directory for JSON blueprints of every facilitation slide type (dialogue, grounding, flowchart, question prompts, lesson aim, and checkpoint). Each file documents required fields and includes a ready-to-copy example configuration.
+
 ## 1. Lesson templates and metadata
 1. Open `Presenter.html` and locate `const lessonLibrary = { ... }`.
 2. Duplicate one of the existing lesson objects (for example `digitalSelfDefense`, `eltLesson`, or `questionTypesShowcase`) and give it a new key; the key is what the selector uses internally.
@@ -50,6 +53,35 @@ Common properties that work across slide types:
 - `cards`: Shows up to four callout cards with icons, headings, and descriptions.
 - `story`: Combines a quote-style rubric, narrative paragraphs, optional imagery, and process/outcome callouts.
 - `process`: Visualises multi-step flows from a `steps` array.
+
+### Facilitation & wellbeing slide types
+- `dialogue`: Alternating speech bubbles to model tone and word choice. Supply a `dialogue` array with turns (`speaker`, `side`, `lines`, optional `note`/`avatar`). See `slide-types/dialogue.json` for a schema and example.
+  ```json
+  {
+    "key": "mentoring-dialogue",
+    "type": "dialogue",
+    "title": "Mentor language in action",
+    "dialogue": [
+      { "speaker": "Mentor", "side": "left", "lines": ["What feels most urgent right now?"] },
+      { "speaker": "Mentee", "side": "right", "lines": ["I'm afraid to ask for help."], "note": "Name the worry before problem solving." }
+    ]
+  }
+  ```
+- `grounding`: Full-bleed image with an overlay of calming prompts. Provide `prompts` and an `image` object; optional `mantra`, `promptTitle`, and `timer` deepen the script. Blueprint: `slide-types/grounding.json`.
+  ```json
+  {
+    "key": "calm-reset",
+    "type": "grounding",
+    "title": "Grounding break",
+    "mantra": "Inhale for four, exhale for six.",
+    "prompts": ["Drop your shoulders", "Notice five colours"],
+    "image": { "src": "https://…/forest.jpg", "alt": "Soft light across trees" }
+  }
+  ```
+- `flowchart`: Connected decision map that guides learners through staged moves. Supply `steps` (or `nodes`) with `title`, `description`, and optional `icon`/`actions`. Works horizontally or vertically via `orientation`. Schema: `slide-types/flowchart.json`.
+- `questionPrompts`: Engaging discussion rounds rendered as cards. Provide a `prompts` array where each entry may include `title`, `text`, optional `stems`, and `action`. Reference `slide-types/question-prompts.json`.
+- `lessonAim`: Summary panel for aims, success criteria, and agenda beats. Configure `aims`, optional `successCriteria`, and `agenda` ordered list; add `badge` for duration. See `slide-types/lesson-aim.json`.
+- `checkpoint`: Exit-ticket style confidence checks. Provide `checkpoints` with `title`, optional `text`, and facilitator `action`. Template: `slide-types/checkpoint.json`.
 
 ### Interactive assessments and reflections
 - `gapfill`: Build a `paragraph` array mixing text segments with gap objects (`answer`, optional `options`, and `feedback`).
