@@ -4,7 +4,7 @@ The Presenter shell reads from the `lessonLibrary` object near the end of `Prese
 
 ## 1. Add or update a lesson entry
 1. Open `Presenter.html` and locate the `const lessonLibrary = { ... }` declaration.【F:Presenter.html†L1433-L1446】
-2. Duplicate one of the existing lesson objects (for example `mentoringOrientation`, `eltLesson`, or `questionTypesShowcase`) and give it a new key; that key is what the selector uses internally.【F:Presenter.html†L1433-L1948】
+2. Duplicate one of the existing lesson objects (for example `mentoringOrientation`, `eltLesson`, `palestinianArtCuratorial`, or `questionTypesShowcase`) and give it a new key; that key is what the selector uses internally.【F:Presenter.html†L1433-L2144】
 3. Update the `id`, `label`, and optional `meta` fields:
    - `id` must be unique and is appended to the notes storage key so each lesson keeps separate annotations.【F:Presenter.html†L1433-L1446】【F:Presenter.html†L2709-L2734】
    - `label` is the name that appears in the dropdown control.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4355-L4378】
@@ -20,6 +20,7 @@ Add objects to the `slides` array in the order they should appear. Every slide o
 - `hero`: Supports `icon`, `title`, `subtitle`, and an `image` object with `src`/`alt` attributes. Ideal for opening slides.【F:Presenter.html†L3258-L3280】【F:Presenter.html†L1472-L1501】
 - `content`: Renders paragraphs, optional imagery, and flexible lists. Provide `body`, `image`, `list`, and `listStyle` as needed.【F:Presenter.html†L3281-L3313】【F:Presenter.html†L1518-L1608】
 - `cards`: Supply a `cards` array where each item can include `icon`, `title`, and `description` to display multiple callouts.【F:Presenter.html†L3963-L4000】【F:Presenter.html†L1609-L1684】
+- `gallery`: Present parallel artefacts or resources. Provide an `items` array where each entry can define `title`, `meta`, `description`, optional `link`, and an `image` object. Ideal for visual negotiation tasks like art curation.【F:Presenter.html†L4230-L4301】【F:Presenter.html†L2035-L2135】
 - `story`: Combines quotes, narrative paragraphs, and optional process/outcome callouts defined on the slide object.【F:Presenter.html†L4001-L4043】【F:Presenter.html†L1685-L1754】
 - `process`: Use for multi-step flows. Add a `steps` array with `title`, `description`, and optional `duration` for each stage.【F:Presenter.html†L4044-L4099】【F:Presenter.html†L1755-L1838】
 - `quiz`: Configure single-answer questions by providing `questions`, each with `id`, `prompt`, `options`, `answer`, and feedback strings. Buttons are wired automatically.【F:Presenter.html†L4100-L4161】【F:Presenter.html†L1502-L1547】
