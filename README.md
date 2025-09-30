@@ -34,5 +34,9 @@ Add objects to the `slides` array in the order they should appear. Every slide o
 ## 4. Launch your lesson
 Open `Presenter.html` in a browser and use the **Lesson template** dropdown to select your lesson. The slide deck, slide map, and notes panel refresh instantly when you change templates.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4311-L4342】
 
+### Example: Dynamic ELT curation task
+- Select **Palestinian art negotiation lesson** to access a full 90–100 minute sequence that guides learners through lead-in, jigsaw research, negotiation, reporting, and reflection activities while providing ready-to-print appendices.【F:Presenter.html†L1433-L1939】
+- The template uses content, process, and cards layouts to model stages such as Think-Pair-Share, expert/home group jigsaws, curated pitches, and gallery walk reflections.【F:Presenter.html†L1482-L1910】
+
 ## 5. Notes and reusable assets
 Slide notes are stored per-lesson in `localStorage` using the lesson `id`, so switching templates keeps annotations separate. Import/export controls remain available from the toolbar. Images can point to remote URLs or relative paths in the repository; be sure to include descriptive alt text for accessibility.【F:Presenter.html†L2687-L2734】【F:Presenter.html†L1455-L1939】
