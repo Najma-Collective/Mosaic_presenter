@@ -82,8 +82,8 @@ window.__LESSON_LIBRARY__ = {
         "title": "Unlock Your Potential as a Researcher",
         "subtitle": "Welcome! We will begin in a few moments.",
         "image": {
-          "src": "https://images.pexels.com/photos/8423233/pexels-photo-8423233.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          "alt": "A diverse group of students smiling and collaborating in an online meeting."
+          "src": "https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A teacher greeting learners at the start of an online workshop."
         },
         "nav": { "hidePrev": true }
       },

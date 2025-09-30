@@ -3428,39 +3428,156 @@
           </header>
 
           <section
-            class="session-hero session-hero--no-image"
-            id="session-hero"
-            aria-labelledby="session-hero-title"
+            id="session-overview"
+            aria-labelledby="session-overview-title"
           >
-            <div class="session-hero__content">
-              <p class="session-hero__eyebrow" id="session-hero-eyebrow">
-                Instructional Session
-              </p>
-              <h1 class="session-hero__title" id="session-hero-title">
-                Select a lesson template
-              </h1>
-              <p class="session-hero__descriptor" id="session-hero-descriptor">
-                Choose a template to populate the slides.
-              </p>
-              <div class="session-hero__meta" id="session-hero-meta" hidden>
-                <span
-                  class="session-hero__badge"
-                  id="session-hero-duration"
-                  hidden
-                >
-                  <i class="fas fa-clock" aria-hidden="true"></i>
-                  <span class="session-hero__duration-text">1 hr</span>
-                </span>
-                <span
-                  class="session-hero__subtitle"
-                  id="session-hero-subtitle"
-                  hidden
-                ></span>
+            <div class="slide-content layout--poster animate-on-scroll is-visible">
+              <header>
+                <p class="text-sm text-muted" id="session-overview-eyebrow">
+                  Instructional Session
+                </p>
+                <h1 class="slide-title" id="session-overview-title">
+                  Select a lesson template
+                </h1>
+                <p class="text-lg" id="session-overview-descriptor">
+                  Choose a template to populate the slides.
+                </p>
+              </header>
+              <div class="slide-content layout--columns">
+                <div class="animate-on-scroll is-visible">
+                  <div
+                    class="question-prompts"
+                    aria-label="Session highlights"
+                  >
+                    <article class="question-card">
+                      <h4>
+                        <i class="fas fa-chalkboard-user" aria-hidden="true"></i>
+                        Teacher posture
+                      </h4>
+                      <p>
+                        Welcome learners with warmth, narrate each transition,
+                        and model curiosity aloud to set an encouraging tone.
+                      </p>
+                    </article>
+                    <article
+                      class="question-card"
+                      id="session-overview-timing-card"
+                    >
+                      <h4>
+                        <i class="fas fa-clock" aria-hidden="true"></i> Live
+                        pacing
+                      </h4>
+                      <p id="session-overview-duration">1 Hour</p>
+                      <p class="text-sm text-soft" id="session-overview-subtitle">
+                        A one-hour online information session for aspiring
+                        postgraduate students.
+                      </p>
+                    </article>
+                    <article class="question-card">
+                      <h4>
+                        <i class="fas fa-people-roof" aria-hidden="true"></i>
+                        Community focus
+                      </h4>
+                      <p>
+                        Use quick polls, the chat, and shout-outs to celebrate
+                        every contribution—especially from quiet voices.
+                      </p>
+                    </article>
+                    <article class="question-card">
+                      <h4>
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        Key promise
+                      </h4>
+                      <p>
+                        Learners leave with a clear map of the programme,
+                        support structures, and their first actionable step.
+                      </p>
+                    </article>
+                  </div>
+
+                  <section
+                    class="session-grounding"
+                    aria-labelledby="session-grounding-title"
+                  >
+                    <h2 class="slide-title" id="session-grounding-title">
+                      <i class="fas fa-seedling" aria-hidden="true"></i>
+                      Grounding activity
+                    </h2>
+                    <p class="text-sm text-muted">
+                      Use this shared pause to help everyone arrive, breathe,
+                      and connect their mindset to the lesson focus.
+                    </p>
+                    <div class="grounding-slide">
+                      <img
+                        src="https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        alt="Adult learners sharing a calm moment together before beginning a workshop."
+                      />
+                      <div class="grounding-overlay">
+                        <p class="text-lg fw-semibold">
+                          Inhale calm, exhale curiosity.
+                        </p>
+                        <h3 class="text-xl">Breathe &amp; Connect (2 minutes)</h3>
+                        <ul class="grounding-prompts">
+                          <li>
+                            <i class="fas fa-person-praying" aria-hidden="true"></i>
+                            Invite everyone to plant their feet, soften their
+                            shoulders, and take one slow breath together.
+                          </li>
+                          <li>
+                            <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                            Ask for one-word check-ins in the chat describing
+                            how ready they feel to research today.
+                          </li>
+                          <li>
+                            <i class="fas fa-link" aria-hidden="true"></i>
+                            Acknowledge responses and connect the emerging words
+                            to today's learning promise.
+                          </li>
+                        </ul>
+                        <p class="text-sm text-soft">Suggested duration: 2 minutes</p>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <div class="animate-on-scroll is-visible">
+                  <figure>
+                    <img
+                      id="session-overview-image"
+                      src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      alt="A facilitator leading a small group conversation with notes open on a laptop."
+                      data-fallback-src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      data-fallback-alt="A facilitator leading a small group conversation with notes open on a laptop."
+                    />
+                    <figcaption class="text-sm text-soft">
+                      Photo by <a href="https://www.pexels.com/@fauxels/">fauxels</a> on
+                      <a href="https://www.pexels.com">Pexels</a>
+                    </figcaption>
+                  </figure>
+                  <div class="question-prompts" aria-label="Teacher toolkit">
+                    <article class="question-card">
+                      <h4>
+                        <i class="fas fa-headset" aria-hidden="true"></i>
+                        Tech check
+                      </h4>
+                      <p>
+                        Confirm slides are shared, captions are on, and the chat
+                        is visible for continual pulse checks.
+                      </p>
+                    </article>
+                    <article class="question-card">
+                      <h4>
+                        <i class="fas fa-book-open-reader" aria-hidden="true"></i>
+                        Materials
+                      </h4>
+                      <p>
+                        Keep the programme overview PDF, registration link, and
+                        learner stories handy for quick reference.
+                      </p>
+                    </article>
+                  </div>
+                </div>
               </div>
             </div>
-            <figure class="session-hero__media" aria-hidden="true">
-              <img id="session-hero-image" src="" alt="" hidden />
-            </figure>
           </section>
 
           <div id="slide-stage">
@@ -3561,25 +3678,32 @@
       const workspaceMenuDescriptor = document.getElementById(
         "workspace-menu-descriptor",
       );
-      const sessionHero = document.getElementById("session-hero");
-      const sessionHeroEyebrow = document.getElementById(
-        "session-hero-eyebrow",
+      const sessionOverview = document.getElementById("session-overview");
+      const sessionOverviewEyebrow = document.getElementById(
+        "session-overview-eyebrow",
       );
-      const sessionHeroTitle = document.getElementById("session-hero-title");
-      const sessionHeroDescriptor = document.getElementById(
-        "session-hero-descriptor",
+      const sessionOverviewTitle = document.getElementById(
+        "session-overview-title",
       );
-      const sessionHeroMeta = document.getElementById("session-hero-meta");
-      const sessionHeroDuration = document.getElementById(
-        "session-hero-duration",
+      const sessionOverviewDescriptor = document.getElementById(
+        "session-overview-descriptor",
       );
-      const sessionHeroDurationText = sessionHeroDuration
-        ? sessionHeroDuration.querySelector(".session-hero__duration-text")
-        : null;
-      const sessionHeroSubtitle = document.getElementById(
-        "session-hero-subtitle",
+      const sessionOverviewTimingCard = document.getElementById(
+        "session-overview-timing-card",
       );
-      const sessionHeroImage = document.getElementById("session-hero-image");
+      const sessionOverviewDuration = document.getElementById(
+        "session-overview-duration",
+      );
+      const sessionOverviewSubtitle = document.getElementById(
+        "session-overview-subtitle",
+      );
+      const sessionOverviewImage = document.getElementById(
+        "session-overview-image",
+      );
+      const sessionOverviewImageFallbackSrc =
+        sessionOverviewImage?.dataset?.fallbackSrc || "";
+      const sessionOverviewImageFallbackAlt =
+        sessionOverviewImage?.dataset?.fallbackAlt || "";
       const lessonOverview = document.getElementById("lesson-overview");
       const lessonSelector = document.getElementById("lesson-template");
       const workspaceMenu = document.getElementById("workspace-menu");
@@ -3641,11 +3765,11 @@
           workspaceMenuDescriptor.textContent = message;
         }
         if (
-          sessionHeroDescriptor &&
+          sessionOverviewDescriptor &&
           typeof message === "string" &&
           message.trim()
         ) {
-          sessionHeroDescriptor.textContent = message;
+          sessionOverviewDescriptor.textContent = message;
         }
       }
 
@@ -3752,11 +3876,10 @@
         }
       }
 
-      function updateSessionHero(lesson) {
-        if (!sessionHero) {
+      function updateSessionOverview(lesson) {
+        if (!sessionOverview) {
           return;
         }
-        const hasLesson = Boolean(lesson);
         const meta = lesson?.meta || {};
         const planner = meta.planner || {};
         const heroSlide = Array.isArray(lesson?.slides)
@@ -3766,70 +3889,57 @@
             )
           : null;
 
-        if (sessionHeroEyebrow) {
+        if (sessionOverviewEyebrow) {
           const eyebrowText =
             meta.eyebrow || lesson?.label || "Instructional Session";
-          sessionHeroEyebrow.textContent = eyebrowText;
+          sessionOverviewEyebrow.textContent = eyebrowText;
         }
-        if (sessionHeroTitle) {
+        if (sessionOverviewTitle) {
           const titleText =
             meta.title || planner.title || lesson?.label || "Lesson template";
-          sessionHeroTitle.textContent = titleText;
+          sessionOverviewTitle.textContent = titleText;
         }
-        if (sessionHeroDescriptor) {
+        if (sessionOverviewDescriptor) {
           const descriptorText =
             meta.descriptor ||
             planner.subtitle ||
             "Choose a template to populate the slides.";
-          sessionHeroDescriptor.textContent = descriptorText;
+          sessionOverviewDescriptor.textContent = descriptorText;
         }
 
         const durationText = planner.duration || meta.duration || "";
-        if (sessionHeroDuration) {
-          if (durationText) {
-            if (sessionHeroDurationText) {
-              sessionHeroDurationText.textContent = durationText;
-            }
-            toggleHidden(sessionHeroDuration, false);
-          } else {
-            toggleHidden(sessionHeroDuration, true);
-          }
+        const subtitleText = planner.subtitle || meta.plannerSubtitle || "";
+
+        if (sessionOverviewDuration) {
+          sessionOverviewDuration.textContent = durationText || "";
         }
 
-        if (sessionHeroSubtitle) {
-          const subtitleText = planner.subtitle || meta.plannerSubtitle || "";
+        if (sessionOverviewSubtitle) {
           if (subtitleText) {
-            sessionHeroSubtitle.textContent = subtitleText;
-            toggleHidden(sessionHeroSubtitle, false);
+            sessionOverviewSubtitle.textContent = subtitleText;
+            toggleHidden(sessionOverviewSubtitle, false);
           } else {
-            toggleHidden(sessionHeroSubtitle, true);
+            sessionOverviewSubtitle.textContent = "";
+            toggleHidden(sessionOverviewSubtitle, true);
           }
         }
 
-        if (sessionHeroMeta) {
-          const showMeta =
-            Boolean(durationText) ||
-            Boolean(planner.subtitle || meta.plannerSubtitle);
-          toggleHidden(sessionHeroMeta, !showMeta);
+        if (sessionOverviewTimingCard) {
+          const showTimingCard = Boolean(durationText || subtitleText);
+          toggleHidden(sessionOverviewTimingCard, !showTimingCard);
         }
 
-        if (sessionHeroImage) {
+        if (sessionOverviewImage) {
           if (heroSlide?.image?.src) {
-            sessionHeroImage.src = heroSlide.image.src;
-            sessionHeroImage.alt = heroSlide.image.alt || "";
-            sessionHeroImage.removeAttribute("hidden");
-            sessionHero.classList.remove("session-hero--no-image");
-          } else {
-            sessionHeroImage.src = "";
-            sessionHeroImage.removeAttribute("src");
-            sessionHeroImage.alt = "";
-            sessionHeroImage.setAttribute("hidden", "");
-            sessionHero.classList.add("session-hero--no-image");
+            sessionOverviewImage.src = heroSlide.image.src;
+            sessionOverviewImage.alt = heroSlide.image.alt || "";
+          } else if (sessionOverviewImageFallbackSrc) {
+            sessionOverviewImage.src = sessionOverviewImageFallbackSrc;
+            sessionOverviewImage.alt =
+              sessionOverviewImageFallbackAlt ||
+              sessionOverviewImage.alt ||
+              "";
           }
-        }
-
-        if (!hasLesson) {
-          toggleHidden(sessionHeroMeta, true);
         }
       }
 
@@ -7320,7 +7430,7 @@
         if (workspaceSummaryTitle) {
           workspaceSummaryTitle.textContent = lesson.label || "Lesson template";
         }
-        updateSessionHero(lesson);
+        updateSessionOverview(lesson);
         setPresentationDescriptor(
           lesson.meta?.descriptor ||
             "Choose a template to populate the slides.",
@@ -7502,7 +7612,7 @@
           displayStatusMessage(
             "Unable to load lesson templates. Please refresh or try again later.",
           );
-          updateSessionHero(null);
+          updateSessionOverview(null);
           if (lessonSelector) {
             lessonSelector.innerHTML = "";
             const option = document.createElement("option");
