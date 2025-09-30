@@ -556,12 +556,9 @@
 
         /* ------------------------------- App shell ----------------------------------*/
         #app-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: stretch;
             padding: max(var(--space-7), env(safe-area-inset-top)) var(--space-4) var(--space-7);
-            width: 100%;
-            min-height: 100dvh;
+            width: 100%; min-height: 100dvh;
             background: radial-gradient(800px 600px at 20% 0%, rgba(156,175,136,0.08) 0%, transparent 70%),
                         radial-gradient(700px 500px at 80% 100%, rgba(90,107,82,0.06) 0%, transparent 65%);
         }
@@ -582,17 +579,14 @@
             transform: translate(-50%, 0);
         }
         #activity-shell {
-            width: min(100%, calc(100vw - (var(--space-4) * 2)));
-            max-width: calc(100vw - (var(--space-4) * 2));
-            display: flex;
-            flex-direction: row;
+            width: min(100%, var(--workspace-max));
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
             align-items: stretch;
-            gap: clamp(24px, 4vw, 48px);
-            margin: 0 auto;
         }
         #activity-container {
-            flex: 6 1 0;
-            max-width: none;
+            width: clamp(540px, 75vw, var(--workspace-max));
             background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
             padding: clamp(24px, 3.2vw, 48px);
             border-radius: var(--radius-lg);
@@ -603,14 +597,10 @@
             container-type: inline-size;
             display: flex;
             flex-direction: column;
-            min-height: 0;
-        }
-        #slides-root {
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-6);
-            overflow: visible;
+            min-height: 87.5vh;
+            max-height: 87.5vh;
+            height: 87.5vh;
+            min-width: 0;
         }
         @supports (backdrop-filter: blur(6px)) {
             #activity-container {
@@ -618,14 +608,47 @@
                 backdrop-filter: blur(6px) saturate(1.02);
             }
         }
+        #slide-stage {
+            flex: 1 1 auto;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(16px, 2.6vw, 28px);
+        }
+        #slides-root {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            max-height: 100%;
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            padding: clamp(20px, 2.6vw, 36px);
+            overflow: hidden;
+        }
         #activity-container::before {
             content: ""; position: absolute; inset: -1px; border-radius: inherit;
             background: radial-gradient(1200px 200px at 50% -5%, rgba(156,175,136,0.12), transparent 60%),
                         radial-gradient(800px 1000px at 50% 110%, rgba(122,132,113,0.08), transparent 70%);
             z-index: -1; pointer-events: none;
         }
-        .screen { display: none; scroll-margin-top: clamp(90px, 12vh, 140px); } /* Hide screens initially */
-        .screen.active { display: block; } /* Show active screen */
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            scroll-margin-top: clamp(90px, 12vh, 140px);
+        } /* Hide screens initially */
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+            height: 100%;
+        } /* Show active screen */
         .data-status-message {
             margin: var(--space-7) auto;
             padding: var(--space-6);
@@ -871,87 +894,82 @@
         .accent-card--frost { background: color-mix(in srgb, rgba(122, 132, 113, 0.12) 40%, white 60%); backdrop-filter: blur(12px); }
 
         .presentation-header {
-            position: static;
-            margin: 0 0 var(--space-4);
+            position: relative;
+            margin: 0 0 var(--space-3);
             padding: 0;
-            background: transparent;
-            border: 0;
+            background: none;
+            border: none;
             box-shadow: none;
-            display: flex;
-            justify-content: flex-start;
+            z-index: 2;
         }
         .workspace-menu {
-            display: inline-block;
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
             border-radius: var(--radius-sm);
             border: 1px solid rgba(122, 132, 113, 0.2);
-            background: rgba(255, 255, 255, 0.82);
-            box-shadow: none;
+            background: color-mix(in srgb, var(--soft-white) 96%, white 4%);
+            box-shadow: var(--shadow-1);
             overflow: visible;
+            min-width: 0;
         }
         .workspace-menu[open] {
             box-shadow: var(--shadow-2);
         }
         .workspace-menu__summary {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            gap: var(--space-3);
+            gap: var(--space-2);
             padding: var(--space-2) var(--space-4);
             cursor: pointer;
             list-style: none;
-            min-width: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
             font-size: var(--step--1);
             font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            color: var(--forest-shadow);
         }
         .workspace-menu__summary::-webkit-details-marker { display: none; }
         .workspace-menu__summary:focus-visible {
             outline: none;
             box-shadow: var(--ring);
         }
-        .workspace-menu__summary-text {
-            display: inline-flex;
-            flex-direction: column;
-            gap: var(--space-1);
-            min-width: 0;
-        }
-        .workspace-menu__label {
+        .workspace-menu__summary-label {
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            color: var(--forest-shadow);
+            white-space: nowrap;
+            font-family: var(--font-display);
         }
         .workspace-menu__summary-indicator {
             display: inline-flex;
             align-items: center;
-            gap: var(--space-2);
-            font-weight: 700;
+            justify-content: center;
             color: var(--forest-shadow);
         }
-        .workspace-menu__summary-indicator i { color: var(--primary-sage); }
-        .workspace-menu__summary-hint {
-            font-size: var(--step--2);
-            color: var(--ink-muted);
-        }
-        .workspace-menu__summary i {
+        .workspace-menu__summary-indicator i {
+            color: var(--primary-sage);
             transition: transform var(--dur-2) var(--ease-ambient);
+            font-size: 0.85em;
         }
-        .workspace-menu[open] .workspace-menu__summary i {
+        .workspace-menu[open] .workspace-menu__summary-indicator i {
             transform: rotate(-180deg);
         }
         .workspace-menu__panel {
+            position: absolute;
+            top: calc(100% + var(--space-2));
+            left: 0;
+            z-index: 15;
             display: grid;
             gap: var(--space-5);
             padding: var(--space-4);
+            width: clamp(320px, 36vw, 520px);
+            max-height: min(60vh, 520px);
+            overflow: auto;
             border-radius: var(--radius-lg);
             border: 1px solid rgba(122, 132, 113, 0.18);
-            background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
-            width: clamp(280px, 32vw, 420px);
-            max-height: min(70vh, 520px);
-            overflow-y: auto;
-            margin: var(--space-3) 0 0;
-            box-shadow: var(--shadow-2);
+            background: color-mix(in srgb, var(--soft-white) 98%, white 2%);
+            box-shadow: var(--shadow-3);
         }
         .workspace-menu__intro {
             display: flex;
@@ -1360,47 +1378,53 @@
             .workspace-tools__actions { justify-content: flex-start; }
         }
         @media (min-width: 1024px) {
-            #activity-container {
-                box-shadow: var(--shadow-3);
-                height: calc(87.5vh);
-            }
+            #activity-container { box-shadow: var(--shadow-3); }
+            #activity-shell { grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr); gap: var(--space-7); }
             #notes-dock {
-                height: calc(87.5vh);
+                align-self: start;
+                width: clamp(260px, 22vw, 420px);
+                position: sticky;
+                top: clamp(16px, 2.4vw, 32px);
+                height: 87.5vh;
+                max-height: 87.5vh;
+                overflow: hidden;
             }
-            h1 { letter-spacing: 0.3px; }
-            #slide-map-list { gap: var(--space-4); }
-        }
-        @media (max-width: 1023px) {
-            #app-wrapper {
-                align-items: stretch;
+            #notes-panels {
+                flex: 1 1 auto;
+                overflow: auto;
+                padding-right: var(--space-1);
             }
-            #activity-shell {
-                flex-direction: column;
-                gap: var(--space-6);
-            }
-            #activity-container {
-                flex: none;
-                max-width: 100%;
-                min-height: auto;
-            }
-            #notes-dock {
-                flex: none;
-                max-width: 100%;
-            }
+            #slide-stage { padding: clamp(16px, 2.2vw, 32px); }
         }
         @media (max-width: 767px) {
             #app-wrapper { padding: var(--space-4); }
-            #activity-container { padding: 24px; }
+            #activity-container {
+                width: 100%;
+                padding: 24px;
+                height: auto;
+                min-height: 0;
+                max-height: none;
+            }
+            #slide-stage {
+                padding: var(--space-3);
+                align-items: stretch;
+            }
+            #slides-root {
+                aspect-ratio: auto;
+                height: auto;
+                max-height: none;
+            }
             h1 { font-size: clamp(1.75rem, 5vw, 2rem); }
             h2.rubric { font-size: var(--step--1); margin-bottom: 20px; }
             .slide-map-button { padding-inline: var(--space-3); }
-            .workspace-menu__summary {
+            .workspace-menu { width: 100%; }
+            .workspace-menu__summary { width: 100%; justify-content: space-between; }
+            .workspace-menu__panel {
+                position: static;
                 width: 100%;
-                justify-content: center;
-                text-align: center;
-            }
-            .workspace-menu__summary-indicator {
-                width: auto;
+                max-height: none;
+                margin-top: var(--space-3);
+                box-shadow: var(--shadow-2);
             }
             .lesson-selector { width: 100%; }
             .lesson-selector select { width: 100%; min-width: 0; }
@@ -1429,12 +1453,12 @@
                             linear-gradient(135deg, #191D18 0%, #1B1E19 100%);
             }
             #activity-container { background: color-mix(in srgb, #23261F 92%, #1B1E19 8%); border-color: rgba(184, 197, 166, 0.18); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
-            .presentation-header { background: linear-gradient(180deg, rgba(31, 33, 28, 0.92) 0%, rgba(31, 33, 28, 0.6) 85%, transparent 100%); border-bottom-color: rgba(184, 197, 166, 0.2); }
-            .workspace-menu { background: rgba(28, 31, 26, 0.88); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
+            #slides-root { background: color-mix(in srgb, #23261F 88%, #1B1E19 12%); box-shadow: 0 20px 40px rgba(0,0,0,0.45); }
+            .workspace-menu { background: rgba(28, 31, 26, 0.9); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
             .workspace-menu__summary { color: var(--forest-shadow); }
             .workspace-menu__summary-indicator { color: var(--forest-shadow); }
-            .workspace-menu__summary-hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .workspace-menu__descriptor { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
+            .workspace-menu__panel { background: rgba(28, 31, 26, 0.92); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 18px 36px rgba(0,0,0,0.4); }
             .workspace-tools { background: rgba(28, 31, 26, 0.78); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
             .workspace-tools__hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .lesson-selector label { color: var(--forest-shadow); }
@@ -2182,8 +2206,8 @@
         }
         /* ------------------------------- Collaborative text boxes ----------------------------------*/
         #notes-dock {
-            flex: 2 1 0;
-            max-width: min(100%, 28rem);
+            width: 100%;
+            max-width: min(100%, 460px);
             background: color-mix(in srgb, var(--soft-white) 90%, white 10%);
             border-radius: var(--radius-lg);
             border: 1px solid rgba(122, 132, 113, 0.14);
@@ -2193,7 +2217,6 @@
             flex-direction: column;
             gap: var(--space-5);
             min-height: 0;
-            overflow: hidden;
         }
         .notes-dock-header {
             display: grid;
@@ -2224,8 +2247,6 @@
             gap: var(--space-4);
             flex: 1 1 auto;
             min-height: 0;
-            overflow: auto;
-            padding-right: var(--space-1);
         }
         .notes-panel {
             display: none;
@@ -2405,15 +2426,15 @@
             <header class="presentation-header" id="presentation-header">
                 <details class="workspace-menu" id="workspace-menu">
                     <summary class="workspace-menu__summary">
-                        <span class="workspace-menu__label">Session controls</span>
+                        <span class="workspace-menu__summary-label">Session controls</span>
                         <span class="workspace-menu__summary-text visually-hidden">
                             <span class="workspace-menu__summary-eyebrow" id="presentation-eyebrow">Instructional Session</span>
                             <span class="workspace-menu__summary-title" id="workspace-summary-title">Select a lesson template</span>
                             <span class="workspace-menu__summary-descriptor" id="presentation-descriptor">Choose a template to populate the slides.</span>
                         </span>
-                        <span class="workspace-menu__summary-indicator" aria-hidden="true">
+                        <span class="workspace-menu__summary-indicator">
                             <span class="workspace-menu__summary-hint visually-hidden">Open session controls</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </span>
                     </summary>
                     <div class="workspace-menu__panel">
@@ -2446,7 +2467,9 @@
                 </details>
             </header>
 
-                <div id="slides-root" role="presentation"></div>
+                <div id="slide-stage">
+                    <div id="slides-root" role="presentation"></div>
+                </div>
 
         </div>
         <aside id="notes-dock" aria-label="Collaborative slide notes workspace">
@@ -2495,7 +2518,7 @@
         let embeddedLessonLibrary = null;
         if (workspaceMenu && workspaceSummaryHint) {
             const updateWorkspaceSummaryHint = () => {
-                workspaceSummaryHint.textContent = workspaceMenu.open ? "Collapse session controls" : "Open session controls";
+                workspaceSummaryHint.textContent = workspaceMenu.open ? "Close session controls" : "Open session controls";
             };
             workspaceMenu.addEventListener("toggle", updateWorkspaceSummaryHint);
             updateWorkspaceSummaryHint();
