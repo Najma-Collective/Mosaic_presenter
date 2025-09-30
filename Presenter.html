@@ -730,6 +730,16 @@
         /* ------------------------------- Slide-specific styles ----------------------------------*/
         /* Custom styles for the presentation content */
         .slide-content { margin-top: var(--space-6); }
+        .slide-content.is-centered {
+            text-align: center;
+        }
+        .slide-content.is-centered > * {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .slide-content.is-centered .activity-block {
+            text-align: left;
+        }
         .slide-content img {
             width: 100%;
             height: 250px;
@@ -737,6 +747,257 @@
             border-radius: var(--radius);
             margin-bottom: var(--space-6);
         }
+        .slide-content.is-centered img { margin-left: auto; margin-right: auto; }
+
+        .activity-block {
+            margin-top: var(--space-7);
+            padding: var(--space-5);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-sage);
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+            display: grid;
+            gap: var(--space-3);
+        }
+        .activity-block__title {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: var(--step-1);
+            color: var(--forest-shadow);
+        }
+        .activity-block__description {
+            margin: 0;
+            color: var(--forest-shadow);
+        }
+        .activity-block__list {
+            margin: 0;
+        }
+        .activity-block .slide-list {
+            margin-bottom: 0;
+        }
+        .activity-block .slide-list li {
+            font-size: var(--step-0);
+            margin-bottom: var(--space-2);
+        }
+        .activity-block__inputs {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .activity-block__inputs label {
+            display: block;
+            font-weight: 700;
+            color: var(--primary-sage);
+            margin-bottom: var(--space-1);
+        }
+        .activity-block__inputs input[type="text"] {
+            width: 100%;
+            border-radius: 10px;
+            padding: 12px 14px;
+            border: 1px solid var(--border-sage);
+            font: inherit;
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            transition: border-color var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+        .activity-block__inputs input[type="text"]:focus-visible {
+            outline: none;
+            border-color: var(--secondary-sage);
+            box-shadow: var(--ring);
+        }
+
+        .reference-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+        @container (min-width: 640px) {
+            .reference-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+        }
+        .reference-card {
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: var(--soft-white);
+            padding: var(--space-4);
+            display: grid;
+            gap: var(--space-3);
+        }
+        .reference-card h4 {
+            margin: 0;
+            font-size: var(--step-0);
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+        .reference-card .slide-list {
+            margin: 0;
+        }
+        .reference-card .slide-list li {
+            font-size: var(--step--1);
+            margin-bottom: var(--space-2);
+        }
+
+        .mc-option-group {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .mc-option-item {
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: color-mix(in srgb, var(--soft-white) 96%, white 4%);
+            transition: border-color var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+        .mc-option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            width: 100%;
+            padding: var(--space-4);
+            cursor: pointer;
+        }
+        .mc-option-input { display: none; }
+        .option-control {
+            flex: 0 0 auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            border: 2px solid var(--tertiary-sage);
+            margin-top: 4px;
+            position: relative;
+            transition: border-color var(--dur-2) var(--ease-ambient);
+        }
+        .option-control::after {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: inherit;
+            background: var(--primary-sage);
+            transform: scale(0);
+            transition: transform var(--dur-2) var(--ease-ambient);
+        }
+        .mc-option-text {
+            flex: 1;
+            font-size: var(--step-0);
+            color: var(--forest-shadow);
+        }
+        .mc-option-item:hover {
+            border-color: var(--secondary-sage);
+            box-shadow: var(--shadow-1);
+        }
+        .mc-option-input:checked + .option-control {
+            border-color: var(--secondary-sage);
+        }
+        .mc-option-input:checked + .option-control::after {
+            transform: scale(1);
+        }
+
+        .gallery-grid {
+            display: grid;
+            gap: var(--space-5);
+            margin-top: var(--space-6);
+        }
+        @container (min-width: 720px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+        .gallery-card {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--soft-white) 94%, white 6%), color-mix(in srgb, var(--soft-white) 88%, white 12%));
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+            border: 1px solid rgba(122, 132, 113, 0.16);
+            display: grid;
+        }
+        .gallery-card img {
+            height: 180px;
+            object-fit: cover;
+            border-radius: 0;
+            margin: 0;
+            width: 100%;
+        }
+        .gallery-card__body {
+            padding: var(--space-4);
+            display: grid;
+            gap: var(--space-2);
+        }
+        .gallery-card__title {
+            margin: 0;
+            font-size: var(--step-0);
+            font-weight: 700;
+            color: var(--forest-shadow);
+        }
+        .gallery-card__meta {
+            margin: 0;
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+        .gallery-card__body p {
+            margin: 0;
+        }
+
+        .reporting-layout {
+            display: grid;
+            gap: var(--space-6);
+        }
+        .reporting-sections {
+            display: grid;
+            gap: var(--space-6);
+        }
+        .reporting-section {
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
+            padding: var(--space-5);
+            display: grid;
+            gap: var(--space-3);
+        }
+        .reporting-section h4 {
+            margin: 0;
+            font-size: var(--step-1);
+            color: var(--primary-sage);
+        }
+        .reporting-image-placeholder {
+            border-radius: var(--radius-sm);
+            border: 2px dashed rgba(122, 132, 113, 0.4);
+            padding: var(--space-4);
+            text-align: center;
+            font-weight: 700;
+            color: var(--ink-muted);
+        }
+        .reporting-field {
+            display: grid;
+            gap: var(--space-2);
+        }
+        .reporting-field label {
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+        .reporting-field input[type="text"],
+        .reporting-field textarea {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border-sage);
+            padding: 12px 14px;
+            font: inherit;
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            transition: border-color var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+        .reporting-field textarea { min-height: 120px; }
+        .reporting-field textarea.statement { min-height: 150px; }
+        .reporting-field input[type="text"]:focus-visible,
+        .reporting-field textarea:focus-visible {
+            outline: none;
+            border-color: var(--secondary-sage);
+            box-shadow: var(--ring);
+        }
+
+        .statement-section {
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: color-mix(in srgb, var(--soft-white) 93%, white 7%);
+            padding: var(--space-5);
+            display: grid;
+            gap: var(--space-3);
+        }
+
         .activity-feedback {
             margin-top: var(--space-6);
             background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
@@ -966,6 +1227,12 @@
             padding-left: 0;
             margin-bottom: var(--space-6);
         }
+        .slide-list.plain { list-style: none; }
+        .slide-list.ordered {
+            list-style: decimal;
+            list-style-position: outside;
+            padding-left: var(--space-6);
+        }
         .slide-list li {
             position: relative;
             padding-left: var(--space-7);
@@ -982,6 +1249,14 @@
             height: var(--space-3);
             background-color: var(--primary-sage);
             border-radius: 50%;
+        }
+        .slide-list.plain li,
+        .slide-list.ordered li {
+            padding-left: 0;
+        }
+        .slide-list.plain li::before,
+        .slide-list.ordered li::before {
+            display: none;
         }
         .slide-list.smart li::before {
             content: attr(data-letter);
@@ -1749,6 +2024,249 @@
                             { id: "mentoring-questions", label: "Questions I want to ask my mentor", placeholder: "List the support, resources, or feedback you hope to receive." }
                         ],
                         nav: { nextAction: "restart", nextLabel: "Finish & Restart", nextIcon: "fas fa-check" }
+                    }
+                ]
+            },
+            curatorialNegotiation: {
+                id: "curatorial-negotiation",
+                label: "Curatorial negotiation workshop",
+                meta: {
+                    eyebrow: "Mosaic Presenter",
+                    descriptor: "Seven-slide flow for curating an exhibition through collaborative language work.",
+                    pageTitle: "\"Echoes of Palestine\" – Curatorial Negotiation Lesson"
+                },
+                sections: [
+                    { title: "Lead-in", slideKeys: ["curation-leadin"] },
+                    { title: "Pre-task Language", slideKeys: ["art-language", "negotiation-language", "artist-profiles"] },
+                    { title: "Main Task", slideKeys: ["art-selection"] },
+                    { title: "Reporting & Reflection", slideKeys: ["art-reporting", "art-reflection"] }
+                ],
+                slides: [
+                    {
+                        key: "curation-leadin",
+                        type: "content",
+                        title: "What Makes Art Powerful?",
+                        subtitle: "Lead-in",
+                        layout: { alignment: "center" },
+                        image: {
+                            src: "https://images.pexels.com/photos/164455/pexels-photo-164455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Large mural of a face painted on a city wall"
+                        },
+                        activity: {
+                            title: "Activity: Think-Pair-Share",
+                            stepsType: "ordered",
+                            stepsStyle: "ordered",
+                            steps: [
+                                { strong: "Think (1 minute):", text: "Look at the image. What story do you think the artist is trying to tell? What emotions does it make you feel?" },
+                                { strong: "Pair (2 minutes):", text: "With a partner, discuss your interpretations. Did you see the same story? What elements of the artwork led you to your interpretation?" },
+                                { strong: "Share (3 minutes):", text: "Be prepared to share your pair's key ideas with the class." }
+                            ]
+                        }
+                    },
+                    {
+                        key: "art-language",
+                        type: "content",
+                        title: "The Language of Art",
+                        subtitle: "Pre-task A – Building Our Curator's Toolkit",
+                        list: [
+                            { strong: "Medium:", text: "The materials used to create a work of art (e.g., oil on canvas, photography, sculpture)." },
+                            { strong: "Theme:", text: "The main idea or message of the artwork (e.g., identity, resilience, memory)." },
+                            { strong: "Symbolism:", text: "The use of objects or images to represent bigger ideas (e.g., a key representing lost homes)." },
+                            { strong: "Style:", text: "The distinctive visual manner in which an artist creates (e.g., abstract, figurative, surreal)." },
+                            { strong: "Narrative:", text: "The story that the artwork tells." }
+                        ],
+                        listStyle: "plain",
+                        activity: {
+                            title: "Activity: Become the Expert",
+                            stepsType: "ordered",
+                            stepsStyle: "ordered",
+                            steps: [
+                                "In your group, each person will be assigned one or two terms.",
+                                "Take two minutes to make sure you understand your term(s) and can explain them in your own words.",
+                                "Take turns explaining your expert terms to your group. The other members should listen and can ask questions to clarify."
+                            ]
+                        }
+                    },
+                    {
+                        key: "negotiation-language",
+                        type: "grid",
+                        title: "How to Be a Curator: Functional Language",
+                        subtitle: "Pre-task B – The Language of Negotiation",
+                        grid: [
+                            {
+                                title: "Expressing Opinion",
+                                items: ["I believe...", "From my perspective...", "What stands out is..."],
+                                listStyle: "plain"
+                            },
+                            {
+                                title: "Agreeing",
+                                items: ["I see your point.", "That’s a great choice.", "I agree with you."],
+                                listStyle: "plain"
+                            },
+                            {
+                                title: "Politely Disagreeing",
+                                items: ["I see it differently.", "I understand, but...", "While that's strong, I'm not sure..."],
+                                listStyle: "plain"
+                            },
+                            {
+                                title: "Making a Compromise",
+                                items: ["What if we include...?", "Can we agree on...?", "Let's go with that one, then."],
+                                listStyle: "plain"
+                            }
+                        ],
+                        activity: {
+                            title: "Activity: Choose the Title",
+                            description: [
+                                "With your group, you have 3 minutes to choose the best title for your upcoming exhibition. Use the functional language above to discuss the options and come to a consensus."
+                            ],
+                            options: [
+                                { value: "a", label: "Option A: Fragments of a Homeland" },
+                                { value: "b", label: "Option B: Echoes of Palestine" },
+                                { value: "c", label: "Option C: The Olive and the Key" }
+                            ]
+                        }
+                    },
+                    {
+                        key: "artist-profiles",
+                        type: "content",
+                        title: "The \"Fragments of a Homeland\" Collective",
+                        subtitle: "Pre-task C – Meet the Artists",
+                        list: [
+                            { strong: "Artist 1: Laila (Digital Artist, Gaza) –", text: "Focuses on memory, nostalgia, and the resilience of youth." },
+                            { strong: "Artist 2: Yousef (Painter/Sculptor, Ramallah) –", text: "Focuses on connection to the land and cultural heritage." },
+                            { strong: "Artist 3: Rania (Interdisciplinary Artist, London) –", text: "Focuses on identity, exile, and life in the diaspora." }
+                        ],
+                        listStyle: "plain",
+                        activity: {
+                            title: "Activity: Rank & Justify",
+                            stepsType: "ordered",
+                            stepsStyle: "ordered",
+                            steps: [
+                                { strong: "Individually (1 minute):", text: "Rank the artists (1, 2, 3) based on whose focus you find most compelling for an international audience." },
+                                { strong: "With a Partner (3 minutes):", text: "Justify your #1 choice to your partner. Use the language of opinion to convince them of your choice." }
+                            ],
+                            inputs: [
+                                { label: "Record your ranking", placeholder: "e.g., 1 – Laila, 2 – Yousef, 3 – Rania" }
+                            ]
+                        }
+                    },
+                    {
+                        key: "art-selection",
+                        type: "gallery",
+                        title: "Curating \"Echoes of Palestine\"",
+                        subtitle: "Group Negotiation",
+                        body: [
+                            "The Scenario: In your curatorial groups, you must negotiate and select the three best artworks for the exhibition. You must all agree on the final selection and be able to justify your choices. Remember to use the functional language for negotiation."
+                        ],
+                        items: [
+                            {
+                                title: "Gaza Dreams",
+                                meta: "Laila",
+                                image: {
+                                    src: "https://images.pexels.com/photos/14899381/pexels-photo-14899381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Child in a yellow jacket flying a kite on the beach"
+                                }
+                            },
+                            {
+                                title: "Inheritance",
+                                meta: "Yousef",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8582333/pexels-photo-8582333.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Close-up of a vintage key resting on fabric"
+                                }
+                            },
+                            {
+                                title: "Fragmented City",
+                                meta: "Rania",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8149633/pexels-photo-8149633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Abstract painting with layered city shapes"
+                                }
+                            },
+                            {
+                                title: "The Storyteller",
+                                meta: "Yousef",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8001153/pexels-photo-8001153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Portrait of an older woman with deep lines on her face"
+                                }
+                            },
+                            {
+                                title: "Walled Garden",
+                                meta: "Laila",
+                                image: {
+                                    src: "https://images.pexels.com/photos/3230137/pexels-photo-3230137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Open door leading into a garden space"
+                                }
+                            },
+                            {
+                                title: "Unsent Letters",
+                                meta: "Rania",
+                                image: {
+                                    src: "https://images.pexels.com/photos/1089578/pexels-photo-1089578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Rolled parchment scrolls tied with string"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        key: "art-reporting",
+                        type: "reporting",
+                        title: "Our Selections for \"Echoes of Palestine\"",
+                        subtitle: "Activity: Present Your Exhibition",
+                        body: [
+                            "One member from each group will present your final selections and the curatorial statement to the class."
+                        ],
+                        sections: [
+                            {
+                                title: "Selected Artwork 1",
+                                placeholder: "Artwork 1: Add image and title",
+                                fields: [
+                                    { label: "Artwork & Title", type: "text", placeholder: "List the chosen work and artist." },
+                                    { label: "Justification", type: "textarea", placeholder: "Why does this piece belong in the exhibition?" }
+                                ]
+                            },
+                            {
+                                title: "Selected Artwork 2",
+                                placeholder: "Artwork 2: Add image and title",
+                                fields: [
+                                    { label: "Artwork & Title", type: "text", placeholder: "List the chosen work and artist." },
+                                    { label: "Justification", type: "textarea", placeholder: "Explain how this piece supports your theme." }
+                                ]
+                            },
+                            {
+                                title: "Selected Artwork 3",
+                                placeholder: "Artwork 3: Add image and title",
+                                fields: [
+                                    { label: "Artwork & Title", type: "text", placeholder: "List the chosen work and artist." },
+                                    { label: "Justification", type: "textarea", placeholder: "Describe the story this artwork adds to the exhibition." }
+                                ]
+                            }
+                        ],
+                        statementField: {
+                            label: "Our Collective's Curatorial Statement",
+                            placeholder: "Summarize the narrative your exhibition tells and how the selected works speak in harmony."
+                        }
+                    },
+                    {
+                        key: "art-reflection",
+                        type: "content",
+                        title: "Debriefing the Curatorial Process",
+                        subtitle: "Reflect",
+                        activity: {
+                            title: "Activity: Class Discussion",
+                            description: [
+                                "Be prepared to discuss the following questions as a class:"
+                            ],
+                            stepsType: "unordered",
+                            stepsStyle: "bullets",
+                            steps: [
+                                "What were the most challenging aspects of the negotiation?",
+                                "Which artworks sparked the most debate, and why?",
+                                "How did your group's final selection represent a compromise or a consensus?",
+                                "What did this process teach you about the responsibilities of representing a collective voice through art?"
+                            ]
+                        }
                     }
                 ]
             },
@@ -3148,21 +3666,41 @@
             return img;
         }
 
-        function createParagraph(text) {
+        function createParagraph(text, className) {
             const paragraph = document.createElement("p");
-            paragraph.textContent = text;
+            if (text && typeof text === "object" && text.html) {
+                paragraph.innerHTML = text.html;
+            } else {
+                paragraph.textContent = text ?? "";
+            }
             paragraph.classList.add("animate-on-scroll");
+            if (className) {
+                paragraph.classList.add(className);
+            }
             return paragraph;
         }
 
-        function createListElement(items = [], style = "bullets") {
+        function createListElement(items = [], options = "bullets") {
             if (!Array.isArray(items) || !items.length) {
                 return null;
             }
-            const list = document.createElement("ul");
-            list.className = "slide-list";
+            const resolved = typeof options === "string" ? { style: options } : { ...(options || {}) };
+            const style = resolved.style || "bullets";
+            const typeHint = resolved.type || resolved.listType;
+            const listType = typeHint === "ol" || typeHint === "ordered" || style === "ordered" ? "ol" : "ul";
+            const list = document.createElement(listType);
+            list.classList.add("slide-list");
             if (style === "smart") {
                 list.classList.add("smart");
+            }
+            if (style === "plain") {
+                list.classList.add("plain");
+            }
+            if (listType === "ol" || style === "ordered") {
+                list.classList.add("ordered");
+            }
+            if (resolved.className) {
+                list.classList.add(resolved.className);
             }
             items.forEach((item) => {
                 const li = document.createElement("li");
@@ -3188,6 +3726,105 @@
                 list.appendChild(li);
             });
             return list;
+        }
+
+        function createChoiceGroup(options = [], idPrefix = "choice") {
+            if (!Array.isArray(options) || !options.length) {
+                return null;
+            }
+            const group = document.createElement("div");
+            group.className = "mc-option-group animate-on-scroll";
+            const name = `${idPrefix}-options`;
+            options.forEach((option, index) => {
+                const item = document.createElement("div");
+                item.className = "mc-option-item";
+
+                const label = document.createElement("label");
+                label.className = "mc-option-label";
+
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = name;
+                input.value = option.value || option.id || `option-${index + 1}`;
+                input.className = "mc-option-input";
+
+                const control = document.createElement("span");
+                control.className = "option-control";
+
+                const text = document.createElement("span");
+                text.className = "mc-option-text";
+                text.textContent = option.label || option.text || option;
+
+                label.appendChild(input);
+                label.appendChild(control);
+                label.appendChild(text);
+
+                item.appendChild(label);
+                group.appendChild(item);
+            });
+            return group;
+        }
+
+        function createActivityBlock(activity, idPrefix = "activity") {
+            if (!activity) {
+                return null;
+            }
+            const block = document.createElement("section");
+            block.className = "activity-block animate-on-scroll";
+
+            if (activity.title) {
+                const heading = document.createElement("h3");
+                heading.className = "activity-block__title";
+                heading.textContent = activity.title;
+                block.appendChild(heading);
+            }
+
+            (activity.description || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph, "activity-block__description");
+                if (paragraphElement) {
+                    block.appendChild(paragraphElement);
+                }
+            });
+
+            if (Array.isArray(activity.steps) && activity.steps.length) {
+                const list = createListElement(activity.steps, {
+                    style: activity.stepsStyle || (activity.stepsType === "unordered" ? "plain" : "ordered"),
+                    type: activity.stepsType === "unordered" ? "ul" : "ol",
+                    className: "activity-block__list"
+                });
+                if (list) {
+                    block.appendChild(list);
+                }
+            }
+
+            if (Array.isArray(activity.inputs) && activity.inputs.length) {
+                const inputsWrapper = document.createElement("div");
+                inputsWrapper.className = "activity-block__inputs";
+                activity.inputs.forEach((inputConfig, index) => {
+                    const fieldId = `${idPrefix}-input-${index + 1}`;
+                    if (inputConfig.label) {
+                        const label = document.createElement("label");
+                        label.setAttribute("for", fieldId);
+                        label.textContent = inputConfig.label;
+                        inputsWrapper.appendChild(label);
+                    }
+                    const input = document.createElement("input");
+                    input.type = "text";
+                    input.id = fieldId;
+                    input.placeholder = inputConfig.placeholder || "";
+                    inputsWrapper.appendChild(input);
+                });
+                block.appendChild(inputsWrapper);
+            }
+
+            if (Array.isArray(activity.options) && activity.options.length) {
+                const choiceGroup = createChoiceGroup(activity.options, idPrefix);
+                if (choiceGroup) {
+                    block.appendChild(choiceGroup);
+                }
+            }
+
+            return block;
         }
 
         function createActivityControls({ onCheck, onReset, checkLabel = "Check answers", resetLabel = "Reset" } = {}) {
@@ -3294,6 +3931,12 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
+            if (config.layout && config.layout.alignment === "center") {
+                content.classList.add("is-centered");
+            }
+            if (config.layout && config.layout.className) {
+                content.classList.add(config.layout.className);
+            }
             if (config.image) {
                 const img = createImageElement(config.image);
                 if (img) {
@@ -3302,11 +3945,227 @@
                 }
             }
             (config.body || []).forEach((paragraph) => {
-                content.appendChild(createParagraph(paragraph));
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
             });
-            const list = createListElement(config.list, config.listStyle);
+            const list = createListElement(config.list, config.listOptions || config.listStyle);
             if (list) {
                 content.appendChild(list);
+            }
+            const activityBlock = createActivityBlock(config.activity, slideElement.id || config.key || "activity");
+            if (activityBlock) {
+                content.appendChild(activityBlock);
+            }
+            slideElement.appendChild(content);
+        }
+
+        function renderGridSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+            if (Array.isArray(config.grid) && config.grid.length) {
+                const grid = document.createElement("div");
+                grid.className = "reference-grid";
+                config.grid.forEach((column) => {
+                    const card = document.createElement("section");
+                    card.className = "reference-card animate-on-scroll";
+                    if (column.title) {
+                        const title = document.createElement("h4");
+                        title.textContent = column.title;
+                        card.appendChild(title);
+                    }
+                    const list = createListElement(column.items, column.listOptions || column.listStyle || "plain");
+                    if (list) {
+                        card.appendChild(list);
+                    }
+                    grid.appendChild(card);
+                });
+                content.appendChild(grid);
+            }
+            const activityBlock = createActivityBlock(config.activity, slideElement.id || config.key || "grid-activity");
+            if (activityBlock) {
+                content.appendChild(activityBlock);
+            }
+            slideElement.appendChild(content);
+        }
+
+        function renderGallerySlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+            const list = createListElement(config.list, config.listOptions || config.listStyle);
+            if (list) {
+                content.appendChild(list);
+            }
+            if (Array.isArray(config.items) && config.items.length) {
+                const gallery = document.createElement("div");
+                gallery.className = "gallery-grid";
+                config.items.forEach((item, index) => {
+                    const card = document.createElement("article");
+                    card.className = "gallery-card animate-on-scroll";
+                    if (item.image) {
+                        const img = createImageElement(item.image);
+                        if (img) {
+                            card.appendChild(img);
+                        }
+                    }
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "gallery-card__body";
+                    if (item.title) {
+                        const title = document.createElement("h4");
+                        title.className = "gallery-card__title";
+                        title.textContent = item.title;
+                        cardBody.appendChild(title);
+                    }
+                    if (item.meta) {
+                        const meta = document.createElement("p");
+                        meta.className = "gallery-card__meta";
+                        meta.textContent = item.meta;
+                        cardBody.appendChild(meta);
+                    }
+                    if (item.description) {
+                        const description = document.createElement("p");
+                        description.textContent = item.description;
+                        cardBody.appendChild(description);
+                    }
+                    card.appendChild(cardBody);
+                    gallery.appendChild(card);
+                });
+                content.appendChild(gallery);
+            }
+            const activityBlock = createActivityBlock(config.activity, slideElement.id || config.key || "gallery-activity");
+            if (activityBlock) {
+                content.appendChild(activityBlock);
+            }
+            slideElement.appendChild(content);
+        }
+
+        function renderReportingSlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+            const content = document.createElement("div");
+            content.className = "slide-content reporting-layout";
+            (config.body || []).forEach((paragraph) => {
+                const paragraphElement = createParagraph(paragraph);
+                if (paragraphElement) {
+                    content.appendChild(paragraphElement);
+                }
+            });
+            if (Array.isArray(config.sections) && config.sections.length) {
+                const sectionsWrapper = document.createElement("div");
+                sectionsWrapper.className = "reporting-sections";
+                config.sections.forEach((section, sectionIndex) => {
+                    const sectionElement = document.createElement("section");
+                    sectionElement.className = "reporting-section animate-on-scroll";
+                    if (section.title) {
+                        const heading = document.createElement("h4");
+                        heading.textContent = section.title;
+                        sectionElement.appendChild(heading);
+                    }
+                    if (section.placeholder) {
+                        const placeholder = document.createElement("div");
+                        placeholder.className = "reporting-image-placeholder";
+                        placeholder.textContent = section.placeholder;
+                        sectionElement.appendChild(placeholder);
+                    }
+                    (section.fields || []).forEach((field, fieldIndex) => {
+                        const fieldWrapper = document.createElement("div");
+                        fieldWrapper.className = "reporting-field";
+                        const fieldId = `${slideElement.id || config.key || "report"}-section-${sectionIndex + 1}-field-${fieldIndex + 1}`;
+                        if (field.label) {
+                            const label = document.createElement("label");
+                            label.setAttribute("for", fieldId);
+                            label.textContent = field.label;
+                            fieldWrapper.appendChild(label);
+                        }
+                        let control;
+                        if (!field.type || field.type === "textarea") {
+                            control = document.createElement("textarea");
+                        } else {
+                            control = document.createElement("input");
+                            control.type = field.type;
+                        }
+                        control.id = fieldId;
+                        if (field.placeholder) {
+                            control.placeholder = field.placeholder;
+                        }
+                        if (field.className) {
+                            const classes = Array.isArray(field.className)
+                                ? field.className
+                                : String(field.className).split(/\s+/).filter(Boolean);
+                            if (classes.length) {
+                                control.classList.add(...classes);
+                            }
+                        }
+                        fieldWrapper.appendChild(control);
+                        sectionElement.appendChild(fieldWrapper);
+                    });
+                    sectionsWrapper.appendChild(sectionElement);
+                });
+                content.appendChild(sectionsWrapper);
+            }
+            if (config.statementField) {
+                const statement = document.createElement("div");
+                statement.className = "statement-section animate-on-scroll";
+                const statementId = `${slideElement.id || config.key || "report"}-statement`;
+                if (config.statementField.label) {
+                    const label = document.createElement("label");
+                    label.setAttribute("for", statementId);
+                    label.textContent = config.statementField.label;
+                    statement.appendChild(label);
+                }
+                const textarea = document.createElement("textarea");
+                textarea.id = statementId;
+                textarea.placeholder = config.statementField.placeholder || "";
+                textarea.classList.add("statement");
+                statement.appendChild(textarea);
+                content.appendChild(statement);
             }
             slideElement.appendChild(content);
         }
@@ -4265,6 +5124,15 @@
                     break;
                 case "matching":
                     renderMatchingSlide(slideElement, config);
+                    break;
+                case "grid":
+                    renderGridSlide(slideElement, config);
+                    break;
+                case "gallery":
+                    renderGallerySlide(slideElement, config);
+                    break;
+                case "reporting":
+                    renderReportingSlide(slideElement, config);
                     break;
                 case "cards":
                     renderCardsSlide(slideElement, config);
