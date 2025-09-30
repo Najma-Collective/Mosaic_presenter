@@ -3213,6 +3213,241 @@
                         ]
                     }
                 ]
+            },
+            stayingSafeOnline: {
+                id: "staying-safe-online",
+                label: "Staying Safe Online",
+                meta: {
+                    eyebrow: "Digital Citizenship",
+                    descriptor: "A guide to spotting and avoiding common internet scams.",
+                    pageTitle: "Staying Safe Online – Instructional Slides",
+                    planner: {
+                        title: "Lesson overview",
+                        subtitle: "Help learners recognize online scams and share protective strategies.",
+                        duration: "Approx. 45 minutes",
+                        pacing: [
+                            { label: "Hook & scenario discussion", duration: "5 min" },
+                            { label: "Vocabulary activation", duration: "10 min" },
+                            { label: "Spot the red flags", duration: "10 min" },
+                            { label: "Create the safety guide", duration: "15 min" },
+                            { label: "Share & reflect", duration: "5 min" }
+                        ],
+                        sections: [
+                            {
+                                title: "Learning goals",
+                                items: [
+                                    "Identify common tactics used in digital scams.",
+                                    "Analyse messages for warning signs before clicking links.",
+                                    "Collaboratively design a guide that promotes safer online habits."
+                                ]
+                            },
+                            {
+                                title: "Materials",
+                                items: [
+                                    "Projector or shared screen to display the presenter.",
+                                    "Devices or paper for groups to draft their guides.",
+                                    "Internet safety reference sheet for extension questions."
+                                ]
+                            },
+                            {
+                                title: "Teacher moves",
+                                items: [
+                                    "Model think-alouds that highlight subtle red flags in the sample messages.",
+                                    "Prompt learners to cross-check tips with real experiences from classmates.",
+                                    "Celebrate preventative actions (pausing, verifying, reporting) during share-outs."
+                                ]
+                            }
+                        ],
+                        spotlight: "Normalize skepticism and invite students to share verification strategies they already use."
+                    }
+                },
+                sections: [
+                    { title: "Launch", slideKeys: ["safety-hero", "lead-in-scenario"] },
+                    { title: "Pre-Task", slideKeys: ["lingo-match", "scam-cards", "red-flags-quiz"] },
+                    { title: "Task", slideKeys: ["safety-guide-process"] },
+                    { title: "Reporting", slideKeys: ["guide-share"] },
+                    { title: "Reflection", slideKeys: ["safety-reflection"] }
+                ],
+                slides: [
+                    {
+                        key: "safety-hero",
+                        type: "hero",
+                        title: "Staying Safe Online",
+                        subtitle: "A guide to spotting and avoiding common internet scams.",
+                        image: {
+                            src: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg",
+                            alt: "A metallic padlock icon on a digital background, representing cybersecurity."
+                        },
+                        nav: { hidePrev: true, nextLabel: "Begin", nextIcon: "fas fa-arrow-right" }
+                    },
+                    {
+                        key: "lead-in-scenario",
+                        type: "content",
+                        title: "What would you do?",
+                        body: [
+                            "Imagine you receive a text message from an unknown number. It says: 'Your package delivery has been delayed. To avoid extra fees, please confirm your address immediately by clicking this link.'",
+                            "Does this seem legitimate? What makes you suspicious?"
+                        ],
+                        image: {
+                            src: "https://images.pexels.com/photos/4065624/pexels-photo-4065624.jpeg",
+                            alt: "A person holding a smartphone with a text message notification on the screen."
+                        }
+                    },
+                    {
+                        key: "lingo-match",
+                        type: "matching",
+                        title: "Know the Lingo",
+                        subtitle: "Match each term to the scam description it represents.",
+                        instructions: "Select the description that best matches each vocabulary word, then check your work.",
+                        columns: [
+                            { id: "phishing-definition", label: "Fraudulent emails that imitate trusted companies to steal information." },
+                            { id: "malware-definition", label: "Software that disrupts, damages, or steals access to systems." },
+                            { id: "scam-definition", label: "A dishonest scheme created to trick or defraud someone." },
+                            { id: "smishing-definition", label: "Text messages that try to trick you into sharing personal data." }
+                        ],
+                        rows: [
+                            {
+                                id: "phishing",
+                                label: "Phishing",
+                                correctColumn: "phishing-definition",
+                                explanation: "Phishing emails copy branding or tone from legitimate organisations to harvest credentials."
+                            },
+                            {
+                                id: "malware",
+                                label: "Malware",
+                                correctColumn: "malware-definition",
+                                explanation: "Malware includes viruses, spyware, and ransomware that can compromise your device."
+                            },
+                            {
+                                id: "scam",
+                                label: "Scam",
+                                correctColumn: "scam-definition",
+                                explanation: "Scams rely on deception to gain money, data, or access from victims."
+                            },
+                            {
+                                id: "smishing",
+                                label: "Smishing",
+                                correctColumn: "smishing-definition",
+                                explanation: "Smishing combines SMS and phishing—messages push urgent links to capture details."
+                            }
+                        ]
+                    },
+                    {
+                        key: "scam-cards",
+                        type: "cards",
+                        title: "Common Types of Scams",
+                        cards: [
+                            {
+                                icon: "fas fa-envelope",
+                                title: "Phishing Emails",
+                                description: "Emails that look like they're from your bank or a popular service, but they link to a fake website to steal your login details."
+                            },
+                            {
+                                icon: "fas fa-cart-shopping",
+                                title: "Fake Shopping Sites",
+                                description: "Websites offering products at unbelievably low prices. They either send a counterfeit item or nothing at all."
+                            },
+                            {
+                                icon: "fas fa-trophy",
+                                title: "Unexpected Prize Scams",
+                                description: "A message claims you've won a lottery or a prize, but you must first pay a fee or provide personal details to claim it."
+                            }
+                        ]
+                    },
+                    {
+                        key: "red-flags-quiz",
+                        type: "quiz",
+                        title: "Spot the Red Flags",
+                        subtitle: "Decide whether each highlighted detail is a cause for concern.",
+                        image: {
+                            src: "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg",
+                            alt: "A person looking at an email on a laptop screen with a concerned expression."
+                        },
+                        questions: [
+                            {
+                                id: "red-flag-email",
+                                prompt: "The sender's email is 'support@yourbank-info.com'. Is this a red flag?",
+                                options: [
+                                    { value: "yes", label: "Yes, it's a red flag." },
+                                    { value: "no", label: "No, this looks normal." }
+                                ],
+                                answer: "yes",
+                                correctFeedback: "Correct. Scammers often create email addresses that look similar to official ones but are not the same.",
+                                incorrectFeedback: "Look carefully—legitimate companies rarely use extra words or hyphenated domains like this."
+                            },
+                            {
+                                id: "red-flag-greeting",
+                                prompt: "The email begins with a generic greeting like 'Dear Valued Customer'. Is this a red flag?",
+                                options: [
+                                    { value: "yes", label: "Yes, it's a red flag." },
+                                    { value: "no", label: "No, this looks normal." }
+                                ],
+                                answer: "yes",
+                                correctFeedback: "Correct. Legitimate companies will almost always address you by your name.",
+                                incorrectFeedback: "Remember—most official communications use your name instead of a vague greeting."
+                            },
+                            {
+                                id: "red-flag-urgency",
+                                prompt: "The email insists that you must 'Click Here Immediately' to prevent your account from being suspended. Is this a red flag?",
+                                options: [
+                                    { value: "yes", label: "Yes, it's a red flag." },
+                                    { value: "no", label: "No, this looks normal." }
+                                ],
+                                answer: "yes",
+                                correctFeedback: "Correct. Creating a sense of urgency is a common tactic to make you act without thinking.",
+                                incorrectFeedback: "Be cautious—pressure to act instantly is a typical scam signal."
+                            }
+                        ]
+                    },
+                    {
+                        key: "safety-guide-process",
+                        type: "process",
+                        title: "Your Task: Create a Safety Guide",
+                        subtitle: "Work in small groups to design a quick reference for friends and family.",
+                        instructions: "Follow each step and capture at least five clear safety tips along with one supporting visual.",
+                        steps: [
+                            {
+                                title: "Brainstorm",
+                                description: "Discuss the most important tips you have learned. Choose the top five.",
+                                duration: "5 min"
+                            },
+                            {
+                                title: "Design & Write",
+                                description: "Organise your tips in a clear and simple way. Write short, easy-to-understand explanations for each tip.",
+                                duration: "15 min"
+                            },
+                            {
+                                title: "Review",
+                                description: "Check your guide for any errors and make sure it is easy to read and understand.",
+                                duration: "5 min"
+                            }
+                        ]
+                    },
+                    {
+                        key: "guide-share",
+                        type: "content",
+                        title: "Present Your Safety Guide",
+                        body: [
+                            "Each group will now share their screen and present their safety guide to the class.",
+                            "Explain the tips you chose and why you believe they are the most important for people to know."
+                        ],
+                        image: {
+                            src: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
+                            alt: "A diverse group of people collaborating around a table with laptops and documents."
+                        }
+                    },
+                    {
+                        key: "safety-reflection",
+                        type: "reflection",
+                        title: "Final Thoughts",
+                        fields: [
+                            { id: "most_useful", label: "What was the most useful piece of information you learned today?" },
+                            { id: "apply_learning", label: "How will you change your online behavior after this lesson?" },
+                            { id: "remaining_questions", label: "What questions do you still have about online safety?" }
+                        ],
+                        nav: { nextAction: "restart", nextLabel: "Finish & Restart", nextIcon: "fas fa-check" }
+                    }
+                ]
             }
         };
         const textboxColorOptions = [
