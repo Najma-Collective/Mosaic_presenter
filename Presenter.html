@@ -3213,6 +3213,298 @@
                         ]
                     }
                 ]
+            },
+            stayingSafeOnline: {
+                id: "staying-safe-online",
+                label: "Staying Safe Online",
+                meta: {
+                    eyebrow: "Digital Citizenship",
+                    descriptor: "Spot and avoid common online scams through practice and collaboration.",
+                    pageTitle: "Staying Safe Online – Instructional Slides",
+                    planner: {
+                        title: "Digital safety lesson overview",
+                        subtitle: "Guide learners to recognise scams and share actionable online safety advice.",
+                        duration: "Approx. 60 minutes",
+                        pacing: [
+                            { label: "Lead-in & scenario", duration: "10 min" },
+                            { label: "Vocabulary & language focus", duration: "15 min" },
+                            { label: "Scam identification practice", duration: "15 min" },
+                            { label: "Group product creation", duration: "15 min" },
+                            { label: "Share & reflect", duration: "5 min" }
+                        ],
+                        sections: [
+                            {
+                                title: "Learning goals",
+                                items: [
+                                    "Identify red flags in digital communication and online offers.",
+                                    "Use imperative language to deliver clear online safety advice.",
+                                    "Collaboratively design a safety resource for peers."
+                                ]
+                            },
+                            {
+                                title: "Materials",
+                                items: [
+                                    "Devices or printed scam examples for analysis.",
+                                    "Collaborative slide or design tool for the safety guide.",
+                                    "Projector or shared screen for group presentations."
+                                ]
+                            },
+                            {
+                                title: "Assessment & follow-up",
+                                items: [
+                                    "Monitor responses during matching, gap-fill, and grouping checks.",
+                                    "Review group safety guides for accurate, actionable tips.",
+                                    "Use reflection responses to plan additional digital safety support."
+                                ]
+                            }
+                        ],
+                        spotlight: "Model pausing and verifying sources so learners internalise slow, critical clicks online."
+                    }
+                },
+                sections: [
+                    { title: "Launch", slideKeys: ["staying-safe-hero", "close-call-story"] },
+                    { title: "Pre-task practice", slideKeys: ["lingo-matching", "advice-gapfill", "scam-spotting-grouping"] },
+                    { title: "Create & share", slideKeys: ["digital-safety-process", "safety-guide-share"] },
+                    { title: "Language focus", slideKeys: ["modals-quiz"] },
+                    { title: "Reflect", slideKeys: ["online-safety-reflection"] }
+                ],
+                slides: [
+                    {
+                        key: "staying-safe-hero",
+                        type: "hero",
+                        title: "Staying Safe Online",
+                        subtitle: "A guide to spotting and avoiding common internet scams.",
+                        image: {
+                            src: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg",
+                            alt: "A metallic padlock icon on a digital background, representing cybersecurity."
+                        },
+                        nav: { hidePrev: true, nextLabel: "Meet Alex", nextIcon: "fas fa-arrow-right" }
+                    },
+                    {
+                        key: "close-call-story",
+                        type: "story",
+                        icon: "fas fa-user-shield",
+                        title: "A Close Call",
+                        quote: "\"I thought I was going to lose everything.\"",
+                        image: {
+                            src: "https://images.pexels.com/photos/1181353/pexels-photo-1181353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Person reviewing email on a laptop at home"
+                        },
+                        process: {
+                            label: "What happened:",
+                            text: "While job hunting, Alex received a polished email promising a dream opportunity but demanding an upfront processing fee via wire transfer."
+                        },
+                        outcome: {
+                            label: "What changed:",
+                            text: "Noticing the sender's generic Gmail address pushed Alex to investigate, discover the company was fake, and commit to verifying details before sending money or personal data."
+                        }
+                    },
+                    {
+                        key: "lingo-matching",
+                        type: "matching",
+                        icon: "fas fa-shield-halved",
+                        title: "Know the Lingo",
+                        instructions: "Match the cybersecurity terms to their correct definitions, then check your work for quick feedback.",
+                        feedbackSummary: "Review each definition to confirm you can explain these safety terms to a friend.",
+                        columns: [
+                            { id: "col-phishing", label: "Fraudulent emails pretending to be from reputable companies to steal personal data." },
+                            { id: "col-malware", label: "Software designed to damage or gain unauthorized access to a computer system." },
+                            { id: "col-2fa", label: "A security process requiring two different authentication methods to verify a user's identity." },
+                            { id: "col-smishing", label: "Using fraudulent text messages to trick people into revealing personal information." },
+                            { id: "col-encryption", label: "The process of converting data into a code to prevent unauthorized access." }
+                        ],
+                        rows: [
+                            {
+                                id: "phishing",
+                                label: "Phishing",
+                                correctColumn: "col-phishing",
+                                explanation: "Watch for urgent language, mismatched URLs, and requests for credentials in unexpected emails."
+                            },
+                            {
+                                id: "malware",
+                                label: "Malware",
+                                correctColumn: "col-malware",
+                                explanation: "Malicious software can arrive through downloads, attachments, or infected websites."
+                            },
+                            {
+                                id: "2fa",
+                                label: "Two-Factor Authentication (2FA)",
+                                correctColumn: "col-2fa",
+                                explanation: "Combining something you know with something you have or are makes unauthorized logins far harder."
+                            },
+                            {
+                                id: "smishing",
+                                label: "Smishing",
+                                correctColumn: "col-smishing",
+                                explanation: "Fraudulent texts often use shortened links and alarming claims to rush your response."
+                            },
+                            {
+                                id: "encryption",
+                                label: "Encryption",
+                                correctColumn: "col-encryption",
+                                explanation: "Encrypted data looks like gibberish to attackers without the right key."
+                            }
+                        ]
+                    },
+                    {
+                        key: "advice-gapfill",
+                        type: "gapfill",
+                        icon: "fas fa-list-ol",
+                        title: "Grammar: Giving Strong Advice",
+                        instructions: "Complete the security tips using the verbs from the word bank. Word bank: Use, Enable, Be, Check, Avoid, Think.",
+                        feedbackSummary: "Each imperative verb reinforces a concrete online safety action.",
+                        paragraph: [
+                            "1. ",
+                            { type: "gap", id: "advice-gap-1", answer: "Use", placeholder: "Select", options: ["Use", "Enable", "Be", "Check", "Avoid", "Think"] },
+                            " strong, unique passwords for every account. 2. ",
+                            { type: "gap", id: "advice-gap-2", answer: "Enable", placeholder: "Select", options: ["Use", "Enable", "Be", "Check", "Avoid", "Think"] },
+                            " two-factor authentication whenever possible. 3. ",
+                            { type: "gap", id: "advice-gap-3", answer: "Be", placeholder: "Select", options: ["Use", "Enable", "Be", "Check", "Avoid", "Think"] },
+                            " wary of unsolicited emails or messages. 4. ",
+                            { type: "gap", id: "advice-gap-4", answer: "Check", placeholder: "Select", options: ["Use", "Enable", "Be", "Check", "Avoid", "Think"] },
+                            " the sender's email address for authenticity. 5. ",
+                            { type: "gap", id: "advice-gap-5", answer: "Avoid", placeholder: "Select", options: ["Use", "Enable", "Be", "Check", "Avoid", "Think"] },
+                            " clicking on suspicious links or downloading unknown attachments. 6. ",
+                            { type: "gap", id: "advice-gap-6", answer: "Think", placeholder: "Select", options: ["Use", "Enable", "Be", "Check", "Avoid", "Think"] },
+                            " before you click!"
+                        ]
+                    },
+                    {
+                        key: "scam-spotting-grouping",
+                        type: "grouping",
+                        icon: "fas fa-magnifying-glass",
+                        title: "Scam or Not a Scam?",
+                        instructions: "Read the messages and assign each one to the correct category before checking your answers.",
+                        feedbackSummary: "Look for sender details, urgency, and unexpected prizes when deciding.",
+                        categories: [
+                            { id: "scam", label: "Likely a Scam" },
+                            { id: "safe", label: "Looks Safe" }
+                        ],
+                        items: [
+                            {
+                                id: "item1",
+                                label: "From: Netflix <support@mailer-netflix.com> Subject: Update your payment details to keep your account active!",
+                                category: "scam",
+                                explanation: "Legitimate Netflix emails come from the official netflix.com domain."
+                            },
+                            {
+                                id: "item2",
+                                label: "Text Message: 'Your Amazon order for a 75-inch TV has been confirmed. If this wasn't you, call us immediately at (123) 456-7890.'",
+                                category: "scam",
+                                explanation: "Scammers hope you'll call and share personal or payment details."
+                            },
+                            {
+                                id: "item3",
+                                label: "From: yourbank.com <security@yourbank.com> Subject: A login to your account was detected from a new device.",
+                                category: "safe",
+                                explanation: "Security alerts from your bank usually send you to log in independently rather than clicking embedded links."
+                            },
+                            {
+                                id: "item4",
+                                label: "Text Message: 'You've won a $1000 gift card! Click here to claim your prize: tiny.url/w1nbig'",
+                                category: "scam",
+                                explanation: "Unexpected prizes and shortened URLs are common phishing tactics."
+                            }
+                        ]
+                    },
+                    {
+                        key: "digital-safety-process",
+                        type: "process",
+                        icon: "fas fa-diagram-project",
+                        title: "Your Task: Create a Digital Safety Guide",
+                        subtitle: "In small groups, design a single-slide guide for a friend on staying safe online.",
+                        body: [
+                            "Keep the advice direct and friendly. Show how each tip tackles a specific online threat."
+                        ],
+                        steps: [
+                            { title: "Brainstorm & plan", description: "Discuss the most critical online safety threats and choose your top five tips." },
+                            { title: "Write & design", description: "Draft the guide using the imperative mood and add one relevant image from Pexels." },
+                            { title: "Peer review", description: "Swap guides with another group to check clarity, accuracy, and tone." }
+                        ]
+                    },
+                    {
+                        key: "safety-guide-share",
+                        type: "content",
+                        icon: "fas fa-person-chalkboard",
+                        title: "Present Your Safety Guide",
+                        image: {
+                            src: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
+                            alt: "A diverse group of people collaborating around a table with laptops and documents."
+                        },
+                        body: [
+                            "Each group shares their slide with the class, highlighting the red flags they focused on.",
+                            "Explain why each tip matters and summarise peer feedback received."
+                        ]
+                    },
+                    {
+                        key: "modals-quiz",
+                        type: "quiz",
+                        icon: "fas fa-lightbulb",
+                        title: "Grammar: Modals of Advice",
+                        questions: [
+                            {
+                                id: "q1",
+                                prompt: "You ______ share your password with anyone, not even your best friend.",
+                                options: [
+                                    { value: "should", label: "should" },
+                                    { value: "shouldn't", label: "shouldn't" },
+                                    { value: "must", label: "must" }
+                                ],
+                                answer: "shouldn't",
+                                correctFeedback: "Correct. 'Shouldn't' is used to give strong advice about what is not a good idea.",
+                                incorrectFeedback: "Look for the modal that clearly tells someone not to do something."
+                            },
+                            {
+                                id: "q2",
+                                prompt: "For maximum security, you ______ enable two-factor authentication on important accounts.",
+                                options: [
+                                    { value: "should", label: "should" },
+                                    { value: "mustn't", label: "mustn't" },
+                                    { value: "might", label: "might" }
+                                ],
+                                answer: "should",
+                                correctFeedback: "Correct. 'Should' is the most common way to offer positive advice.",
+                                incorrectFeedback: "Choose the modal that signals friendly but firm advice."
+                            },
+                            {
+                                id: "q3",
+                                prompt: "You ______ be able to spot a scam if you look for red flags like poor grammar and urgent requests.",
+                                options: [
+                                    { value: "ought to", label: "ought to" },
+                                    { value: "can", label: "can" },
+                                    { value: "have to", label: "have to" }
+                                ],
+                                answer: "can",
+                                correctFeedback: "Correct. 'Can' is used here to express ability.",
+                                incorrectFeedback: "Think about the modal that shows capability, not obligation."
+                            },
+                            {
+                                id: "q4",
+                                prompt: "If you receive a suspicious email, you ______ click on any links. Delete it immediately.",
+                                options: [
+                                    { value: "should", label: "should" },
+                                    { value: "have to", label: "have to" },
+                                    { value: "mustn't", label: "mustn't" }
+                                ],
+                                answer: "mustn't",
+                                correctFeedback: "Correct. 'Mustn't' indicates a prohibition or a very strong negative recommendation.",
+                                incorrectFeedback: "Pick the modal that signals a strong warning against an action."
+                            }
+                        ]
+                    },
+                    {
+                        key: "online-safety-reflection",
+                        type: "reflection",
+                        icon: "fas fa-comments",
+                        title: "Final Thoughts",
+                        fields: [
+                            { id: "most_useful", label: "What was the most surprising or useful thing you learned today?" },
+                            { id: "apply_learning", label: "Describe one specific action you will take to improve your online security after this lesson." },
+                            { id: "remaining_questions", label: "What do you still want to know about staying safe online?" }
+                        ],
+                        nav: { nextAction: "restart", nextLabel: "Restart lesson", nextIcon: "fas fa-rotate" }
+                    }
+                ]
             }
         };
         const textboxColorOptions = [
