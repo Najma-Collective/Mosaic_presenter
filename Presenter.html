@@ -500,6 +500,106 @@
         .presentation-menu__card .presentation-menu__hint {
             line-height: 1.5;
         }
+        .lesson-overview {
+            margin: 0 0 var(--space-6);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 132, 113, 0.14);
+            background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+            box-shadow: var(--shadow-1);
+            display: grid;
+            gap: var(--space-4);
+        }
+        .lesson-overview[hidden] {
+            display: none;
+        }
+        .lesson-overview__header {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+        .lesson-overview__title {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: var(--step-1);
+            color: var(--forest-shadow);
+        }
+        .lesson-overview__meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+        .lesson-overview__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(122, 132, 113, 0.12);
+            color: var(--forest-shadow);
+            font-weight: 700;
+            font-size: var(--step--1);
+        }
+        .lesson-overview__body {
+            display: grid;
+            gap: var(--space-4);
+        }
+        .lesson-overview__pacing {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: var(--space-2);
+        }
+        .lesson-overview__pacing-item {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-3);
+            padding: var(--space-3);
+            border-radius: var(--radius-sm);
+            background: rgba(122, 132, 113, 0.08);
+            font-size: var(--step--1);
+        }
+        .lesson-overview__pacing-label {
+            font-weight: 600;
+            color: var(--forest-shadow);
+        }
+        .lesson-overview__pacing-duration {
+            font-variant-numeric: tabular-nums;
+            color: var(--ink-muted);
+        }
+        .lesson-overview__section {
+            display: grid;
+            gap: var(--space-2);
+        }
+        .lesson-overview__section-title {
+            margin: 0;
+            font-size: var(--step-0);
+            font-weight: 700;
+            color: var(--forest-shadow);
+        }
+        .lesson-overview__list {
+            margin: 0;
+            padding-left: 1.1em;
+            display: grid;
+            gap: var(--space-1);
+        }
+        .lesson-overview__callout {
+            margin: 0;
+            padding: var(--space-3);
+            border-left: 4px solid var(--secondary-sage);
+            background: rgba(156, 175, 136, 0.1);
+            border-radius: var(--radius-sm);
+            font-size: var(--step--1);
+            color: var(--forest-shadow);
+        }
+        @media (min-width: 768px) {
+            .lesson-overview__body {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
         #slide-map { margin: 0; }
         #slide-map-list {
             display: flex;
@@ -709,6 +809,10 @@
             .presentation-menu__hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .lesson-selector label { color: var(--forest-shadow); }
             .lesson-selector select { background: rgba(28, 31, 26, 0.85); border-color: rgba(184, 197, 166, 0.28); color: var(--forest-shadow); box-shadow: none; }
+            .lesson-overview { background: rgba(28, 31, 26, 0.82); border-color: rgba(184, 197, 166, 0.26); box-shadow: 0 16px 28px rgba(0,0,0,0.35); }
+            .lesson-overview__badge { background: rgba(156, 175, 136, 0.18); color: var(--forest-shadow); }
+            .lesson-overview__pacing-item { background: rgba(122, 132, 113, 0.16); }
+            .lesson-overview__callout { background: rgba(156, 175, 136, 0.18); border-left-color: color-mix(in srgb, var(--secondary-sage) 80%, #0F120E 20%); }
             a { color: color-mix(in srgb, var(--secondary-sage) 80%, #C7D3C0 20%); }
             .mc-question { background: linear-gradient(180deg, #20241E 0%, #191D18 100%); border-color: rgba(184, 197, 166, 0.20); box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 10px 30px rgba(0,0,0,0.35); }
             .activity-btn { background: linear-gradient(180deg, color-mix(in srgb, var(--primary-sage) 80%, #0F120E 20%), var(--primary-sage)); box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 8px 18px rgba(0,0,0,0.35); }
@@ -1639,6 +1743,13 @@
         }
         .animate-on-scroll {
             opacity: 0;
+            transform: translate3d(0, 24px, 0);
+            transition: opacity var(--dur-3) var(--ease-ambient), transform var(--dur-3) var(--ease-ambient);
+            transition-delay: var(--stagger-delay, 0ms);
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
         }
     </style>
 </head>
@@ -1691,6 +1802,8 @@
                 </details>
             </header>
 
+                <section class="lesson-overview" id="lesson-overview" aria-label="Lesson overview" hidden aria-hidden="true"></section>
+
                 <div id="slides-root" role="presentation"></div>
 
         </div>
@@ -1706,13 +1819,311 @@
 
     <script>
         const lessonLibrary = {
+            aiLessonDesignerBlueprint: {
+                id: "ai-lesson-designer-blueprint",
+                label: "LLM lesson designer blueprint",
+                meta: {
+                    eyebrow: "Lesson designer",
+                    descriptor: "Instructions for language models to generate lesson plans compatible with this presenter.",
+                    pageTitle: "AI-authored lesson blueprint – Instructional Slides",
+                    llmGuide: {
+                        purpose: "Return JSON that can be injected into lessonLibrary to populate the presenter without manual cleanup.",
+                        outputShape: {
+                            requiredTopLevelKeys: ["id", "label", "meta", "sections", "slides"],
+                            meta: {
+                                eyebrow: "Short label for the presenter header.",
+                                descriptor: "One-sentence description that appears under the header.",
+                                pageTitle: "Browser tab title; defaults to `${label} – Instructional Slides` if omitted.",
+                                planner: "Object controlling the lesson overview panel."
+                            },
+                            sections: "Ordered array describing sidebar groupings. Each object uses { title, slideKeys }.",
+                            slides: "Ordered array of slide configs. Each slide requires a unique `key` and a supported `type`."
+                        },
+                        supportedSlideTypes: {
+                            hero: {
+                                usage: "Use for the opening slide. Supports title, subtitle, image, and nav.",
+                                required: ["title"],
+                                optional: ["subtitle", "image", "nav", "spotlight"]
+                            },
+                            content: {
+                                usage: "General purpose text/image slide. Supports body paragraphs, lists, quotes, images, callouts, and annotations.",
+                                required: ["title"],
+                                optional: ["subtitle", "body", "list", "image", "callout", "annotations"]
+                            },
+                            cards: {
+                                usage: "Highlights 2–4 options or stations. Each card accepts icon, title, description, and annotation.",
+                                required: ["cards"],
+                                optional: ["title", "subtitle", "icon", "rubric"]
+                            },
+                            quiz: {
+                                usage: "Multiple-choice or multi-select check for understanding. Include items[].options[].correct.",
+                                required: ["items"],
+                                optional: ["title", "subtitle", "feedback", "image"]
+                            },
+                            reflection: {
+                                usage: "Short debrief prompt. Accepts prompt, frames, and list of sentence starters.",
+                                required: ["prompts"],
+                                optional: ["title", "subtitle", "frames", "image"]
+                            },
+                            process: {
+                                usage: "Step-by-step routine with segments[]. Each segment supports label, duration, facilitatorNotes, and learnerTask.",
+                                required: ["segments"],
+                                optional: ["title", "subtitle", "icon"]
+                            },
+                            activity: {
+                                usage: "Use the `grouping`, `gapfill`, `matching`, or `ranking` slide types when interactive logic is needed.",
+                                required: [],
+                                optional: []
+                            }
+                        },
+                        interactionNotes: [
+                            "Images require accessible alt text. Provide royalty-free URLs or leave src null for instructor upload.",
+                            "Set nav.hidePrev to true on the first slide, and use nextAction:\"restart\" on the last slide when you want a loop.",
+                            "Activity slides support check/reset buttons automatically; populate instructions and answer keys for autograding.",
+                            "Annotations can be added by wrapping phrases with { text, annotation } entries in content lists or body arrays."
+                        ],
+                        promptingTips: [
+                            "Confirm the target audience, learning objectives, timebox, and materials before generating content.",
+                            "Map each objective to at least one interactive or reflective slide.",
+                            "Surface explicit teacher moves using facilitatorNotes fields when available.",
+                            "Respect tone guidance—warm, invitational, and specific."
+                        ],
+                        exampleUsage: {
+                            sections: [
+                                { title: "Launch", slideKeys: ["hero-slide", "objectives-slide"] },
+                                { title: "Practice", slideKeys: ["guided-practice", "independent-practice"] }
+                            ],
+                            slide: {
+                                key: "objectives-slide",
+                                type: "content",
+                                title: "Learning objectives",
+                                body: ["State each objective using action verbs and learner-friendly language."],
+                                list: ["Identify", "Apply", "Reflect"]
+                            }
+                        }
+                    },
+                    planner: {
+                        title: "AI lesson designer checklist",
+                        subtitle: "Feed these constraints to an LLM so it outputs a complete lesson configuration for the presenter.",
+                        duration: "Flexible runtime — align to the planned session length",
+                        pacingTitle: "Authoring workflow",
+                        pacing: [
+                            { label: "Collect context & learner goals", duration: "Step 1" },
+                            { label: "Draft slide flow & interactions", duration: "Step 2" },
+                            { label: "Layer facilitation notes & supports", duration: "Step 3" },
+                            { label: "Audit accessibility & timing", duration: "Step 4" }
+                        ],
+                        sections: [
+                            {
+                                title: "Prompt requirements",
+                                items: [
+                                    "Instruct the LLM to return a JSON object matching the lessonLibrary entry structure.",
+                                    "Provide session title, audience, duration, objectives, and success metrics as explicit inputs.",
+                                    "Ask for unique slide keys following kebab-case, aligned with section slideKeys arrays."
+                                ]
+                            },
+                            {
+                                title: "Data model essentials",
+                                items: [
+                                    "meta.planner controls the overview panel: include pacing[], sections[], and spotlight text.",
+                                    "sections[] drives navigation groupings; include every slide key exactly once.",
+                                    "slides[] items accept optional nav controls: set nextLabel, nextIcon, and nextAction when needed."
+                                ]
+                            },
+                            {
+                                title: "Interactive affordances",
+                                items: [
+                                    "Use quiz, ranking, matching, or gapfill types for auto-check activities with answer keys.",
+                                    "cards slides outline differentiation pathways (e.g., stations, roles, or extension choices).",
+                                    "process segments highlight teacher moves, learner tasks, timing, and required materials."
+                                ]
+                            },
+                            {
+                                title: "Accessibility & tone",
+                                items: [
+                                    "Ensure every image includes alt text describing instructional intent.",
+                                    "Use gender-inclusive names and culturally sustaining examples.",
+                                    "Keep facilitator guidance in second person (\"Invite learners...\") and learner text in first/second person."
+                                ]
+                            }
+                        ],
+                        spotlight: "Deliver JSON that preserves this structure—no markdown, no prose wrapper—so it can be dropped directly into lessonLibrary."
+                    }
+                },
+                sections: [
+                    { title: "Blueprint overview", slideKeys: ["ai-blueprint-hero", "ai-blueprint-structure", "ai-blueprint-slide-types"] },
+                    { title: "Interactive patterns", slideKeys: ["ai-blueprint-interactions", "ai-blueprint-accessibility"] },
+                    { title: "Implementation checklist", slideKeys: ["ai-blueprint-quality", "ai-blueprint-handoff"] }
+                ],
+                slides: [
+                    {
+                        key: "ai-blueprint-hero",
+                        type: "hero",
+                        title: "Design AI-authored lessons that just work",
+                        subtitle: "Give the model structured expectations so the presenter renders every slide without edits.",
+                        image: {
+                            src: "https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Teacher planning a lesson on a laptop covered in sticky notes"
+                        },
+                        nav: { hidePrev: true, nextLabel: "Data contract", nextIcon: "fas fa-diagram-project" }
+                    },
+                    {
+                        key: "ai-blueprint-structure",
+                        type: "content",
+                        icon: "fas fa-sitemap",
+                        title: "Lesson data contract",
+                        subtitle: "Brief the LLM on how each object maps to the UI.",
+                        body: [
+                            "Return a single JSON object with the properties described below. Avoid additional commentary or markdown fences.",
+                            "Omit optional keys you do not use instead of leaving empty strings."
+                        ],
+                        list: [
+                            "id: slug-safe identifier used for file exports.",
+                            "label: human-readable template name for the selector.",
+                            "meta: descriptor, eyebrow, pageTitle, and planner object for the overview panel.",
+                            "sections: ordered navigation groupings; slideKeys must reference slides[].key values.",
+                            "slides: ordered slide configs. Each config must include type, title (when applicable), and any inputs required by that renderer."
+                        ],
+                        callout: {
+                            title: "LLM reminder",
+                            body: "Respond only with valid JSON. Use double quotes around all keys and strings."
+                        }
+                    },
+                    {
+                        key: "ai-blueprint-slide-types",
+                        type: "cards",
+                        icon: "fas fa-layer-group",
+                        title: "Supported slide archetypes",
+                        subtitle: "Choose the layout that matches each instructional move.",
+                        cards: [
+                            { icon: "fas fa-bullseye", title: "content", description: "Use for objectives, mini lessons, and resource callouts. Supports body[], list[], and image." },
+                            { icon: "fas fa-images", title: "gallery | grid", description: "Combine visuals or documents. Provide cards[] with title, caption, and optional link." },
+                            { icon: "fas fa-gamepad", title: "quiz | ranking | matching | gapfill", description: "Interactive checks with automatic feedback. Include answer keys." },
+                            { icon: "fas fa-route", title: "process", description: "Outline multi-step routines. Each segment can include facilitatorNotes, learnerTask, and timing." }
+                        ]
+                    },
+                    {
+                        key: "ai-blueprint-interactions",
+                        type: "content",
+                        icon: "fas fa-chalkboard-teacher",
+                        title: "Programming interactivity",
+                        body: [
+                            "Each activity slide supports call-to-action buttons rendered automatically. Supply clear instructions in the subtitle or body fields.",
+                            "For quizzes, set item.options[].correct = true for right answers and include feedback.correct/incorrect summaries.",
+                            "For gapfill, alternate plain text segments with { type: 'gap', options: [] } entries to define dropdowns.",
+                            "For matching and grouping slides, provide pairs or categories arrays respectively."
+                        ],
+                        list: [
+                            "Include facilitatorNotes when teachers need backstage coaching.",
+                            "Use activity.blocks[] within process slides to define stations or breakout roles.",
+                            "Add nav.nextLabel to cue transitions (e.g., 'Start gallery walk')."
+                        ]
+                    },
+                    {
+                        key: "ai-blueprint-accessibility",
+                        type: "content",
+                        icon: "fas fa-universal-access",
+                        title: "Access & inclusion defaults",
+                        body: [
+                            "Write alternative text that captures instructional purpose, not just literal objects.",
+                            "Use plain-language instructions and chunk information into lists or short paragraphs.",
+                            "Respect prefers-reduced-motion by avoiding directives that rely on animations for meaning."
+                        ],
+                        list: [
+                            "Provide pronunciation or vocabulary support using annotations when new terms appear.",
+                            "Surface multilingual or multimodal options through cards slides (e.g., read, watch, discuss).",
+                            "When referencing materials, include format (digital PDF, printed handout) and accessibility notes."
+                        ]
+                    },
+                    {
+                        key: "ai-blueprint-quality",
+                        type: "content",
+                        icon: "fas fa-clipboard-check",
+                        title: "Quality assurance before delivery",
+                        body: [
+                            "Validate that pacing durations sum to the intended session length or clearly mark sections as flexible.",
+                            "Ensure every objective is revisited in a later slide or reflection prompt.",
+                            "Cross-check that every slide key is listed exactly once across sections[]."
+                        ],
+                        list: [
+                            "Double-check that quiz answers and feedback align with the lesson focus.",
+                            "Review facilitatorNotes for actionable, empathetic language.",
+                            "Confirm materials referenced exist in planner.sections[].items for easy prep."
+                        ]
+                    },
+                    {
+                        key: "ai-blueprint-handoff",
+                        type: "reflection",
+                        icon: "fas fa-share-square",
+                        title: "Hand-off prompt",
+                        subtitle: "Use this script when you ask the LLM to generate a new lesson.",
+                        prompts: [
+                            "Given the provided context, return a JSON object that mirrors the aiLessonDesignerBlueprint schema.",
+                            "Populate meta.planner with pacing, sections, and a spotlight facilitation reminder.",
+                            "Sequence slides to progress from activation to practice to reflection; leverage interactive types when appropriate."
+                        ],
+                        frames: [
+                            "Context: [audience, grade band, subject, duration]",
+                            "Objectives: [list 2–3 measurable goals]",
+                            "Required interactions: [quizzes, collaborative tasks, reflections]"
+                        ],
+                        nav: { nextLabel: "Restart blueprint", nextIcon: "fas fa-rotate", nextAction: "restart" }
+                    }
+                ]
+            },
             mentoringOrientation: {
                 id: "mentoring-orientation",
                 label: "Mentoring orientation",
                 meta: {
                     eyebrow: "Noor Community Mentoring",
                     descriptor: "An onboarding deck for project-based mentoring partnerships.",
-                    pageTitle: "Mentoring Orientation – Instructional Slides"
+                    pageTitle: "Mentoring Orientation – Instructional Slides",
+                    planner: {
+                        title: "Mentoring session blueprint",
+                        subtitle: "Use this flow to help mentees enter the program with clarity and confidence.",
+                        duration: "Approx. 60 minutes",
+                        pacing: [
+                            { label: "Community welcome & mission check", duration: "10 min" },
+                            { label: "Mentoring stories & benefits", duration: "15 min" },
+                            { label: "SMART planning walkthrough", duration: "20 min" },
+                            { label: "Reflection & commitments", duration: "15 min" }
+                        ],
+                        sections: [
+                            {
+                                title: "Learning goals",
+                                items: [
+                                    "Build shared language around the Noor Community mentoring mission.",
+                                    "Clarify the SMART framework and map out the mentee journey.",
+                                    "Document mentee priorities, questions, and next steps."
+                                ]
+                            },
+                            {
+                                title: "Prep before the session",
+                                items: [
+                                    "Review recent mentee success stories to personalise the benefits slide.",
+                                    "Queue the AI planning guide so you can model how to draft a SMART proposal.",
+                                    "Print or share onboarding forms and note-taking templates."
+                                ]
+                            },
+                            {
+                                title: "Materials & logistics",
+                                items: [
+                                    "Project proposal or planning template (digital or paper).",
+                                    "Timer to keep the journey quiz and brainstorm tight.",
+                                    "Sticky notes or collaborative doc for questions the group surfaces."
+                                ]
+                            },
+                            {
+                                title: "Checkpoints",
+                                items: [
+                                    "Mission quiz responses show whether the purpose is clear.",
+                                    "Journey scenario choices reveal how well mentees understand expectations.",
+                                    "Exit reflection captures individual action steps and support needs."
+                                ]
+                            }
+                        ],
+                        spotlight: "Model transparent mentor thinking during the SMART planning demo so mentees know what quality reflection sounds like."
+                    }
                 },
                 sections: [
                     { title: "Welcome & Community", slideKeys: ["welcome", "mentoring-benefits", "community-identity", "mentoring-definition"] },
@@ -2033,7 +2444,53 @@
                 meta: {
                     eyebrow: "Mosaic Presenter",
                     descriptor: "Seven-slide flow for curating an exhibition through collaborative language work.",
-                    pageTitle: "\"Echoes of Palestine\" – Curatorial Negotiation Lesson"
+                    pageTitle: "\"Echoes of Palestine\" – Curatorial Negotiation Lesson",
+                    planner: {
+                        title: "Curatorial negotiation plan",
+                        subtitle: "Support learners as they negotiate exhibit choices while using target language for agreement and persuasion.",
+                        duration: "Approx. 50 minutes",
+                        pacing: [
+                            { label: "Lead-in & context", duration: "8 min" },
+                            { label: "Language focus", duration: "12 min" },
+                            { label: "Group negotiation", duration: "20 min" },
+                            { label: "Reporting & reflection", duration: "10 min" }
+                        ],
+                        sections: [
+                            {
+                                title: "Learning goals",
+                                items: [
+                                    "Activate background knowledge about art that speaks to displacement and memory.",
+                                    "Rehearse functional language for expressing, agreeing, and disagreeing.",
+                                    "Facilitate a collaborative selection that results in a curated exhibition plan."
+                                ]
+                            },
+                            {
+                                title: "Teacher preparation",
+                                items: [
+                                    "Print or share the artist profiles and gallery cards for quick reference.",
+                                    "Decide negotiation groupings and roles before class to save transition time.",
+                                    "Load the audio/visual prompts you plan to use for the lead-in."
+                                ]
+                            },
+                            {
+                                title: "Materials",
+                                items: [
+                                    "Projected visuals of the artworks (or printed gallery cards).",
+                                    "Negotiation task sheets for tracking agreements.",
+                                    "Timer or slide countdown to manage the main task window."
+                                ]
+                            },
+                            {
+                                title: "Assessment & evidence",
+                                items: [
+                                    "Monitor the negotiation language log to check for target phrases.",
+                                    "Use reporting slide prompts as a speaking assessment.",
+                                    "Collect quick written rationales in the reflection slide to evidence learning."
+                                ]
+                            }
+                        ],
+                        spotlight: "Keep the negotiation language visible and model supportive phrases when groups reach impasses."
+                    }
                 },
                 sections: [
                     { title: "Lead-in", slideKeys: ["curation-leadin"] },
@@ -2276,7 +2733,53 @@
                 meta: {
                     eyebrow: "English Language Teaching",
                     descriptor: "Reusable slide flow for communicative ELT lessons focused on descriptive language.",
-                    pageTitle: "ELT Lesson Template – Instructional Slides"
+                    pageTitle: "ELT Lesson Template – Instructional Slides",
+                    planner: {
+                        title: "Descriptive language lesson plan",
+                        subtitle: "A communicative sequence for adjectives, sensory details, and vivid voice.",
+                        duration: "Approx. 45 minutes",
+                        pacing: [
+                            { label: "Lead-in & goals", duration: "5 min" },
+                            { label: "Model & notice language", duration: "15 min" },
+                            { label: "Guided practice", duration: "10 min" },
+                            { label: "Production & reflection", duration: "15 min" }
+                        ],
+                        sections: [
+                            {
+                                title: "Learning goals",
+                                items: [
+                                    "Notice how sensory language shapes reader experience.",
+                                    "Collect and categorise vivid vocabulary in context.",
+                                    "Craft a short descriptive text that demonstrates voice and detail."
+                                ]
+                            },
+                            {
+                                title: "Teacher moves",
+                                items: [
+                                    "Model a think-aloud when analysing the mentor text slide.",
+                                    "Use the activity blocks to assign roles and circulate for feedback.",
+                                    "Prompt learners to reuse new adjectives during the production gallery walk."
+                                ]
+                            },
+                            {
+                                title: "Materials",
+                                items: [
+                                    "High-resolution image prompts or printed cards for the warm-up.",
+                                    "Speakers or headphones for the sound walk audio clip.",
+                                    "Coloured markers or collaborative doc for vocabulary collection."
+                                ]
+                            },
+                            {
+                                title: "Evidence of learning",
+                                items: [
+                                    "Warm-up share-outs indicate access to topic vocabulary.",
+                                    "Multiple-choice checks confirm understanding of vivid vs. plain sentences.",
+                                    "Exit reflection captures individual goals for future writing."
+                                ]
+                            }
+                        ],
+                        spotlight: "During the guided practice, highlight learner contributions on-screen to validate precise language choices."
+                    }
                 },
                 sections: [
                     { title: "Welcome & Objectives", slideKeys: ["elt-hero", "elt-objectives", "elt-warmups"] },
@@ -2461,7 +2964,49 @@
                 meta: {
                     eyebrow: "Mosaic Presenter",
                     descriptor: "Interactive templates converted from standalone activities.",
-                    pageTitle: "Interactive Question Types – Instructional Slides"
+                    pageTitle: "Interactive Question Types – Instructional Slides",
+                    planner: {
+                        title: "Interactive template facilitation notes",
+                        subtitle: "Guide educators in modelling each question type with clear checkpoints.",
+                        duration: "Approx. 40 minutes",
+                        pacing: [
+                            { label: "Warm-up & framing", duration: "5 min" },
+                            { label: "Template walkthroughs", duration: "25 min" },
+                            { label: "Practice & debrief", duration: "10 min" }
+                        ],
+                        sections: [
+                            {
+                                title: "Session goals",
+                                items: [
+                                    "Demonstrate how to adapt gap-fill, sequencing, grouping, and matching prompts.",
+                                    "Highlight ways to capture quick formative data from each interaction.",
+                                    "Curate take-away tasks teachers can remix for their own subjects."
+                                ]
+                            },
+                            {
+                                title: "Before you facilitate",
+                                items: [
+                                    "Decide whether participants will respond individually or in teams.",
+                                    "Preload answer keys so the feedback modals work smoothly.",
+                                    "Prepare a sample debrief question for each template." ]
+                            },
+                            {
+                                title: "Materials",
+                                items: [
+                                    "Devices or printed copies for teachers to test each interaction.",
+                                    "Projector or screen-sharing setup to model the presenter view.",
+                                    "Reflection doc for capturing remix ideas." ]
+                            },
+                            {
+                                title: "Evidence & follow-up",
+                                items: [
+                                    "Collect the exported notes file to review adaptation ideas.",
+                                    "Use the matching slide explanations as an exemplar for student-facing feedback.",
+                                    "Schedule a follow-up clinic where teachers bring a draft question." ]
+                            }
+                        ],
+                        spotlight: "Invite participants to narrate what they observe about learner experience during each template so they leave with actionable adaptations."
+                    }
                 },
                 sections: [
                     { title: "Gap-fill dropdown", slideKeys: ["roman-gapfill"] },
@@ -2693,6 +3238,7 @@
         const slidesRoot = document.getElementById("slides-root");
         const presentationEyebrow = document.getElementById("presentation-eyebrow");
         const presentationDescriptor = document.getElementById("presentation-descriptor");
+        const lessonOverview = document.getElementById("lesson-overview");
         const lessonSelector = document.getElementById("lesson-template");
         const slideMapList = document.getElementById("slide-map-list");
         const motionQuery = typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
@@ -3345,18 +3891,17 @@
         function animateSlideContents(slide) {
             const elementsToAnimate = slide.querySelectorAll(".animate-on-scroll");
             elementsToAnimate.forEach((el, index) => {
+                el.classList.remove("animate__animated", "animate__fadeInUp");
                 if (prefersReducedMotion) {
-                    el.style.opacity = "1";
-                    el.classList.remove("animate__animated", "animate__fadeInUp");
+                    el.classList.add("is-visible");
+                    el.style.removeProperty("--stagger-delay");
                     return;
                 }
-                el.classList.remove("animate__animated", "animate__fadeInUp");
-                el.style.opacity = "0";
-                void el.offsetWidth;
-                setTimeout(() => {
-                    el.classList.add("animate__animated", "animate__fadeInUp");
-                    el.style.opacity = "1";
-                }, index * 160);
+                el.classList.remove("is-visible");
+                el.style.setProperty("--stagger-delay", `${Math.min(index * 90, 900)}ms`);
+                requestAnimationFrame(() => {
+                    el.classList.add("is-visible");
+                });
             });
         }
 
@@ -5175,6 +5720,136 @@
             slides = Array.from(slidesRoot.querySelectorAll(".screen"));
         }
 
+        function renderLessonOverview(lesson) {
+            if (!lessonOverview) {
+                return;
+            }
+            const planner = lesson?.meta?.planner;
+            lessonOverview.innerHTML = "";
+            if (!planner) {
+                lessonOverview.hidden = true;
+                lessonOverview.setAttribute("aria-hidden", "true");
+                return;
+            }
+
+            const title = document.createElement("h2");
+            title.className = "lesson-overview__title";
+            title.textContent = planner.title || "Lesson overview";
+
+            const header = document.createElement("div");
+            header.className = "lesson-overview__header";
+            header.appendChild(title);
+
+            if (planner.duration || planner.subtitle) {
+                const meta = document.createElement("div");
+                meta.className = "lesson-overview__meta";
+                if (planner.duration) {
+                    const badge = document.createElement("span");
+                    badge.className = "lesson-overview__badge";
+                    badge.innerHTML = `<i class="fas fa-clock" aria-hidden="true"></i> ${planner.duration}`;
+                    meta.appendChild(badge);
+                }
+                if (planner.subtitle) {
+                    const subtitle = document.createElement("span");
+                    subtitle.textContent = planner.subtitle;
+                    meta.appendChild(subtitle);
+                }
+                if (meta.childNodes.length) {
+                    header.appendChild(meta);
+                }
+            }
+
+            lessonOverview.appendChild(header);
+
+            const body = document.createElement("div");
+            body.className = "lesson-overview__body";
+
+            if (Array.isArray(planner.pacing) && planner.pacing.length) {
+                const pacingWrapper = document.createElement("section");
+                pacingWrapper.className = "lesson-overview__section";
+                const pacingTitle = document.createElement("h3");
+                pacingTitle.className = "lesson-overview__section-title";
+                pacingTitle.textContent = planner.pacingTitle || "Suggested pacing";
+                pacingWrapper.appendChild(pacingTitle);
+
+                const pacingList = document.createElement("ul");
+                pacingList.className = "lesson-overview__pacing";
+                planner.pacing.forEach((segment) => {
+                    if (!segment) {
+                        return;
+                    }
+                    const item = document.createElement("li");
+                    item.className = "lesson-overview__pacing-item";
+
+                    const label = document.createElement("span");
+                    label.className = "lesson-overview__pacing-label";
+                    label.textContent = segment.label || segment.title || "Segment";
+                    item.appendChild(label);
+
+                    if (segment.duration) {
+                        const duration = document.createElement("span");
+                        duration.className = "lesson-overview__pacing-duration";
+                        duration.textContent = segment.duration;
+                        item.appendChild(duration);
+                    }
+
+                    pacingList.appendChild(item);
+                });
+                pacingWrapper.appendChild(pacingList);
+                body.appendChild(pacingWrapper);
+            }
+
+            if (Array.isArray(planner.sections)) {
+                planner.sections.forEach((section) => {
+                    if (!section) {
+                        return;
+                    }
+                    const sectionElement = document.createElement("section");
+                    sectionElement.className = "lesson-overview__section";
+
+                    const sectionTitle = document.createElement("h3");
+                    sectionTitle.className = "lesson-overview__section-title";
+                    sectionTitle.textContent = section.title || "Key points";
+                    sectionElement.appendChild(sectionTitle);
+
+                    const items = Array.isArray(section.items) ? section.items : [];
+                    if (items.length) {
+                        const list = document.createElement("ul");
+                        list.className = "lesson-overview__list";
+                        items.forEach((itemText) => {
+                            const listItem = document.createElement("li");
+                            listItem.textContent = itemText;
+                            list.appendChild(listItem);
+                        });
+                        sectionElement.appendChild(list);
+                    } else if (section.description) {
+                        const paragraph = document.createElement("p");
+                        paragraph.textContent = section.description;
+                        sectionElement.appendChild(paragraph);
+                    }
+
+                    body.appendChild(sectionElement);
+                });
+            }
+
+            if (planner.spotlight) {
+                const callout = document.createElement("p");
+                callout.className = "lesson-overview__callout";
+                const calloutLabel = document.createElement("strong");
+                calloutLabel.textContent = "Facilitation spotlight:";
+                callout.appendChild(calloutLabel);
+                callout.appendChild(document.createTextNode(` ${planner.spotlight}`));
+                body.appendChild(callout);
+            }
+
+            if (body.childNodes.length) {
+                lessonOverview.appendChild(body);
+            }
+
+            lessonOverview.hidden = false;
+            lessonOverview.setAttribute("aria-hidden", "false");
+        }
+
         function renderLesson(lessonKey) {
             const availableLessons = Object.keys(lessonLibrary);
             if (!availableLessons.length) {
@@ -5194,6 +5869,7 @@
             if (presentationDescriptor) {
                 presentationDescriptor.textContent = lesson.meta?.descriptor || "Choose a template to populate the slides.";
             }
+            renderLessonOverview(lesson);
             if (typeof document !== "undefined") {
                 const fallbackTitle = `${lesson.label || "Lesson"} – Instructional Slides`;
                 document.title = lesson.meta?.pageTitle || fallbackTitle;
