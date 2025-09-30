@@ -1034,6 +1034,386 @@
         .slide-content p { margin-bottom: var(--space-4); }
         .slide-content ul { padding-left: var(--space-6); }
         .slide-content ul li { margin-bottom: var(--space-2); }
+
+        /* ------------------------------- Curatorial workshop slide styles ----------------------------------*/
+        .lead-in-slide {
+            display: grid;
+            justify-items: center;
+            text-align: center;
+            gap: var(--space-7);
+        }
+        .lead-in-slide figure {
+            margin: 0;
+            width: 100%;
+        }
+        .lead-in-slide img {
+            width: 100%;
+            max-height: 360px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+        }
+        .lead-in-slide .lead-in-title {
+            font-family: var(--font-display);
+            font-size: var(--step-4);
+            color: var(--forest-shadow);
+            margin: 0;
+        }
+        .lead-in-activity {
+            max-width: 720px;
+            width: 100%;
+            padding: clamp(24px, 4vw, 40px);
+            border-radius: var(--radius-lg);
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+            box-shadow: var(--shadow-1);
+        }
+        .lead-in-activity h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            margin: 0 0 var(--space-3);
+        }
+        .lead-in-activity ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: var(--space-3);
+        }
+        .lead-in-activity li {
+            font-size: var(--step-0);
+            line-height: 1.6;
+        }
+        .lead-in-activity li strong {
+            font-family: var(--font-display);
+            color: var(--forest-shadow);
+        }
+
+        .definition-slide {
+            display: grid;
+            gap: var(--space-6);
+        }
+        .definition-slide h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            margin: 0;
+        }
+        .definition-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: var(--space-3);
+        }
+        .definition-list li {
+            font-size: var(--step-0);
+            line-height: 1.6;
+        }
+        .definition-term {
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+        .definition-activity-box {
+            padding: clamp(28px, 4vw, 48px);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-sage);
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+            display: grid;
+            gap: var(--space-3);
+        }
+        .definition-activity-box h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-1);
+            margin: 0;
+        }
+
+        .language-slide {
+            display: grid;
+            gap: var(--space-7);
+        }
+        .language-slide h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            margin: 0;
+        }
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--space-4);
+        }
+        .language-card {
+            padding: var(--space-4);
+            border-radius: var(--radius);
+            background: var(--soft-white);
+            box-shadow: var(--shadow-1);
+            display: grid;
+            gap: var(--space-2);
+        }
+        .language-card h4 {
+            margin: 0;
+            font-weight: 700;
+            color: var(--primary-sage);
+            font-size: var(--step-0);
+        }
+        .language-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: var(--space-2);
+            font-size: var(--step--1);
+        }
+        .language-activity {
+            display: grid;
+            gap: var(--space-4);
+        }
+        .language-activity p {
+            margin: 0;
+        }
+        .mc-option-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: var(--space-3);
+        }
+        .mc-option-item {
+            border-radius: var(--radius);
+            border: 1px solid var(--border-sage);
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+            transition: transform var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+        .mc-option-label {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            cursor: pointer;
+        }
+        .mc-option-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-2);
+        }
+        .mc-option-item:has(input:checked) {
+            border-color: var(--secondary-sage);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary-sage) 25%, transparent);
+        }
+        .option-control {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            border: 2px solid var(--primary-sage);
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+        .option-control::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--primary-sage);
+            transform: scale(0);
+            transition: transform var(--dur-2) var(--ease-ambient);
+        }
+        .mc-option-item input[type="radio"] {
+            display: none;
+        }
+        .mc-option-item input[type="radio"]:checked + .option-control::after {
+            transform: scale(1);
+        }
+        .mc-option-text {
+            display: grid;
+            gap: var(--space-1);
+        }
+        .mc-option-text strong {
+            font-family: var(--font-display);
+            color: var(--forest-shadow);
+            font-size: var(--step-0);
+        }
+
+        .artist-slide {
+            display: grid;
+            gap: var(--space-7);
+        }
+        .artist-list {
+            display: grid;
+            gap: var(--space-5);
+        }
+        .artist-card {
+            display: grid;
+            gap: var(--space-2);
+        }
+        .artist-card strong {
+            font-size: var(--step-1);
+            color: var(--forest-shadow);
+        }
+        .artist-card p {
+            margin: 0;
+            font-size: var(--step-0);
+        }
+        .artist-activity {
+            display: grid;
+            gap: var(--space-4);
+        }
+        .artist-activity h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-1);
+            margin: 0;
+        }
+        .ranking-inputs {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .ranking-inputs label {
+            font-weight: 700;
+            color: var(--primary-sage);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+        .ranking-inputs input[type="text"] {
+            width: 100%;
+            border-radius: 10px;
+            padding: 12px 14px;
+            border: 1px solid var(--border-sage);
+        }
+
+        .artwork-slide {
+            display: grid;
+            gap: var(--space-6);
+        }
+        .artwork-slide h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            margin: 0;
+        }
+        .artwork-slide p {
+            margin: 0;
+            font-size: var(--step-0);
+        }
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-5);
+        }
+        .artwork-card {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--soft-white) 94%, white 6%), #fff);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+            display: grid;
+        }
+        .artwork-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .artwork-card__body {
+            padding: var(--space-4);
+            display: grid;
+            gap: var(--space-2);
+        }
+        .artwork-card__body h4 {
+            margin: 0;
+            font-size: var(--step-0);
+            font-weight: 700;
+            color: var(--forest-shadow);
+        }
+        .artwork-card__body p {
+            margin: 0;
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+
+        .reporting-slide {
+            display: grid;
+            gap: var(--space-6);
+        }
+        .reporting-slide h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            margin: 0;
+        }
+        .reporting-slide p {
+            margin: 0;
+            font-size: var(--step-0);
+        }
+        .reporting-sections {
+            display: grid;
+            gap: var(--space-7);
+        }
+        .reporting-artwork {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .reporting-artwork h4 {
+            margin: 0;
+            font-size: var(--step-1);
+            color: var(--primary-sage);
+        }
+        .reporting-image-placeholder {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius);
+            border: 2px dashed var(--border-sage);
+            display: grid;
+            place-items: center;
+            color: var(--ink-muted);
+            font-size: var(--step--1);
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+        }
+        .reporting-artwork textarea,
+        .reporting-statement textarea {
+            width: 100%;
+            border-radius: 10px;
+            padding: 12px 14px;
+            border: 1px solid var(--border-sage);
+            min-height: 100px;
+        }
+        .reporting-statement textarea {
+            min-height: 150px;
+        }
+        .reporting-statement label {
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+
+        .discussion-slide {
+            display: grid;
+            gap: var(--space-5);
+        }
+        .discussion-slide h3 {
+            font-family: var(--font-display);
+            font-size: var(--step-2);
+            margin: 0;
+        }
+        .discussion-slide p {
+            margin: 0;
+            font-size: var(--step-0);
+        }
+        .discussion-questions {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: var(--space-3);
+        }
+        .discussion-questions li {
+            position: relative;
+            padding-left: var(--space-7);
+            font-size: var(--step-0);
+            line-height: 1.7;
+        }
+        .discussion-questions li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: calc(var(--space-1) + 2px);
+            width: var(--space-3);
+            height: var(--space-3);
+            border-radius: 50%;
+            background: var(--primary-sage);
+        }
         
         .card-container {
             display: grid;
@@ -2150,6 +2530,215 @@
                         ]
                     }
                 ]
+            },
+            artCurationWorkshop: {
+                id: "art-curation-workshop",
+                label: "Art Curation Workshop",
+                meta: {
+                    eyebrow: "Arts & Humanities",
+                    descriptor: "Collaborative curation workshop exploring negotiation language and artistic storytelling.",
+                    pageTitle: "Echoes of Palestine – Curatorial Workshop Slides"
+                },
+                sections: [
+                    { title: "Lead-in", slideKeys: ["art-lead-in"] },
+                    { title: "Pre-task", slideKeys: ["art-lexicon", "art-language-negotiation", "art-collective"] },
+                    { title: "Task", slideKeys: ["art-task", "art-reporting"] },
+                    { title: "Reflect", slideKeys: ["art-reflect"] }
+                ],
+                slides: [
+                    {
+                        key: "art-lead-in",
+                        type: "lead-in",
+                        title: "What Makes Art Powerful?",
+                        image: {
+                            src: "https://images.pexels.com/photos/164455/pexels-photo-164455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Street art portrait of a man's face painted on a wall"
+                        },
+                        activity: {
+                            title: "Think-Pair-Share",
+                            steps: [
+                                {
+                                    label: "Think (1 minute)",
+                                    description: "Look at the image. What story do you think the artist is trying to tell? What emotions does it make you feel?"
+                                },
+                                {
+                                    label: "Pair (2 minutes)",
+                                    description: "With a partner, discuss your interpretations. Did you see the same story? What elements of the artwork led you to your interpretation?"
+                                },
+                                {
+                                    label: "Share (3 minutes)",
+                                    description: "Be prepared to share your pair's key ideas with the class."
+                                }
+                            ]
+                        },
+                        nav: { hidePrev: true }
+                    },
+                    {
+                        key: "art-lexicon",
+                        type: "definition-activity",
+                        title: "The Language of Art",
+                        definitions: [
+                            { term: "Medium", description: "The materials used to create a work of art (e.g., oil on canvas, photography, sculpture)." },
+                            { term: "Theme", description: "The main idea or message of the artwork (e.g., identity, resilience, memory)." },
+                            { term: "Symbolism", description: "The use of objects or images to represent bigger ideas (e.g., a key representing lost homes)." },
+                            { term: "Style", description: "The distinctive visual manner in which an artist creates (e.g., abstract, figurative, surreal)." },
+                            { term: "Narrative", description: "The story that the artwork tells." }
+                        ],
+                        activity: {
+                            title: "Become the Expert",
+                            instructions: [
+                                "In your group, each person will be assigned one or two terms.",
+                                "Take two minutes to make sure you understand your term(s) and can explain them in your own words.",
+                                "Take turns explaining your expert terms to your group. The other members should listen and can ask questions to clarify."
+                            ]
+                        }
+                    },
+                    {
+                        key: "art-language-negotiation",
+                        type: "language-negotiation",
+                        title: "How to Be a Curator: Functional Language",
+                        categories: [
+                            { title: "Expressing Opinion", items: ["I believe...", "From my perspective...", "What stands out is..."] },
+                            { title: "Agreeing", items: ["I see your point.", "That’s a great choice.", "I agree with you."] },
+                            { title: "Politely Disagreeing", items: ["I see it differently.", "I understand, but...", "While that's strong, I'm not sure..."] },
+                            { title: "Making a Compromise", items: ["What if we include...?", "Can we agree on...?", "Let's go with that one, then."] }
+                        ],
+                        activity: {
+                            title: "Choose the Title",
+                            instructions: "With your group, you have 3 minutes to choose the best title for your upcoming exhibition. Use the functional language above to discuss the options and come to a consensus.",
+                            options: [
+                                { value: "fragments", label: "Option A: Fragments of a Homeland" },
+                                { value: "echoes", label: "Option B: Echoes of Palestine" },
+                                { value: "olive", label: "Option C: The Olive and the Key" }
+                            ]
+                        }
+                    },
+                    {
+                        key: "art-collective",
+                        type: "artist-spotlight",
+                        title: "The \"Fragments of a Homeland\" Collective",
+                        artists: [
+                            { name: "Laila", role: "Digital Artist, Gaza", focus: "Focuses on memory, nostalgia, and the resilience of youth." },
+                            { name: "Yousef", role: "Painter/Sculptor, Ramallah", focus: "Focuses on connection to the land and cultural heritage." },
+                            { name: "Rania", role: "Interdisciplinary Artist, London", focus: "Focuses on identity, exile, and life in the diaspora." }
+                        ],
+                        activity: {
+                            title: "Rank & Justify",
+                            steps: [
+                                "Individually (1 minute): Rank the artists (1, 2, 3) based on whose focus you find most compelling for an international audience.",
+                                "With a partner (3 minutes): Justify your #1 choice to your partner using the language of opinion. Try to convince your partner of your choice."
+                            ],
+                            inputs: [
+                                { id: "art-ranking", label: "Your ranking order", placeholder: "e.g., 1 - Laila, 2 - Yousef, 3 - Rania" }
+                            ]
+                        }
+                    },
+                    {
+                        key: "art-task",
+                        type: "artwork-selection",
+                        title: "Curating \"Echoes of Palestine\" (Group Negotiation)",
+                        scenario: "In your curatorial groups, you must negotiate and select the three best artworks for the exhibition. You must all agree on the final selection and be able to justify your choices. Remember to use the functional language for negotiation.",
+                        artworks: [
+                            {
+                                title: "Gaza Dreams",
+                                artist: "Laila – Digital Artist, Gaza",
+                                image: {
+                                    src: "https://images.pexels.com/photos/14899381/pexels-photo-14899381.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+                                    alt: "Child in a yellow jacket flying a kite"
+                                }
+                            },
+                            {
+                                title: "Inheritance",
+                                artist: "Yousef – Painter/Sculptor, Ramallah",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8582333/pexels-photo-8582333.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+                                    alt: "Vintage key resting on patterned fabric"
+                                }
+                            },
+                            {
+                                title: "Fragmented City",
+                                artist: "Rania – Interdisciplinary Artist, London",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8149633/pexels-photo-8149633.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+                                    alt: "Abstract geometric painting on a white wall"
+                                }
+                            },
+                            {
+                                title: "The Storyteller",
+                                artist: "Yousef – Painter/Sculptor, Ramallah",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8001153/pexels-photo-8001153.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+                                    alt: "Portrait of an elderly woman with deep wrinkles"
+                                }
+                            },
+                            {
+                                title: "Walled Garden",
+                                artist: "Laila – Digital Artist, Gaza",
+                                image: {
+                                    src: "https://images.pexels.com/photos/3230137/pexels-photo-3230137.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+                                    alt: "Open doorway leading to a sunlit courtyard"
+                                }
+                            },
+                            {
+                                title: "Unsent Letters",
+                                artist: "Rania – Interdisciplinary Artist, London",
+                                image: {
+                                    src: "https://images.pexels.com/photos/1089578/pexels-photo-1089578.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+                                    alt: "Rolled brown paper scrolls tied with string"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        key: "art-reporting",
+                        type: "curation-report",
+                        title: "Our Selections for \"Echoes of Palestine\"",
+                        activity: {
+                            instructions: "One member from each group will present your final selections and the curatorial statement to the class."
+                        },
+                        selections: [
+                            {
+                                id: "art-selection-1",
+                                title: "Selected Artwork 1",
+                                imagePlaceholder: "Add image & title",
+                                justificationLabel: "Justification",
+                                placeholder: "Why is this artwork essential for the exhibition?"
+                            },
+                            {
+                                id: "art-selection-2",
+                                title: "Selected Artwork 2",
+                                imagePlaceholder: "Add image & title",
+                                justificationLabel: "Justification",
+                                placeholder: "How does this piece support your story?"
+                            },
+                            {
+                                id: "art-selection-3",
+                                title: "Selected Artwork 3",
+                                imagePlaceholder: "Add image & title",
+                                justificationLabel: "Justification",
+                                placeholder: "What makes this choice resonate with audiences?"
+                            }
+                        ],
+                        statement: {
+                            id: "art-curatorial-statement",
+                            label: "Our Collective's Curatorial Statement",
+                            placeholder: "Synthesize the shared story your exhibition tells in a few sentences."
+                        }
+                    },
+                    {
+                        key: "art-reflect",
+                        type: "discussion",
+                        title: "Debriefing the Curatorial Process",
+                        instructions: "Be prepared to discuss the following questions as a class:",
+                        questions: [
+                            "What were the most challenging aspects of the negotiation?",
+                            "Which artworks sparked the most debate, and why?",
+                            "How did your group's final selection represent a compromise or a consensus?",
+                            "What did this process teach you about the challenges and responsibilities of representing a collective voice through art?"
+                        ],
+                        nav: { nextAction: "restart", nextLabel: "Restart Session", nextIcon: "fas fa-rotate-right" }
+                    }
+                ]
             }
         };
         const textboxColorOptions = [
@@ -3255,6 +3844,460 @@
             return array;
         }
 
+        function renderLeadInSlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "lead-in-slide";
+
+            if (config.image) {
+                const figure = document.createElement("figure");
+                figure.className = "animate-on-scroll";
+                const img = createImageElement(config.image);
+                if (img) {
+                    figure.appendChild(img);
+                    container.appendChild(figure);
+                }
+            }
+
+            if (config.title) {
+                const title = document.createElement("h1");
+                title.className = "lead-in-title animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            if (config.activity) {
+                const activity = document.createElement("section");
+                activity.className = "lead-in-activity animate-on-scroll";
+                if (config.activity.title) {
+                    const heading = document.createElement("h3");
+                    heading.textContent = config.activity.title;
+                    activity.appendChild(heading);
+                }
+                if (Array.isArray(config.activity.steps) && config.activity.steps.length) {
+                    const list = document.createElement("ol");
+                    config.activity.steps.forEach((step) => {
+                        const item = document.createElement("li");
+                        if (step && typeof step === "object") {
+                            if (step.label) {
+                                const strong = document.createElement("strong");
+                                strong.textContent = `${step.label}: `;
+                                item.appendChild(strong);
+                            }
+                            if (step.description) {
+                                item.appendChild(document.createTextNode(step.description));
+                            }
+                        } else if (typeof step === "string") {
+                            item.textContent = step;
+                        }
+                        list.appendChild(item);
+                    });
+                    activity.appendChild(list);
+                }
+                container.appendChild(activity);
+            }
+
+            slideElement.appendChild(container);
+        }
+
+        function renderDefinitionActivitySlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "definition-slide";
+
+            if (config.title) {
+                const title = document.createElement("h3");
+                title.className = "animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            if (Array.isArray(config.definitions) && config.definitions.length) {
+                const list = document.createElement("ul");
+                list.className = "definition-list animate-on-scroll";
+                config.definitions.forEach((item) => {
+                    const li = document.createElement("li");
+                    if (item && typeof item === "object") {
+                        if (item.term) {
+                            const strong = document.createElement("span");
+                            strong.className = "definition-term";
+                            strong.textContent = `${item.term}: `;
+                            li.appendChild(strong);
+                        }
+                        if (item.description) {
+                            li.appendChild(document.createTextNode(item.description));
+                        }
+                    } else if (typeof item === "string") {
+                        li.textContent = item;
+                    }
+                    list.appendChild(li);
+                });
+                container.appendChild(list);
+            }
+
+            if (config.activity) {
+                const activityBox = document.createElement("section");
+                activityBox.className = "definition-activity-box animate-on-scroll";
+                if (config.activity.title) {
+                    const heading = document.createElement("h3");
+                    heading.textContent = config.activity.title;
+                    activityBox.appendChild(heading);
+                }
+                const instructions = Array.isArray(config.activity.instructions)
+                    ? config.activity.instructions
+                    : config.activity.instructions ? [config.activity.instructions] : [];
+                instructions.forEach((text) => {
+                    const paragraph = document.createElement("p");
+                    paragraph.textContent = text;
+                    activityBox.appendChild(paragraph);
+                });
+                container.appendChild(activityBox);
+            }
+
+            slideElement.appendChild(container);
+        }
+
+        function renderLanguageNegotiationSlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "language-slide";
+
+            if (config.title) {
+                const title = document.createElement("h3");
+                title.className = "animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            if (Array.isArray(config.categories) && config.categories.length) {
+                const grid = document.createElement("div");
+                grid.className = "language-grid animate-on-scroll";
+                config.categories.forEach((category) => {
+                    const card = document.createElement("article");
+                    card.className = "language-card";
+                    if (category.title) {
+                        const heading = document.createElement("h4");
+                        heading.textContent = category.title;
+                        card.appendChild(heading);
+                    }
+                    const phrases = Array.isArray(category.items) ? category.items : [];
+                    if (phrases.length) {
+                        const list = document.createElement("ul");
+                        phrases.forEach((phrase) => {
+                            const li = document.createElement("li");
+                            li.textContent = phrase;
+                            list.appendChild(li);
+                        });
+                        card.appendChild(list);
+                    }
+                    grid.appendChild(card);
+                });
+                container.appendChild(grid);
+            }
+
+            if (config.activity) {
+                const activity = document.createElement("section");
+                activity.className = "language-activity animate-on-scroll";
+                if (config.activity.title) {
+                    const heading = document.createElement("h3");
+                    heading.textContent = config.activity.title;
+                    activity.appendChild(heading);
+                }
+                if (config.activity.instructions) {
+                    const paragraph = document.createElement("p");
+                    paragraph.textContent = config.activity.instructions;
+                    activity.appendChild(paragraph);
+                }
+
+                const options = Array.isArray(config.activity.options) ? config.activity.options : [];
+                if (options.length) {
+                    const list = document.createElement("ul");
+                    list.className = "mc-option-list";
+                    const groupName = `${config.key || "options"}-group`;
+                    options.forEach((option, index) => {
+                        const item = document.createElement("li");
+                        item.className = "mc-option-item";
+
+                        const label = document.createElement("label");
+                        label.className = "mc-option-label";
+
+                        const input = document.createElement("input");
+                        input.type = "radio";
+                        input.name = groupName;
+                        input.value = option?.value || `option-${index + 1}`;
+
+                        const control = document.createElement("span");
+                        control.className = "option-control";
+
+                        label.appendChild(input);
+                        label.appendChild(control);
+
+                        const textWrapper = document.createElement("span");
+                        textWrapper.className = "mc-option-text";
+                        const primaryLabel = option?.label || option?.title || option?.value;
+                        if (primaryLabel) {
+                            const strong = document.createElement("strong");
+                            strong.textContent = primaryLabel;
+                            textWrapper.appendChild(strong);
+                        }
+                        if (option?.description) {
+                            const description = document.createElement("span");
+                            description.textContent = option.description;
+                            textWrapper.appendChild(description);
+                        }
+                        label.appendChild(textWrapper);
+
+                        item.appendChild(label);
+                        list.appendChild(item);
+                    });
+                    activity.appendChild(list);
+                }
+
+                container.appendChild(activity);
+            }
+
+            slideElement.appendChild(container);
+        }
+
+        function renderArtistSpotlightSlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "artist-slide";
+
+            if (config.title) {
+                const title = document.createElement("h3");
+                title.className = "animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            const artists = Array.isArray(config.artists) ? config.artists : [];
+            if (artists.length) {
+                const list = document.createElement("div");
+                list.className = "artist-list animate-on-scroll";
+                artists.forEach((artist) => {
+                    const card = document.createElement("article");
+                    card.className = "artist-card";
+                    const name = document.createElement("strong");
+                    const nameParts = [];
+                    if (artist.name) {
+                        nameParts.push(artist.name);
+                    }
+                    if (artist.role) {
+                        nameParts.push(`(${artist.role})`);
+                    }
+                    name.textContent = nameParts.join(" ");
+                    card.appendChild(name);
+
+                    if (artist.focus) {
+                        const focus = document.createElement("p");
+                        focus.textContent = artist.focus;
+                        card.appendChild(focus);
+                    }
+                    list.appendChild(card);
+                });
+                container.appendChild(list);
+            }
+
+            if (config.activity) {
+                const activity = document.createElement("section");
+                activity.className = "artist-activity animate-on-scroll";
+                if (config.activity.title) {
+                    const heading = document.createElement("h3");
+                    heading.textContent = config.activity.title;
+                    activity.appendChild(heading);
+                }
+                const steps = Array.isArray(config.activity.steps) ? config.activity.steps : [];
+                if (steps.length) {
+                    const list = document.createElement("ol");
+                    steps.forEach((step) => {
+                        const item = document.createElement("li");
+                        item.textContent = step;
+                        list.appendChild(item);
+                    });
+                    activity.appendChild(list);
+                }
+                const inputs = Array.isArray(config.activity.inputs) ? config.activity.inputs : [];
+                if (inputs.length) {
+                    const inputGroup = document.createElement("div");
+                    inputGroup.className = "ranking-inputs";
+                    inputs.forEach((field, index) => {
+                        const wrapper = document.createElement("div");
+                        const label = document.createElement("label");
+                        const fieldId = field.id || `${config.key || "artist"}-input-${index + 1}`;
+                        label.setAttribute("for", fieldId);
+                        label.textContent = field.label || "Response";
+                        const input = document.createElement("input");
+                        input.type = "text";
+                        input.id = fieldId;
+                        if (field.placeholder) {
+                            input.placeholder = field.placeholder;
+                        }
+                        wrapper.appendChild(label);
+                        wrapper.appendChild(input);
+                        inputGroup.appendChild(wrapper);
+                    });
+                    activity.appendChild(inputGroup);
+                }
+                container.appendChild(activity);
+            }
+
+            slideElement.appendChild(container);
+        }
+
+        function renderArtworkSelectionSlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "artwork-slide";
+
+            if (config.title) {
+                const title = document.createElement("h3");
+                title.className = "animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            if (config.scenario) {
+                const paragraph = document.createElement("p");
+                paragraph.className = "animate-on-scroll";
+                paragraph.textContent = config.scenario;
+                container.appendChild(paragraph);
+            }
+
+            const artworks = Array.isArray(config.artworks) ? config.artworks : [];
+            if (artworks.length) {
+                const grid = document.createElement("div");
+                grid.className = "artwork-grid animate-on-scroll";
+                artworks.forEach((artwork) => {
+                    const card = document.createElement("article");
+                    card.className = "artwork-card";
+                    if (artwork.image) {
+                        const img = createImageElement(artwork.image);
+                        if (img) {
+                            card.appendChild(img);
+                        }
+                    }
+                    const body = document.createElement("div");
+                    body.className = "artwork-card__body";
+                    if (artwork.title) {
+                        const heading = document.createElement("h4");
+                        heading.textContent = artwork.title;
+                        body.appendChild(heading);
+                    }
+                    if (artwork.artist) {
+                        const artist = document.createElement("p");
+                        artist.textContent = artwork.artist;
+                        body.appendChild(artist);
+                    }
+                    card.appendChild(body);
+                    grid.appendChild(card);
+                });
+                container.appendChild(grid);
+            }
+
+            slideElement.appendChild(container);
+        }
+
+        function renderCurationReportSlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "reporting-slide";
+
+            if (config.title) {
+                const title = document.createElement("h3");
+                title.className = "animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            if (config.activity && config.activity.instructions) {
+                const paragraph = document.createElement("p");
+                paragraph.className = "animate-on-scroll";
+                paragraph.textContent = config.activity.instructions;
+                container.appendChild(paragraph);
+            }
+
+            const sections = document.createElement("div");
+            sections.className = "reporting-sections";
+
+            const selections = Array.isArray(config.selections) ? config.selections : [];
+            selections.forEach((selection, index) => {
+                const section = document.createElement("section");
+                section.className = "reporting-artwork animate-on-scroll";
+                if (selection.title) {
+                    const heading = document.createElement("h4");
+                    heading.textContent = selection.title;
+                    section.appendChild(heading);
+                }
+                const placeholder = document.createElement("div");
+                placeholder.className = "reporting-image-placeholder";
+                placeholder.textContent = selection.imagePlaceholder || "Add selected image here";
+                section.appendChild(placeholder);
+
+                const label = document.createElement("label");
+                const fieldId = selection.id || `${config.key || "report"}-selection-${index + 1}`;
+                label.setAttribute("for", fieldId);
+                label.textContent = selection.justificationLabel || "Justification";
+                section.appendChild(label);
+
+                const textarea = document.createElement("textarea");
+                textarea.id = fieldId;
+                if (selection.placeholder) {
+                    textarea.placeholder = selection.placeholder;
+                }
+                section.appendChild(textarea);
+
+                sections.appendChild(section);
+            });
+
+            if (config.statement) {
+                const statement = document.createElement("section");
+                statement.className = "reporting-statement animate-on-scroll";
+                const fieldId = config.statement.id || `${config.key || "report"}-statement`;
+                const label = document.createElement("label");
+                label.setAttribute("for", fieldId);
+                label.textContent = config.statement.label || "Curatorial Statement";
+                statement.appendChild(label);
+                const textarea = document.createElement("textarea");
+                textarea.id = fieldId;
+                if (config.statement.placeholder) {
+                    textarea.placeholder = config.statement.placeholder;
+                }
+                statement.appendChild(textarea);
+                sections.appendChild(statement);
+            }
+
+            container.appendChild(sections);
+            slideElement.appendChild(container);
+        }
+
+        function renderDiscussionSlide(slideElement, config) {
+            const container = document.createElement("div");
+            container.className = "discussion-slide";
+
+            if (config.title) {
+                const title = document.createElement("h3");
+                title.className = "animate-on-scroll";
+                title.textContent = config.title;
+                container.appendChild(title);
+            }
+
+            if (config.instructions) {
+                const paragraph = document.createElement("p");
+                paragraph.className = "animate-on-scroll";
+                paragraph.textContent = config.instructions;
+                container.appendChild(paragraph);
+            }
+
+            const questions = Array.isArray(config.questions) ? config.questions : [];
+            if (questions.length) {
+                const list = document.createElement("ul");
+                list.className = "discussion-questions animate-on-scroll";
+                questions.forEach((question) => {
+                    const item = document.createElement("li");
+                    item.textContent = question;
+                    list.appendChild(item);
+                });
+                container.appendChild(list);
+            }
+
+            slideElement.appendChild(container);
+        }
+
         function renderHeroSlide(slideElement, config) {
             if (config.image) {
                 const wrapper = document.createElement("div");
@@ -4251,6 +5294,27 @@
             slideElement.dataset.slideKey = config.key || slideElement.id;
 
             switch (config.type) {
+                case "lead-in":
+                    renderLeadInSlide(slideElement, config);
+                    break;
+                case "definition-activity":
+                    renderDefinitionActivitySlide(slideElement, config);
+                    break;
+                case "language-negotiation":
+                    renderLanguageNegotiationSlide(slideElement, config);
+                    break;
+                case "artist-spotlight":
+                    renderArtistSpotlightSlide(slideElement, config);
+                    break;
+                case "artwork-selection":
+                    renderArtworkSelectionSlide(slideElement, config);
+                    break;
+                case "curation-report":
+                    renderCurationReportSlide(slideElement, config);
+                    break;
+                case "discussion":
+                    renderDiscussionSlide(slideElement, config);
+                    break;
                 case "hero":
                     renderHeroSlide(slideElement, config);
                     break;
