@@ -164,6 +164,63 @@
         white-space: nowrap;
       }
 
+      /* ------------------------------- Typography utilities ----------------------------------*/
+      .text-lead {
+        font-size: var(--step-1);
+        line-height: 1.7;
+        font-weight: 600;
+        color: var(--forest-shadow);
+      }
+      .text-muted {
+        color: var(--ink-muted);
+      }
+      .text-measure {
+        max-width: 62ch;
+      }
+      .text-eyebrow {
+        font-size: var(--step--2);
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--forest-shadow) 82%, white 18%);
+      }
+      .text-caption {
+        font-size: var(--step--2);
+        line-height: 1.4;
+        color: color-mix(in srgb, var(--forest-shadow) 70%, white 30%);
+      }
+
+      /* ------------------------------- Text containers ----------------------------------*/
+      .textbox {
+        display: grid;
+        gap: var(--space-2);
+        padding: clamp(18px, 2.2vw, 26px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(122, 132, 113, 0.18);
+        background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+        box-shadow: var(--shadow-1);
+      }
+      .textbox--outline {
+        border-style: solid;
+        border-color: color-mix(in srgb, var(--secondary-sage) 55%, white 45%);
+        background: color-mix(in srgb, var(--soft-white) 82%, white 18%);
+      }
+      .textbox--tonal {
+        background: color-mix(in srgb, rgba(248, 246, 240, 0.9) 65%, rgba(156, 175, 136, 0.15) 35%);
+      }
+      .textbox--accent {
+        border-color: color-mix(in srgb, var(--amber) 60%, var(--dried-clay) 40%);
+        background: color-mix(in srgb, rgba(255, 247, 235, 0.85) 60%, rgba(198, 170, 119, 0.2) 40%);
+        box-shadow: var(--shadow-2);
+      }
+      .textbox--ghost {
+        background: transparent;
+        box-shadow: none;
+        border-style: dashed;
+        border-color: rgba(90, 107, 82, 0.24);
+      }
+
+
       /* ------------------------------- App shell ----------------------------------*/
       #app-wrapper {
         display: flex;
@@ -521,15 +578,15 @@
       .workspace-menu__summary {
         appearance: none;
         border: none;
-        background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 246, 240, 0.94));
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
+        gap: var(--space-3);
+        padding: var(--space-2) var(--space-4);
+        min-height: 56px;
+        border-radius: 999px;
         border: 1px solid rgba(122, 132, 113, 0.22);
-        box-shadow: var(--shadow-1);
+        box-shadow: var(--shadow-2);
         cursor: pointer;
         color: var(--forest-shadow);
         transition:
@@ -545,23 +602,46 @@
         box-shadow: var(--ring);
       }
       .workspace-menu[open] .workspace-menu__summary {
-        background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
-        box-shadow: var(--shadow-2);
-        transform: scale(1.04);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 246, 240, 0.98));
+        box-shadow: var(--shadow-3);
+        transform: translateY(2px);
       }
       .workspace-menu__summary-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--secondary-sage) 25%, white 75%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
       }
       .workspace-menu__summary-icon i {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+      }
+      .workspace-menu__summary-label {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: flex-start;
+      }
+      .workspace-menu__summary-chevron {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--secondary-sage) 18%, white 82%);
+        color: var(--forest-shadow);
+        transition: transform var(--dur-2) var(--ease-ambient);
+      }
+      .workspace-menu[open] .workspace-menu__summary-chevron {
+        transform: rotate(180deg);
       }
       .workspace-menu__panel {
         position: absolute;
-        top: calc(100% + var(--space-3));
+        top: calc(100% + var(--space-2));
         left: 0;
         width: min(420px, max(280px, 42vw));
         max-height: min(70vh, 540px);
@@ -580,12 +660,6 @@
         font-size: var(--step-0);
         color: var(--forest-shadow);
         line-height: 1.5;
-      }
-      .workspace-menu__summary-text {
-        display: inline-flex;
-        flex-direction: column;
-        gap: 4px;
-        margin-left: var(--space-3);
       }
       .workspace-menu__summary-eyebrow {
         font-size: var(--step--2);
@@ -631,6 +705,55 @@
         border-color: var(--secondary-sage);
         box-shadow: var(--ring);
       }
+      .text-input {
+        width: 100%;
+        min-height: var(--target-min);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(122, 132, 113, 0.2);
+        padding: var(--space-3);
+        font: inherit;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--forest-shadow);
+        box-shadow: inset 0 1px 2px rgba(122, 132, 113, 0.1);
+        transition:
+          border-color var(--dur-1) var(--ease-ambient),
+          box-shadow var(--dur-1) var(--ease-ambient);
+      }
+      .text-input:focus-visible {
+        outline: none;
+        border-color: var(--secondary-sage);
+        box-shadow: var(--ring);
+      }
+      .response-grid {
+        display: grid;
+        gap: var(--space-4);
+      }
+      @media (min-width: 768px) {
+        .response-grid {
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+      }
+      .response-grid__field {
+        display: grid;
+        gap: var(--space-2);
+      }
+      .response-grid__label {
+        font-weight: 700;
+        color: var(--forest-shadow);
+      }
+      .response-grid__helper {
+        margin: 0;
+        font-size: var(--step--2);
+        color: var(--ink-muted);
+      }
+      .workspace-tools__status {
+        margin: 0;
+        font-size: var(--step--1);
+        color: var(--ink-muted);
+      }
+      .workspace-tools__status strong {
+        color: var(--forest-shadow);
+      }
       .workspace-tools {
         display: grid;
         gap: var(--space-4);
@@ -654,6 +777,74 @@
       .workspace-tools__actions {
         display: grid;
         gap: var(--space-3);
+      }
+      .workspace-annotations {
+        display: grid;
+        gap: var(--space-3);
+      }
+      .workspace-annotations__header {
+        display: grid;
+        gap: var(--space-1);
+      }
+      .workspace-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        border: none;
+        background: color-mix(in srgb, var(--secondary-sage) 12%, white 88%);
+        padding: var(--space-3) var(--space-4);
+        border-radius: var(--radius-lg);
+        cursor: pointer;
+        color: var(--forest-shadow);
+        font: inherit;
+        font-weight: 700;
+        transition:
+          box-shadow var(--dur-2) var(--ease-ambient),
+          transform var(--dur-2) var(--ease-ambient),
+          background var(--dur-2) var(--ease-ambient);
+      }
+      .workspace-toggle:focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+      .workspace-toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-2);
+      }
+      .workspace-toggle.is-active {
+        background: color-mix(in srgb, var(--secondary-sage) 35%, white 65%);
+        box-shadow: var(--shadow-2);
+      }
+      .workspace-toggle__icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: color-mix(in srgb, var(--secondary-sage) 45%, white 55%);
+        color: color-mix(in srgb, var(--deep-forest) 85%, white 15%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+      .workspace-toggle.is-active .workspace-toggle__icon {
+        background: color-mix(in srgb, var(--secondary-sage) 65%, white 35%);
+        color: color-mix(in srgb, white 90%, var(--deep-forest) 10%);
+      }
+      .workspace-toggle__icon i {
+        font-size: 1.15rem;
+      }
+      .workspace-toggle__copy {
+        display: grid;
+        gap: 2px;
+        text-align: left;
+      }
+      .workspace-toggle__label {
+        font-size: var(--step-0);
+        font-weight: 800;
+      }
+      .workspace-toggle__hint {
+        font-size: var(--step--2);
+        color: var(--ink-muted);
       }
       .workspace-tools__map {
         display: grid;
@@ -896,6 +1087,15 @@
           var(--primary-sage) 30%
         );
         box-shadow: none;
+      }
+      .activity-btn.is-active {
+        background: color-mix(in srgb, var(--secondary-sage) 85%, white 15%);
+        color: var(--soft-white);
+        border-color: var(--secondary-sage);
+        box-shadow: var(--shadow-2);
+      }
+      .activity-btn.is-active:hover {
+        background: color-mix(in srgb, var(--secondary-sage) 70%, white 30%);
       }
       .activity-btn.secondary:hover {
         background-color: var(--hover-sage);
@@ -1907,6 +2107,15 @@
       .data-table tbody tr:hover {
         background: rgba(156, 175, 136, 0.14);
       }
+      .data-table__rating {
+        text-align: center;
+        width: clamp(110px, 12vw, 160px);
+      }
+      .data-table__choice {
+        inline-size: 1.15rem;
+        block-size: 1.15rem;
+        accent-color: var(--secondary-sage);
+      }
 
       /* ------------------------------- Chat prompts ----------------------------------*/
       .chat-prompts {
@@ -2133,9 +2342,15 @@
                 <header class="presentation-header" aria-label="Session tools">
                     <details class="workspace-menu" id="presentation-tools">
                         <summary class="workspace-menu__summary" aria-label="Open session tools">
-                            <span class="workspace-menu__summary-icon">
-                                <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                                <span class="visually-hidden">Open session tools</span>
+                            <span class="workspace-menu__summary-icon" aria-hidden="true">
+                                <i class="fa-solid fa-gear"></i>
+                            </span>
+                            <span class="workspace-menu__summary-label">
+                                <span class="workspace-menu__summary-eyebrow">Workspace</span>
+                                <span class="workspace-menu__summary-title">Session tools</span>
+                            </span>
+                            <span class="workspace-menu__summary-chevron" aria-hidden="true">
+                                <i class="fa-solid fa-chevron-down"></i>
                             </span>
                         </summary>
                         <div class="workspace-menu__panel">
@@ -2154,6 +2369,22 @@
                                     <input type="file" id="load-annotations-input" accept="application/json" hidden>
                                     <p class="workspace-tools__hint">Loading will replace the current slide content.</p>
                                 </div>
+                                <section class="workspace-annotations textbox textbox--outline" aria-label="Annotation controls">
+                                    <div class="workspace-annotations__header">
+                                        <span class="text-eyebrow">Markup mode</span>
+                                        <p class="text-muted text-measure">Switch on the digital pen when you are ready to capture evidence directly on the slide.</p>
+                                    </div>
+                                    <button type="button" class="workspace-toggle" id="toggle-annotation-mode" aria-pressed="false" aria-label="Enable highlighting">
+                                        <span class="workspace-toggle__icon" aria-hidden="true">
+                                            <i class="fa-solid fa-pen-nib"></i>
+                                        </span>
+                                        <span class="workspace-toggle__copy">
+                                            <span class="workspace-toggle__label">Enable highlighting</span>
+                                            <span class="workspace-toggle__hint">Pen is resting. Turn it on to add highlights.</span>
+                                        </span>
+                                    </button>
+                                    <p class="workspace-tools__status text-muted text-measure" id="annotation-mode-status"><strong>Highlighting off.</strong> Select text freely to copy.</p>
+                                </section>
                             </div>
                         </div>
                     </details>
@@ -2165,7 +2396,7 @@
                         <header class="session-hero">
                             <div class="session-hero__content">
                                 <h1 class="session-hero__title">The Eco-Activist's Toolkit</h1>
-                                <p class="session-hero__descriptor">Learning to make a difference, one step at a time.</p>
+                                <p class="session-hero__descriptor text-lead text-measure">Learning to make a difference, one step at a time.</p>
                                 <div class="session-hero__meta">
                                     <span class="session-hero__badge"><i class="fa-solid fa-earth-americas"></i> B2 Level</span>
                                     <span class="session-hero__badge"><i class="fa-solid fa-bullhorn"></i> Eco-Activism</span>
@@ -2181,7 +2412,7 @@
                     <div class="slide" id="slide-2">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-comments"></i> Let's Talk About Our Planet</h2>
-                            <p class="section-intro__descriptor">In pairs, discuss the following questions. Be ready to share your ideas with the class.</p>
+                            <p class="section-intro__descriptor text-measure">In pairs, discuss the following questions. Be ready to share your ideas with the class.</p>
                             
                             <!-- Activity Type: Open-ended discussion -->
                             <div class="question-prompts">
@@ -2211,7 +2442,7 @@
                             <h2 class="slide-title"><i class="fa-solid fa-layer-group"></i> Key Campaign Vocabulary</h2>
                             <div class="section-intro">
                                 <h3 class="section-intro__title">Match the Core Concepts</h3>
-                                <p class="section-intro__descriptor">Match the words to their definitions. Click a word, then click its definition.</p>
+                                <p class="section-intro__descriptor text-measure">Match the words to their definitions. Click a word, then click its definition.</p>
                             </div>
                             <div class="matching-activity" id="matching-activity-1">
                                 <ul class="matching-list">
@@ -2237,7 +2468,7 @@
                     <div class="slide" id="slide-4">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-book-open-reader"></i> Words in Action</h2>
-                            <p class="section-intro__descriptor">Choose the best word to complete each sentence.</p>
+                            <p class="section-intro__descriptor text-measure">Choose the best word to complete each sentence.</p>
                             <div class="interactive-module__steps" id="mcq-activity-1">
                                 <p>6. The main goal of their campaign is to raise _______ about the dangers of single-use plastics.
                                     <select data-answer="awareness"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
@@ -2265,7 +2496,7 @@
                     <div class="slide" id="slide-5">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-arrow-up-9-1"></i> What's Most Effective?</h2>
-                            <p class="section-intro__descriptor">With a partner, rank these actions from 1 (most effective) to 5 (least effective) for creating real change. Drag and drop to reorder. Be prepared to justify your ranking.</p>
+                            <p class="section-intro__descriptor text-measure">With a partner, rank these actions from 1 (most effective) to 5 (least effective) for creating real change. Drag and drop to reorder. Be prepared to justify your ranking.</p>
                             
                             <!-- Activity Type: Ranking and Justification -->
                             <ol class="ranking-list" id="ranking-list-1">
@@ -2288,7 +2519,7 @@
                             <h2 class="slide-title"><i class="fa-solid fa-diagram-project"></i> Sort the Strategies</h2>
                             <div class="section-intro">
                                 <h3 class="section-intro__title">Types of Action</h3>
-                                <p class="section-intro__descriptor">Drag the actions from the bank into the correct category.</p>
+                                <p class="section-intro__descriptor text-measure">Drag the actions from the bank into the correct category.</p>
                             </div>
                             <div id="drag-drop-activity-1">
                                 <div class="draggable-bank">
@@ -2317,7 +2548,7 @@
                             <h2 class="slide-title"><i class="fa-solid fa-spell-check"></i> Speak Like an Activist</h2>
                             <div class="section-intro">
                                 <h3 class="section-intro__title">Common Collocations</h3>
-                                <p class="section-intro__descriptor">Choose the correct verb to complete each phrase.</p>
+                                <p class="section-intro__descriptor text-measure">Choose the correct verb to complete each phrase.</p>
                             </div>
                             <div class="interactive-module__steps" id="collocation-activity-1">
                                 <p>7. <select data-answer="Launch"><option>Select...</option><option>Launch</option><option>Hold</option><option>Write</option></select> a campaign</p>
@@ -2335,7 +2566,7 @@
                     <div class="slide" id="slide-8">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-user-check"></i> What Kind of Activist Are You?</h2>
-                            <p class="section-intro__descriptor">Rate how likely you would be to do each action. Then, discuss your choices with a partner, explaining why some actions appeal to you more than others.</p>
+                            <p class="section-intro__descriptor text-measure">Rate how likely you would be to do each action. Then, discuss your choices with a partner, explaining why some actions appeal to you more than others.</p>
                             
                             <!-- Activity Type: Matrix Grid completion followed by personalized discussion -->
                             <div class="data-table">
@@ -2343,41 +2574,41 @@
                                     <thead>
                                         <tr>
                                             <th>Action</th>
-                                            <th style="text-align: center;">Very Likely</th>
-                                            <th style="text-align: center;">Perhaps</th>
-                                            <th style="text-align: center;">Unlikely</th>
+                                            <th class="data-table__rating">Very Likely</th>
+                                            <th class="data-table__rating">Perhaps</th>
+                                            <th class="data-table__rating">Unlikely</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Write to an MP</td>
-                                            <td style="text-align: center;"><input type="radio" name="action1"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action1"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action1"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action1" value="very-likely" aria-label="Write to an MP - very likely"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action1" value="perhaps" aria-label="Write to an MP - perhaps"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action1" value="unlikely" aria-label="Write to an MP - unlikely"></td>
                                         </tr>
                                         <tr>
                                             <td>Launch an online campaign</td>
-                                            <td style="text-align: center;"><input type="radio" name="action2"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action2"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action2"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action2" value="very-likely" aria-label="Launch an online campaign - very likely"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action2" value="perhaps" aria-label="Launch an online campaign - perhaps"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action2" value="unlikely" aria-label="Launch an online campaign - unlikely"></td>
                                         </tr>
                                         <tr>
                                             <td>Boycott a brand</td>
-                                            <td style="text-align: center;"><input type="radio" name="action3"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action3"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action3"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action3" value="very-likely" aria-label="Boycott a brand - very likely"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action3" value="perhaps" aria-label="Boycott a brand - perhaps"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action3" value="unlikely" aria-label="Boycott a brand - unlikely"></td>
                                         </tr>
                                         <tr>
                                             <td>Organize a community clean-up</td>
-                                            <td style="text-align: center;"><input type="radio" name="action4"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action4"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action4"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action4" value="very-likely" aria-label="Organize a community clean-up - very likely"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action4" value="perhaps" aria-label="Organize a community clean-up - perhaps"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action4" value="unlikely" aria-label="Organize a community clean-up - unlikely"></td>
                                         </tr>
                                         <tr>
                                             <td>Stage a peaceful demonstration</td>
-                                            <td style="text-align: center;"><input type="radio" name="action5"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action5"></td>
-                                            <td style="text-align: center;"><input type="radio" name="action5"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action5" value="very-likely" aria-label="Stage a peaceful demonstration - very likely"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action5" value="perhaps" aria-label="Stage a peaceful demonstration - perhaps"></td>
+                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action5" value="unlikely" aria-label="Stage a peaceful demonstration - unlikely"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -2387,30 +2618,54 @@
 
                     <!-- SLIDE 9: Case Study - The Riverwood Cleanup -->
                     <div class="slide" id="slide-9">
-                        <div class="slide-content layout--columns">
-                            <div class="slide-section">
-                                <h2 class="slide-title"><i class="fa-solid fa-people-group"></i> The Riverwood Guardians</h2>
-                                <p class="section-intro__descriptor">Explore how one community combined different actions to drive change.</p>
-                                <div class="callout-card">
-                                    <p class="callout-card__body">The town of Riverwood faced a polluted river caused by a local factory. A citizen group, the "Riverwood Guardians," organized weekly clean-ups to raise awareness, gathered 10,000 signatures on a petition demanding better filters, and lobbied politicians with scientific evidence. After six months of pressure, the factory installed cleaner technology, proving how coordinated action can deliver results.</p>
-                                </div>
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-people-group"></i> The Riverwood Guardians</h2>
+                            <div class="section-intro">
+                                <h3 class="section-intro__title">Community Case Study</h3>
+                                <p class="section-intro__descriptor text-measure">Read how one town coordinated different actions to protect their river.</p>
                             </div>
-                            <div class="slide-section" id="table-completion-1">
-                                <h3 class="section-intro__title">Complete the Campaign Snapshot</h3>
-                                <p>Who: <input type="text" data-answer="Riverwood Guardians"></p>
-                                <p>What was the problem: <input type="text" data-answer="river was polluted"></p>
-                                <p>When did it start: <input type="text" data-answer="2022"></p>
-                                <p>Methods Used: <input type="text" data-answer="clean-ups, petition, lobbying"></p>
-                                <p>Final Result: <input type="text" data-answer="factory installed cleaner technology"></p>
+                            <div class="callout-card">
+                                <h4 class="callout-card__title"><i class="fa-solid fa-water"></i> Riverwood at a Glance</h4>
+                                <p class="callout-card__body">The town of Riverwood faced a polluted river caused by a local factory. A citizen group, the "Riverwood Guardians," organized weekly clean-ups to raise awareness, gathered 10,000 signatures on a petition demanding better filters, and lobbied politicians with scientific evidence. After six months of pressure, the factory installed cleaner technology, proving how coordinated action can deliver results.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 10: Reading for Detail -->
+                    <!-- SLIDE 10: Campaign Snapshot -->
                     <div class="slide" id="slide-10">
                         <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-table-columns"></i> Capture the Campaign</h2>
+                            <p class="section-intro__descriptor text-measure">Use details from the case study to complete each prompt. Keep your responses concise and specific.</p>
+                            <div class="response-grid" id="campaign-snapshot-1">
+                                <div class="response-grid__field">
+                                    <label class="response-grid__label" for="snapshot-who">Who was involved?</label>
+                                    <input type="text" id="snapshot-who" class="text-input" data-answer="Riverwood Guardians" placeholder="Name the group or people">
+                                </div>
+                                <div class="response-grid__field">
+                                    <label class="response-grid__label" for="snapshot-problem">What was the issue?</label>
+                                    <input type="text" id="snapshot-problem" class="text-input" data-answer="river was polluted" placeholder="Summarise the challenge">
+                                </div>
+                                <div class="response-grid__field">
+                                    <label class="response-grid__label" for="snapshot-start">When did it start?</label>
+                                    <input type="text" id="snapshot-start" class="text-input" data-answer="2022" placeholder="Add a time reference">
+                                </div>
+                                <div class="response-grid__field">
+                                    <label class="response-grid__label" for="snapshot-methods">Which actions were used?</label>
+                                    <input type="text" id="snapshot-methods" class="text-input" data-answer="clean-ups, petition, lobbying" placeholder="List the key methods">
+                                </div>
+                                <div class="response-grid__field">
+                                    <label class="response-grid__label" for="snapshot-result">What was the result?</label>
+                                    <input type="text" id="snapshot-result" class="text-input" data-answer="factory installed cleaner technology" placeholder="Describe the outcome">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 11: Reading for Detail -->
+                    <div class="slide" id="slide-11">
+                        <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Check Your Understanding</h2>
-                            <p class="section-intro__descriptor">Answer the questions about the Riverwood campaign.</p>
+                            <p class="section-intro__descriptor text-measure">Answer the questions about the Riverwood campaign.</p>
                             <div class="interactive-module__steps" id="mcq-activity-2">
                                 <p>6. What was the first action the Riverwood Guardians took?
                                     <select data-answer="c"><option>Select...</option><option value="a">a) They started a petition.</option><option value="b">b) They lobbied politicians.</option><option value="c">c) They organized clean-ups.</option></select>
@@ -2434,11 +2689,11 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 11: Task 3 - Interview an Activist -->
-                    <div class="slide" id="slide-11">
+                    <!-- SLIDE 12: Task 3 - Interview an Activist -->
+                    <div class="slide" id="slide-12">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-microphone-lines"></i> Behind the Campaign</h2>
-                            <p class="section-intro__descriptor">Work in pairs. Student A: You are a journalist. Student B: You are a member of the Riverwood Guardians. The journalist will interview the activist about the campaign. Use the prompts to help you. Swap roles after 5 minutes.</p>
+                            <p class="section-intro__descriptor text-measure">Work in pairs. Student A: You are a journalist. Student B: You are a member of the Riverwood Guardians. The journalist will interview the activist about the campaign. Use the prompts to help you. Swap roles after 5 minutes.</p>
                             
                             <!-- Activity Type: Role-play -->
                             <div class="chat-prompts layout--columns">
@@ -2464,11 +2719,11 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 12: Planning the Conversation -->
-                    <div class="slide" id="slide-12">
+                    <!-- SLIDE 13: Planning the Conversation -->
+                    <div class="slide" id="slide-13">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-people-arrows"></i> Sequence the Strategy Talk</h2>
-                            <p class="section-intro__descriptor">Put the sentences in order to build a logical planning conversation.</p>
+                            <p class="section-intro__descriptor text-measure">Put the sentences in order to build a logical planning conversation.</p>
                             <ul class="ordering-list" id="ordering-list-1">
                                 <li class="order-item" draggable="true" data-order="4"><i class="fa-solid fa-grip-vertical order-handle"></i> B: I agree. So, we should focus on raising awareness first.</li>
                                 <li class="order-item" draggable="true" data-order="2"><i class="fa-solid fa-grip-vertical order-handle"></i> A: How about we start a petition to ban plastic bags in our town?</li>
@@ -2483,11 +2738,11 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 13: Functional Language Focus -->
-                    <div class="slide" id="slide-13">
+                    <!-- SLIDE 14: Functional Language Focus -->
+                    <div class="slide" id="slide-14">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-language"></i> Choose the Best Phrase</h2>
-                            <p class="section-intro__descriptor">Complete each sentence with the most appropriate planning phrase.</p>
+                            <p class="section-intro__descriptor text-measure">Complete each sentence with the most appropriate planning phrase.</p>
                             <div class="gap-fill-box">
                                 <p>Phrases:</p>
                                 <span>What if we...</span>
@@ -2509,11 +2764,11 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 14: Task 4 - Your Eco-Action Plan -->
-                    <div class="slide" id="slide-14">
+                    <!-- SLIDE 15: Task 4 - Your Eco-Action Plan -->
+                    <div class="slide" id="slide-15">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-clipboard-list"></i> Design Your Campaign</h2>
-                            <p class="section-intro__descriptor">In small groups, choose a local environmental issue (e.g., too much traffic, not enough recycling bins, a park in need of care). Use the framework below to create a simple action plan for a campaign. Prepare to present your main ideas to the class.</p>
+                            <p class="section-intro__descriptor text-measure">In small groups, choose a local environmental issue (e.g., too much traffic, not enough recycling bins, a park in need of care). Use the framework below to create a simple action plan for a campaign. Prepare to present your main ideas to the class.</p>
                             
                             <!-- Activity Type: Collaborative Project Planning and Presentation -->
                             <div class="note-card">
@@ -2541,11 +2796,11 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 15: Lesson Reflection -->
-                    <div class="slide" id="slide-15">
+                    <!-- SLIDE 16: Lesson Reflection -->
+                    <div class="slide" id="slide-16">
                         <div class="slide-content">
                             <h2 class="slide-title"><i class="fa-solid fa-lightbulb"></i> Final Thoughts</h2>
-                            <p class="section-intro__descriptor">Individually, think about these questions. Share one thought with your partner.</p>
+                            <p class="section-intro__descriptor text-measure">Individually, think about these questions. Share one thought with your partner.</p>
                             
                             <!-- Activity Type: Individual Reflection -->
                             <div class="reflection-grid">
@@ -2603,7 +2858,7 @@
                         </div>
                     </div>
                     <div class="slide-status-bar__row">
-                        <p class="slide-status-bar__count" id="slide-counter">Slide 1 of 15</p>
+                        <p class="slide-status-bar__count" id="slide-counter">Slide 1 of 16</p>
                         <div class="slide-status-bar__actions">
                             <button class="activity-btn secondary" id="prev-btn" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
                             <button class="activity-btn" id="next-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
@@ -2625,6 +2880,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveAnnotationsBtn = document.getElementById('save-annotations-btn');
     const loadAnnotationsBtn = document.getElementById('load-annotations-btn');
     const loadAnnotationsInput = document.getElementById('load-annotations-input');
+    const toggleAnnotationModeBtn = document.getElementById('toggle-annotation-mode');
+    const annotationToggleLabel = toggleAnnotationModeBtn
+        ? toggleAnnotationModeBtn.querySelector('.workspace-toggle__label')
+        : null;
+    const annotationToggleHint = toggleAnnotationModeBtn
+        ? toggleAnnotationModeBtn.querySelector('.workspace-toggle__hint')
+        : null;
+    const annotationModeStatus = document.getElementById('annotation-mode-status');
     const annotationPopover = document.getElementById('annotation-popover');
     const annotationForm = document.getElementById('annotation-form');
     const annotationComment = document.getElementById('annotation-comment');
@@ -2637,6 +2900,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let slides = [];
     let totalSlides = 0;
     let currentSlide = 0;
+    let highlightingEnabled = false;
     let pendingRange = null;
     let activeHighlight = null;
     let annotationMode = 'create';
@@ -2742,6 +3006,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             reader.readAsText(file);
+        });
+    }
+
+    if (toggleAnnotationModeBtn) {
+        toggleAnnotationModeBtn.addEventListener('click', () => {
+            highlightingEnabled = !highlightingEnabled;
+            toggleAnnotationModeBtn.classList.toggle('is-active', highlightingEnabled);
+            toggleAnnotationModeBtn.setAttribute('aria-pressed', highlightingEnabled ? 'true' : 'false');
+            toggleAnnotationModeBtn.setAttribute(
+                'aria-label',
+                highlightingEnabled ? 'Disable highlighting' : 'Enable highlighting'
+            );
+            if (annotationToggleLabel) {
+                annotationToggleLabel.textContent = highlightingEnabled
+                    ? 'Disable highlighting'
+                    : 'Enable highlighting';
+            }
+            if (annotationToggleHint) {
+                annotationToggleHint.textContent = highlightingEnabled
+                    ? 'Pen is active. Select text to capture notes.'
+                    : 'Pen is resting. Turn it on to add highlights.';
+            }
+            if (annotationModeStatus) {
+                annotationModeStatus.innerHTML = highlightingEnabled
+                    ? '<strong>Highlighting on.</strong> Select text to add notes.'
+                    : '<strong>Highlighting off.</strong> Select text freely to copy.';
+            }
+            if (!highlightingEnabled) {
+                window.getSelection().removeAllRanges();
+                if (isPopoverOpen()) {
+                    closeAnnotationPopover();
+                }
+                hideAnnotationTooltip();
+            }
         });
     }
 
@@ -2897,6 +3195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleSelectionMouseUp() {
+        if (!highlightingEnabled) return;
         if (!annotationPopover || annotationPopover.getAttribute('aria-hidden') === 'false') return;
 
         setTimeout(() => {
