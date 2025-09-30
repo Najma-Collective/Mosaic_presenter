@@ -469,6 +469,9 @@
             box-shadow: var(--shadow-1);
             grid-column: 1 / -1;
         }
+        .presentation-menu__card--planner {
+            gap: var(--space-4);
+        }
         .presentation-menu__card-text {
             display: grid;
             gap: var(--space-2);
@@ -502,16 +505,93 @@
         }
         .lesson-overview {
             margin: 0 0 var(--space-6);
-            padding: var(--space-5);
+        }
+        .presentation-menu__card--planner .lesson-overview {
+            margin: 0;
+        }
+        .lesson-overview[hidden] {
+            display: none;
+        }
+        .lesson-overview__details {
             border-radius: var(--radius-lg);
             border: 1px solid rgba(122, 132, 113, 0.14);
             background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
             box-shadow: var(--shadow-1);
+            overflow: hidden;
+            transition: box-shadow var(--dur-2) var(--ease-ambient), border-color var(--dur-2) var(--ease-ambient);
+        }
+        .lesson-overview__details[open] {
+            box-shadow: var(--shadow-2);
+            border-color: rgba(122, 132, 113, 0.22);
+        }
+        .lesson-overview__summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            padding: var(--space-4) var(--space-5);
+            cursor: pointer;
+            list-style: none;
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            font-weight: 700;
+        }
+        .lesson-overview__summary:focus-visible {
+            outline: none;
+            box-shadow: var(--ring);
+        }
+        .lesson-overview__summary::-webkit-details-marker {
+            display: none;
+        }
+        .lesson-overview__summary-main {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+        .lesson-overview__summary-icon-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(122, 132, 113, 0.18);
+            color: var(--forest-shadow);
+            flex-shrink: 0;
+        }
+        .lesson-overview__summary-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .lesson-overview__summary-title {
+            font-size: var(--step-0);
+            font-family: var(--font-display);
+            color: var(--forest-shadow);
+        }
+        .lesson-overview__summary-subtitle {
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+            font-weight: 600;
+        }
+        .lesson-overview__summary-action {
+            font-size: var(--step--1);
+            color: var(--primary-sage);
+            font-weight: 700;
+            letter-spacing: 0.015em;
+        }
+        .lesson-overview__summary-caret {
+            font-size: var(--step-1);
+            color: var(--primary-sage);
+            transition: transform var(--dur-2) var(--ease-ambient);
+        }
+        .lesson-overview__details[open] .lesson-overview__summary-caret {
+            transform: rotate(180deg);
+        }
+        .lesson-overview__content {
             display: grid;
             gap: var(--space-4);
-        }
-        .lesson-overview[hidden] {
-            display: none;
+            padding: var(--space-5);
+            border-top: 1px solid rgba(122, 132, 113, 0.14);
         }
         .lesson-overview__header {
             display: flex;
@@ -530,12 +610,13 @@
             gap: var(--space-2);
             font-size: var(--step--1);
             color: var(--ink-muted);
+            font-weight: 600;
         }
         .lesson-overview__badge {
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 999px;
             background: rgba(122, 132, 113, 0.12);
             color: var(--forest-shadow);
@@ -809,7 +890,8 @@
             .presentation-menu__hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .lesson-selector label { color: var(--forest-shadow); }
             .lesson-selector select { background: rgba(28, 31, 26, 0.85); border-color: rgba(184, 197, 166, 0.28); color: var(--forest-shadow); box-shadow: none; }
-            .lesson-overview { background: rgba(28, 31, 26, 0.82); border-color: rgba(184, 197, 166, 0.26); box-shadow: 0 16px 28px rgba(0,0,0,0.35); }
+            .lesson-overview__details { background: rgba(28, 31, 26, 0.82); border-color: rgba(184, 197, 166, 0.26); box-shadow: 0 16px 28px rgba(0,0,0,0.35); }
+            .lesson-overview__summary { background: rgba(36, 40, 33, 0.9); }
             .lesson-overview__badge { background: rgba(156, 175, 136, 0.18); color: var(--forest-shadow); }
             .lesson-overview__pacing-item { background: rgba(122, 132, 113, 0.16); }
             .lesson-overview__callout { background: rgba(156, 175, 136, 0.18); border-left-color: color-mix(in srgb, var(--secondary-sage) 80%, #0F120E 20%); }
@@ -1772,7 +1854,7 @@
                         <select id="lesson-template" aria-label="Select a lesson template"></select>
                     </div>
                 </div>
-                <details class="presentation-menu" id="notes-io-controls" open>
+                <details class="presentation-menu" id="notes-io-controls">
                     <summary class="presentation-menu__summary">
                         <span class="presentation-menu__summary-label">
                             <i class="fas fa-seedling presentation-menu__summary-icon" aria-hidden="true"></i>
@@ -1781,6 +1863,13 @@
                         <span class="presentation-menu__summary-hint">Slide map &amp; notes backup</span>
                     </summary>
                     <div class="presentation-menu__content">
+                        <section class="presentation-menu__card presentation-menu__card--planner" id="lesson-overview-card" aria-labelledby="lesson-overview-heading" hidden aria-hidden="true">
+                            <div class="presentation-menu__card-text">
+                                <h2 class="presentation-menu__heading" id="lesson-overview-heading">AI lesson designer checklist</h2>
+                                <p class="presentation-menu__hint">Feed these constraints to an LLM so it outputs a complete lesson configuration for the presenter.</p>
+                            </div>
+                            <div class="lesson-overview" id="lesson-overview" aria-label="Lesson overview"></div>
+                        </section>
                         <section class="presentation-menu__card" aria-labelledby="presentation-notes-io-heading">
                             <div class="presentation-menu__card-text">
                                 <h2 class="presentation-menu__heading" id="presentation-notes-io-heading">Save or load notes</h2>
@@ -1801,8 +1890,6 @@
                     </div>
                 </details>
             </header>
-
-                <section class="lesson-overview" id="lesson-overview" aria-label="Lesson overview" hidden aria-hidden="true"></section>
 
                 <div id="slides-root" role="presentation"></div>
 
@@ -1841,37 +1928,37 @@
                         },
                         supportedSlideTypes: {
                             hero: {
-                                usage: "Use for the opening slide. Supports title, subtitle, image, and nav.",
+                                usage: "Use for the opening slide. Name the learning arc, activate prior knowledge, and set community agreements.",
                                 required: ["title"],
                                 optional: ["subtitle", "image", "nav", "spotlight"]
                             },
                             content: {
-                                usage: "General purpose text/image slide. Supports body paragraphs, lists, quotes, images, callouts, and annotations.",
+                                usage: "Model concepts or language, chunk direct instruction, and capture anchor charts with text, imagery, and annotations.",
                                 required: ["title"],
                                 optional: ["subtitle", "body", "list", "image", "callout", "annotations"]
                             },
                             cards: {
-                                usage: "Highlights 2–4 options or stations. Each card accepts icon, title, description, and annotation.",
+                                usage: "Highlight stations, differentiated pathways, or multimodal options. Each card can cue scaffolds and extension choices.",
                                 required: ["cards"],
                                 optional: ["title", "subtitle", "icon", "rubric"]
                             },
                             quiz: {
-                                usage: "Multiple-choice or multi-select check for understanding. Include items[].options[].correct.",
+                                usage: "Plan multiple-choice or multi-select checks for understanding. Tag each answer key so facilitators can diagnose next moves.",
                                 required: ["items"],
                                 optional: ["title", "subtitle", "feedback", "image"]
                             },
                             reflection: {
-                                usage: "Short debrief prompt. Accepts prompt, frames, and list of sentence starters.",
+                                usage: "Close loops with exit tickets, SEL check-ins, or planning prompts. Supply frames and sentence starters for varied learners.",
                                 required: ["prompts"],
                                 optional: ["title", "subtitle", "frames", "image"]
                             },
                             process: {
-                                usage: "Step-by-step routine with segments[]. Each segment supports label, duration, facilitatorNotes, and learnerTask.",
+                                usage: "Document gradual release routines with segments[]. Each segment can spell out teacher moves, student tasks, and timing.",
                                 required: ["segments"],
                                 optional: ["title", "subtitle", "icon"]
                             },
                             activity: {
-                                usage: "Use the `grouping`, `gapfill`, `matching`, or `ranking` slide types when interactive logic is needed.",
+                                usage: "Use `grouping`, `gapfill`, `matching`, or `ranking` slides when you need structured interaction with automatic feedback.",
                                 required: [],
                                 optional: []
                             }
@@ -1880,12 +1967,14 @@
                             "Images require accessible alt text. Provide royalty-free URLs or leave src null for instructor upload.",
                             "Set nav.hidePrev to true on the first slide, and use nextAction:\"restart\" on the last slide when you want a loop.",
                             "Activity slides support check/reset buttons automatically; populate instructions and answer keys for autograding.",
-                            "Annotations can be added by wrapping phrases with { text, annotation } entries in content lists or body arrays."
+                            "Annotations can be added by wrapping phrases with { text, annotation } entries in content lists or body arrays.",
+                            "Sequence learning so every new concept is followed by guided practice or formative evidence before independent work."
                         ],
                         promptingTips: [
-                            "Confirm the target audience, learning objectives, timebox, and materials before generating content.",
-                            "Map each objective to at least one interactive or reflective slide.",
-                            "Surface explicit teacher moves using facilitatorNotes fields when available.",
+                            "Confirm the target audience, learning objectives, timebox, non-negotiable content, and required materials before generating content.",
+                            "Map each objective to at least one interactive or reflective slide and name the evidence of learning collected.",
+                            "Surface explicit teacher moves using facilitation notes or slide subtitles so the adult voice is actionable and empathetic.",
+                            "Plan universal supports (language frames, visuals, peer structures) alongside enrichment moves for advanced learners.",
                             "Respect tone guidance—warm, invitational, and specific."
                         ],
                         exampleUsage: {
@@ -1939,6 +2028,14 @@
                                 ]
                             },
                             {
+                                title: "Pedagogical guardrails",
+                                items: [
+                                    "Sequence slides to move from activation to modeling, guided practice, and reflection.",
+                                    "Name success criteria and the evidence of learning gathered in quizzes, activities, or reflections.",
+                                    "Surface scaffolds and extensions so every learner has an entry point and a stretch option."
+                                ]
+                            },
+                            {
                                 title: "Accessibility & tone",
                                 items: [
                                     "Ensure every image includes alt text describing instructional intent.",
@@ -1947,12 +2044,12 @@
                                 ]
                             }
                         ],
-                        spotlight: "Deliver JSON that preserves this structure—no markdown, no prose wrapper—so it can be dropped directly into lessonLibrary."
+                        spotlight: "Deliver JSON that preserves this structure—no markdown, no prose wrapper—and make pedagogy explicit: objectives, evidence, and supports should align slide by slide."
                     }
                 },
                 sections: [
                     { title: "Blueprint overview", slideKeys: ["ai-blueprint-hero", "ai-blueprint-structure", "ai-blueprint-slide-types"] },
-                    { title: "Interactive patterns", slideKeys: ["ai-blueprint-interactions", "ai-blueprint-accessibility"] },
+                    { title: "Interactive patterns", slideKeys: ["ai-blueprint-interactions", "ai-blueprint-accessibility", "ai-blueprint-pedagogy"] },
                     { title: "Implementation checklist", slideKeys: ["ai-blueprint-quality", "ai-blueprint-handoff"] }
                 ],
                 slides: [
@@ -2033,6 +2130,22 @@
                             "Provide pronunciation or vocabulary support using annotations when new terms appear.",
                             "Surface multilingual or multimodal options through cards slides (e.g., read, watch, discuss).",
                             "When referencing materials, include format (digital PDF, printed handout) and accessibility notes."
+                        ]
+                    },
+                    {
+                        key: "ai-blueprint-pedagogy",
+                        type: "content",
+                        icon: "fas fa-lightbulb",
+                        title: "Pedagogical throughline",
+                        subtitle: "Balance cognitive load and make the learning journey visible slide by slide.",
+                        body: [
+                            "Describe how each objective will be introduced, rehearsed, and checked for understanding across the deck.",
+                            "Label the learning science move driving each slide (e.g., retrieval, modeling, discourse) so facilitators can narrate the why."
+                        ],
+                        list: [
+                            "Activation: connect to prior knowledge or lived experiences before introducing new content.",
+                            "Application: pair every new concept with guided or collaborative practice before independent work.",
+                            "Reflection: close with synthesis, exit tickets, or next-step commitments tied to success criteria."
                         ]
                     },
                     {
@@ -3238,6 +3351,7 @@
         const slidesRoot = document.getElementById("slides-root");
         const presentationEyebrow = document.getElementById("presentation-eyebrow");
         const presentationDescriptor = document.getElementById("presentation-descriptor");
+        const lessonOverviewCard = document.getElementById("lesson-overview-card");
         const lessonOverview = document.getElementById("lesson-overview");
         const lessonSelector = document.getElementById("lesson-template");
         const slideMapList = document.getElementById("slide-map-list");
@@ -5727,10 +5841,65 @@
             const planner = lesson?.meta?.planner;
             lessonOverview.innerHTML = "";
             if (!planner) {
+                if (lessonOverviewCard) {
+                    lessonOverviewCard.hidden = true;
+                    lessonOverviewCard.setAttribute("aria-hidden", "true");
+                }
                 lessonOverview.hidden = true;
                 lessonOverview.setAttribute("aria-hidden", "true");
                 return;
             }
+
+            const details = document.createElement("details");
+            details.className = "lesson-overview__details";
+
+            const summary = document.createElement("summary");
+            summary.className = "lesson-overview__summary";
+
+            const summaryMain = document.createElement("span");
+            summaryMain.className = "lesson-overview__summary-main";
+
+            const iconCircle = document.createElement("span");
+            iconCircle.className = "lesson-overview__summary-icon-circle";
+            iconCircle.innerHTML = '<i class="fas fa-clipboard-check" aria-hidden="true"></i>';
+
+            const summaryText = document.createElement("span");
+            summaryText.className = "lesson-overview__summary-text";
+
+            const summaryTitle = document.createElement("span");
+            summaryTitle.className = "lesson-overview__summary-title";
+            summaryTitle.textContent = planner.title || "Lesson overview";
+            summaryText.appendChild(summaryTitle);
+
+            const summarySubtitle = document.createElement("span");
+            summarySubtitle.className = "lesson-overview__summary-subtitle";
+            summarySubtitle.textContent = planner.subtitle || "Tap to review the planning checklist.";
+            summaryText.appendChild(summarySubtitle);
+
+            summaryMain.appendChild(iconCircle);
+            summaryMain.appendChild(summaryText);
+
+            const summaryAction = document.createElement("span");
+            summaryAction.className = "lesson-overview__summary-action";
+
+            const summaryCaret = document.createElement("i");
+            summaryCaret.className = "fas fa-chevron-down lesson-overview__summary-caret";
+            summaryCaret.setAttribute("aria-hidden", "true");
+
+            summary.appendChild(summaryMain);
+            summary.appendChild(summaryAction);
+            summary.appendChild(summaryCaret);
+
+            const updateSummaryAction = () => {
+                summaryAction.textContent = details.open ? "Hide planning checklist" : "Show planning checklist";
+            };
+            updateSummaryAction();
+            details.addEventListener("toggle", updateSummaryAction);
+
+            details.appendChild(summary);
+
+            const content = document.createElement("div");
+            content.className = "lesson-overview__content";
 
             const title = document.createElement("h2");
             title.className = "lesson-overview__title";
@@ -5749,17 +5918,16 @@
                     badge.innerHTML = `<i class="fas fa-clock" aria-hidden="true"></i> ${planner.duration}`;
                     meta.appendChild(badge);
                 }
-                if (planner.subtitle) {
-                    const subtitle = document.createElement("span");
-                    subtitle.textContent = planner.subtitle;
-                    meta.appendChild(subtitle);
-                }
+                const subtitleText = planner.subtitle || "Align the flow, supports, and evidence of learning before you teach.";
+                const subtitle = document.createElement("span");
+                subtitle.textContent = subtitleText;
+                meta.appendChild(subtitle);
                 if (meta.childNodes.length) {
                     header.appendChild(meta);
                 }
             }
 
-            lessonOverview.appendChild(header);
+            content.appendChild(header);
 
             const body = document.createElement("div");
             body.className = "lesson-overview__body";
@@ -5843,11 +6011,17 @@
             }
 
             if (body.childNodes.length) {
-                lessonOverview.appendChild(body);
+                content.appendChild(body);
             }
 
+            details.appendChild(content);
+            lessonOverview.appendChild(details);
             lessonOverview.hidden = false;
             lessonOverview.setAttribute("aria-hidden", "false");
+            if (lessonOverviewCard) {
+                lessonOverviewCard.hidden = false;
+                lessonOverviewCard.setAttribute("aria-hidden", "false");
+            }
         }
 
         function renderLesson(lessonKey) {
