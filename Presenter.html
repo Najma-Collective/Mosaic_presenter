@@ -1058,6 +1058,59 @@
             font-size: var(--step-1);
             margin: 0;
         }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+        .gallery-card {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid var(--border-sage);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+        }
+        .gallery-card figure {
+            margin: 0;
+            position: relative;
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-card__body {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            padding: var(--space-5);
+        }
+        .gallery-card__title {
+            font-size: var(--step-1);
+            margin: 0;
+            color: var(--forest-shadow);
+        }
+        .gallery-card__title a {
+            color: inherit;
+        }
+        .gallery-card__title a:hover,
+        .gallery-card__title a:focus-visible {
+            color: var(--primary-sage);
+        }
+        .gallery-card__meta {
+            font-size: var(--step--1);
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+        }
+        .gallery-card__description {
+            margin: 0;
+            color: var(--forest-shadow);
+        }
         .quiz-card {
             background: var(--warm-cream);
             border: 1px solid var(--border-sage);
@@ -1934,6 +1987,181 @@
                             { id: "elt-followup", label: "Follow-up idea", placeholder: "Capture homework, extension, or differentiation options." }
                         ],
                         nav: { nextAction: "restart", nextLabel: "Finish & Restart", nextIcon: "fas fa-check" }
+                    }
+                ]
+            },
+            palestinianArtCuratorial: {
+                id: "palestinian-art-elt",
+                label: "ELT: Curating Palestinian Art",
+                meta: {
+                    eyebrow: "English Language Teaching",
+                    descriptor: "Task-based lesson on negotiating contemporary Palestinian art selections.",
+                    pageTitle: "Echoes of Palestine – Instructional Slides"
+                },
+                sections: [
+                    { title: "Lead-in", slideKeys: ["palestine-leadin"] },
+                    { title: "Pre-task preparation", slideKeys: ["palestine-toolkit", "palestine-collective"] },
+                    { title: "The task", slideKeys: ["palestine-task", "palestine-reporting"] },
+                    { title: "Reflect", slideKeys: ["palestine-reflect"] }
+                ],
+                slides: [
+                    {
+                        key: "palestine-leadin",
+                        type: "hero",
+                        title: "Art as a Voice: Telling Our Stories",
+                        subtitle: "How can art communicate a collective identity? What stories can a single image tell?",
+                        image: {
+                            src: "https://images.pexels.com/photos/1061576/pexels-photo-1061576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Abstract multicolour brushstrokes blending together"
+                        },
+                        nav: { hidePrev: true, nextLabel: "Pre-task A", nextIcon: "fas fa-arrow-right" }
+                    },
+                    {
+                        key: "palestine-toolkit",
+                        type: "content",
+                        icon: "fas fa-toolbox",
+                        title: "The Language of Art: A Curator's Toolkit",
+                        subtitle: "Clarify the vocabulary you'll need to evaluate each piece.",
+                        body: [
+                            "Use these shared reference points so your group can describe, compare, and negotiate confidently."
+                        ],
+                        list: [
+                            "Medium: The materials used to create a work of art (e.g., oil on canvas, photography, sculpture, digital art).",
+                            "Theme: The main idea or message of the artwork—identity, connection to land, resilience, memory.",
+                            "Symbolism: Objects or images that represent ideas. Olive trees can signal rootedness and peace; keys evoke the right of return.",
+                            "Style: The distinctive manner in which an artist creates their work (e.g., abstract, figurative, expressionist).",
+                            "Narrative: The story the artwork tells or implies."
+                        ]
+                    },
+                    {
+                        key: "palestine-collective",
+                        type: "cards",
+                        icon: "fas fa-people-group",
+                        title: "Meet the Artists of the 'Fragments of a Homeland' Collective",
+                        subtitle: "Skim the profiles so you can advocate for each voice during the task.",
+                        cards: [
+                            {
+                                icon: "fas fa-camera-retro",
+                                title: "Laila — Digital Artist",
+                                description: "Gaza-based photographer blending vibrant colour with surreal, dreamlike imagery. Focuses on memory, youthful resilience, and imagined pasts."
+                            },
+                            {
+                                icon: "fas fa-tree",
+                                title: "Yousef — Painter & Sculptor",
+                                description: "Ramallah artist working with olive wood, stone, and earth. Uses symbolism to honour steadfastness and cultural heritage rooted in the land."
+                            },
+                            {
+                                icon: "fas fa-feather",
+                                title: "Rania — Interdisciplinary Artist",
+                                description: "London-based creative from Jerusalem who layers calligraphy and text to examine identity, exile, and diaspora experiences."
+                            }
+                        ]
+                    },
+                    {
+                        key: "palestine-task",
+                        type: "gallery",
+                        icon: "fas fa-palette",
+                        title: "Curating 'Echoes of Palestine' for an International Audience",
+                        subtitle: "Review each artwork before negotiating your top three selections.",
+                        body: [
+                            "The 'Fragments of a Homeland' collective has been invited to submit three artworks to the 'Echoes of Palestine' exhibition.",
+                            "As a team, discuss the themes, symbolism, and stories each piece communicates before you make your case."
+                        ],
+                        items: [
+                            {
+                                title: "Gaza Dreams (Digital Photograph) — Laila",
+                                meta: "Medium: Digital photograph",
+                                description: "A young girl flies a keffiyeh kite from a Gaza rooftop. The skyline blurs into dreamlike colour, blending everyday life with hope.",
+                                image: {
+                                    src: "https://images.pexels.com/photos/14899381/pexels-photo-14899381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Child on a rooftop flying a kite made from a keffiyeh"
+                                },
+                                link: "https://www.pexels.com/photo/a-child-in-a-yellow-jacket-playing-with-a-kite-14899381/"
+                            },
+                            {
+                                title: "Inheritance (Sculpture) — Yousef",
+                                meta: "Medium: Olive wood sculpture",
+                                description: "A stylised key carved from an olive tree trunk, etched with tatreez patterns to symbolise return, lineage, and steadfastness.",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8582333/pexels-photo-8582333.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Hand holding an old key carved from wood"
+                                },
+                                link: "https://www.pexels.com/photo/close-up-shot-of-a-vintage-key-8582333/"
+                            },
+                            {
+                                title: "Fragmented City (Mixed Media) — Rania",
+                                meta: "Medium: Mixed media on canvas",
+                                description: "An abstract Jerusalem skyline interwoven with Mahmoud Darwish verses in Arabic calligraphy, with muted hues and flashes of gold leaf.",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8149633/pexels-photo-8149633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Abstract painting of a cityscape with layered calligraphy"
+                                },
+                                link: "https://www.pexels.com/photo/an-abstract-painting-on-a-white-wall-8149633/"
+                            },
+                            {
+                                title: "The Storyteller (Oil on Canvas) — Yousef",
+                                meta: "Medium: Oil on canvas",
+                                description: "Portrait of an elder in traditional dress cradling a ripe orange, capturing oral history, wisdom, and connection to land.",
+                                image: {
+                                    src: "https://images.pexels.com/photos/8001153/pexels-photo-8001153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Elderly woman in traditional dress holding an orange"
+                                },
+                                link: "https://www.pexels.com/photo/an-old-woman-with-wrinkles-on-her-face-8001153/"
+                            },
+                            {
+                                title: "Walled Garden (Digital Art) — Laila",
+                                meta: "Medium: Digital art",
+                                description: "A lush oasis of olive and orange trees enclosed by a towering wall. A single open door invites viewers to imagine access and freedom.",
+                                image: {
+                                    src: "https://images.pexels.com/photos/3230137/pexels-photo-3230137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Concrete wall with an open door revealing a green garden"
+                                },
+                                link: "https://www.pexels.com/photo/photo-of-an-open-door-on-wall-3230137/"
+                            },
+                            {
+                                title: "Unsent Letters (Installation) — Rania",
+                                meta: "Medium: Mixed-media installation",
+                                description: "Hanging scrolls of faded calligraphy representing silenced or lost stories that still shape collective memory.",
+                                image: {
+                                    src: "https://images.pexels.com/photos/1089578/pexels-photo-1089578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                    alt: "Hanging scrolls with faded calligraphy"
+                                },
+                                link: "https://www.pexels.com/photo/brown-scrolls-1089578/"
+                            }
+                        ],
+                        nav: { nextLabel: "Reporting", nextIcon: "fas fa-clipboard" }
+                    },
+                    {
+                        key: "palestine-reporting",
+                        type: "reflection",
+                        icon: "fas fa-clipboard-list",
+                        title: "Our Selections for 'Echoes of Palestine'",
+                        subtitle: "Document the artworks you chose and justify your collective vision.",
+                        fields: [
+                            { id: "palestine-artwork-1", label: "Artwork 1 – image or title link", placeholder: "Paste the image URL or title for your first selection." },
+                            { id: "palestine-justification-1", label: "Justification", placeholder: "Explain why this piece belongs in the exhibition." },
+                            { id: "palestine-artwork-2", label: "Artwork 2 – image or title link", placeholder: "Record the second artwork your group selected." },
+                            { id: "palestine-justification-2", label: "Justification", placeholder: "Summarise the story or theme this piece contributes." },
+                            { id: "palestine-artwork-3", label: "Artwork 3 – image or title link", placeholder: "List the final artwork chosen for the submission." },
+                            { id: "palestine-justification-3", label: "Justification", placeholder: "Describe how this artwork completes your collective narrative." },
+                            { id: "palestine-statement", label: "Our collective curatorial statement", placeholder: "Write a brief statement to introduce your selection to an international audience." }
+                        ],
+                        nav: { nextLabel: "Debrief", nextIcon: "fas fa-comments" }
+                    },
+                    {
+                        key: "palestine-reflect",
+                        type: "content",
+                        icon: "fas fa-people-arrows",
+                        title: "Debriefing the Curatorial Process",
+                        subtitle: "Reflect on collaboration, negotiation, and representation.",
+                        list: [
+                            "What were the most challenging aspects of the negotiation?",
+                            "Which artworks sparked the most debate, and why?",
+                            "How did your final selection represent a compromise or consensus?",
+                            "In what ways do your chosen pieces reflect the diversity of Palestinian identity and experience?",
+                            "What does this process reveal about representing a collective voice through art?"
+                        ],
+                        nav: { nextAction: "restart", nextLabel: "Restart lesson", nextIcon: "fas fa-rotate-right" }
                     }
                 ]
             },
@@ -3999,6 +4227,79 @@
             slideElement.appendChild(content);
         }
 
+        function renderGallerySlide(slideElement, config) {
+            if (config.title) {
+                const headingWrapper = document.createElement("div");
+                headingWrapper.className = "animate-on-scroll";
+                headingWrapper.appendChild(createIconHeading(config.icon, config.title));
+                slideElement.appendChild(headingWrapper);
+            }
+            if (config.subtitle) {
+                const rubricWrapper = document.createElement("div");
+                rubricWrapper.className = "animate-on-scroll";
+                rubricWrapper.appendChild(createRubric(config.subtitle));
+                slideElement.appendChild(rubricWrapper);
+            }
+            const content = document.createElement("div");
+            content.className = "slide-content";
+            (config.body || []).forEach((paragraph) => {
+                content.appendChild(createParagraph(paragraph));
+            });
+            const grid = document.createElement("div");
+            grid.className = "gallery-grid";
+            (config.items || []).forEach((item) => {
+                const card = document.createElement("article");
+                card.className = "gallery-card animate-on-scroll";
+
+                if (item.image) {
+                    const figure = document.createElement("figure");
+                    const img = createImageElement(item.image);
+                    if (img) {
+                        figure.appendChild(img);
+                    }
+                    card.appendChild(figure);
+                }
+
+                const body = document.createElement("div");
+                body.className = "gallery-card__body";
+
+                if (item.title) {
+                    const heading = document.createElement("h3");
+                    heading.className = "gallery-card__title";
+                    if (item.link) {
+                        const link = document.createElement("a");
+                        link.href = item.link;
+                        link.target = "_blank";
+                        link.rel = "noopener";
+                        link.textContent = item.title;
+                        heading.appendChild(link);
+                    } else {
+                        heading.textContent = item.title;
+                    }
+                    body.appendChild(heading);
+                }
+
+                if (item.meta) {
+                    const meta = document.createElement("p");
+                    meta.className = "gallery-card__meta";
+                    meta.textContent = item.meta;
+                    body.appendChild(meta);
+                }
+
+                if (item.description) {
+                    const description = document.createElement("p");
+                    description.className = "gallery-card__description";
+                    description.textContent = item.description;
+                    body.appendChild(description);
+                }
+
+                card.appendChild(body);
+                grid.appendChild(card);
+            });
+            content.appendChild(grid);
+            slideElement.appendChild(content);
+        }
+
         function renderStorySlide(slideElement, config) {
             if (config.title) {
                 const headingWrapper = document.createElement("div");
@@ -4268,6 +4569,9 @@
                     break;
                 case "cards":
                     renderCardsSlide(slideElement, config);
+                    break;
+                case "gallery":
+                    renderGallerySlide(slideElement, config);
                     break;
                 case "story":
                     renderStorySlide(slideElement, config);
