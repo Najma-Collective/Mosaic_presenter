@@ -569,114 +569,89 @@
         box-shadow: none;
         z-index: 2;
       }
-      .workspace-menu {
+      .session-tools {
         position: absolute;
-        top: clamp(16px, 2vw, 28px);
-        left: clamp(16px, 2vw, 28px);
+        top: clamp(18px, 2.4vw, 32px);
+        left: clamp(18px, 2.4vw, 32px);
         z-index: 30;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
       }
-      .workspace-menu__summary {
+      .session-tools__trigger {
         appearance: none;
         border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 246, 240, 0.94));
+        box-shadow: var(--shadow-2);
         display: inline-flex;
         align-items: center;
-        gap: var(--space-3);
-        padding: var(--space-2) var(--space-4);
-        min-height: 56px;
-        border-radius: 999px;
-        border: 1px solid rgba(122, 132, 113, 0.22);
-        box-shadow: var(--shadow-2);
-        cursor: pointer;
+        justify-content: center;
         color: var(--forest-shadow);
+        cursor: pointer;
         transition:
           transform var(--dur-2) var(--ease-ambient),
           box-shadow var(--dur-2) var(--ease-ambient),
           background var(--dur-2) var(--ease-ambient);
       }
-      .workspace-menu__summary::-webkit-details-marker {
-        display: none;
+      .session-tools__trigger:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-3);
       }
-      .workspace-menu__summary:focus-visible {
+      .session-tools__trigger:focus-visible {
         outline: none;
         box-shadow: var(--ring);
       }
-      .workspace-menu[open] .workspace-menu__summary {
+      .session-tools[data-open='true'] .session-tools__trigger {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 246, 240, 0.98));
-        box-shadow: var(--shadow-3);
-        transform: translateY(2px);
       }
-      .workspace-menu__summary-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: color-mix(in srgb, var(--secondary-sage) 25%, white 75%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-      }
-      .workspace-menu__summary-icon i {
-        font-size: 1.1rem;
-      }
-      .workspace-menu__summary-label {
-        display: inline-flex;
-        flex-direction: column;
-        gap: 2px;
-        align-items: flex-start;
-      }
-      .workspace-menu__summary-chevron {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: color-mix(in srgb, var(--secondary-sage) 18%, white 82%);
-        color: var(--forest-shadow);
-        transition: transform var(--dur-2) var(--ease-ambient);
-      }
-      .workspace-menu[open] .workspace-menu__summary-chevron {
-        transform: rotate(180deg);
-      }
-      .workspace-menu__panel {
+      .session-tools__panel {
         position: absolute;
-        top: calc(100% + var(--space-2));
+        top: calc(100% + var(--space-3));
         left: 0;
-        width: min(420px, max(280px, 42vw));
-        max-height: min(70vh, 540px);
-        overflow: auto;
-        display: grid;
-        gap: var(--space-5);
-        padding: clamp(20px, 2.6vw, 32px);
-        border-radius: var(--radius-lg);
-        border: 1px solid rgba(122, 132, 113, 0.18);
-        background: color-mix(in srgb, var(--soft-white) 90%, white 10%);
+        width: min(280px, 82vw);
+        border-radius: var(--radius-xl);
+        border: 1px solid rgba(122, 132, 113, 0.2);
+        background: color-mix(in srgb, var(--soft-white) 96%, white 4%);
         box-shadow: var(--shadow-3);
-        backdrop-filter: blur(12px);
+        padding: clamp(18px, 3.2vw, 26px);
+        display: grid;
+        gap: var(--space-4);
+        z-index: 35;
       }
-      .workspace-menu__descriptor {
+      .session-tools__panel[hidden] {
+        display: none;
+      }
+      .session-tools__header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+      }
+      .session-tools__title {
         margin: 0;
         font-size: var(--step-0);
-        color: var(--forest-shadow);
-        line-height: 1.5;
-      }
-      .workspace-menu__summary-eyebrow {
-        font-size: var(--step--2);
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-      .workspace-menu__summary-title {
         font-weight: 800;
-        font-size: var(--step-0);
+        color: var(--forest-shadow);
       }
-      .workspace-menu__summary-descriptor {
-        font-size: var(--step--1);
-      }
-      .workspace-menu__summary-hint {
+      .session-tools__hint {
+        margin: 0;
         font-size: var(--step--2);
         color: var(--ink-muted);
+      }
+      .session-tools__actions {
+        display: grid;
+        gap: var(--space-3);
+      }
+      .session-tools__status {
+        margin: 0;
+        font-size: var(--step--1);
+        color: var(--ink-muted);
+      }
+      .session-tools__status strong {
+        color: var(--forest-shadow);
       }
       .lesson-selector {
         display: grid;
@@ -746,115 +721,174 @@
         font-size: var(--step--2);
         color: var(--ink-muted);
       }
-      .workspace-tools__status {
-        margin: 0;
-        font-size: var(--step--1);
-        color: var(--ink-muted);
-      }
-      .workspace-tools__status strong {
-        color: var(--forest-shadow);
-      }
-      .workspace-tools {
-        display: grid;
-        gap: var(--space-4);
-      }
-      .workspace-tools__header {
+      .annotation-tool {
+        position: fixed;
+        right: clamp(12px, 3vw, 32px);
+        bottom: clamp(96px, 14vh, 148px);
+        z-index: 95;
         display: flex;
         flex-direction: column;
-        gap: var(--space-1);
-      }
-      .workspace-tools__title {
-        margin: 0;
-        font-size: var(--step-1);
-        font-weight: 800;
-        color: var(--forest-shadow);
-      }
-      .workspace-tools__hint {
-        margin: 0;
-        font-size: var(--step--1);
-        color: var(--ink-muted);
-      }
-      .workspace-tools__actions {
-        display: grid;
+        align-items: flex-end;
         gap: var(--space-3);
       }
-      .workspace-annotations {
-        display: grid;
-        gap: var(--space-3);
-      }
-      .workspace-annotations__header {
-        display: grid;
-        gap: var(--space-1);
-      }
-      .workspace-toggle {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-3);
-        border: none;
-        background: color-mix(in srgb, var(--secondary-sage) 12%, white 88%);
-        padding: var(--space-3) var(--space-4);
-        border-radius: var(--radius-lg);
-        cursor: pointer;
-        color: var(--forest-shadow);
-        font: inherit;
-        font-weight: 700;
-        transition:
-          box-shadow var(--dur-2) var(--ease-ambient),
-          transform var(--dur-2) var(--ease-ambient),
-          background var(--dur-2) var(--ease-ambient);
-      }
-      .workspace-toggle:focus-visible {
-        outline: none;
-        box-shadow: var(--ring);
-      }
-      .workspace-toggle:hover {
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-2);
-      }
-      .workspace-toggle.is-active {
-        background: color-mix(in srgb, var(--secondary-sage) 35%, white 65%);
-        box-shadow: var(--shadow-2);
-      }
-      .workspace-toggle__icon {
-        width: 44px;
-        height: 44px;
+      .annotation-tool__toggle {
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
+        border: none;
+        background: color-mix(in srgb, var(--secondary-sage) 50%, white 50%);
+        color: color-mix(in srgb, var(--deep-forest) 85%, white 15%);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background: color-mix(in srgb, var(--secondary-sage) 45%, white 55%);
-        color: color-mix(in srgb, var(--deep-forest) 85%, white 15%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        box-shadow: var(--shadow-2);
+        cursor: pointer;
+        transition:
+          transform var(--dur-2) var(--ease-ambient),
+          box-shadow var(--dur-2) var(--ease-ambient),
+          background var(--dur-2) var(--ease-ambient);
       }
-      .workspace-toggle.is-active .workspace-toggle__icon {
-        background: color-mix(in srgb, var(--secondary-sage) 65%, white 35%);
-        color: color-mix(in srgb, white 90%, var(--deep-forest) 10%);
+      .annotation-tool__toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-3);
       }
-      .workspace-toggle__icon i {
-        font-size: 1.15rem;
+      .annotation-tool__toggle:focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
       }
-      .workspace-toggle__copy {
+      .annotation-tool.is-active .annotation-tool__toggle {
+        background: color-mix(in srgb, var(--secondary-sage) 70%, white 30%);
+        color: color-mix(in srgb, white 88%, var(--deep-forest) 12%);
+      }
+      @media (max-width: 600px) {
+        .annotation-tool__toggle {
+          width: 36px;
+          height: 36px;
+        }
+      }
+      .annotation-tool__drawer {
+        width: min(240px, 72vw);
+        padding: clamp(16px, 3.6vw, 24px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(122, 132, 113, 0.22);
+        background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
+        box-shadow: var(--shadow-3);
         display: grid;
-        gap: 2px;
-        text-align: left;
+        gap: var(--space-4);
       }
-      .workspace-toggle__label {
+      .annotation-tool__drawer[hidden] {
+        display: none;
+      }
+      .annotation-tool__header {
+        display: grid;
+        gap: var(--space-1);
+      }
+      .annotation-tool__title {
+        margin: 0;
         font-size: var(--step-0);
         font-weight: 800;
+        color: var(--forest-shadow);
       }
-      .workspace-toggle__hint {
+      .annotation-tool__label {
+        font-size: var(--step--2);
+        font-weight: 700;
+        color: var(--forest-shadow);
+        display: block;
+      }
+      .annotation-tool__hint {
+        margin: 0;
         font-size: var(--step--2);
         color: var(--ink-muted);
       }
-      .workspace-tools__map {
-        display: grid;
-        gap: var(--space-3);
+      .annotation-tool__swatches {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        flex-wrap: wrap;
       }
-      .workspace-tools__subtitle {
-        margin: 0;
-        font-size: var(--step--1);
+      .annotation-tool__color {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        background: var(--swatch, rgba(198, 170, 119, 0.45));
+        cursor: pointer;
+        transition:
+          transform var(--dur-2) var(--ease-ambient),
+          border-color var(--dur-2) var(--ease-ambient),
+          box-shadow var(--dur-2) var(--ease-ambient);
+      }
+      .annotation-tool__color:hover {
+        transform: translateY(-1px);
+      }
+      .annotation-tool__color:focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+      .annotation-tool__color.is-selected {
+        border-color: color-mix(in srgb, var(--deep-forest) 45%, white 55%);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+        transform: translateY(-1px);
+      }
+      .annotation-tool__textarea {
+        min-height: 82px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(122, 132, 113, 0.24);
+        padding: var(--space-3);
+        font: inherit;
+        background: rgba(255, 255, 255, 0.92);
+        resize: vertical;
+      }
+      .annotation-tool__textarea:focus {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+      .annotation-tool__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        justify-content: flex-end;
+      }
+      .annotation-tool__action {
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: var(--space-2) var(--space-4);
         font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform var(--dur-2) var(--ease-ambient),
+          box-shadow var(--dur-2) var(--ease-ambient);
+      }
+      .annotation-tool__action.primary {
+        background: color-mix(in srgb, var(--secondary-sage) 55%, white 45%);
+        color: color-mix(in srgb, var(--deep-forest) 80%, white 20%);
+      }
+      .annotation-tool__action.secondary {
+        background: rgba(255, 255, 255, 0.9);
         color: var(--forest-shadow);
+        border: 1px solid rgba(122, 132, 113, 0.24);
+      }
+      .annotation-tool__action.danger {
+        background: rgba(203, 80, 66, 0.12);
+        color: #8a332b;
+        border: 1px solid rgba(203, 80, 66, 0.25);
+      }
+      .annotation-tool__action:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-2);
+      }
+      .annotation-tool__action:focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+      .annotation-tool__message {
+        margin: 0;
+        font-size: var(--step--2);
+        color: #8a332b;
+        display: none;
+      }
+      .annotation-tool__message.is-visible {
+        display: block;
       }
       .lesson-overview__body {
         display: grid;
@@ -1141,9 +1175,17 @@
       /* ------------------------------- Slide content wrappers ----------------------------------*/
       .slide {
         display: none;
+        position: relative;
       }
       .slide.active {
-        display: block;
+        display: grid;
+        gap: clamp(24px, 4vw, 48px);
+      }
+      @media (min-width: 1024px) {
+        .slide.active {
+          grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
+          align-items: start;
+        }
       }
       .slide-content {
         display: grid;
@@ -1153,6 +1195,89 @@
         padding: clamp(28px, 4vw, 42px);
         border: 1px solid rgba(122, 132, 113, 0.12);
         box-shadow: var(--shadow-2);
+      }
+      @media (min-width: 1024px) {
+        .slide-content {
+          grid-column: 1 / 2;
+        }
+      }
+      .slide-annotations {
+        display: grid;
+        gap: var(--space-3);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(122, 132, 113, 0.16);
+        background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+        padding: clamp(22px, 3.5vw, 32px);
+        box-shadow: var(--shadow-1);
+      }
+      @media (min-width: 1024px) {
+        .slide-annotations {
+          grid-column: 2 / 3;
+          position: sticky;
+          top: clamp(90px, 14vh, 140px);
+          align-self: start;
+        }
+      }
+      .slide-annotations__header {
+        display: grid;
+        gap: var(--space-1);
+      }
+      .slide-annotations__title {
+        margin: 0;
+        font-size: var(--step-0);
+        font-weight: 800;
+        color: var(--forest-shadow);
+      }
+      .slide-annotations__intro {
+        margin: 0;
+        font-size: var(--step--2);
+        color: var(--ink-muted);
+      }
+      .slide-annotations__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: var(--space-3);
+      }
+      .slide-annotations__empty {
+        margin: 0;
+        font-size: var(--step--1);
+        color: var(--ink-muted);
+      }
+      .slide-annotation {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--space-3);
+        align-items: start;
+        padding: var(--space-3);
+        border-radius: var(--radius-sm);
+        background: color-mix(in srgb, var(--warm-cream) 65%, white 35%);
+        border: 1px solid rgba(122, 132, 113, 0.16);
+        cursor: pointer;
+        transition:
+          transform var(--dur-2) var(--ease-ambient),
+          box-shadow var(--dur-2) var(--ease-ambient);
+      }
+      .slide-annotation:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-2);
+      }
+      .slide-annotation:focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+      .slide-annotation__color {
+        width: 12px;
+        border-radius: 999px;
+        background: var(--annotation-color, rgba(198, 170, 119, 0.45));
+        height: 100%;
+        display: block;
+      }
+      .slide-annotation__text {
+        margin: 0;
+        font-size: var(--step--1);
+        color: var(--forest-shadow);
       }
       .slide-content.layout--poster {
         position: relative;
@@ -2247,6 +2372,9 @@
             box-shadow var(--dur-2) var(--ease-ambient),
             background var(--dur-2) var(--ease-ambient);
         }
+        .annotation-highlight.is-active {
+          box-shadow: 0 0 0 3px rgba(122, 132, 113, 0.35);
+        }
         .annotation-highlight:hover {
           box-shadow: 0 0 0 2px rgba(47, 58, 43, 0.15);
         }
@@ -2255,81 +2383,21 @@
           box-shadow: var(--ring);
         }
 
-        #annotation-popover {
-          position: fixed;
-          z-index: 70;
-          display: none;
-          width: min(360px, 92vw);
-          padding: clamp(20px, 3vw, 28px);
-          border-radius: var(--radius-lg);
-          border: 1px solid rgba(122, 132, 113, 0.2);
-          background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
-          box-shadow: var(--shadow-3);
-        }
-        #annotation-popover[aria-hidden="true"] {
-          display: none;
-        }
-        .annotation-popover__form {
-          display: grid;
-          gap: var(--space-4);
-        }
-        .annotation-popover__field {
-          display: grid;
-          gap: var(--space-2);
-        }
-        .annotation-popover__label {
-          font-size: var(--step--1);
-          font-weight: 700;
-          color: var(--forest-shadow);
-        }
-        .annotation-popover__textarea {
-          min-height: 96px;
-          resize: vertical;
-          border-radius: var(--radius-sm);
-          border: 1px solid rgba(122, 132, 113, 0.24);
-          padding: var(--space-3);
-          font: inherit;
-          background: rgba(255, 255, 255, 0.92);
-        }
-        .annotation-popover__color-input {
-          display: flex;
-          align-items: center;
-          gap: var(--space-3);
-          flex-wrap: wrap;
-        }
-        .annotation-popover__color-picker {
-          width: 48px;
-          height: 48px;
-          border-radius: var(--radius-sm);
-          border: 1px solid rgba(122, 132, 113, 0.24);
-          background: rgba(255, 255, 255, 0.95);
-          cursor: pointer;
-        }
-        .annotation-popover__hint {
-          margin: 0;
-          font-size: var(--step--2);
-          color: var(--ink-muted);
-        }
-        .annotation-popover__actions {
-          display: flex;
-          justify-content: flex-end;
-          flex-wrap: wrap;
-          gap: var(--space-2);
-        }
-
-        #annotation-tooltip {
-          position: fixed;
-          z-index: 60;
-          display: none;
-          max-width: min(320px, 70vw);
-          padding: var(--space-3);
-          border-radius: var(--radius-sm);
-          border: 1px solid rgba(122, 132, 113, 0.24);
-          background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
-          box-shadow: var(--shadow-2);
-          font-size: var(--step--1);
-          color: var(--forest-shadow);
+        .annotation-overlay {
+          position: absolute;
+          inset: 0;
           pointer-events: none;
+          z-index: 25;
+          grid-column: 1 / -1;
+        }
+        .annotation-connector {
+          position: absolute;
+          height: 2px;
+          background: rgba(122, 132, 113, 0.35);
+          border-radius: 999px;
+          transition: opacity var(--dur-2) var(--ease-ambient);
+          opacity: 0.9;
+          transform-origin: 0 50%;
         }
 
     </style>
@@ -2340,54 +2408,39 @@
             <main id="activity-container">
 
                 <header class="presentation-header" aria-label="Session tools">
-                    <details class="workspace-menu" id="presentation-tools">
-                        <summary class="workspace-menu__summary" aria-label="Open session tools">
-                            <span class="workspace-menu__summary-icon" aria-hidden="true">
-                                <i class="fa-solid fa-gear"></i>
-                            </span>
-                            <span class="workspace-menu__summary-label">
-                                <span class="workspace-menu__summary-eyebrow">Workspace</span>
-                                <span class="workspace-menu__summary-title">Session tools</span>
-                            </span>
-                            <span class="workspace-menu__summary-chevron" aria-hidden="true">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </span>
-                        </summary>
-                        <div class="workspace-menu__panel">
-                            <div class="workspace-tools">
-                                <div class="workspace-tools__header">
-                                    <h2 class="workspace-tools__title">Session tools</h2>
-                                    <p class="workspace-tools__hint">Save or restore your annotated slides.</p>
-                                </div>
-                                <div class="workspace-tools__actions">
-                                    <button type="button" class="activity-btn" id="save-annotations-btn">
-                                        <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save annotations
-                                    </button>
-                                    <button type="button" class="activity-btn secondary" id="load-annotations-btn">
-                                        <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Load annotations
-                                    </button>
-                                    <input type="file" id="load-annotations-input" accept="application/json" hidden>
-                                    <p class="workspace-tools__hint">Loading will replace the current slide content.</p>
-                                </div>
-                                <section class="workspace-annotations textbox textbox--outline" aria-label="Annotation controls">
-                                    <div class="workspace-annotations__header">
-                                        <span class="text-eyebrow">Markup mode</span>
-                                        <p class="text-muted text-measure">Switch on the digital pen when you are ready to capture evidence directly on the slide.</p>
-                                    </div>
-                                    <button type="button" class="workspace-toggle" id="toggle-annotation-mode" aria-pressed="false" aria-label="Enable highlighting">
-                                        <span class="workspace-toggle__icon" aria-hidden="true">
-                                            <i class="fa-solid fa-pen-nib"></i>
-                                        </span>
-                                        <span class="workspace-toggle__copy">
-                                            <span class="workspace-toggle__label">Enable highlighting</span>
-                                            <span class="workspace-toggle__hint">Pen is resting. Turn it on to add highlights.</span>
-                                        </span>
-                                    </button>
-                                    <p class="workspace-tools__status text-muted text-measure" id="annotation-mode-status"><strong>Highlighting off.</strong> Select text freely to copy.</p>
-                                </section>
+                    <div class="session-tools" id="presentation-tools" data-open="false">
+                        <button type="button" class="session-tools__trigger" id="session-tools-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="session-tools-panel">
+                            <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                            <span class="visually-hidden">Open session tools</span>
+                        </button>
+                        <div class="session-tools__panel" id="session-tools-panel" role="group" aria-label="Session tools" hidden>
+                            <div class="session-tools__header">
+                                <h2 class="session-tools__title">Session tools</h2>
+                                <p class="session-tools__hint">Save or restore your annotated slides.</p>
                             </div>
+                            <div class="session-tools__actions">
+                                <button type="button" class="activity-btn" id="save-annotations-btn">
+                                    <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save annotations
+                                </button>
+                                <button type="button" class="activity-btn secondary" id="load-annotations-btn">
+                                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Load annotations
+                                </button>
+                                <input type="file" id="load-annotations-input" accept="application/json" hidden>
+                                <p class="session-tools__hint">Loading will replace the current slide content.</p>
+                            </div>
+                            <section class="textbox textbox--outline" aria-label="Annotation controls">
+                                <div class="session-tools__header">
+                                    <span class="text-eyebrow">Markup mode</span>
+                                    <p class="text-muted text-measure">Switch on the digital pen when you are ready to capture evidence directly on the slide.</p>
+                                </div>
+                                <p class="text-muted text-measure">
+                                    Tap the highlighter icon in the lower-right corner to open the quick annotation drawer.
+                                    Choose a colour, drag over text, then capture your note—the slide keeps a live list of everything you've marked.
+                                </p>
+                                <p class="session-tools__status text-muted text-measure" id="annotation-mode-status"><strong>Highlighting off.</strong> Select text freely to copy.</p>
+                            </section>
                         </div>
-                    </details>
+                    </div>
                 </header>
 
                 <div id="slides-root">
@@ -2821,35 +2874,6 @@
                     </div>
                 </div>
 
-                <div id="annotation-popover" role="dialog" aria-hidden="true" aria-label="Add or edit annotation">
-                    <form id="annotation-form" class="annotation-popover__form" autocomplete="off">
-                        <div class="annotation-popover__field">
-                            <label class="annotation-popover__label" for="annotation-comment">Annotation</label>
-                            <textarea id="annotation-comment" class="annotation-popover__textarea" placeholder="Add a note about this highlight"></textarea>
-                        </div>
-                        <div class="annotation-popover__field">
-                            <span class="annotation-popover__label">Highlight colour</span>
-                            <div class="annotation-popover__color-input">
-                                <input type="color" id="annotation-color" class="annotation-popover__color-picker" value="#d9cdb4" aria-label="Choose highlight colour">
-                                <span class="annotation-popover__hint">Adjust the shade to organise your notes.</span>
-                            </div>
-                        </div>
-                        <p class="annotation-popover__hint">Select text to create a highlight. Click an existing highlight to edit or remove it.</p>
-                        <div class="annotation-popover__actions">
-                            <button type="button" class="activity-btn secondary" id="annotation-delete" hidden>
-                                <i class="fa-solid fa-trash-can" aria-hidden="true"></i> Remove
-                            </button>
-                            <button type="button" class="activity-btn secondary" id="annotation-cancel">
-                                <i class="fa-solid fa-xmark" aria-hidden="true"></i> Cancel
-                            </button>
-                            <button type="submit" class="activity-btn" id="annotation-save">
-                                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div id="annotation-tooltip" role="tooltip" aria-hidden="true"></div>
-
                 <!-- SLIDE NAVIGATION -->
                 <div class="slide-status-bar">
                     <div class="slide-status-bar__progress">
@@ -2862,6 +2886,38 @@
                         <div class="slide-status-bar__actions">
                             <button class="activity-btn secondary" id="prev-btn" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
                             <button class="activity-btn" id="next-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="annotation-tool" class="annotation-tool" data-active="false">
+                    <button type="button" class="annotation-tool__toggle" id="annotation-toggle" aria-expanded="false" aria-controls="annotation-drawer">
+                        <i class="fa-solid fa-highlighter"></i>
+                        <span class="visually-hidden">Open annotation tools</span>
+                    </button>
+                    <div class="annotation-tool__drawer" id="annotation-drawer" hidden>
+                        <div class="annotation-tool__header">
+                            <h2 class="annotation-tool__title">Quick annotations</h2>
+                            <p class="annotation-tool__hint">Choose a colour, brush over the text, then capture your note. Every highlight appears in the slide panel.</p>
+                        </div>
+                        <div>
+                            <span class="annotation-tool__label" id="annotation-colour-label">Highlight colour</span>
+                            <div class="annotation-tool__swatches" role="group" aria-labelledby="annotation-colour-label">
+                                <button type="button" class="annotation-tool__color is-selected" data-color="rgba(198, 170, 119, 0.45)" style="--swatch: rgba(198, 170, 119, 0.45);" aria-pressed="true" aria-label="Soft clay highlight"></button>
+                                <button type="button" class="annotation-tool__color" data-color="rgba(156, 175, 136, 0.45)" style="--swatch: rgba(156, 175, 136, 0.45);" aria-pressed="false" aria-label="Sage highlight"></button>
+                                <button type="button" class="annotation-tool__color" data-color="rgba(214, 186, 140, 0.45)" style="--swatch: rgba(214, 186, 140, 0.45);" aria-pressed="false" aria-label="Golden highlight"></button>
+                                <button type="button" class="annotation-tool__color" data-color="rgba(180, 204, 195, 0.45)" style="--swatch: rgba(180, 204, 195, 0.45);" aria-pressed="false" aria-label="Cool mist highlight"></button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="annotation-tool__label" for="annotation-note">Annotation</label>
+                            <textarea id="annotation-note" class="annotation-tool__textarea" placeholder="Describe the teaching point you want learners to notice."></textarea>
+                        </div>
+                        <p class="annotation-tool__message" id="annotation-message" role="alert"></p>
+                        <div class="annotation-tool__actions">
+                            <button type="button" class="annotation-tool__action danger" id="annotation-remove" hidden>Remove highlight</button>
+                            <button type="button" class="annotation-tool__action secondary" id="annotation-close">Close</button>
+                            <button type="button" class="annotation-tool__action primary" id="annotation-save">Save annotation</button>
                         </div>
                     </div>
                 </div>
@@ -2880,30 +2936,149 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveAnnotationsBtn = document.getElementById('save-annotations-btn');
     const loadAnnotationsBtn = document.getElementById('load-annotations-btn');
     const loadAnnotationsInput = document.getElementById('load-annotations-input');
-    const toggleAnnotationModeBtn = document.getElementById('toggle-annotation-mode');
-    const annotationToggleLabel = toggleAnnotationModeBtn
-        ? toggleAnnotationModeBtn.querySelector('.workspace-toggle__label')
-        : null;
-    const annotationToggleHint = toggleAnnotationModeBtn
-        ? toggleAnnotationModeBtn.querySelector('.workspace-toggle__hint')
-        : null;
+
+    const sessionTools = document.getElementById('presentation-tools');
+    const sessionToolsToggle = document.getElementById('session-tools-toggle');
+    const sessionToolsPanel = document.getElementById('session-tools-panel');
+
+    const annotationTool = document.getElementById('annotation-tool');
+    const annotationToggleBtn = document.getElementById('annotation-toggle');
+    const annotationDrawer = document.getElementById('annotation-drawer');
+    const colorButtons = annotationTool ? Array.from(annotationTool.querySelectorAll('.annotation-tool__color')) : [];
+    const annotationTextarea = document.getElementById('annotation-note');
+    const annotationSaveBtn = document.getElementById('annotation-save');
+    const annotationCloseBtn = document.getElementById('annotation-close');
+    const annotationRemoveBtn = document.getElementById('annotation-remove');
+    const annotationMessage = document.getElementById('annotation-message');
     const annotationModeStatus = document.getElementById('annotation-mode-status');
-    const annotationPopover = document.getElementById('annotation-popover');
-    const annotationForm = document.getElementById('annotation-form');
-    const annotationComment = document.getElementById('annotation-comment');
-    const annotationColor = document.getElementById('annotation-color');
-    const annotationCancelBtn = document.getElementById('annotation-cancel');
-    const annotationDeleteBtn = document.getElementById('annotation-delete');
-    const annotationTooltip = document.getElementById('annotation-tooltip');
-    const defaultHighlightColor = '#d9cdb4';
+
+    const defaultHighlightColor = 'rgba(198, 170, 119, 0.45)';
 
     let slides = [];
     let totalSlides = 0;
     let currentSlide = 0;
+
     let highlightingEnabled = false;
-    let pendingRange = null;
     let activeHighlight = null;
-    let annotationMode = 'create';
+    let pendingHighlight = null;
+    let currentHighlightColor = defaultHighlightColor;
+    const connectorRegistry = new Map();
+    const slideComponentsCache = new WeakMap();
+    let annotationSystemReady = false;
+    let resizeRaf = null;
+
+    refreshSlides();
+    initializeActivities();
+    initializeAnnotationSystem();
+
+    nextBtn.addEventListener('click', () => {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide += 1;
+            updateSlideView();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide -= 1;
+            updateSlideView();
+        }
+    });
+
+    if (sessionTools && sessionToolsToggle && sessionToolsPanel) {
+        sessionToolsToggle.addEventListener('click', () => {
+            const open = sessionTools.dataset.open === 'true';
+            setSessionToolsOpen(!open);
+        });
+
+        document.addEventListener('click', event => {
+            if (!sessionTools.contains(event.target)) {
+                setSessionToolsOpen(false);
+            }
+        });
+
+        sessionTools.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                setSessionToolsOpen(false);
+                sessionToolsToggle.focus({ preventScroll: true });
+            }
+        });
+    }
+
+    if (saveAnnotationsBtn) {
+        saveAnnotationsBtn.addEventListener('click', () => {
+            const exportPayload = {
+                savedAt: new Date().toISOString(),
+                documentTitle: document.title,
+                slidesHtml: slidesRoot.innerHTML
+            };
+            const blob = new Blob([JSON.stringify(exportPayload, null, 2)], { type: 'application/json' });
+            const fileName = `eco-activist-annotations-${Date.now()}.json`;
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        });
+    }
+
+    if (loadAnnotationsBtn && loadAnnotationsInput) {
+        loadAnnotationsBtn.addEventListener('click', () => {
+            loadAnnotationsInput.click();
+        });
+
+        loadAnnotationsInput.addEventListener('change', event => {
+            const [file] = event.target.files || [];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = loadEvent => {
+                try {
+                    const payload = JSON.parse(loadEvent.target.result);
+                    if (payload && typeof payload.slidesHtml === 'string') {
+                        slidesRoot.innerHTML = payload.slidesHtml;
+                        refreshSlides();
+                        initializeActivities();
+                        initializeAnnotationSystem();
+                    } else {
+                        window.alert('The selected file does not contain any slides to load.');
+                    }
+                } catch (error) {
+                    console.error('Unable to load annotations', error);
+                    window.alert('We could not load that file. Please choose a valid annotations export.');
+                } finally {
+                    loadAnnotationsInput.value = '';
+                }
+            };
+            reader.readAsText(file);
+        });
+    }
+
+    if (annotationTool && annotationToggleBtn && annotationDrawer) {
+        annotationToggleBtn.addEventListener('click', () => {
+            setDrawerState(!highlightingEnabled);
+        });
+        annotationCloseBtn?.addEventListener('click', () => setDrawerState(false));
+        annotationSaveBtn?.addEventListener('click', handleAnnotationSave);
+        annotationRemoveBtn?.addEventListener('click', handleAnnotationRemove);
+
+        colorButtons.forEach(button => {
+            button.addEventListener('click', () => selectColor(button));
+        });
+    }
+
+    function setSessionToolsOpen(open) {
+        if (!sessionTools || !sessionToolsPanel || !sessionToolsToggle) return;
+        sessionTools.dataset.open = open ? 'true' : 'false';
+        sessionToolsPanel.hidden = !open;
+        sessionToolsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            const focusable = sessionToolsPanel.querySelector('button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])');
+            focusable?.focus({ preventScroll: true });
+        }
+    }
 
     function refreshSlides() {
         slides = Array.from(slidesRoot.querySelectorAll('.slide'));
@@ -2934,142 +3109,465 @@ document.addEventListener('DOMContentLoaded', () => {
 
         prevBtn.disabled = currentSlide === 0;
         nextBtn.disabled = currentSlide === totalSlides - 1;
+
+        scheduleConnectorUpdate();
     }
 
-    nextBtn.addEventListener('click', () => {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide += 1;
-            updateSlideView();
-        }
-    });
+    function initializeAnnotationSystem() {
+        if (!slidesRoot) return;
+        setupSlidesForAnnotations();
+        updateAnnotationModeStatus();
+        scheduleConnectorUpdate();
+    }
 
-    prevBtn.addEventListener('click', () => {
-        if (currentSlide > 0) {
-            currentSlide -= 1;
-            updateSlideView();
-        }
-    });
+    function setupSlidesForAnnotations() {
+        connectorRegistry.forEach(entry => {
+            if (entry.line?.parentNode) {
+                entry.line.parentNode.removeChild(entry.line);
+            }
+        });
+        connectorRegistry.clear();
 
-    refreshSlides();
-    initializeActivities();
-
-    if (saveAnnotationsBtn) {
-        saveAnnotationsBtn.addEventListener('click', () => {
-            const exportPayload = {
-                savedAt: new Date().toISOString(),
-                documentTitle: document.title,
-                slidesHtml: slidesRoot.innerHTML
-            };
-            const blob = new Blob([JSON.stringify(exportPayload, null, 2)], {
-                type: 'application/json'
+        slides.forEach(slide => {
+            const components = ensureSlideComponents(slide);
+            components.overlay.innerHTML = '';
+            const cards = Array.from(components.list.querySelectorAll('.slide-annotation'));
+            cards.forEach(card => {
+                if (card.dataset.annotationBound === 'true') return;
+                card.dataset.annotationBound = 'true';
+                card.addEventListener('click', () => handleCardFocus(card.dataset.annotationId));
             });
-            const fileName = `eco-activist-annotations-${Date.now()}.json`;
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(link.href);
+            updatePanelPlaceholder(components);
         });
+
+        const highlights = slidesRoot.querySelectorAll('.annotation-highlight');
+        highlights.forEach(highlight => {
+            if (!highlight.dataset.annotationId) {
+                highlight.dataset.annotationId = `annotation-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+            }
+            const color = highlight.dataset.color || defaultHighlightColor;
+            highlight.dataset.color = color;
+            highlight.style.setProperty('--annotation-color', color);
+            if (!highlight.hasAttribute('tabindex')) {
+                highlight.setAttribute('tabindex', '0');
+                highlight.setAttribute('role', 'note');
+            }
+            const comment = highlight.dataset.comment;
+            if (comment) {
+                highlight.setAttribute('aria-label', `Annotation: ${comment}`);
+            }
+            syncAnnotationCard(highlight);
+        });
+
+        if (!annotationSystemReady) {
+            slidesRoot.addEventListener('mouseup', handleSelectionMouseUp);
+            slidesRoot.addEventListener('click', event => {
+                const highlight = event.target.closest('.annotation-highlight');
+                if (!highlight) return;
+                event.preventDefault();
+                openHighlight(highlight, { focusTextarea: true });
+            });
+            window.addEventListener('resize', scheduleConnectorUpdate);
+            document.addEventListener('scroll', scheduleConnectorUpdate, true);
+            annotationSystemReady = true;
+        }
     }
 
-    if (loadAnnotationsBtn && loadAnnotationsInput) {
-        loadAnnotationsBtn.addEventListener('click', () => {
-            loadAnnotationsInput.click();
-        });
-
-        loadAnnotationsInput.addEventListener('change', event => {
-            const [file] = event.target.files || [];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = loadEvent => {
-                try {
-                    const payload = JSON.parse(loadEvent.target.result);
-                    if (payload && typeof payload.slidesHtml === 'string') {
-                        if (isPopoverOpen()) {
-                            closeAnnotationPopover();
-                        }
-                        hideAnnotationTooltip();
-                        slidesRoot.innerHTML = payload.slidesHtml;
-                        refreshSlides();
-                        initializeActivities();
-                    } else {
-                        window.alert('The selected file does not contain any slides to load.');
-                    }
-                } catch (error) {
-                    console.error('Unable to load annotations', error);
-                    window.alert('We could not load that file. Please choose a valid annotations export.');
-                } finally {
-                    loadAnnotationsInput.value = '';
-                }
-            };
-            reader.readAsText(file);
-        });
+    function setDrawerState(open) {
+        if (!annotationTool || !annotationDrawer || !annotationToggleBtn) return;
+        highlightingEnabled = open;
+        annotationTool.classList.toggle('is-active', open);
+        annotationDrawer.hidden = !open;
+        annotationToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        annotationTool.dataset.active = open ? 'true' : 'false';
+        updateAnnotationModeStatus();
+        if (!open) {
+            clearActiveHighlight();
+            hideAnnotationMessage();
+            if (annotationTextarea) {
+                annotationTextarea.value = '';
+            }
+        } else if (annotationTextarea) {
+            annotationTextarea.focus({ preventScroll: true });
+        }
     }
 
-    if (toggleAnnotationModeBtn) {
-        toggleAnnotationModeBtn.addEventListener('click', () => {
-            highlightingEnabled = !highlightingEnabled;
-            toggleAnnotationModeBtn.classList.toggle('is-active', highlightingEnabled);
-            toggleAnnotationModeBtn.setAttribute('aria-pressed', highlightingEnabled ? 'true' : 'false');
-            toggleAnnotationModeBtn.setAttribute(
-                'aria-label',
-                highlightingEnabled ? 'Disable highlighting' : 'Enable highlighting'
-            );
-            if (annotationToggleLabel) {
-                annotationToggleLabel.textContent = highlightingEnabled
-                    ? 'Disable highlighting'
-                    : 'Enable highlighting';
-            }
-            if (annotationToggleHint) {
-                annotationToggleHint.textContent = highlightingEnabled
-                    ? 'Pen is active. Select text to capture notes.'
-                    : 'Pen is resting. Turn it on to add highlights.';
-            }
-            if (annotationModeStatus) {
-                annotationModeStatus.innerHTML = highlightingEnabled
-                    ? '<strong>Highlighting on.</strong> Select text to add notes.'
-                    : '<strong>Highlighting off.</strong> Select text freely to copy.';
-            }
-            if (!highlightingEnabled) {
+    function updateAnnotationModeStatus() {
+        if (!annotationModeStatus) return;
+        annotationModeStatus.innerHTML = highlightingEnabled
+            ? '<strong>Highlighting on.</strong> Select text to add notes.'
+            : '<strong>Highlighting off.</strong> Select text freely to copy.';
+    }
+
+    function selectColor(button) {
+        if (!colorButtons.length) return;
+        colorButtons.forEach(btn => {
+            const isSelected = btn === button;
+            btn.classList.toggle('is-selected', isSelected);
+            btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        });
+        currentHighlightColor = button.dataset.color || defaultHighlightColor;
+        if (activeHighlight) {
+            activeHighlight.dataset.color = currentHighlightColor;
+            activeHighlight.style.setProperty('--annotation-color', currentHighlightColor);
+            syncAnnotationCard(activeHighlight);
+            scheduleConnectorUpdate();
+        }
+    }
+
+    function handleSelectionMouseUp() {
+        if (!highlightingEnabled) return;
+        setTimeout(() => {
+            const range = getValidRange();
+            if (!range) return;
+
+            const startHighlight = range.startContainer.parentElement && range.startContainer.parentElement.closest('.annotation-highlight');
+            const endHighlight = range.endContainer.parentElement && range.endContainer.parentElement.closest('.annotation-highlight');
+
+            if (startHighlight && startHighlight === endHighlight) {
+                openHighlight(startHighlight, { focusTextarea: true });
                 window.getSelection().removeAllRanges();
-                if (isPopoverOpen()) {
-                    closeAnnotationPopover();
-                }
-                hideAnnotationTooltip();
+                return;
             }
-        });
+
+            if (pendingHighlight && pendingHighlight.isConnected) {
+                removeAnnotationCard(pendingHighlight);
+                removeConnector(pendingHighlight.dataset.annotationId);
+                removeHighlight(pendingHighlight);
+            }
+
+            const highlight = createHighlight(range, currentHighlightColor);
+            if (!highlight) return;
+
+            pendingHighlight = highlight;
+            openHighlight(highlight, { focusTextarea: true, isNew: true });
+            window.getSelection().removeAllRanges();
+        }, 0);
     }
 
-    if (
-        annotationPopover &&
-        annotationForm &&
-        annotationComment &&
-        annotationColor &&
-        annotationCancelBtn &&
-        annotationDeleteBtn &&
-        annotationTooltip
-    ) {
-        annotationPopover.setAttribute('aria-hidden', 'true');
-        annotationTooltip.setAttribute('aria-hidden', 'true');
+    function getValidRange() {
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return null;
 
-        slidesRoot.addEventListener('mouseup', handleSelectionMouseUp);
-        slidesRoot.addEventListener('click', handleHighlightClick);
-        slidesRoot.addEventListener('mouseover', handleHighlightHover);
-        slidesRoot.addEventListener('mouseout', handleHighlightLeave);
-        slidesRoot.addEventListener('focusin', handleHighlightFocus);
-        slidesRoot.addEventListener('focusout', handleHighlightBlur);
+        const range = selection.getRangeAt(0).cloneRange();
+        if (!slidesRoot.contains(range.startContainer) || !slidesRoot.contains(range.endContainer)) {
+            return null;
+        }
 
-        annotationForm.addEventListener('submit', handleAnnotationSave);
-        annotationCancelBtn.addEventListener('click', () => closeAnnotationPopover());
-        annotationDeleteBtn.addEventListener('click', handleAnnotationDelete);
+        return range.toString().trim() ? range : null;
+    }
 
-        document.addEventListener('click', handleDocumentClick);
-        document.addEventListener('keydown', handleKeydown);
-        document.addEventListener('scroll', handleViewportShift, true);
-        window.addEventListener('resize', handleViewportShift);
+    function createHighlight(range, color) {
+        try {
+            const highlight = document.createElement('span');
+            highlight.className = 'annotation-highlight';
+            highlight.dataset.annotationId = `annotation-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+            highlight.dataset.color = color;
+            highlight.style.setProperty('--annotation-color', color || defaultHighlightColor);
+            highlight.setAttribute('tabindex', '0');
+            highlight.setAttribute('role', 'note');
+
+            const fragment = range.extractContents();
+            highlight.appendChild(fragment);
+            range.insertNode(highlight);
+            highlight.normalize();
+            slidesRoot.normalize();
+            return highlight;
+        } catch (error) {
+            console.error('Unable to create highlight', error);
+            return null;
+        }
+    }
+
+    function openHighlight(highlight, options = {}) {
+        if (!highlight) return;
+        setDrawerState(true);
+        if (activeHighlight && activeHighlight !== highlight) {
+            activeHighlight.classList.remove('is-active');
+        }
+        activeHighlight = highlight;
+        highlight.classList.add('is-active');
+
+        const color = highlight.dataset.color || currentHighlightColor;
+        const matchingButton = colorButtons.find(btn => btn.dataset.color === color);
+        if (matchingButton) {
+            selectColor(matchingButton);
+        } else {
+            currentHighlightColor = color;
+        }
+
+        if (annotationTextarea) {
+            if (options.isNew) {
+                annotationTextarea.value = '';
+            } else {
+                annotationTextarea.value = highlight.dataset.comment || '';
+            }
+            if (options.focusTextarea) {
+                annotationTextarea.focus({ preventScroll: true });
+            }
+        }
+
+        if (annotationRemoveBtn) {
+            annotationRemoveBtn.hidden = false;
+        }
+        hideAnnotationMessage();
+    }
+
+    function handleAnnotationSave() {
+        if (!activeHighlight || !annotationTextarea) {
+            showAnnotationMessage('Highlight text before saving an annotation.');
+            return;
+        }
+        const comment = annotationTextarea.value.trim();
+        if (!comment) {
+            showAnnotationMessage('Add a note to save your highlight.');
+            annotationTextarea.focus({ preventScroll: true });
+            return;
+        }
+        activeHighlight.dataset.comment = comment;
+        activeHighlight.dataset.color = currentHighlightColor;
+        activeHighlight.style.setProperty('--annotation-color', currentHighlightColor);
+        activeHighlight.setAttribute('aria-label', `Annotation: ${comment}`);
+        syncAnnotationCard(activeHighlight);
+        pendingHighlight = null;
+        hideAnnotationMessage();
+        scheduleConnectorUpdate();
+    }
+
+    function handleAnnotationRemove() {
+        if (!activeHighlight) return;
+        const annotationId = activeHighlight.dataset.annotationId;
+        removeAnnotationCard(activeHighlight);
+        removeConnector(annotationId);
+        removeHighlight(activeHighlight);
+        pendingHighlight = null;
+        clearActiveHighlight();
+        hideAnnotationMessage();
+        scheduleConnectorUpdate();
+    }
+
+    function removeHighlight(highlight) {
+        if (!highlight) return;
+        const parent = highlight.parentNode;
+        if (!parent) return;
+        while (highlight.firstChild) {
+            parent.insertBefore(highlight.firstChild, highlight);
+        }
+        highlight.remove();
+        parent.normalize();
+    }
+
+    function clearActiveHighlight() {
+        if (activeHighlight) {
+            activeHighlight.classList.remove('is-active');
+        }
+        activeHighlight = null;
+        if (annotationTextarea) {
+            annotationTextarea.value = '';
+        }
+        if (annotationRemoveBtn) {
+            annotationRemoveBtn.hidden = true;
+        }
+    }
+
+    function syncAnnotationCard(highlight) {
+        const slide = highlight.closest('.slide');
+        if (!slide) return;
+        const components = ensureSlideComponents(slide);
+        const annotationId = highlight.dataset.annotationId;
+        const comment = (highlight.dataset.comment || '').trim();
+        const color = highlight.dataset.color || defaultHighlightColor;
+
+        let card = components.list.querySelector(`[data-annotation-id="${annotationId}"]`);
+        if (!comment) {
+            if (card) {
+                card.remove();
+            }
+            removeConnector(annotationId);
+            updatePanelPlaceholder(components);
+            return;
+        }
+
+        if (!card) {
+            card = document.createElement('li');
+            card.className = 'slide-annotation';
+            card.dataset.annotationId = annotationId;
+            card.innerHTML = `
+                <span class="slide-annotation__color" aria-hidden="true"></span>
+                <p class="slide-annotation__text"></p>
+            `;
+            card.dataset.annotationBound = 'true';
+            card.addEventListener('click', () => handleCardFocus(annotationId));
+            components.list.appendChild(card);
+        }
+
+        card.querySelector('.slide-annotation__color').style.setProperty('--annotation-color', color);
+        card.querySelector('.slide-annotation__text').textContent = comment;
+        components.list.hidden = false;
+        components.empty.hidden = components.list.children.length > 0;
+
+        registerConnector(annotationId, highlight, card, components.overlay);
+    }
+
+    function removeAnnotationCard(highlight) {
+        const slide = highlight.closest('.slide');
+        if (!slide) return;
+        const components = ensureSlideComponents(slide);
+        const annotationId = highlight.dataset.annotationId;
+        const card = components.list.querySelector(`[data-annotation-id="${annotationId}"]`);
+        if (card) {
+            card.remove();
+            updatePanelPlaceholder(components);
+        }
+    }
+
+    function ensureSlideComponents(slide) {
+        let cache = slideComponentsCache.get(slide);
+        if (cache) return cache;
+
+        let panel = slide.querySelector('.slide-annotations');
+        if (!panel) {
+            panel = document.createElement('aside');
+            panel.className = 'slide-annotations';
+            panel.setAttribute('aria-label', 'Slide annotations');
+            panel.innerHTML = `
+                <div class="slide-annotations__header">
+                    <h3 class="slide-annotations__title">Annotations</h3>
+                    <p class="slide-annotations__intro">Highlights saved for this slide.</p>
+                </div>
+                <p class="slide-annotations__empty">No annotations yet. Use the highlighter to capture key moments.</p>
+                <ol class="slide-annotations__list" hidden></ol>
+            `;
+            slide.appendChild(panel);
+        } else {
+            if (!panel.querySelector('.slide-annotations__header')) {
+                const header = document.createElement('div');
+                header.className = 'slide-annotations__header';
+                header.innerHTML = `
+                    <h3 class="slide-annotations__title">Annotations</h3>
+                    <p class="slide-annotations__intro">Highlights saved for this slide.</p>
+                `;
+                panel.prepend(header);
+            }
+            if (!panel.querySelector('.slide-annotations__empty')) {
+                const empty = document.createElement('p');
+                empty.className = 'slide-annotations__empty';
+                empty.textContent = 'No annotations yet. Use the highlighter to capture key moments.';
+                panel.appendChild(empty);
+            }
+            if (!panel.querySelector('.slide-annotations__list')) {
+                const list = document.createElement('ol');
+                list.className = 'slide-annotations__list';
+                list.hidden = true;
+                panel.appendChild(list);
+            }
+        }
+
+        const empty = panel.querySelector('.slide-annotations__empty');
+        const list = panel.querySelector('.slide-annotations__list');
+
+        let overlay = slide.querySelector('.annotation-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'annotation-overlay';
+            slide.appendChild(overlay);
+        }
+
+        cache = { panel, list, empty, overlay };
+        slideComponentsCache.set(slide, cache);
+        return cache;
+    }
+
+    function updatePanelPlaceholder(components) {
+        const hasItems = components.list.children.length > 0;
+        components.empty.hidden = hasItems;
+        components.list.hidden = !hasItems;
+    }
+
+    function registerConnector(annotationId, highlight, card, overlay) {
+        let entry = connectorRegistry.get(annotationId);
+        if (!entry) {
+            const line = document.createElement('div');
+            line.className = 'annotation-connector';
+            entry = { annotationId, line, highlight, card, overlay };
+            connectorRegistry.set(annotationId, entry);
+        } else {
+            entry.highlight = highlight;
+            entry.card = card;
+            entry.overlay = overlay;
+        }
+        updateConnectorPosition(entry);
+    }
+
+    function removeConnector(annotationId) {
+        const entry = connectorRegistry.get(annotationId);
+        if (!entry) return;
+        if (entry.line?.parentNode) {
+            entry.line.parentNode.removeChild(entry.line);
+        }
+        connectorRegistry.delete(annotationId);
+    }
+
+    function updateConnectorPosition(entry) {
+        const { line, highlight, card, overlay } = entry;
+        if (!highlight?.isConnected || !card?.isConnected || !overlay?.isConnected) {
+            removeConnector(entry.annotationId);
+            return;
+        }
+        if (!overlay.contains(line)) {
+            overlay.appendChild(line);
+        }
+
+        const slide = highlight.closest('.slide');
+        if (!slide) {
+            removeConnector(entry.annotationId);
+            return;
+        }
+
+        const slideRect = slide.getBoundingClientRect();
+        const highlightRect = highlight.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+
+        const startX = highlightRect.left + highlightRect.width / 2 - slideRect.left;
+        const startY = highlightRect.top + highlightRect.height / 2 - slideRect.top;
+        const endX = cardRect.left - slideRect.left - 8;
+        const endY = cardRect.top + cardRect.height / 2 - slideRect.top;
+        const dx = endX - startX;
+        const dy = endY - startY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+        line.style.width = `${distance}px`;
+        line.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}deg)`;
+    }
+
+    function scheduleConnectorUpdate() {
+        if (resizeRaf) cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(updateAllConnectors);
+    }
+
+    function updateAllConnectors() {
+        connectorRegistry.forEach(entry => updateConnectorPosition(entry));
+    }
+
+    function handleCardFocus(annotationId) {
+        if (!annotationId) return;
+        const highlight = slidesRoot.querySelector(`.annotation-highlight[data-annotation-id="${annotationId}"]`);
+        if (!highlight) return;
+        highlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        openHighlight(highlight, { focusTextarea: true });
+    }
+
+    function showAnnotationMessage(text) {
+        if (!annotationMessage) return;
+        annotationMessage.textContent = text;
+        annotationMessage.classList.add('is-visible');
+    }
+
+    function hideAnnotationMessage() {
+        if (!annotationMessage) return;
+        annotationMessage.textContent = '';
+        annotationMessage.classList.remove('is-visible');
     }
 
     function initializeActivities() {
@@ -3193,276 +3691,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.dataset.dragBound = 'true';
     }
-
-    function handleSelectionMouseUp() {
-        if (!highlightingEnabled) return;
-        if (!annotationPopover || annotationPopover.getAttribute('aria-hidden') === 'false') return;
-
-        setTimeout(() => {
-            const range = getValidRange();
-            if (!range) return;
-
-            const startHighlight = range.startContainer.parentElement && range.startContainer.parentElement.closest('.annotation-highlight');
-            const endHighlight = range.endContainer.parentElement && range.endContainer.parentElement.closest('.annotation-highlight');
-
-            if (startHighlight && startHighlight === endHighlight) {
-                openEditPopover(startHighlight);
-                window.getSelection().removeAllRanges();
-                return;
-            }
-
-            pendingRange = range;
-            openCreatePopover(range);
-        }, 0);
-    }
-
-    function getValidRange() {
-        const selection = window.getSelection();
-        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return null;
-
-        const range = selection.getRangeAt(0).cloneRange();
-        if (!slidesRoot.contains(range.startContainer) || !slidesRoot.contains(range.endContainer)) {
-            return null;
-        }
-
-        return range.toString().trim() ? range : null;
-    }
-
-    function openCreatePopover(range) {
-        annotationMode = 'create';
-        activeHighlight = null;
-        annotationForm.reset();
-        annotationColor.value = defaultHighlightColor;
-        annotationDeleteBtn.hidden = true;
-        hideAnnotationTooltip();
-        showPopover(getRectFromRange(range));
-        window.getSelection().removeAllRanges();
-    }
-
-    function openEditPopover(highlight) {
-        annotationMode = 'edit';
-        activeHighlight = highlight;
-        pendingRange = null;
-        annotationComment.value = highlight.dataset.comment || '';
-        annotationColor.value = highlight.dataset.color || defaultHighlightColor;
-        annotationDeleteBtn.hidden = false;
-        hideAnnotationTooltip();
-        showPopover(highlight.getBoundingClientRect());
-        window.getSelection().removeAllRanges();
-    }
-
-    function showPopover(rect) {
-        if (!rect) return;
-        annotationPopover.style.display = 'block';
-        annotationPopover.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(() => {
-            positionPopover(rect);
-            annotationComment.focus({ preventScroll: true });
-        });
-    }
-
-    function positionPopover(rect) {
-        const padding = 16;
-        const popoverWidth = annotationPopover.offsetWidth;
-        const popoverHeight = annotationPopover.offsetHeight;
-        let top = rect.bottom + window.scrollY + 12;
-        if (top + popoverHeight > window.scrollY + window.innerHeight - padding) {
-            top = rect.top + window.scrollY - popoverHeight - 12;
-        }
-        top = Math.max(window.scrollY + padding, top);
-
-        let left = rect.left + window.scrollX;
-        if (left + popoverWidth > window.scrollX + window.innerWidth - padding) {
-            left = window.scrollX + window.innerWidth - popoverWidth - padding;
-        }
-        left = Math.max(window.scrollX + padding, left);
-
-        annotationPopover.style.top = `${top}px`;
-        annotationPopover.style.left = `${left}px`;
-    }
-
-    function getRectFromRange(range) {
-        const rects = range.getClientRects();
-        if (rects.length) {
-            return rects[0];
-        }
-        return range.getBoundingClientRect();
-    }
-
-    function closeAnnotationPopover() {
-        annotationPopover.style.display = 'none';
-        annotationPopover.setAttribute('aria-hidden', 'true');
-        annotationForm.reset();
-        annotationColor.value = defaultHighlightColor;
-        annotationDeleteBtn.hidden = true;
-        pendingRange = null;
-        activeHighlight = null;
-        annotationMode = 'create';
-    }
-
-    function handleAnnotationSave(event) {
-        event.preventDefault();
-        const comment = annotationComment.value.trim();
-        const color = annotationColor.value || defaultHighlightColor;
-
-        if (annotationMode === 'create' && pendingRange) {
-            createHighlight(pendingRange, comment, color);
-        } else if (annotationMode === 'edit' && activeHighlight) {
-            updateHighlight(activeHighlight, comment, color);
-        }
-
-        hideAnnotationTooltip();
-        window.getSelection().removeAllRanges();
-        closeAnnotationPopover();
-    }
-
-    function createHighlight(range, comment, color) {
-        const highlight = document.createElement('span');
-        highlight.className = 'annotation-highlight';
-        highlight.dataset.annotationId = `annotation-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-        highlight.dataset.comment = comment;
-        highlight.dataset.color = color;
-        highlight.style.setProperty('--annotation-color', color || defaultHighlightColor);
-        highlight.setAttribute('tabindex', '0');
-        highlight.setAttribute('role', 'note');
-        highlight.setAttribute('aria-label', comment ? `Annotation: ${comment}` : 'Annotation highlight');
-
-        const fragment = range.extractContents();
-        highlight.appendChild(fragment);
-        range.insertNode(highlight);
-        highlight.normalize();
-        slidesRoot.normalize();
-    }
-
-    function updateHighlight(highlight, comment, color) {
-        highlight.dataset.comment = comment;
-        highlight.dataset.color = color;
-        highlight.style.setProperty('--annotation-color', color || defaultHighlightColor);
-        highlight.setAttribute('aria-label', comment ? `Annotation: ${comment}` : 'Annotation highlight');
-    }
-
-    function handleAnnotationDelete() {
-        if (!activeHighlight) return;
-        const highlight = activeHighlight;
-        closeAnnotationPopover();
-        unwrapHighlight(highlight);
-        hideAnnotationTooltip();
-    }
-
-    function unwrapHighlight(highlight) {
-        const parent = highlight.parentNode;
-        while (highlight.firstChild) {
-            parent.insertBefore(highlight.firstChild, highlight);
-        }
-        highlight.remove();
-        parent.normalize();
-    }
-
-    function handleHighlightClick(event) {
-        const highlight = event.target.closest('.annotation-highlight');
-        if (!highlight || !annotationPopover) return;
-        event.preventDefault();
-        openEditPopover(highlight);
-    }
-
-    function handleHighlightHover(event) {
-        if (!annotationTooltip || isPopoverOpen()) return;
-        const highlight = event.target.closest('.annotation-highlight');
-        if (!highlight) return;
-        showAnnotationTooltip(highlight);
-    }
-
-    function handleHighlightLeave(event) {
-        if (!annotationTooltip) return;
-        const highlight = event.target.closest('.annotation-highlight');
-        if (!highlight) return;
-        const relatedHighlight = event.relatedTarget && event.relatedTarget.closest('.annotation-highlight');
-        if (relatedHighlight === highlight) return;
-        hideAnnotationTooltip();
-    }
-
-    function handleHighlightFocus(event) {
-        const highlight = event.target.closest('.annotation-highlight');
-        if (!highlight || !annotationTooltip) return;
-        showAnnotationTooltip(highlight);
-    }
-
-    function handleHighlightBlur() {
-        hideAnnotationTooltip();
-    }
-
-    function showAnnotationTooltip(highlight) {
-        const comment = highlight.dataset.comment;
-        if (!comment) {
-            hideAnnotationTooltip();
-            return;
-        }
-        annotationTooltip.textContent = comment;
-        annotationTooltip.style.display = 'block';
-        annotationTooltip.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(() => {
-            positionTooltip(highlight.getBoundingClientRect());
-        });
-    }
-
-    function hideAnnotationTooltip() {
-        if (!annotationTooltip) return;
-        annotationTooltip.style.display = 'none';
-        annotationTooltip.setAttribute('aria-hidden', 'true');
-        annotationTooltip.textContent = '';
-    }
-
-    function positionTooltip(rect) {
-        const padding = 12;
-        const tooltipWidth = annotationTooltip.offsetWidth;
-        const tooltipHeight = annotationTooltip.offsetHeight;
-        let top = rect.top + window.scrollY - tooltipHeight - 12;
-        if (top < window.scrollY + padding) {
-            top = rect.bottom + window.scrollY + 12;
-        }
-        let left = rect.left + window.scrollX;
-        if (left + tooltipWidth > window.scrollX + window.innerWidth - padding) {
-            left = window.scrollX + window.innerWidth - tooltipWidth - padding;
-        }
-        left = Math.max(window.scrollX + padding, left);
-        annotationTooltip.style.top = `${top}px`;
-        annotationTooltip.style.left = `${left}px`;
-    }
-
-    function handleDocumentClick(event) {
-        if (!isPopoverOpen()) return;
-        if (annotationPopover.contains(event.target)) return;
-        if (event.target.closest('.annotation-highlight')) return;
-        closeAnnotationPopover();
-    }
-
-    function handleKeydown(event) {
-        if (event.key === 'Escape' && isPopoverOpen()) {
-            closeAnnotationPopover();
-            hideAnnotationTooltip();
-        }
-    }
-
-    function handleViewportShift() {
-        if (isPopoverOpen()) {
-            if (annotationMode === 'edit' && activeHighlight) {
-                positionPopover(activeHighlight.getBoundingClientRect());
-            } else if (annotationMode === 'create' && pendingRange) {
-                const rect = getRectFromRange(pendingRange);
-                if (rect) {
-                    positionPopover(rect);
-                }
-            }
-        }
-        hideAnnotationTooltip();
-    }
-
-    function isPopoverOpen() {
-        return annotationPopover && annotationPopover.getAttribute('aria-hidden') === 'false';
-    }
 });
 
-// --- GLOBAL CHECKING FUNCTIONS ---
 function checkSelectAnswers(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -3501,11 +3731,10 @@ function checkOrdering(listId) {
         item.style.backgroundColor = isCorrect ? '#e9f5ec' : '#fbe9eb';
         if (!isCorrect) allCorrect = false;
     });
-    
     const feedbackEl = list.parentElement.querySelector('.feedback');
-    if(feedbackEl){
+    if (feedbackEl) {
         feedbackEl.style.display = 'block';
-        if(allCorrect){
+        if (allCorrect) {
             feedbackEl.textContent = 'Perfect! The conversation is in the correct order.';
             feedbackEl.className = 'feedback correct';
         } else {
@@ -3515,6 +3744,7 @@ function checkOrdering(listId) {
     }
 }
 </script>
+
 
 </body>
 </html>
