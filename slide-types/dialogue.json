@@ -1,0 +1,49 @@
+{
+  "type": "dialogue",
+  "description": "Displays a conversational exchange with speech bubbles for each speaker. Use for modelling role plays or showcasing tone choices.",
+  "required": ["key", "type", "dialogue"],
+  "fields": {
+    "title": "Optional heading shown above the bubbles.",
+    "subtitle": "Optional rubric or framing text.",
+    "body": "Optional array of paragraphs rendered above the dialogue.",
+    "dialogue": "Array of turns. Each turn supports speaker, side ('left' or 'right'), lines (string or array), optional note, and avatar metadata."
+  },
+  "turnSchema": {
+    "speaker": "Label for who is speaking.",
+    "side": "'left' or 'right' to control alignment.",
+    "lines": ["One or more strings rendered as paragraphs inside the bubble."],
+    "note": "Optional facilitator aside displayed in muted text inside the bubble.",
+    "avatar": {
+      "src": "Optional URL for an avatar image.",
+      "alt": "Accessible description of the avatar.",
+      "label": "Fallback initials or label if no image is provided."
+    }
+  },
+  "example": {
+    "key": "mentor-dialogue",
+    "type": "dialogue",
+    "title": "Mentor language in action",
+    "subtitle": "Notice where the mentor validates and redirects.",
+    "dialogue": [
+      {
+        "speaker": "Mentor",
+        "side": "left",
+        "lines": ["I hear how rushed the deadline feels. What would help you slow the spiral?"]
+      },
+      {
+        "speaker": "Learner",
+        "side": "right",
+        "lines": ["I'm worried I'll disappoint the team.", "If I ask for help it means I'm behind."],
+        "note": "Invite mentees to narrate the story they're telling themselves."
+      },
+      {
+        "speaker": "Mentor",
+        "side": "left",
+        "lines": ["Let's list what support you already have and what one ask could unlock next."],
+        "avatar": {
+          "label": "MS"
+        }
+      }
+    ]
+  }
+}

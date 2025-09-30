@@ -1,0 +1,33 @@
+{
+  "type": "grounding",
+  "description": "Immersive slide with a full-bleed image and overlayed relaxation prompts—perfect for wellbeing pauses.",
+  "required": ["key", "type", "prompts"],
+  "fields": {
+    "title": "Optional heading displayed above the image block.",
+    "mantra": "Short sentence surfaced prominently inside the overlay.",
+    "promptTitle": "Optional heading for the prompts list.",
+    "prompts": "Array of strings or objects with text/html fields shown as bullet prompts.",
+    "timer": "Optional string displayed as suggested duration.",
+    "image": {
+      "src": "Background image URL (required for full effect).",
+      "alt": "Text description for accessibility."
+    }
+  },
+  "example": {
+    "key": "calm-reset",
+    "type": "grounding",
+    "title": "Take a mindful minute",
+    "mantra": "Inhale for 4, pause for 4, exhale for 6.",
+    "promptTitle": "Try one reset",
+    "prompts": [
+      "Trace the outline of your hand with your breath.",
+      "Identify three sounds in the room.",
+      "Share one word that captures how you want to feel next."
+    ],
+    "timer": "60 seconds",
+    "image": {
+      "src": "https://images.pexels.com/photos/355241/pexels-photo-355241.jpeg",
+      "alt": "Morning light streaming through trees."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "type": "flowchart",
+  "description": "Renders a simple flowchart or journey map with cards connected horizontally or vertically.",
+  "required": ["key", "type", "steps"],
+  "fields": {
+    "title": "Optional heading shown above the flow.",
+    "subtitle": "Optional rubric text.",
+    "orientation": "Set to 'horizontal' or 'vertical' (defaults to vertical).",
+    "body": "Optional array of paragraph strings that appear before the flowchart.",
+    "steps": "Array of objects defining each stage."
+  },
+  "stepSchema": {
+    "title": "Short label for the stage.",
+    "description": "Longer supporting text or instructions.",
+    "icon": "Font Awesome icon class for the step badge.",
+    "actions": "Optional array passed to a helper list for actions or sub-steps."
+  },
+  "example": {
+    "key": "decision-map",
+    "type": "flowchart",
+    "title": "Escalation decision map",
+    "orientation": "horizontal",
+    "steps": [
+      {
+        "title": "Listen",
+        "description": "Reflect back what you heard and label the feeling.",
+        "icon": "fas fa-ear-listen"
+      },
+      {
+        "title": "Assess",
+        "description": "Check for immediate risks and the support needed.",
+        "icon": "fas fa-shield-heart"
+      },
+      {
+        "title": "Decide",
+        "description": "Offer two options and co-author the next step.",
+        "icon": "fas fa-route"
+      }
+    ]
+  }
+}

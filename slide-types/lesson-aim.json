@@ -1,0 +1,35 @@
+{
+  "type": "lessonAim",
+  "description": "Highlights learning aims, success criteria, and agenda in a compact summary block.",
+  "required": ["key", "type"],
+  "fields": {
+    "title": "Optional slide heading.",
+    "headline": "Primary heading inside the block (defaults to subtitle or 'Today's aims').",
+    "badge": "Short badge string e.g. duration or phase.",
+    "aims": "Array of learning intentions.",
+    "successCriteria": "Array describing what success looks like.",
+    "agenda": "Array of steps shown as an ordered list.",
+    "tip": "Optional facilitator reminder rendered in muted text."
+  },
+  "example": {
+    "key": "lesson-orientation",
+    "type": "lessonAim",
+    "title": "Session orientation",
+    "headline": "Where are we heading?",
+    "badge": "45 min",
+    "aims": [
+      "Surface what participants already know.",
+      "Co-create expectations for collaboration."
+    ],
+    "successCriteria": [
+      "Participants can name one new strategy they'll try.",
+      "The group agrees on norms for feedback."
+    ],
+    "agenda": [
+      "Warm welcome and recap",
+      "Dialogue modelling",
+      "Practice and planning"
+    ],
+    "tip": "Invite learners to add their own aim before revealing yours."
+  }
+}

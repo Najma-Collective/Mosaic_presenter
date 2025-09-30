@@ -480,5 +480,187 @@
         ]
       }
     ]
+  },
+  "slideTypeShowcase": {
+    "id": "slide-type-showcase",
+    "label": "Slide Type Inspiration Pack",
+    "meta": {
+      "eyebrow": "Facilitation toolkit",
+      "descriptor": "Showcase slides that spark discussion, calm energy, and track progress across a workshop.",
+      "pageTitle": "Slide Type Inspiration Pack"
+    },
+    "sections": [
+      {
+        "title": "Launch",
+        "slideKeys": ["lesson-orientation"]
+      },
+      {
+        "title": "Modelled interactions",
+        "slideKeys": ["mentoring-dialogue", "calm-reset"]
+      },
+      {
+        "title": "Guided thinking",
+        "slideKeys": ["decision-map", "discussion-rounds"]
+      },
+      {
+        "title": "Closure",
+        "slideKeys": ["confidence-check"]
+      }
+    ],
+    "slides": [
+      {
+        "key": "lesson-orientation",
+        "type": "lessonAim",
+        "title": "Session orientation",
+        "headline": "Where are we heading?",
+        "badge": "45 min",
+        "aims": [
+          "Surface existing knowledge and needs.",
+          "Model active listening language.",
+          "Equip mentors with calm-down tools."
+        ],
+        "successCriteria": [
+          "Learners can describe one active-listening move.",
+          "Pairs name at least two grounding prompts they will try."
+        ],
+        "agenda": [
+          "Explore a mentor/mentee dialogue model.",
+          "Practise grounding prompts with partners.",
+          "Plan how to invite reflective questions."
+        ],
+        "tip": "Invite participants to co-create their own aims before revealing yours."
+      },
+      {
+        "key": "mentoring-dialogue",
+        "type": "dialogue",
+        "title": "Mentor language in action",
+        "subtitle": "Notice how tone and body language soften resistance.",
+        "dialogue": [
+          {
+            "speaker": "Mentor Sam",
+            "side": "left",
+            "lines": [
+              "I noticed you paused before sharing. What was happening for you in that moment?"
+            ]
+          },
+          {
+            "speaker": "Mentee Aisha",
+            "side": "right",
+            "lines": [
+              "I was worried my idea would sound naive.",
+              "Everyone else seems so sure already."
+            ],
+            "note": "Invite mentees to narrate their internal dialogue without judgement."
+          },
+          {
+            "speaker": "Mentor Sam",
+            "side": "left",
+            "lines": [
+              "Thank you for trusting us with that.",
+              "Can we try sketching the idea together so we can react to something concrete?"
+            ]
+          }
+        ],
+        "body": [
+          "Ask observers to identify the invitation, validation, and action moves in the exchange."
+        ]
+      },
+      {
+        "key": "calm-reset",
+        "type": "grounding",
+        "title": "Grounding break",
+        "mantra": "Breathe in for four, hold for four, breathe out for six.",
+        "promptTitle": "Choose a reset that works for you",
+        "prompts": [
+          "Drop your shoulders and unclench your jaw.",
+          "Notice five colours around you.",
+          "Place both feet flat on the floor and feel the support.",
+          "Share one word that captures how you want to feel when we resume."
+        ],
+        "timer": "90 seconds",
+        "image": {
+          "src": "https://images.pexels.com/photos/3560044/pexels-photo-3560044.jpeg",
+          "alt": "A calm sunrise over a misty forest."
+        }
+      },
+      {
+        "key": "decision-map",
+        "type": "flowchart",
+        "title": "Escalation decision map",
+        "subtitle": "Guide mentees through tricky conversations with a clear process.",
+        "orientation": "horizontal",
+        "steps": [
+          {
+            "title": "Listen and label",
+            "description": "Reflect back what you heard and name the emotion you notice.",
+            "icon": "fas fa-ear-listen"
+          },
+          {
+            "title": "Assess safety",
+            "description": "Ask if anyone feels at risk and what support they need right now.",
+            "icon": "fas fa-shield-heart"
+          },
+          {
+            "title": "Co-create next steps",
+            "description": "Offer two options and invite the mentee to choose or adapt them.",
+            "icon": "fas fa-route"
+          },
+          {
+            "title": "Document & follow up",
+            "description": "Record the decision and schedule a check-in within 48 hours.",
+            "icon": "fas fa-clipboard-check"
+          }
+        ]
+      },
+      {
+        "key": "discussion-rounds",
+        "type": "questionPrompts",
+        "title": "Dialogue starters",
+        "subtitle": "Use these rounds to keep the group energised and reflective.",
+        "prompts": [
+          {
+            "title": "Round 1: Celebrate",
+            "text": "Share one micro-win you've observed in your mentee recently.",
+            "action": "Invite quick snaps or emojis in the chat."
+          },
+          {
+            "title": "Round 2: Stretch",
+            "text": "What is one conversation topic you tend to avoid with mentees? Why?",
+            "stems": [
+              "I notice I hesitate when...",
+              "A question that could open this up is..."
+            ]
+          },
+          {
+            "title": "Round 3: Commit",
+            "text": "Choose a prompt you will try in your next session and pair-share why it matters.",
+            "action": "Partners jot a reminder card before the break."
+          }
+        ]
+      },
+      {
+        "key": "confidence-check",
+        "type": "checkpoint",
+        "title": "Confidence check",
+        "subtitle": "Before we leave, where do you feel solid and where do you want backup?",
+        "checkpoints": [
+          {
+            "title": "I can name our session aims in my own words.",
+            "action": "Thumbs up/down in the room or chat."
+          },
+          {
+            "title": "I have at least two grounding prompts to offer.",
+            "action": "Write them in your notes before you go."
+          },
+          {
+            "title": "I know how to escalate a concern collaboratively.",
+            "action": "Flag a scenario you want to rehearse next time."
+          }
+        ],
+        "body": [
+          "Invite participants to mark any items needing more support; use that data to plan follow-up resources."
+        ]
+      }
+    ]
   }
 }
