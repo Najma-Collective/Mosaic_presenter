@@ -586,7 +586,7 @@
             align-items: stretch;
         }
         #activity-container {
-            width: clamp(540px, 75vw, var(--workspace-max));
+            width: min(100%, clamp(720px, 85vw, var(--workspace-max)));
             background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
             padding: clamp(24px, 3.2vw, 48px);
             border-radius: var(--radius-lg);
@@ -597,9 +597,8 @@
             container-type: inline-size;
             display: flex;
             flex-direction: column;
-            min-height: 87.5vh;
-            max-height: 87.5vh;
-            height: 87.5vh;
+            min-height: 0;
+            height: auto;
             min-width: 0;
         }
         @supports (backdrop-filter: blur(6px)) {
@@ -614,21 +613,100 @@
             min-width: 0;
             min-height: 0;
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: center;
-            padding: clamp(16px, 2.6vw, 28px);
+            padding: clamp(20px, 3vw, 40px);
+            margin-top: calc(clamp(16px, 2vw, 28px) + 64px);
+        }
+        #slide-stage-shell {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            width: 100%;
+            min-height: 0;
         }
         #slides-root {
             position: relative;
             width: 100%;
             max-width: 100%;
-            height: 100%;
-            max-height: 100%;
+            flex: 1 1 auto;
+            min-height: 0;
             background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-2);
-            padding: clamp(20px, 2.6vw, 36px);
-            overflow: hidden;
+            padding: clamp(24px, 3vw, 44px);
+            overflow: visible;
+        }
+        #slides-root::-webkit-scrollbar {
+            width: 10px;
+        }
+        #slides-root::-webkit-scrollbar-track {
+            background: rgba(122, 132, 113, 0.1);
+            border-radius: 999px;
+        }
+        #slides-root::-webkit-scrollbar-thumb {
+            background: color-mix(in srgb, var(--tertiary-sage) 70%, var(--secondary-sage) 30%);
+            border-radius: 999px;
+        }
+        .slide-status-bar {
+            display: grid;
+            gap: var(--space-3);
+            padding: clamp(16px, 2.2vw, 24px);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            box-shadow: var(--shadow-1);
+        }
+        .slide-status-bar__row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-3);
+        }
+        .slide-status-bar__count {
+            margin: 0;
+            font-size: var(--step--1);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--forest-shadow);
+        }
+        .slide-status-bar__title {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: clamp(var(--step-0), 1.2vw + 0.9rem, var(--step-2));
+            color: var(--forest-shadow);
+        }
+        .slide-status-bar__actions {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        .slide-status-bar__focus-btn {
+            min-height: 40px;
+            padding: 8px 16px;
+            font-size: var(--step--1);
+        }
+        .slide-status-bar__focus-btn i {
+            font-size: 0.95rem;
+        }
+        body.focus-mode #notes-dock {
+            display: none;
+        }
+        body.focus-mode #activity-shell {
+            grid-template-columns: minmax(0, 1fr);
+        }
+        body.focus-mode #activity-container {
+            width: min(100%, clamp(760px, 92vw, var(--workspace-max)));
+        }
+        body.focus-mode #focus-mode-toggle {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--forest-shadow) 92%, white 8%), var(--forest-shadow));
+            border-color: var(--forest-shadow);
+            color: var(--soft-white);
+        }
+        body.focus-mode #focus-mode-toggle:hover {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--forest-shadow) 96%, white 4%), var(--forest-shadow));
         }
         #activity-container::before {
             content: ""; position: absolute; inset: -1px; border-radius: inherit;
@@ -639,15 +717,15 @@
         .screen {
             display: none;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
+            min-height: 100%;
+            padding-bottom: var(--space-6);
             scroll-margin-top: clamp(90px, 12vh, 140px);
         } /* Hide screens initially */
         .screen.active {
             display: flex;
             flex-direction: column;
             gap: var(--space-5);
-            height: 100%;
+            min-height: 100%;
         } /* Show active screen */
         .data-status-message {
             margin: var(--space-7) auto;
@@ -903,73 +981,62 @@
             z-index: 2;
         }
         .workspace-menu {
-            position: relative;
-            display: inline-flex;
-            flex-direction: column;
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(122, 132, 113, 0.2);
-            background: color-mix(in srgb, var(--soft-white) 96%, white 4%);
-            box-shadow: var(--shadow-1);
-            overflow: visible;
-            min-width: 0;
-        }
-        .workspace-menu[open] {
-            box-shadow: var(--shadow-2);
+            position: absolute;
+            top: clamp(16px, 2vw, 28px);
+            left: clamp(16px, 2vw, 28px);
+            z-index: 30;
         }
         .workspace-menu__summary {
+            appearance: none;
+            border: none;
+            background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
             display: inline-flex;
             align-items: center;
-            gap: var(--space-2);
-            padding: var(--space-2) var(--space-4);
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(122, 132, 113, 0.22);
+            box-shadow: var(--shadow-1);
             cursor: pointer;
-            list-style: none;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-size: var(--step--1);
-            font-weight: 800;
             color: var(--forest-shadow);
+            transition: transform var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient), background var(--dur-2) var(--ease-ambient);
         }
         .workspace-menu__summary::-webkit-details-marker { display: none; }
         .workspace-menu__summary:focus-visible {
             outline: none;
             box-shadow: var(--ring);
         }
-        .workspace-menu__summary-label {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-2);
-            white-space: nowrap;
-            font-family: var(--font-display);
+        .workspace-menu[open] .workspace-menu__summary {
+            background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
+            box-shadow: var(--shadow-2);
+            transform: scale(1.04);
         }
-        .workspace-menu__summary-indicator {
+        .workspace-menu__summary-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: var(--forest-shadow);
+            width: 100%;
+            height: 100%;
         }
-        .workspace-menu__summary-indicator i {
-            color: var(--primary-sage);
-            transition: transform var(--dur-2) var(--ease-ambient);
-            font-size: 0.85em;
-        }
-        .workspace-menu[open] .workspace-menu__summary-indicator i {
-            transform: rotate(-180deg);
+        .workspace-menu__summary-icon i {
+            font-size: 1.2rem;
         }
         .workspace-menu__panel {
             position: absolute;
-            top: calc(100% + var(--space-2));
+            top: calc(100% + var(--space-3));
             left: 0;
-            z-index: 15;
+            width: min(420px, max(280px, 42vw));
+            max-height: min(70vh, 540px);
+            overflow: auto;
             display: grid;
             gap: var(--space-5);
-            padding: var(--space-4);
-            width: clamp(320px, 36vw, 520px);
-            max-height: min(60vh, 520px);
-            overflow: auto;
+            padding: clamp(20px, 2.6vw, 32px);
             border-radius: var(--radius-lg);
             border: 1px solid rgba(122, 132, 113, 0.18);
-            background: color-mix(in srgb, var(--soft-white) 98%, white 2%);
+            background: color-mix(in srgb, var(--soft-white) 96%, white 4%);
             box-shadow: var(--shadow-3);
+            z-index: 40;
         }
         .workspace-menu__intro {
             display: flex;
@@ -1380,6 +1447,7 @@
         @media (min-width: 1024px) {
             #activity-container { box-shadow: var(--shadow-3); }
             #activity-shell { grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr); gap: var(--space-7); }
+            body.focus-mode #activity-shell { grid-template-columns: minmax(0, 1fr); }
             #notes-dock {
                 align-self: start;
                 width: clamp(260px, 22vw, 420px);
@@ -1394,7 +1462,10 @@
                 overflow: auto;
                 padding-right: var(--space-1);
             }
-            #slide-stage { padding: clamp(16px, 2.2vw, 32px); }
+            #slide-stage {
+                padding: clamp(24px, 2.8vw, 56px);
+                margin-top: calc(clamp(20px, 2.6vw, 36px) + 64px);
+            }
         }
         @media (max-width: 767px) {
             #app-wrapper { padding: var(--space-4); }
@@ -1408,6 +1479,7 @@
             #slide-stage {
                 padding: var(--space-3);
                 align-items: stretch;
+                margin-top: calc(var(--space-7) + 64px);
             }
             #slides-root {
                 aspect-ratio: auto;
@@ -1417,14 +1489,19 @@
             h1 { font-size: clamp(1.75rem, 5vw, 2rem); }
             h2.rubric { font-size: var(--step--1); margin-bottom: 20px; }
             .slide-map-button { padding-inline: var(--space-3); }
-            .workspace-menu { width: 100%; }
-            .workspace-menu__summary { width: 100%; justify-content: space-between; }
+            .workspace-menu {
+                position: fixed;
+                top: var(--space-3);
+                left: var(--space-3);
+            }
             .workspace-menu__panel {
-                position: static;
-                width: 100%;
-                max-height: none;
-                margin-top: var(--space-3);
-                box-shadow: var(--shadow-2);
+                position: fixed;
+                top: calc(var(--space-3) + 60px);
+                left: var(--space-3);
+                right: var(--space-3);
+                bottom: auto;
+                width: auto;
+                max-height: calc(100vh - (var(--space-3) * 2) - 76px);
             }
             .lesson-selector { width: 100%; }
             .lesson-selector select { width: 100%; min-width: 0; }
@@ -1454,11 +1531,17 @@
             }
             #activity-container { background: color-mix(in srgb, #23261F 92%, #1B1E19 8%); border-color: rgba(184, 197, 166, 0.18); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
             #slides-root { background: color-mix(in srgb, #23261F 88%, #1B1E19 12%); box-shadow: 0 20px 40px rgba(0,0,0,0.45); }
-            .workspace-menu { background: rgba(28, 31, 26, 0.9); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
-            .workspace-menu__summary { color: var(--forest-shadow); }
-            .workspace-menu__summary-indicator { color: var(--forest-shadow); }
+            .workspace-menu__summary {
+                background: rgba(28, 31, 26, 0.9);
+                border-color: rgba(184, 197, 166, 0.28);
+                color: var(--forest-shadow);
+            }
+            .workspace-menu__panel {
+                background: rgba(28, 31, 26, 0.92);
+                border-color: rgba(184, 197, 166, 0.28);
+                box-shadow: 0 18px 36px rgba(0,0,0,0.4);
+            }
             .workspace-menu__descriptor { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
-            .workspace-menu__panel { background: rgba(28, 31, 26, 0.92); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 18px 36px rgba(0,0,0,0.4); }
             .workspace-tools { background: rgba(28, 31, 26, 0.78); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
             .workspace-tools__hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .lesson-selector label { color: var(--forest-shadow); }
@@ -2425,17 +2508,16 @@
 
             <header class="presentation-header" id="presentation-header">
                 <details class="workspace-menu" id="workspace-menu">
-                    <summary class="workspace-menu__summary">
-                        <span class="workspace-menu__summary-label">Session controls</span>
+                    <summary class="workspace-menu__summary" aria-label="Session controls">
+                        <span class="workspace-menu__summary-icon" aria-hidden="true">
+                            <i class="fas fa-cog"></i>
+                        </span>
                         <span class="workspace-menu__summary-text visually-hidden">
                             <span class="workspace-menu__summary-eyebrow" id="presentation-eyebrow">Instructional Session</span>
                             <span class="workspace-menu__summary-title" id="workspace-summary-title">Select a lesson template</span>
                             <span class="workspace-menu__summary-descriptor" id="presentation-descriptor">Choose a template to populate the slides.</span>
                         </span>
-                        <span class="workspace-menu__summary-indicator">
-                            <span class="workspace-menu__summary-hint visually-hidden">Open session controls</span>
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </span>
+                        <span class="workspace-menu__summary-hint visually-hidden">Open session controls</span>
                     </summary>
                     <div class="workspace-menu__panel">
                         <div class="workspace-menu__intro">
@@ -2467,9 +2549,23 @@
                 </details>
             </header>
 
-                <div id="slide-stage">
-                    <div id="slides-root" role="presentation"></div>
-                </div>
+        <div id="slide-stage">
+            <div id="slide-stage-shell">
+                <section class="slide-status-bar" id="slide-status-bar" aria-live="polite">
+                    <div class="slide-status-bar__row">
+                        <p class="slide-status-bar__count" id="slide-status-count">Loading slides…</p>
+                        <div class="slide-status-bar__actions">
+                            <button type="button" class="activity-btn secondary slide-status-bar__focus-btn" id="focus-mode-toggle" aria-pressed="false">
+                                <i class="fas fa-eye-slash" aria-hidden="true"></i>
+                                <span class="focus-mode-toggle__label">Focus mode</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="slide-status-bar__title" id="slide-status-title">Preparing your lesson</p>
+                </section>
+                <div id="slides-root" role="presentation"></div>
+            </div>
+        </div>
 
         </div>
         <aside id="notes-dock" aria-label="Collaborative slide notes workspace">
@@ -2503,8 +2599,15 @@
         let notesPanelsHost = null;
         const slideMapButtons = [];
         let keyboardHandlerAttached = false;
+        let focusModeEnabled = false;
 
         const slidesRoot = document.getElementById("slides-root");
+        const notesDock = document.getElementById("notes-dock");
+        const slideStatusCount = document.getElementById("slide-status-count");
+        const slideStatusTitle = document.getElementById("slide-status-title");
+        const focusModeToggle = document.getElementById("focus-mode-toggle");
+        const focusModeLabel = focusModeToggle ? focusModeToggle.querySelector(".focus-mode-toggle__label") : null;
+        const focusModeIcon = focusModeToggle ? focusModeToggle.querySelector("i") : null;
         const presentationEyebrow = document.getElementById("presentation-eyebrow");
         const presentationDescriptor = document.getElementById("presentation-descriptor");
         const workspaceSummaryTitle = document.getElementById("workspace-summary-title");
@@ -2536,6 +2639,13 @@
         const motionQuery = typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
         let prefersReducedMotion = motionQuery ? motionQuery.matches : false;
 
+        setFocusMode(false);
+        if (focusModeToggle) {
+            focusModeToggle.addEventListener("click", () => {
+                setFocusMode(!focusModeEnabled);
+            });
+        }
+
         function setPresentationDescriptor(message) {
             if (presentationDescriptor) {
                 presentationDescriptor.textContent = message;
@@ -2545,11 +2655,73 @@
             }
         }
 
+        function updateSlideStatusBar({ countText, titleText }) {
+            if (slideStatusCount && typeof countText === "string") {
+                slideStatusCount.textContent = countText;
+            }
+            if (slideStatusTitle && typeof titleText === "string") {
+                slideStatusTitle.textContent = titleText;
+            }
+        }
+
+        function updateSlideStatus(index) {
+            if (!slides.length) {
+                updateSlideStatusBar({
+                    countText: "Slides unavailable",
+                    titleText: "This lesson does not include slides yet."
+                });
+                return;
+            }
+            const current = Math.min(Math.max(index, 0), slides.length - 1);
+            const slide = slides[current];
+            const title = slide?.querySelector(".slide-title")?.textContent?.trim();
+            const fallbackTitle = activeLesson?.label ? `${activeLesson.label}` : "Untitled slide";
+            updateSlideStatusBar({
+                countText: `Slide ${current + 1} of ${slides.length}`,
+                titleText: title || fallbackTitle
+            });
+        }
+
+        function setFocusMode(enabled) {
+            focusModeEnabled = Boolean(enabled);
+            if (typeof document !== "undefined") {
+                document.body.classList.toggle("focus-mode", focusModeEnabled);
+            }
+            if (focusModeToggle) {
+                focusModeToggle.setAttribute("aria-pressed", focusModeEnabled ? "true" : "false");
+                const label = focusModeEnabled ? "Show notes panels" : "Hide notes panels";
+                focusModeToggle.title = label;
+                focusModeToggle.setAttribute("aria-label", label);
+            }
+            if (focusModeLabel) {
+                focusModeLabel.textContent = focusModeEnabled ? "Show notes" : "Focus mode";
+            }
+            if (focusModeIcon) {
+                focusModeIcon.className = focusModeEnabled ? "fas fa-eye" : "fas fa-eye-slash";
+            }
+            if (notesDock) {
+                if (focusModeEnabled) {
+                    notesDock.hidden = true;
+                    notesDock.setAttribute("aria-hidden", "true");
+                } else {
+                    notesDock.hidden = false;
+                    notesDock.removeAttribute("aria-hidden");
+                }
+            }
+        }
+
         function displayStatusMessage(message) {
             if (!slidesRoot) {
                 return;
             }
             slidesRoot.innerHTML = "";
+            if (message) {
+                const descriptorText = presentationDescriptor?.textContent?.trim() || "Preparing your session…";
+                updateSlideStatusBar({
+                    countText: message,
+                    titleText: descriptorText
+                });
+            }
             if (!message) {
                 return;
             }
@@ -5298,6 +5470,12 @@
             initializeTextboxes();
             renderAllSlides();
             buildSlideMap();
+            if (!slides.length) {
+                updateSlideStatusBar({
+                    countText: "Slides unavailable",
+                    titleText: "This lesson does not include slides yet."
+                });
+            }
             showSlide(0);
 
             if (lessonSelector && lessonSelector.value !== resolvedKey) {
@@ -5355,6 +5533,14 @@
             hideHighlightToolbar();
             hideAnnotationPopover();
             const activeSlide = slides[index];
+            if (slidesRoot) {
+                try {
+                    slidesRoot.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+                } catch (error) {
+                    slidesRoot.scrollTop = 0;
+                }
+            }
+            updateSlideStatus(index);
             if (activeSlide) {
                 animateSlideContents(activeSlide);
                 activateNotesPanel(activeSlide.dataset.slideId);
