@@ -583,14 +583,24 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: var(--space-6);
-            align-items: start;
+            align-items: stretch;
         }
         #activity-container {
-            width: 100%; max-width: var(--container-max);
+            width: clamp(540px, 75vw, var(--workspace-max));
             background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
-            padding: clamp(24px, 3.2vw, 48px); border-radius: var(--radius-lg);
-            border: 1px solid rgba(122, 132, 113, 0.12); box-shadow: var(--shadow-2);
-            position: relative; isolation: isolate; container-type: inline-size;
+            padding: clamp(24px, 3.2vw, 48px);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 132, 113, 0.12);
+            box-shadow: var(--shadow-2);
+            position: relative;
+            isolation: isolate;
+            container-type: inline-size;
+            display: flex;
+            flex-direction: column;
+            min-height: 87.5vh;
+            max-height: 87.5vh;
+            height: 87.5vh;
+            min-width: 0;
         }
         @supports (backdrop-filter: blur(6px)) {
             #activity-container {
@@ -598,14 +608,47 @@
                 backdrop-filter: blur(6px) saturate(1.02);
             }
         }
+        #slide-stage {
+            flex: 1 1 auto;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(16px, 2.6vw, 28px);
+        }
+        #slides-root {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            max-height: 100%;
+            background: color-mix(in srgb, var(--soft-white) 94%, white 6%);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-2);
+            padding: clamp(20px, 2.6vw, 36px);
+            overflow: hidden;
+        }
         #activity-container::before {
             content: ""; position: absolute; inset: -1px; border-radius: inherit;
             background: radial-gradient(1200px 200px at 50% -5%, rgba(156,175,136,0.12), transparent 60%),
                         radial-gradient(800px 1000px at 50% 110%, rgba(122,132,113,0.08), transparent 70%);
             z-index: -1; pointer-events: none;
         }
-        .screen { display: none; scroll-margin-top: clamp(90px, 12vh, 140px); } /* Hide screens initially */
-        .screen.active { display: block; } /* Show active screen */
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            scroll-margin-top: clamp(90px, 12vh, 140px);
+        } /* Hide screens initially */
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+            height: 100%;
+        } /* Show active screen */
         .data-status-message {
             margin: var(--space-7) auto;
             padding: var(--space-6);
@@ -851,90 +894,82 @@
         .accent-card--frost { background: color-mix(in srgb, rgba(122, 132, 113, 0.12) 40%, white 60%); backdrop-filter: blur(12px); }
 
         .presentation-header {
-            position: sticky;
-            top: 0;
-            z-index: 3;
-            background: linear-gradient(180deg, rgba(248, 246, 240, 0.92) 0%, rgba(248, 246, 240, 0.65) 85%, transparent 100%);
-            backdrop-filter: blur(6px);
-            padding: clamp(12px, 1.6vw, 18px) clamp(24px, 3vw, 36px);
-            margin: calc(var(--space-6) * -1) calc(clamp(24px, 3.2vw, 48px) * -1) var(--space-4);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-            border-bottom: 1px solid rgba(122, 132, 113, 0.12);
-            box-shadow: 0 12px 28px rgba(62, 74, 58, 0.16);
+            position: relative;
+            margin: 0 0 var(--space-3);
+            padding: 0;
+            background: none;
+            border: none;
+            box-shadow: none;
+            z-index: 2;
         }
         .workspace-menu {
-            display: block;
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(122, 132, 113, 0.16);
-            background: rgba(255, 255, 255, 0.88);
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(122, 132, 113, 0.2);
+            background: color-mix(in srgb, var(--soft-white) 96%, white 4%);
             box-shadow: var(--shadow-1);
-            overflow: hidden;
+            overflow: visible;
+            min-width: 0;
         }
         .workspace-menu[open] {
             box-shadow: var(--shadow-2);
         }
         .workspace-menu__summary {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            gap: var(--space-4);
-            padding: var(--space-4);
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
             cursor: pointer;
             list-style: none;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: var(--step--1);
+            font-weight: 800;
+            color: var(--forest-shadow);
         }
         .workspace-menu__summary::-webkit-details-marker { display: none; }
         .workspace-menu__summary:focus-visible {
             outline: none;
             box-shadow: var(--ring);
         }
-        .workspace-menu__summary-text {
-            display: grid;
-            gap: var(--space-1);
-            min-width: 0;
-        }
-        .workspace-menu__summary-eyebrow {
-            font-size: var(--step--2);
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--primary-sage);
-        }
-        .workspace-menu__summary-title {
-            font-family: var(--font-display);
-            font-size: var(--step-1);
-            font-weight: 700;
-            color: var(--forest-shadow);
-        }
-        .workspace-menu__summary-descriptor {
-            font-size: var(--step--1);
-            color: var(--ink-muted);
+        .workspace-menu__summary-label {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: clamp(220px, 40vw, 520px);
+            font-family: var(--font-display);
         }
         .workspace-menu__summary-indicator {
             display: inline-flex;
             align-items: center;
-            gap: var(--space-2);
-            font-weight: 700;
+            justify-content: center;
             color: var(--forest-shadow);
         }
-        .workspace-menu__summary-indicator i { color: var(--primary-sage); }
-        .workspace-menu__summary-hint {
-            font-size: var(--step--1);
-            color: var(--ink-muted);
-        }
-        .workspace-menu__summary i {
+        .workspace-menu__summary-indicator i {
+            color: var(--primary-sage);
             transition: transform var(--dur-2) var(--ease-ambient);
+            font-size: 0.85em;
         }
-        .workspace-menu[open] .workspace-menu__summary i {
+        .workspace-menu[open] .workspace-menu__summary-indicator i {
             transform: rotate(-180deg);
         }
         .workspace-menu__panel {
+            position: absolute;
+            top: calc(100% + var(--space-2));
+            left: 0;
+            z-index: 15;
             display: grid;
             gap: var(--space-5);
-            padding: 0 var(--space-4) var(--space-5);
+            padding: var(--space-4);
+            width: clamp(320px, 36vw, 520px);
+            max-height: min(60vh, 520px);
+            overflow: auto;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            background: color-mix(in srgb, var(--soft-white) 98%, white 2%);
+            box-shadow: var(--shadow-3);
         }
         .workspace-menu__intro {
             display: flex;
@@ -1344,19 +1379,14 @@
         }
         @media (min-width: 1024px) {
             #activity-container { box-shadow: var(--shadow-3); }
-            h1 { letter-spacing: 0.3px; }
-            .presentation-header { padding: clamp(20px, 2.4vw, 32px) clamp(28px, 3.2vw, 48px); margin: calc(var(--space-6) * -1) calc(clamp(28px, 3.2vw, 48px) * -1) var(--space-5); }
-            #slide-map-list { gap: var(--space-4); }
-        }
-        @media (min-width: 1180px) {
-            #activity-shell { grid-template-columns: minmax(0, 2.35fr) minmax(280px, 1fr); gap: var(--space-7); }
-            #activity-container { max-width: none; }
+            #activity-shell { grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr); gap: var(--space-7); }
             #notes-dock {
                 align-self: start;
-                max-width: 440px;
+                width: clamp(260px, 22vw, 420px);
                 position: sticky;
-                top: clamp(24px, 3.5vw, 48px);
-                max-height: calc(100dvh - (clamp(24px, 3.5vw, 48px) * 2));
+                top: clamp(16px, 2.4vw, 32px);
+                height: 87.5vh;
+                max-height: 87.5vh;
                 overflow: hidden;
             }
             #notes-panels {
@@ -1364,16 +1394,38 @@
                 overflow: auto;
                 padding-right: var(--space-1);
             }
+            #slide-stage { padding: clamp(16px, 2.2vw, 32px); }
         }
         @media (max-width: 767px) {
             #app-wrapper { padding: var(--space-4); }
-            #activity-container { padding: 24px; }
+            #activity-container {
+                width: 100%;
+                padding: 24px;
+                height: auto;
+                min-height: 0;
+                max-height: none;
+            }
+            #slide-stage {
+                padding: var(--space-3);
+                align-items: stretch;
+            }
+            #slides-root {
+                aspect-ratio: auto;
+                height: auto;
+                max-height: none;
+            }
             h1 { font-size: clamp(1.75rem, 5vw, 2rem); }
             h2.rubric { font-size: var(--step--1); margin-bottom: 20px; }
             .slide-map-button { padding-inline: var(--space-3); }
-            .workspace-menu__summary { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
-            .workspace-menu__summary-indicator { width: 100%; justify-content: space-between; }
-            .workspace-menu__summary-descriptor { max-width: 100%; white-space: normal; }
+            .workspace-menu { width: 100%; }
+            .workspace-menu__summary { width: 100%; justify-content: space-between; }
+            .workspace-menu__panel {
+                position: static;
+                width: 100%;
+                max-height: none;
+                margin-top: var(--space-3);
+                box-shadow: var(--shadow-2);
+            }
             .lesson-selector { width: 100%; }
             .lesson-selector select { width: 100%; min-width: 0; }
         }
@@ -1401,12 +1453,12 @@
                             linear-gradient(135deg, #191D18 0%, #1B1E19 100%);
             }
             #activity-container { background: color-mix(in srgb, #23261F 92%, #1B1E19 8%); border-color: rgba(184, 197, 166, 0.18); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
-            .presentation-header { background: linear-gradient(180deg, rgba(31, 33, 28, 0.92) 0%, rgba(31, 33, 28, 0.6) 85%, transparent 100%); border-bottom-color: rgba(184, 197, 166, 0.2); }
-            .workspace-menu { background: rgba(28, 31, 26, 0.88); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
+            #slides-root { background: color-mix(in srgb, #23261F 88%, #1B1E19 12%); box-shadow: 0 20px 40px rgba(0,0,0,0.45); }
+            .workspace-menu { background: rgba(28, 31, 26, 0.9); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
             .workspace-menu__summary { color: var(--forest-shadow); }
             .workspace-menu__summary-indicator { color: var(--forest-shadow); }
-            .workspace-menu__summary-hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .workspace-menu__descriptor { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
+            .workspace-menu__panel { background: rgba(28, 31, 26, 0.92); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 18px 36px rgba(0,0,0,0.4); }
             .workspace-tools { background: rgba(28, 31, 26, 0.78); border-color: rgba(184, 197, 166, 0.28); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
             .workspace-tools__hint { color: color-mix(in srgb, var(--ink-muted) 85%, #fff 15%); }
             .lesson-selector label { color: var(--forest-shadow); }
@@ -2374,14 +2426,15 @@
             <header class="presentation-header" id="presentation-header">
                 <details class="workspace-menu" id="workspace-menu">
                     <summary class="workspace-menu__summary">
-                        <span class="workspace-menu__summary-text">
+                        <span class="workspace-menu__summary-label">Session controls</span>
+                        <span class="workspace-menu__summary-text visually-hidden">
                             <span class="workspace-menu__summary-eyebrow" id="presentation-eyebrow">Instructional Session</span>
                             <span class="workspace-menu__summary-title" id="workspace-summary-title">Select a lesson template</span>
                             <span class="workspace-menu__summary-descriptor" id="presentation-descriptor">Choose a template to populate the slides.</span>
                         </span>
-                        <span class="workspace-menu__summary-indicator" aria-hidden="true">
-                            <span class="workspace-menu__summary-hint">Open workspace menu</span>
-                            <i class="fas fa-chevron-down"></i>
+                        <span class="workspace-menu__summary-indicator">
+                            <span class="workspace-menu__summary-hint visually-hidden">Open session controls</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
                         </span>
                     </summary>
                     <div class="workspace-menu__panel">
@@ -2414,7 +2467,9 @@
                 </details>
             </header>
 
-                <div id="slides-root" role="presentation"></div>
+                <div id="slide-stage">
+                    <div id="slides-root" role="presentation"></div>
+                </div>
 
         </div>
         <aside id="notes-dock" aria-label="Collaborative slide notes workspace">
@@ -2463,7 +2518,7 @@
         let embeddedLessonLibrary = null;
         if (workspaceMenu && workspaceSummaryHint) {
             const updateWorkspaceSummaryHint = () => {
-                workspaceSummaryHint.textContent = workspaceMenu.open ? "Close workspace menu" : "Open workspace menu";
+                workspaceSummaryHint.textContent = workspaceMenu.open ? "Close session controls" : "Open session controls";
             };
             workspaceMenu.addEventListener("toggle", updateWorkspaceSummaryHint);
             updateWorkspaceSummaryHint();
