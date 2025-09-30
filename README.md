@@ -32,7 +32,38 @@ Add objects to the `slides` array in the order they should appear. Every slide o
 - `matching`: Set up `columns` and `rows` to create a multiple-choice grid. Each row specifies `correctColumn` and optional `explanation`. Global instructions, feedback summaries, and button labels work the same way.【F:Presenter.html†L3796-L3962】【F:Presenter.html†L2133-L2219】
 
 ## 4. Launch your lesson
-Open `Presenter.html` in a browser and use the **Lesson template** dropdown to select your lesson. The slide deck, slide map, and notes panel refresh instantly when you change templates.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4311-L4342】
+Open `Presenter.html` in a browser and use the **Lesson template** dropdown to select your lesson. The slide deck, slide map, and notes panel refresh instantly when you change templates. The planning checklist now lives inside the **AI lesson designer checklist** card within the Session tools drawer—expand the collapsible summary whenever you want pacing or guardrail reminders without covering the active slide. The Session tools drawer loads closed by default so the instructional canvas stays clear until you open it.【F:Presenter.html†L1846-L1894】【F:Presenter.html†L5865-L6024】【F:Presenter.html†L1857-L1864】
 
 ## 5. Notes and reusable assets
 Slide notes are stored per-lesson in `localStorage` using the lesson `id`, so switching templates keeps annotations separate. Import/export controls remain available from the toolbar. Images can point to remote URLs or relative paths in the repository; be sure to include descriptive alt text for accessibility.【F:Presenter.html†L2687-L2734】【F:Presenter.html†L1455-L1939】
+
+## 6. LLM authoring directives
+The `aiLessonDesignerBlueprint` entry inside `lessonLibrary` includes a purpose-built guide for language models. Use these directives whenever you prompt an LLM to generate a new lesson configuration.【F:Presenter.html†L1887-L2148】
+
+### Purpose
+- Produce a single JSON object that can be injected into `lessonLibrary` without hand-editing. Avoid prose wrapping or Markdown fences so the presenter can parse it directly.【F:Presenter.html†L1900-L1940】
+
+### Output contract
+- **Top-level keys**: `id`, `label`, `meta`, `sections`, and `slides` are mandatory. `meta` must contain `eyebrow`, `descriptor`, optional `pageTitle`, and a fully populated `planner` object.【F:Presenter.html†L1900-L1940】【F:Presenter.html†L1939-L2059】
+- **Sections array**: Provide ordered objects with `title` and `slideKeys`. Every slide key must appear exactly once so the slide map groups correctly.【F:Presenter.html†L1900-L1940】【F:Presenter.html†L2059-L2106】
+- **Slides array**: Supply ordered slide configs. Each config needs a unique `key`, a supported `type`, and only the properties required by that renderer.【F:Presenter.html†L1900-L1940】【F:Presenter.html†L2106-L2148】
+- **Planner object**: Include pacing segments, overview sections, the `spotlight` reminder, and the pedagogical guardrails listed below so facilitators can prep at a glance.【F:Presenter.html†L1941-L2059】
+
+### Supported slide types
+- **hero** – Open the lesson, activate prior knowledge, and name community agreements. Accepts `title`, `subtitle`, `image`, optional navigation, and an optional `spotlight` cue.【F:Presenter.html†L1905-L1938】
+- **content** – Model concepts and anchor charts with paragraphs, lists, annotations, and imagery for direct instruction moments.【F:Presenter.html†L1905-L1938】
+- **cards** – Lay out stations, differentiation pathways, or multimodal options where each card can note scaffolds or extensions.【F:Presenter.html†L1905-L1938】
+- **quiz** – Plan formative checks with explicit answer keys so facilitators can diagnose next steps.【F:Presenter.html†L1905-L1938】
+- **reflection** – Close loops with exit tickets, SEL check-ins, or future-planning prompts using frames and sentence starters.【F:Presenter.html†L1905-L1938】
+- **process** – Document gradual release routines with timed segments and clear teacher vs. learner actions.【F:Presenter.html†L1905-L1938】
+- **activity** – Reserve for interactive slide types (`grouping`, `gapfill`, `matching`, `ranking`) that need auto-check logic.【F:Presenter.html†L1905-L1938】
+
+### Interaction and sequencing guardrails
+- Provide accessible alt text, sequencing cues, and automatic check/reset details for interactive slides. Annotate key phrases where extra context benefits learners.【F:Presenter.html†L1941-L1998】
+- Sequence learning so every new concept is followed by guided practice or formative evidence before independent work.【F:Presenter.html†L1941-L1998】
+- Capture objectives, evidence, scaffolds, and extensions inside the planner so facilitators can see how pedagogy flows across the deck.【F:Presenter.html†L1998-L2069】
+- Retain accessibility and tone commitments: inclusive language, gender-neutral names, and second-person facilitator guidance.【F:Presenter.html†L2059-L2069】
+
+### Prompting script
+- When prompting the LLM, feed it audience, objectives, duration, required interactions, and success metrics. Demand kebab-case slide keys, differentiated supports, and the sequencing guardrails listed above.【F:Presenter.html†L1945-L2069】【F:Presenter.html†L2098-L2148】
+- Close your prompt with the reminder from the planner spotlight: return only valid JSON that already aligns objectives, evidence, and supports for every slide.【F:Presenter.html†L2066-L2070】
