@@ -737,6 +737,296 @@
             border-radius: var(--radius);
             margin-bottom: var(--space-6);
         }
+
+        /* Blueprint slide system (flexible layout-driven slides) */
+        .blueprint-slide .controls { margin-top: var(--space-7); }
+        .blueprint {
+            display: flex;
+            flex-direction: column;
+            gap: var(--blueprint-gap, var(--space-5));
+            width: 100%;
+        }
+        .blueprint-block {
+            width: 100%;
+        }
+        .blueprint-block--mt-space-4 { margin-top: var(--space-4); }
+        .blueprint-block--mt-space-5 { margin-top: var(--space-5); }
+        .blueprint-block--mt-space-6 { margin-top: var(--space-6); }
+        .blueprint-block--mt-space-7 { margin-top: var(--space-7); }
+        .blueprint-block.animate-on-scroll { animation-duration: 600ms; }
+        .blueprint--single-column {
+            align-items: stretch;
+        }
+        .blueprint-align-center {
+            align-items: center;
+            text-align: center;
+        }
+        .blueprint-align-center .blueprint-block {
+            max-width: min(100%, 760px);
+        }
+        .blueprint-align-left {
+            align-items: stretch;
+            text-align: left;
+        }
+        .blueprint-align-right {
+            align-items: flex-end;
+            text-align: right;
+        }
+        .blueprint-align-right .blueprint-block {
+            max-width: min(100%, 760px);
+        }
+        .blueprint-media {
+            margin: 0;
+        }
+        .blueprint-media img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-1);
+            margin: 0;
+        }
+        .blueprint-media figcaption {
+            margin-top: var(--space-2);
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+        .blueprint-heading {
+            margin: 0;
+            color: var(--forest-shadow);
+        }
+        .blueprint-heading.slide-title {
+            font-family: var(--font-display);
+        }
+        .blueprint-text {
+            margin: 0;
+        }
+        .blueprint-list {
+            margin: 0;
+            padding-left: 1.25em;
+            display: grid;
+            gap: var(--space-2);
+        }
+        .blueprint-list--unordered {
+            list-style: disc;
+        }
+        .blueprint-list--ordered {
+            list-style: decimal;
+        }
+        .blueprint-list__item {
+            line-height: 1.6;
+        }
+        .blueprint-list__item strong {
+            display: inline-block;
+            font-weight: 700;
+            color: var(--forest-shadow);
+        }
+        .blueprint-list__description {
+            display: inline;
+        }
+        .blueprint-definition-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: var(--space-3);
+        }
+        .blueprint-definition-list li {
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-sage);
+            padding: var(--space-4);
+        }
+        .blueprint-definition-list strong {
+            color: var(--primary-sage);
+            font-weight: 700;
+            display: block;
+            margin-bottom: var(--space-2);
+        }
+        .blueprint-activity {
+            background: color-mix(in srgb, #ffffff 92%, var(--warm-cream) 8%);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-sage);
+            padding: var(--space-4);
+            display: grid;
+            gap: var(--space-3);
+            text-align: left;
+        }
+        .blueprint-align-center .blueprint-activity {
+            text-align: center;
+        }
+        .blueprint-activity__title {
+            margin: 0;
+            font-family: var(--font-display);
+            color: var(--forest-shadow);
+        }
+        .blueprint-activity__description {
+            margin: 0;
+        }
+        .blueprint-activity__list {
+            padding-left: 1.25em;
+            margin: 0;
+            display: grid;
+            gap: var(--space-2);
+        }
+        .blueprint-grid {
+            display: grid;
+            gap: var(--space-4);
+            grid-template-columns: var(--blueprint-grid-columns, repeat(auto-fit, minmax(180px, 1fr)));
+        }
+        .blueprint-grid__item {
+            background: var(--soft-white);
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            padding: var(--space-4);
+            display: grid;
+            gap: var(--space-3);
+        }
+        .blueprint-grid__title {
+            margin: 0;
+            font-size: var(--step-0);
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+        .blueprint-gallery {
+            display: grid;
+            gap: var(--space-5);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .blueprint-gallery__item {
+            background: var(--soft-white);
+            border-radius: var(--radius);
+            border: 1px solid rgba(122, 132, 113, 0.16);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+        }
+        .blueprint-gallery__item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .blueprint-gallery__body {
+            padding: var(--space-4);
+        }
+        .blueprint-gallery__title {
+            margin: 0 0 var(--space-1) 0;
+            font-weight: 700;
+            color: var(--forest-shadow);
+        }
+        .blueprint-gallery__subtitle {
+            margin: 0;
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+        .blueprint-radio-group {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .blueprint-radio {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-sage);
+            background: var(--soft-white);
+            cursor: pointer;
+            transition: border-color var(--dur-1) var(--ease-ambient), box-shadow var(--dur-1) var(--ease-ambient);
+        }
+        .blueprint-radio:hover,
+        .blueprint-radio:focus-within {
+            border-color: var(--secondary-sage);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary-sage) 20%, transparent);
+        }
+        .blueprint-radio input {
+            width: 1.15rem;
+            height: 1.15rem;
+            margin: 0;
+        }
+        .blueprint-radio__text {
+            font-weight: 600;
+        }
+        .blueprint-profiles {
+            display: grid;
+            gap: var(--space-5);
+        }
+        .blueprint-profile {
+            display: grid;
+            gap: var(--space-2);
+        }
+        .blueprint-profile__name {
+            margin: 0;
+            font-weight: 700;
+            font-size: var(--step-1);
+            color: var(--forest-shadow);
+        }
+        .blueprint-profile__meta {
+            margin: 0;
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+        .blueprint-profile__focus {
+            margin: 0;
+        }
+        .blueprint-reporting {
+            display: grid;
+            gap: var(--space-6);
+        }
+        .blueprint-reporting__section {
+            display: grid;
+            gap: var(--space-3);
+        }
+        .blueprint-reporting__title {
+            margin: 0;
+            font-size: var(--step-1);
+            font-family: var(--font-display);
+            color: var(--primary-sage);
+        }
+        .blueprint-reporting__field {
+            display: grid;
+            gap: var(--space-2);
+        }
+        .blueprint-reporting__label {
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+        .blueprint-questions {
+            list-style: disc;
+            padding-left: 1.25em;
+            display: grid;
+            gap: var(--space-3);
+            margin: 0;
+        }
+        .blueprint-spec {
+            margin-top: var(--space-6);
+            background: color-mix(in srgb, var(--soft-white) 90%, white 10%);
+            border-radius: var(--radius);
+            border: 1px dashed rgba(122, 132, 113, 0.35);
+            padding: var(--space-3) var(--space-4);
+        }
+        .blueprint-spec summary {
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .blueprint-spec__body {
+            margin-top: var(--space-3);
+            display: grid;
+            gap: var(--space-3);
+        }
+        .blueprint-spec__section {
+            display: grid;
+            gap: var(--space-2);
+        }
+        .blueprint-spec__section h4 {
+            margin: 0;
+            font-size: var(--step--1);
+            font-weight: 700;
+            color: var(--primary-sage);
+        }
+        .blueprint-spec__section ul {
+            margin: 0;
+            padding-left: 1.25em;
+            display: grid;
+            gap: var(--space-1);
+        }
         .activity-feedback {
             margin-top: var(--space-6);
             background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
@@ -1934,6 +2224,384 @@
                             { id: "elt-followup", label: "Follow-up idea", placeholder: "Capture homework, extension, or differentiation options." }
                         ],
                         nav: { nextAction: "restart", nextLabel: "Finish & Restart", nextIcon: "fas fa-check" }
+                    }
+                ]
+            },
+            curatorialWorkshop: {
+                id: "echoes-of-palestine",
+                label: "Echoes of Palestine – Curatorial Workshop",
+                meta: {
+                    eyebrow: "Art & Negotiation Workshop",
+                    descriptor: "A flexible lesson exploring curatorial negotiation and collective storytelling.",
+                    pageTitle: "\"Echoes of Palestine\" – Curatorial Workshop Slides"
+                },
+                sections: [
+                    { title: "Lead-in", slideKeys: ["lead-in"] },
+                    { title: "Pre-task Toolkit", slideKeys: ["pre-task-a", "pre-task-b", "pre-task-c"] },
+                    { title: "Curatorial Task", slideKeys: ["the-task", "reporting", "reflection"] }
+                ],
+                slides: [
+                    {
+                        key: "lead-in",
+                        type: "blueprint",
+                        nav: { hidePrev: true },
+                        layout: { type: "single-column", alignment: "center" },
+                        media: {
+                            src: "https://images.pexels.com/photos/164455/pexels-photo-164455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                            alt: "Mural of a contemplative face painted on a city wall"
+                        },
+                        blocks: [
+                            { type: "heading", tag: "h1", text: "What Makes Art Powerful?", isSlideTitle: true },
+                            {
+                                type: "activity",
+                                title: "Activity: Think-Pair-Share",
+                                description: "Think-Pair-Share",
+                                ordered: true,
+                                className: "blueprint-block--mt-space-7",
+                                steps: [
+                                    { title: "Think (1 minute)", description: "Look at the image. What story do you think the artist is trying to tell? What emotions does it make you feel?" },
+                                    { title: "Pair (2 minutes)", description: "With a partner, discuss your interpretations. Did you see the same story? What elements of the artwork (colors, subject, style) led you to your interpretation?" },
+                                    { title: "Share (3 minutes)", description: "Be prepared to share your pair's key ideas with the class." }
+                                ]
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Single-column vertical flow with centered alignment for the hero image, title, and activity instructions.",
+                            typography: [
+                                "Title: h1 using var(--font-display) at var(--step-4) in var(--forest-shadow) with centered alignment.",
+                                "Activity title: h3 display font at var(--step-2) in var(--forest-shadow).",
+                                "Body text: var(--font-body) at var(--step-0) with 1.6 line height."
+                            ],
+                            components: [
+                                "Image spans the full content width with var(--radius-lg) corners and var(--shadow-1) shadow.",
+                                "Think-Pair-Share steps live in a padded activity block with clear ordered formatting."
+                            ],
+                            spacing: [
+                                "Image margin-bottom var(--space-4).",
+                                "Activity block margin-top var(--space-7).",
+                                "List items maintain var(--space-2) spacing."
+                            ]
+                        }
+                    },
+                    {
+                        key: "pre-task-a",
+                        type: "blueprint",
+                        layout: { type: "single-column", alignment: "left" },
+                        blocks: [
+                            { type: "heading", tag: "h3", text: "The Language of Art", isSlideTitle: true },
+                            {
+                                type: "definitionList",
+                                items: [
+                                    { term: "Medium", definition: "The materials used to create a work of art (e.g., oil on canvas, photography, sculpture)." },
+                                    { term: "Theme", definition: "The main idea or message of the artwork (e.g., identity, resilience, memory)." },
+                                    { term: "Symbolism", definition: "The use of objects or images to represent bigger ideas (e.g., a key representing lost homes)." },
+                                    { term: "Style", definition: "The distinctive visual manner in which an artist creates (e.g., abstract, figurative, surreal)." },
+                                    { term: "Narrative", definition: "The story that the artwork tells." }
+                                ]
+                            },
+                            {
+                                type: "activity",
+                                title: "Activity: Become the Expert",
+                                ordered: true,
+                                className: "blueprint-block--mt-space-7",
+                                steps: [
+                                    { description: "In your group, each person will be assigned one or two terms." },
+                                    { description: "Take two minutes to make sure you understand your term(s) and can explain them in your own words." },
+                                    { description: "Take turns explaining your expert terms to your group. The other members should listen and can ask questions to clarify." }
+                                ]
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Single-column layout with left-aligned text for readability.",
+                            typography: [
+                                "Main title uses h3 with var(--font-display) at var(--step-2).",
+                                "Definition terms appear in bold with var(--primary-sage).",
+                                "Activity heading set in var(--font-display) at var(--step-1)."
+                            ],
+                            components: [
+                                "Definitions use an unordered list with strong terms followed by plain-language explanations.",
+                                "Activity block styled as a lightly bordered card to distinguish instructions."
+                            ],
+                            spacing: [
+                                "Definition entries carry var(--space-3) separation.",
+                                "Activity box sits var(--space-7) below the list."
+                            ]
+                        }
+                    },
+                    {
+                        key: "pre-task-b",
+                        type: "blueprint",
+                        layout: { type: "single-column", alignment: "left" },
+                        blocks: [
+                            { type: "heading", tag: "h3", text: "How to Be a Curator: Functional Language", isSlideTitle: true },
+                            {
+                                type: "grid",
+                                columns: "repeat(auto-fit, minmax(160px, 1fr))",
+                                items: [
+                                    { title: "Expressing Opinion", list: ["I believe...", "From my perspective...", "What stands out is..."] },
+                                    { title: "Agreeing", list: ["I see your point.", "That's a great choice.", "I agree with you."] },
+                                    { title: "Politely Disagreeing", list: ["I see it differently.", "I understand, but...", "While that's strong, I'm not sure..."] },
+                                    { title: "Making a Compromise", list: ["What if we include...?", "Can we agree on...?", "Let's go with that one, then."] }
+                                ]
+                            },
+                            {
+                                type: "activity",
+                                title: "Activity: Choose the Title",
+                                description: "With your group, you have 3 minutes to choose the best title for your upcoming exhibition. Use the functional language above to discuss the options and come to a consensus.",
+                                name: "exhibition-title",
+                                options: [
+                                    { value: "option-a", label: "Option A: Fragments of a Homeland" },
+                                    { value: "option-b", label: "Option B: Echoes of Palestine" },
+                                    { value: "option-c", label: "Option C: The Olive and the Key" }
+                                ],
+                                className: "blueprint-block--mt-space-7"
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Top section uses a responsive grid, followed by a single-column activity section.",
+                            typography: [
+                                "Main title: h3 with var(--font-display) at var(--step-2).",
+                                "Category headings: h4 with var(--primary-sage).",
+                                "Activity instructions in var(--font-body) at var(--step-0)."
+                            ],
+                            components: [
+                                "Language cards presented in softly bordered containers with padding.",
+                                "Radio options styled with full-width clickable labels for quick decisions."
+                            ],
+                            spacing: [
+                                "Grid gap set to var(--space-4).",
+                                "Activity block begins after var(--space-7) separation.",
+                                "Radio options spaced by var(--space-3)."
+                            ]
+                        }
+                    },
+                    {
+                        key: "pre-task-c",
+                        type: "blueprint",
+                        layout: { type: "single-column", alignment: "left" },
+                        blocks: [
+                            { type: "heading", tag: "h3", text: "The \"Fragments of a Homeland\" Collective", isSlideTitle: true },
+                            {
+                                type: "profiles",
+                                items: [
+                                    { name: "Laila", meta: "Digital Artist, Gaza", focus: "Focuses on memory, nostalgia, and the resilience of youth." },
+                                    { name: "Yousef", meta: "Painter/Sculptor, Ramallah", focus: "Focuses on connection to the land and cultural heritage." },
+                                    { name: "Rania", meta: "Interdisciplinary Artist, London", focus: "Focuses on identity, exile, and life in the diaspora." }
+                                ]
+                            },
+                            {
+                                type: "activity",
+                                title: "Activity: Rank & Justify",
+                                ordered: true,
+                                className: "blueprint-block--mt-space-7",
+                                steps: [
+                                    { title: "Individually (1 minute)", description: "Rank the artists (1, 2, 3) based on whose focus you find most compelling for an international audience." },
+                                    { title: "With a Partner (3 minutes)", description: "Justify your #1 choice to your partner. Use the language of opinion to persuade them." }
+                                ]
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Single-column layout foregrounding artist information before the task.",
+                            typography: [
+                                "Slide title uses h3 with var(--font-display) at var(--step-2).",
+                                "Artist names set in bold var(--font-body) at var(--step-1).",
+                                "Activity title uses var(--font-display) at var(--step-1)."
+                            ],
+                            components: [
+                                "Artist bios presented in a stacked list with clear name, meta, and focus lines.",
+                                "Ranking task instructions provided inside an activity card with ordered steps."
+                            ],
+                            spacing: [
+                                "Each artist block separated by var(--space-5).",
+                                "Activity section begins after var(--space-7)."
+                            ]
+                        }
+                    },
+                    {
+                        key: "the-task",
+                        type: "blueprint",
+                        layout: { type: "single-column", alignment: "left" },
+                        blocks: [
+                            { type: "heading", tag: "h3", text: "Curating \"Echoes of Palestine\" (Group Negotiation)", isSlideTitle: true },
+                            { type: "text", tag: "p", text: "In your curatorial groups, you must negotiate and select the three best artworks for the exhibition. You must all agree on the final selection and be able to justify your choices. Remember to use the functional language for negotiation." },
+                            {
+                                type: "gallery",
+                                className: "blueprint-block--mt-space-6",
+                                items: [
+                                    {
+                                        title: "Gaza Dreams",
+                                        subtitle: "Laila",
+                                        image: {
+                                            src: "https://images.pexels.com/photos/14899381/pexels-photo-14899381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                            alt: "Child in a yellow jacket flying a kite",
+                                            loading: "lazy"
+                                        }
+                                    },
+                                    {
+                                        title: "Inheritance",
+                                        subtitle: "Yousef",
+                                        image: {
+                                            src: "https://images.pexels.com/photos/8582333/pexels-photo-8582333.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                            alt: "Vintage key resting on a rustic surface",
+                                            loading: "lazy"
+                                        }
+                                    },
+                                    {
+                                        title: "Fragmented City",
+                                        subtitle: "Rania",
+                                        image: {
+                                            src: "https://images.pexels.com/photos/8149633/pexels-photo-8149633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                            alt: "Abstract painting with geometric city forms",
+                                            loading: "lazy"
+                                        }
+                                    },
+                                    {
+                                        title: "The Storyteller",
+                                        subtitle: "Yousef",
+                                        image: {
+                                            src: "https://images.pexels.com/photos/8001153/pexels-photo-8001153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                            alt: "Portrait of an elder with deep expression lines",
+                                            loading: "lazy"
+                                        }
+                                    },
+                                    {
+                                        title: "Walled Garden",
+                                        subtitle: "Laila",
+                                        image: {
+                                            src: "https://images.pexels.com/photos/3230137/pexels-photo-3230137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                            alt: "Open doorway leading to greenery beyond a wall",
+                                            loading: "lazy"
+                                        }
+                                    },
+                                    {
+                                        title: "Unsent Letters",
+                                        subtitle: "Rania",
+                                        image: {
+                                            src: "https://images.pexels.com/photos/1089578/pexels-photo-1089578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                            alt: "Rolled parchment letters tied with twine",
+                                            loading: "lazy"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Single-column introduction that transitions into a responsive artwork grid.",
+                            typography: [
+                                "Main title uses h3 display styling at var(--step-2).",
+                                "Scenario paragraph in var(--font-body) with 1.6 line height.",
+                                "Artwork titles presented as bold h4 elements."
+                            ],
+                            components: [
+                                "Gallery cards feature imagery with matching rounded corners and shadowed backgrounds.",
+                                "Each card highlights title and artist attribution for quick reference."
+                            ],
+                            spacing: [
+                                "Scenario paragraph separated from gallery by var(--space-6).",
+                                "Gallery grid gap set to var(--space-5)."
+                            ]
+                        }
+                    },
+                    {
+                        key: "reporting",
+                        type: "blueprint",
+                        layout: { type: "single-column", alignment: "left" },
+                        blocks: [
+                            { type: "heading", tag: "h3", text: "Our Selections for \"Echoes of Palestine\"", isSlideTitle: true },
+                            { type: "text", tag: "p", text: "One member from each group will present your final selections and the curatorial statement to the class." },
+                            {
+                                type: "reporting",
+                                className: "blueprint-block--mt-space-7",
+                                sections: [
+                                    {
+                                        title: "Artwork 1",
+                                        fields: [
+                                            { label: "Artwork 1: (Image and Title)", type: "text", placeholder: "Paste the image link or note the artwork title." },
+                                            { label: "Justification:", type: "textarea", minHeight: "100px", placeholder: "Summarize why this piece belongs in the exhibition." }
+                                        ]
+                                    },
+                                    {
+                                        title: "Artwork 2",
+                                        fields: [
+                                            { label: "Artwork 2: (Image and Title)", type: "text", placeholder: "Paste the image link or note the artwork title." },
+                                            { label: "Justification:", type: "textarea", minHeight: "100px", placeholder: "Explain how this choice supports your theme." }
+                                        ]
+                                    },
+                                    {
+                                        title: "Artwork 3",
+                                        fields: [
+                                            { label: "Artwork 3: (Image and Title)", type: "text", placeholder: "Paste the image link or note the artwork title." },
+                                            { label: "Justification:", type: "textarea", minHeight: "100px", placeholder: "Describe the story this piece contributes." }
+                                        ]
+                                    },
+                                    {
+                                        title: "Our Collective's Curatorial Statement",
+                                        fields: [
+                                            { label: "Statement", type: "textarea", minHeight: "150px", placeholder: "Capture the shared narrative your exhibition tells." }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Single-column output slide structured for easy reporting.",
+                            typography: [
+                                "Main title uses h3 display styling at var(--step-2).",
+                                "Section titles styled as h4 with var(--primary-sage).",
+                                "Labels use bold var(--font-body)."
+                            ],
+                            components: [
+                                "Each artwork section bundles text fields and justification textareas.",
+                                "Final statement offers an expanded textarea to record the collective voice."
+                            ],
+                            spacing: [
+                                "Artwork sections separated by var(--space-7).",
+                                "Field groups maintain var(--space-2) internal spacing."
+                            ]
+                        }
+                    },
+                    {
+                        key: "reflection",
+                        type: "blueprint",
+                        layout: { type: "single-column", alignment: "left" },
+                        blocks: [
+                            { type: "heading", tag: "h3", text: "Debriefing the Curatorial Process", isSlideTitle: true },
+                            { type: "heading", tag: "h4", text: "Activity: Class Discussion", className: "blueprint-block--mt-space-4" },
+                            { type: "text", tag: "p", text: "Be prepared to discuss the following questions as a class." },
+                            {
+                                type: "questions",
+                                className: "blueprint-block--mt-space-5",
+                                items: [
+                                    "What were the most challenging aspects of the negotiation?",
+                                    "Which artworks sparked the most debate, and why?",
+                                    "How did your group's final selection represent a compromise or a consensus?",
+                                    "What did this process teach you about the challenges and responsibilities of representing a collective voice through art?"
+                                ]
+                            }
+                        ],
+                        blueprintNotes: {
+                            summary: "Design blueprint",
+                            layout: "Clean single-column layout that keeps attention on reflective prompts.",
+                            typography: [
+                                "Slide title uses h3 display styling at var(--step-2).",
+                                "Activity heading uses h4 with var(--font-display).",
+                                "Question list uses var(--font-body) at var(--step-0) with 1.7 line height."
+                            ],
+                            components: [
+                                "Reflection questions presented as a custom-bullet unordered list for clarity.",
+                                "Introductory paragraph sets expectations before discussion."
+                            ],
+                            spacing: [
+                                "Question list begins after var(--space-5) separation.",
+                                "List items spaced by var(--space-3)."
+                            ]
+                        }
                     }
                 ]
             },
@@ -3255,6 +3923,714 @@
             return array;
         }
 
+        const BLUEPRINT_BLOCK_TYPES = new Set([
+            "media",
+            "heading",
+            "text",
+            "list",
+            "definitionList",
+            "activity",
+            "grid",
+            "profiles",
+            "gallery",
+            "reporting",
+            "questions",
+        ]);
+
+        function validateBlueprintSlideConfig(config) {
+            if (!config || typeof config !== "object") {
+                if (typeof console !== "undefined" && console.warn) {
+                    console.warn("[blueprint] Slide config is not an object.", config);
+                }
+                return;
+            }
+            const warnings = [];
+            if (config.blocks !== undefined && !Array.isArray(config.blocks)) {
+                warnings.push({ message: "Expected `blocks` to be an array.", context: config.blocks });
+            } else if (Array.isArray(config.blocks)) {
+                config.blocks.forEach((block, index) => {
+                    if (typeof block === "string") {
+                        return;
+                    }
+                    if (!block || typeof block !== "object") {
+                        warnings.push({ message: `Block #${index + 1} is not an object.`, context: block });
+                        return;
+                    }
+                    if (block.type && !BLUEPRINT_BLOCK_TYPES.has(block.type)) {
+                        warnings.push({ message: `Block #${index + 1} uses unknown type \"${block.type}\".`, context: block });
+                    }
+                    if ((block.type === "heading" || block.type === "text") && !block.text && !block.html) {
+                        warnings.push({ message: `Block #${index + 1} (${block.type}) is missing text content.`, context: block });
+                    }
+                    if (block.type === "activity" && block.steps && !Array.isArray(block.steps)) {
+                        warnings.push({ message: `Activity block #${index + 1} expects an array of steps.`, context: block });
+                    }
+                });
+            }
+
+            if (warnings.length && typeof console !== "undefined") {
+                const label = config.key || config.title || config.nav?.title || "blueprint slide";
+                if (typeof console.groupCollapsed === "function") {
+                    console.groupCollapsed(`[blueprint] ${label}: ${warnings.length} potential issue${warnings.length > 1 ? "s" : ""}`);
+                    warnings.forEach((warning) => console.warn(warning.message, warning.context));
+                    console.groupEnd();
+                } else {
+                    console.warn(`[blueprint] ${label}:`, warnings.map((warning) => warning.message).join("; "));
+                }
+            }
+        }
+
+        function createBlueprintMedia(media) {
+            if (!media || !media.src) {
+                return null;
+            }
+            const figure = document.createElement("figure");
+            figure.className = "blueprint-block blueprint-media animate-on-scroll";
+            if (media.className) {
+                figure.classList.add(...media.className.split(/\s+/).filter(Boolean));
+            }
+            const img = document.createElement("img");
+            img.src = media.src;
+            img.alt = media.alt || "";
+            img.loading = media.loading || "lazy";
+            if (media.decoding) {
+                img.decoding = media.decoding;
+            }
+            if (media.fit) {
+                img.style.objectFit = media.fit;
+            }
+            if (media.height) {
+                img.style.height = media.height;
+            }
+            if (media.width) {
+                img.style.width = media.width;
+            }
+            if (media.imageClassName) {
+                img.classList.add(...media.imageClassName.split(/\s+/).filter(Boolean));
+            }
+            if (media.imageStyle && typeof media.imageStyle === "object") {
+                Object.entries(media.imageStyle).forEach(([property, value]) => {
+                    if (value !== undefined && value !== null) {
+                        img.style.setProperty(property, value);
+                    }
+                });
+            }
+            figure.appendChild(img);
+            if (media.caption) {
+                const caption = document.createElement("figcaption");
+                caption.textContent = media.caption;
+                figure.appendChild(caption);
+            }
+            if (media.figureStyle && typeof media.figureStyle === "object") {
+                Object.entries(media.figureStyle).forEach(([property, value]) => {
+                    if (value !== undefined && value !== null) {
+                        figure.style.setProperty(property, value);
+                    }
+                });
+            }
+            return figure;
+        }
+
+        function appendBlueprintParagraphs(parent, paragraphs) {
+            (Array.isArray(paragraphs) ? paragraphs : []).forEach((text) => {
+                if (!text) {
+                    return;
+                }
+                const paragraph = document.createElement("p");
+                paragraph.className = "blueprint-text";
+                paragraph.textContent = text;
+                parent.appendChild(paragraph);
+            });
+        }
+
+        function createBlueprintList(items, options = {}) {
+            const { ordered = false, block = true, classes = [], itemClass = "blueprint-list__item" } = options;
+            const tagName = ordered ? "ol" : "ul";
+            const list = document.createElement(tagName);
+            const classNames = ["blueprint-list", ordered ? "blueprint-list--ordered" : "blueprint-list--unordered", ...classes];
+            if (block) {
+                classNames.unshift("blueprint-block");
+                classNames.push("animate-on-scroll");
+            }
+            list.className = classNames.join(" ");
+            (Array.isArray(items) ? items : []).forEach((item) => {
+                if (item === null || item === undefined) {
+                    return;
+                }
+                const listItem = document.createElement("li");
+                if (itemClass) {
+                    listItem.classList.add(itemClass);
+                }
+                if (typeof item === "string") {
+                    listItem.textContent = item;
+                } else {
+                    const title = item.title || item.term || item.label;
+                    const text = item.text;
+                    const description = item.description || item.body;
+                    if (title) {
+                        const strong = document.createElement("strong");
+                        strong.textContent = title;
+                        listItem.appendChild(strong);
+                    }
+                    const detail = description || text;
+                    if (detail) {
+                        if (listItem.childNodes.length) {
+                            listItem.appendChild(document.createTextNode(" "));
+                        }
+                        const span = document.createElement("span");
+                        span.className = "blueprint-list__description";
+                        span.textContent = detail;
+                        listItem.appendChild(span);
+                    }
+                    if (!title && !detail) {
+                        listItem.textContent = String(item.value ?? "");
+                    }
+                }
+                list.appendChild(listItem);
+            });
+            return list;
+        }
+
+        function createBlueprintOptions(block, config, index) {
+            const options = Array.isArray(block?.options) ? block.options : [];
+            if (!options.length) {
+                return null;
+            }
+            const inputType = block.optionType === "checkbox" ? "checkbox" : "radio";
+            const groupName = block.name || `${config?.key || "blueprint"}-options-${index}`;
+            const wrapper = document.createElement("div");
+            wrapper.className = "blueprint-radio-group";
+            options.forEach((option, optionIndex) => {
+                if (!option) {
+                    return;
+                }
+                const label = document.createElement("label");
+                label.className = "blueprint-radio";
+                const input = document.createElement("input");
+                input.type = inputType;
+                input.value = option.value || `option-${optionIndex + 1}`;
+                const optionId = option.id || `${groupName}-${inputType}-${optionIndex + 1}`;
+                input.id = optionId;
+                if (inputType === "checkbox") {
+                    input.name = option.name || `${groupName}-${optionIndex}`;
+                } else {
+                    input.name = groupName;
+                }
+                const text = document.createElement("span");
+                text.className = "blueprint-radio__text";
+                text.textContent = option.label || option.text || input.value;
+                label.appendChild(input);
+                label.appendChild(text);
+                wrapper.appendChild(label);
+            });
+            return wrapper;
+        }
+
+        function createBlueprintNotes(notes) {
+            if (!notes) {
+                return null;
+            }
+            const details = document.createElement("details");
+            details.className = "blueprint-spec";
+            const summary = document.createElement("summary");
+            summary.textContent = typeof notes.summary === "string" ? notes.summary : "Blueprint details";
+            details.appendChild(summary);
+            const body = document.createElement("div");
+            body.className = "blueprint-spec__body";
+            const appendSection = (title, content) => {
+                if (!content) {
+                    return;
+                }
+                const section = document.createElement("div");
+                section.className = "blueprint-spec__section";
+                const heading = document.createElement("h4");
+                heading.textContent = title;
+                section.appendChild(heading);
+                if (Array.isArray(content)) {
+                    const list = document.createElement("ul");
+                    content.forEach((item) => {
+                        if (!item) {
+                            return;
+                        }
+                        const li = document.createElement("li");
+                        li.textContent = item;
+                        list.appendChild(li);
+                    });
+                    section.appendChild(list);
+                } else {
+                    const paragraph = document.createElement("p");
+                    paragraph.className = "blueprint-text";
+                    paragraph.textContent = content;
+                    section.appendChild(paragraph);
+                }
+                body.appendChild(section);
+            };
+
+            if (typeof notes === "string" || Array.isArray(notes)) {
+                appendSection("Details", notes);
+            } else {
+                Object.entries(notes).forEach(([key, value]) => {
+                    if (key === "summary") {
+                        return;
+                    }
+                    const headingText = key.replace(/([A-Z])/g, " $1").replace(/^\w/, (char) => char.toUpperCase());
+                    appendSection(headingText.trim(), value);
+                });
+            }
+
+            if (!body.children.length) {
+                return null;
+            }
+            details.appendChild(body);
+            return details;
+        }
+
+        function createBlueprintBlock(block, config, index) {
+            if (!block) {
+                return null;
+            }
+            if (block.type === "media") {
+                return createBlueprintMedia(block);
+            }
+            const alignment = block.alignment;
+            switch (block.type) {
+                case "heading": {
+                    const tag = block.tag || (block.level ? `h${block.level}` : "h3");
+                    const heading = document.createElement(tag);
+                    heading.className = "blueprint-block blueprint-heading animate-on-scroll";
+                    if (block.isSlideTitle) {
+                        heading.classList.add("slide-title");
+                    }
+                    if (block.html) {
+                        heading.innerHTML = block.html;
+                    } else if (Array.isArray(block.text)) {
+                        heading.textContent = block.text.join(" ");
+                    } else {
+                        heading.textContent = block.text || "";
+                    }
+                    if (alignment) {
+                        heading.style.textAlign = alignment;
+                    }
+                    if (block.className) {
+                        heading.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    return heading;
+                }
+                case "text": {
+                    const tag = block.tag || "p";
+                    const paragraph = document.createElement(tag);
+                    paragraph.className = "blueprint-block blueprint-text animate-on-scroll";
+                    if (block.html) {
+                        paragraph.innerHTML = block.html;
+                    } else if (Array.isArray(block.text)) {
+                        paragraph.textContent = block.text.join(" ");
+                    } else {
+                        paragraph.textContent = block.text || "";
+                    }
+                    if (alignment) {
+                        paragraph.style.textAlign = alignment;
+                    }
+                    if (block.className) {
+                        paragraph.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    return paragraph;
+                }
+                case "list": {
+                    const classes = block.className ? block.className.split(/\s+/).filter(Boolean) : [];
+                    return createBlueprintList(block.items, { ordered: block.ordered, block: true, classes });
+                }
+                case "definitionList": {
+                    const list = document.createElement("ul");
+                    list.className = "blueprint-block blueprint-definition-list animate-on-scroll";
+                    (Array.isArray(block.items) ? block.items : []).forEach((item) => {
+                        if (!item) {
+                            return;
+                        }
+                        const li = document.createElement("li");
+                        const strong = document.createElement("strong");
+                        strong.textContent = item.term || item.title || "";
+                        li.appendChild(strong);
+                        const paragraph = document.createElement("p");
+                        paragraph.className = "blueprint-text";
+                        paragraph.textContent = item.definition || item.description || item.text || "";
+                        li.appendChild(paragraph);
+                        list.appendChild(li);
+                    });
+                    return list;
+                }
+                case "activity": {
+                    const activity = document.createElement("div");
+                    activity.className = "blueprint-block blueprint-activity animate-on-scroll";
+                    if (block.className) {
+                        activity.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    if (block.title) {
+                        const titleTag = block.titleTag || "h3";
+                        const title = document.createElement(titleTag);
+                        title.className = "blueprint-activity__title";
+                        title.textContent = block.title;
+                        activity.appendChild(title);
+                    }
+                    const descriptions = Array.isArray(block.description)
+                        ? block.description
+                        : block.description
+                            ? [block.description]
+                            : [];
+                    descriptions.forEach((desc) => {
+                        if (!desc) {
+                            return;
+                        }
+                        const description = document.createElement("p");
+                        description.className = "blueprint-activity__description";
+                        description.textContent = desc;
+                        activity.appendChild(description);
+                    });
+                    appendBlueprintParagraphs(activity, block.body);
+                    if (Array.isArray(block.steps) && block.steps.length) {
+                        const stepList = createBlueprintList(block.steps, {
+                            ordered: block.ordered !== false,
+                            block: false,
+                        });
+                        stepList.classList.add("blueprint-activity__list");
+                        activity.appendChild(stepList);
+                    }
+                    const optionsElement = createBlueprintOptions(block, config, index);
+                    if (optionsElement) {
+                        activity.appendChild(optionsElement);
+                    }
+                    return activity;
+                }
+                case "grid": {
+                    const grid = document.createElement("div");
+                    grid.className = "blueprint-block blueprint-grid animate-on-scroll";
+                    if (block.columns) {
+                        grid.style.setProperty("--blueprint-grid-columns", block.columns);
+                    }
+                    if (block.className) {
+                        grid.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    (Array.isArray(block.items) ? block.items : []).forEach((item) => {
+                        if (!item) {
+                            return;
+                        }
+                        const card = document.createElement("article");
+                        card.className = "blueprint-grid__item";
+                        if (item.title) {
+                            const titleTag = item.titleTag || "h4";
+                            const title = document.createElement(titleTag);
+                            title.className = "blueprint-grid__title";
+                            title.textContent = item.title;
+                            card.appendChild(title);
+                        }
+                        if (Array.isArray(item.list) && item.list.length) {
+                            const list = createBlueprintList(item.list, { ordered: false, block: false });
+                            card.appendChild(list);
+                        }
+                        const descriptions = [];
+                        if (Array.isArray(item.description)) {
+                            descriptions.push(...item.description);
+                        } else if (item.description) {
+                            descriptions.push(item.description);
+                        }
+                        if (Array.isArray(item.body)) {
+                            descriptions.push(...item.body);
+                        } else if (item.body) {
+                            descriptions.push(item.body);
+                        }
+                        descriptions.forEach((text) => {
+                            if (!text) {
+                                return;
+                            }
+                            const paragraph = document.createElement("p");
+                            paragraph.className = "blueprint-text";
+                            paragraph.textContent = text;
+                            card.appendChild(paragraph);
+                        });
+                        grid.appendChild(card);
+                    });
+                    return grid;
+                }
+                case "profiles": {
+                    const container = document.createElement("div");
+                    container.className = "blueprint-block blueprint-profiles animate-on-scroll";
+                    if (block.className) {
+                        container.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    (Array.isArray(block.items) ? block.items : []).forEach((item) => {
+                        if (!item) {
+                            return;
+                        }
+                        const profile = document.createElement("article");
+                        profile.className = "blueprint-profile";
+                        if (item.name) {
+                            const name = document.createElement("p");
+                            name.className = "blueprint-profile__name";
+                            name.textContent = item.name;
+                            profile.appendChild(name);
+                        }
+                        if (item.meta) {
+                            const meta = document.createElement("p");
+                            meta.className = "blueprint-profile__meta";
+                            meta.textContent = item.meta;
+                            profile.appendChild(meta);
+                        }
+                        if (item.focus) {
+                            const focus = document.createElement("p");
+                            focus.className = "blueprint-profile__focus";
+                            focus.textContent = item.focus;
+                            profile.appendChild(focus);
+                        }
+                        if (item.description) {
+                            const descParagraphs = Array.isArray(item.description)
+                                ? item.description
+                                : [item.description];
+                            descParagraphs.forEach((text) => {
+                                if (!text) {
+                                    return;
+                                }
+                                const paragraph = document.createElement("p");
+                                paragraph.className = "blueprint-text";
+                                paragraph.textContent = text;
+                                profile.appendChild(paragraph);
+                            });
+                        }
+                        container.appendChild(profile);
+                    });
+                    return container;
+                }
+                case "gallery": {
+                    const gallery = document.createElement("div");
+                    gallery.className = "blueprint-block blueprint-gallery animate-on-scroll";
+                    if (block.className) {
+                        gallery.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    (Array.isArray(block.items) ? block.items : []).forEach((item) => {
+                        if (!item) {
+                            return;
+                        }
+                        const card = document.createElement("article");
+                        card.className = "blueprint-gallery__item";
+                        if (item.image && item.image.src) {
+                            const img = document.createElement("img");
+                            img.src = item.image.src;
+                            img.alt = item.image.alt || "";
+                            img.loading = item.image.loading || "lazy";
+                            card.appendChild(img);
+                        }
+                        const body = document.createElement("div");
+                        body.className = "blueprint-gallery__body";
+                        if (item.title) {
+                            const title = document.createElement("h4");
+                            title.className = "blueprint-gallery__title";
+                            title.textContent = item.title;
+                            body.appendChild(title);
+                        }
+                        if (item.subtitle) {
+                            const subtitle = document.createElement("p");
+                            subtitle.className = "blueprint-gallery__subtitle";
+                            subtitle.textContent = item.subtitle;
+                            body.appendChild(subtitle);
+                        }
+                        const bodyParagraphs = [];
+                        if (Array.isArray(item.description)) {
+                            bodyParagraphs.push(...item.description);
+                        } else if (item.description) {
+                            bodyParagraphs.push(item.description);
+                        }
+                        if (Array.isArray(item.body)) {
+                            bodyParagraphs.push(...item.body);
+                        } else if (item.body) {
+                            bodyParagraphs.push(item.body);
+                        }
+                        bodyParagraphs.forEach((text) => {
+                            if (!text) {
+                                return;
+                            }
+                            const paragraph = document.createElement("p");
+                            paragraph.className = "blueprint-text";
+                            paragraph.textContent = text;
+                            body.appendChild(paragraph);
+                        }
+                        card.appendChild(body);
+                        gallery.appendChild(card);
+                    });
+                    return gallery;
+                }
+                case "reporting": {
+                    const reporting = document.createElement("div");
+                    reporting.className = "blueprint-block blueprint-reporting animate-on-scroll";
+                    if (block.className) {
+                        reporting.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    (Array.isArray(block.sections) ? block.sections : []).forEach((section, sectionIndex) => {
+                        const sectionElement = document.createElement("section");
+                        sectionElement.className = "blueprint-reporting__section";
+                        if (section.title) {
+                            const titleTag = section.titleTag || "h4";
+                            const title = document.createElement(titleTag);
+                            title.className = "blueprint-reporting__title";
+                            title.textContent = section.title;
+                            sectionElement.appendChild(title);
+                        }
+                        const sectionDescriptions = Array.isArray(section.description)
+                            ? section.description
+                            : section.description
+                                ? [section.description]
+                                : [];
+                        sectionDescriptions.forEach((text) => {
+                            if (!text) {
+                                return;
+                            }
+                            const paragraph = document.createElement("p");
+                            paragraph.className = "blueprint-text";
+                            paragraph.textContent = text;
+                            sectionElement.appendChild(paragraph);
+                        });
+                        (Array.isArray(section.fields) ? section.fields : []).forEach((field, fieldIndex) => {
+                            const fieldWrapper = document.createElement("div");
+                            fieldWrapper.className = "blueprint-reporting__field";
+                            const fieldId = field.id || `${config?.key || "report"}-${sectionIndex + 1}-${fieldIndex + 1}`;
+                            if (field.label) {
+                                const label = document.createElement("label");
+                                label.className = "blueprint-reporting__label";
+                                label.setAttribute("for", fieldId);
+                                label.textContent = field.label;
+                                fieldWrapper.appendChild(label);
+                            }
+                            let input;
+                            if (field.type === "textarea" || !field.type || field.type === "text-area") {
+                                input = document.createElement("textarea");
+                                if (field.rows) {
+                                    input.rows = field.rows;
+                                }
+                                if (field.minHeight) {
+                                    input.style.minHeight = field.minHeight;
+                                }
+                            } else {
+                                input = document.createElement("input");
+                                input.type = field.type;
+                            }
+                            input.id = fieldId;
+                            if (field.placeholder) {
+                                input.placeholder = field.placeholder;
+                            }
+                            fieldWrapper.appendChild(input);
+                            sectionElement.appendChild(fieldWrapper);
+                        });
+                        reporting.appendChild(sectionElement);
+                    });
+                    return reporting;
+                }
+                case "questions": {
+                    const list = document.createElement("ul");
+                    list.className = "blueprint-block blueprint-questions animate-on-scroll";
+                    if (block.className) {
+                        list.classList.add(...block.className.split(/\s+/).filter(Boolean));
+                    }
+                    (Array.isArray(block.items) ? block.items : []).forEach((question) => {
+                        if (!question) {
+                            return;
+                        }
+                        const li = document.createElement("li");
+                        if (typeof question === "string") {
+                            li.textContent = question;
+                        } else if (question.html) {
+                            li.innerHTML = question.html;
+                        } else {
+                            li.textContent = question.text || "";
+                        }
+                        list.appendChild(li);
+                    });
+                    return list;
+                }
+                default:
+                    return null;
+            }
+        }
+
+        function renderBlueprintSlide(slideElement, config) {
+            validateBlueprintSlideConfig(config);
+            slideElement.classList.add("blueprint-slide");
+            if (config?.key) {
+                slideElement.dataset.blueprintKey = config.key;
+            }
+            const wrapper = document.createElement("div");
+            wrapper.className = "blueprint";
+            if (config?.className) {
+                wrapper.classList.add(...config.className.split(/\s+/).filter(Boolean));
+            }
+            const layoutOptions = config?.layout || {};
+            const layoutType = (layoutOptions.type || "single-column").toLowerCase();
+            wrapper.classList.add(`blueprint--${layoutType}`);
+            wrapper.dataset.blueprintLayout = layoutType;
+            const requestedAlignment = (layoutOptions.alignment || layoutOptions.align || "left").toLowerCase();
+            const alignment = ["center", "left", "right"].includes(requestedAlignment) ? requestedAlignment : "left";
+            wrapper.classList.add(`blueprint-align-${alignment}`);
+            wrapper.dataset.blueprintAlignment = alignment;
+            if (layoutOptions.className) {
+                wrapper.classList.add(...layoutOptions.className.split(/\s+/).filter(Boolean));
+            }
+            if (layoutOptions.gap) {
+                wrapper.style.setProperty("--blueprint-gap", layoutOptions.gap);
+            }
+            if (layoutOptions.maxWidth) {
+                wrapper.style.maxWidth = layoutOptions.maxWidth;
+            }
+            if (layoutOptions.minWidth) {
+                wrapper.style.minWidth = layoutOptions.minWidth;
+            }
+            if (layoutOptions.minHeight) {
+                wrapper.style.minHeight = layoutOptions.minHeight;
+            }
+            if (layoutOptions.background) {
+                wrapper.style.background = layoutOptions.background;
+            }
+            if (layoutOptions.padding) {
+                wrapper.style.padding = layoutOptions.padding;
+            }
+            if (layoutOptions.border) {
+                wrapper.style.border = layoutOptions.border;
+            }
+            if (layoutOptions.borderRadius) {
+                wrapper.style.borderRadius = layoutOptions.borderRadius;
+            }
+            if (layoutOptions.boxShadow) {
+                wrapper.style.boxShadow = layoutOptions.boxShadow;
+            }
+            if (layoutOptions.style && typeof layoutOptions.style === "object") {
+                Object.entries(layoutOptions.style).forEach(([property, value]) => {
+                    if (value !== undefined && value !== null) {
+                        wrapper.style.setProperty(property, value);
+                    }
+                });
+            }
+            if (config.media) {
+                const mediaElement = createBlueprintMedia(config.media);
+                if (mediaElement) {
+                    wrapper.appendChild(mediaElement);
+                }
+            }
+            const blockDefinitions = Array.isArray(config.blocks)
+                ? config.blocks
+                : config?.blocks
+                    ? [config.blocks]
+                    : [];
+            blockDefinitions.forEach((block, index) => {
+                const normalisedBlock = typeof block === "string"
+                    ? { type: "text", text: block }
+                    : block;
+                const element = createBlueprintBlock(normalisedBlock, config, index);
+                if (element) {
+                    wrapper.appendChild(element);
+                }
+            });
+            slideElement.appendChild(wrapper);
+            const notes = createBlueprintNotes(config.blueprintNotes);
+            if (notes) {
+                slideElement.appendChild(notes);
+            }
+        }
+
         function renderHeroSlide(slideElement, config) {
             if (config.image) {
                 const wrapper = document.createElement("div");
@@ -4251,6 +5627,9 @@
             slideElement.dataset.slideKey = config.key || slideElement.id;
 
             switch (config.type) {
+                case "blueprint":
+                    renderBlueprintSlide(slideElement, config);
+                    break;
                 case "hero":
                     renderHeroSlide(slideElement, config);
                     break;
