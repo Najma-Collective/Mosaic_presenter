@@ -1,665 +1,447 @@
 window.__LESSON_LIBRARY__ = {
-  "digitalSelfDefense": {
-    "id": "digital-self-defense",
-    "label": "Digital Self-Defense Playbook",
+  "researchSkillsIntro": {
+    "id": "researchSkillsIntro",
+    "label": "Research Skills: Unlock Your Potential",
     "meta": {
-      "eyebrow": "Digital Wellness",
-      "descriptor": "Interactive workshop to recognise, analyse, and respond to online threats with confidence.",
-      "pageTitle": "Digital Self-Defense Playbook \u2013 Instructional Slides",
+      "eyebrow": "Al Manar Society",
+      "descriptor": "An introductory session for aspiring researchers.",
+      "title": "Research Skills Programme | Al Manar Society",
       "planner": {
-        "title": "Digital self-defense workshop plan",
-        "subtitle": "Guide learners through recognising scams, practising response language, and crafting actionable advice.",
-        "duration": "Approx. 60 minutes",
-        "pacingTitle": "Session flow",
+        "title": "Unlock Your Potential as a Researcher",
+        "subtitle": "A one-hour online information session for aspiring postgraduate students.",
+        "duration": "1 Hour",
+        "pacingTitle": "Session Flow",
         "pacing": [
-          {
-            "label": "Launch & story",
-            "duration": "10 min"
-          },
-          {
-            "label": "Threat decoding stations",
-            "duration": "20 min"
-          },
-          {
-            "label": "Language & prioritisation",
-            "duration": "15 min"
-          },
-          {
-            "label": "Infographic task & share",
-            "duration": "15 min"
-          }
+          { "label": "Welcome & Warm-Up", "duration": "5 min" },
+          { "label": "The Power of Research", "duration": "10 min" },
+          { "label": "Your 11-Month Journey", "duration": "15 min" },
+          { "label": "Your Support System", "duration": "10 min" },
+          { "label": "Meet the Community", "duration": "10 min" },
+          { "label": "Registration & Q&A", "duration": "10 min" }
         ],
         "sections": [
           {
-            "title": "Learning goals",
+            "title": "Session Aims",
             "items": [
-              "Spot common digital scam tactics and red flags.",
-              "Practise advice language for guiding safer online behaviour.",
-              "Collaborate on an actionable digital self-defense resource."
-            ]
-          },
-          {
-            "title": "Facilitator moves",
-            "items": [
-              "Model URL inspection and narrate why the spear-phishing example is convincing.",
-              "Circulate during activities to prompt specific evidence for each categorisation.",
-              "Coach groups to use imperative language while drafting infographic tips."
-            ]
-          },
-          {
-            "title": "Materials & tech",
-            "items": [
-              "Projector or shared screen for slides and scenario analysis.",
-              "Devices with internet access for research and infographic creation.",
-              "Shared workspace or chat channel for gallery walk feedback."
+              "Inspire confidence in new researchers.",
+              "Clearly explain the programme structure and benefits.",
+              "Build a sense of community and support.",
+              "Guide participants smoothly through registration."
             ]
           }
         ],
-        "spotlight": "Emphasise the pause-verify habit whenever urgency appears in a message."
+        "spotlight": {
+          "title": "Facilitator Focus",
+          "text": "Remember to speak clearly and slowly. Use polls and the chat for low-pressure interaction to help shy, B1-level participants feel comfortable and engaged."
+        }
       }
     },
     "sections": [
       {
-        "title": "Launch",
+        "title": "Welcome",
+        "slideKeys": ["welcome", "housekeeping", "warmup"]
+      },
+      {
+        "title": "The Power of Research",
         "slideKeys": [
-          "digital-hero",
-          "invoice-incident"
+          "what-is-research",
+          "from-question-to-impact",
+          "who-is-a-researcher",
+          "your-path"
         ]
       },
       {
-        "title": "Pre-Task A",
+        "title": "The Programme Journey",
         "slideKeys": [
-          "stage1-matching",
-          "stage2-cards"
+          "journey-overview",
+          "units-1-2",
+          "units-3-4",
+          "unit-5",
+          "learning-model"
         ]
       },
       {
-        "title": "Pre-Task B",
+        "title": "Support & Community",
         "slideKeys": [
-          "stage1-gapfill",
-          "stage2-ranking"
+          "support-system",
+          "wellbeing",
+          "logistics",
+          "community-intro",
+          "community-share"
         ]
       },
       {
-        "title": "Pre-Task C",
-        "slideKeys": [
-          "stage1-grouping",
-          "stage2-justify"
-        ]
-      },
-      {
-        "title": "Task",
-        "slideKeys": [
-          "digital-task"
-        ]
-      },
-      {
-        "title": "Reporting",
-        "slideKeys": [
-          "gallery-walk"
-        ]
-      },
-      {
-        "title": "Reflection",
-        "slideKeys": [
-          "digital-reflection"
-        ]
+        "title": "Your First Step",
+        "slideKeys": ["ready-to-begin", "how-to-register", "q-and-a"]
       }
     ],
     "slides": [
       {
-        "key": "digital-hero",
+        "key": "welcome",
         "type": "hero",
-        "title": "The Digital Self-Defense Playbook",
-        "subtitle": "Mastering the art of identifying and neutralizing online threats.",
+        "title": "Unlock Your Potential as a Researcher",
+        "subtitle": "Welcome! We will begin in a few moments.",
         "image": {
-          "src": "https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg",
-          "alt": "A person's hands typing on a laptop with glowing code overlayed, representing digital activity."
+          "src": "https://images.pexels.com/photos/8423233/pexels-photo-8423233.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A diverse group of students smiling and collaborating in an online meeting."
         },
-        "nav": {
-          "hidePrev": true,
-          "nextLabel": "Begin"
-        }
+        "nav": { "hidePrev": true }
       },
       {
-        "key": "invoice-incident",
-        "type": "story",
-        "title": "The Invoice Incident",
-        "quote": "It looked exactly like the real thing. I was one click away from a disaster.",
-        "narrative": [
-          "Maria, a freelance designer, received an email from what appeared to be her biggest client, 'Innovate Corp.' The subject was 'URGENT: Overdue Invoice.' The email used the company's logo and had a professional tone, instructing her to log into their new payment portal via a link to settle a supposed outstanding bill. Panicked about damaging her client relationship, she clicked the link.",
-          "The login page looked perfect. But as she was about to enter her banking password, she noticed the URL: 'innovate-corp.secure-login.net.' The real client's URL was just 'innovate.com.' It was a sophisticated 'spear phishing' attack, targeting her specifically. She closed the window, took a deep breath, and called her client directly. There was no overdue invoice."
-        ],
-        "takeaways": {
-          "process": "The scammer used urgency, impersonation, and a highly convincing fake website.",
-          "outcome": "Maria learned that verifying through a separate, trusted channel (like a phone call) is the ultimate security check."
-        }
-      },
-      {
-        "key": "stage1-matching",
-        "type": "matching",
-        "title": "Stage 1: Decoding the Threats",
-        "instructions": "Match the cybersecurity terms to their official definitions. Understanding these is your first line of defense.",
-        "columns": [
-          {
-            "id": "term",
-            "label": "Threat Term"
-          },
-          {
-            "id": "definition",
-            "label": "Definition"
-          }
-        ],
-        "rows": [
-          {
-            "id": "phishing",
-            "label": "Phishing",
-            "correctColumn": "definition"
-          },
-          {
-            "id": "vishing",
-            "label": "Vishing",
-            "correctColumn": "definition"
-          },
-          {
-            "id": "spear_phishing",
-            "label": "Spear Phishing",
-            "correctColumn": "definition"
-          },
-          {
-            "id": "malware",
-            "label": "Malware",
-            "correctColumn": "definition"
-          },
-          {
-            "id": "2fa",
-            "label": "2FA (Two-Factor Authentication)",
-            "correctColumn": "definition"
-          }
-        ],
-        "answers": [
-          {
-            "id": "phishing",
-            "text": "A broad attack using fraudulent emails or texts to trick many people into revealing sensitive information."
-          },
-          {
-            "id": "vishing",
-            "text": "Voice phishing; using fraudulent phone calls to trick people into giving away personal data."
-          },
-          {
-            "id": "spear_phishing",
-            "text": "A highly targeted attack that uses personalized information to trick a specific individual or organization."
-          },
-          {
-            "id": "malware",
-            "text": "Malicious software (like viruses, ransomware) designed to damage or gain unauthorized access to computer systems."
-          },
-          {
-            "id": "2fa",
-            "text": "A security method requiring two forms of identification to access an account, like a password and a code sent to your phone."
-          }
-        ]
-      },
-      {
-        "key": "stage2-cards",
+        "key": "housekeeping",
         "type": "cards",
-        "title": "Stage 2: Threat Analysis",
-        "instructions": "With your partner, analyze each scenario. Identify the threat type and explain the 'red flags' you see.",
+        "title": "Welcome to Our Session!",
+        "body": ["A few notes to help you feel comfortable."],
         "cards": [
           {
-            "icon": "phone",
-            "title": "Voicemail Transcript",
-            "description": "'This is the IRS. Your assets will be frozen due to tax evasion unless you call us back immediately at 1-800-555-FAKE to settle your account. Do not ignore this message.'"
+            "icon": "mic-off",
+            "heading": "Your Microphone",
+            "description": "Your microphone is off to keep the audio clear for everyone."
           },
           {
-            "icon": "email",
-            "title": "Email to a University Student",
-            "description": "'Dear [Student Name], We saw your resume on the university career portal and are impressed with your profile for the intern role at [Company Name]. Please send a copy of your driver's license and social security number to start the background check.'"
+            "icon": "camera",
+            "heading": "Your Camera",
+            "description": "Your camera is your choice. We are happy to see you, but it's okay to keep it off."
           },
           {
-            "icon": "sms",
-            "title": "Text Message",
-            "description": "'Your package is stuck at customs. A $1.99 fee is required. To release your package and schedule delivery, visit: bit.ly/shiptrck.'"
+            "icon": "chat-dots",
+            "heading": "The Chat Box",
+            "description": "We will use the chat box to talk together. Please share your questions here!"
           }
         ]
       },
       {
-        "key": "stage1-gapfill",
-        "type": "gapfill",
-        "title": "Stage 1: Language for Advising",
-        "instructions": "Read this blog post about digital wellness. Fill in the gaps with the best word from the box to give strong, clear advice.",
-        "wordBank": [
-          "must",
-          "should",
-          "shouldn't",
-          "verify",
-          "be",
-          "enable",
-          "think",
-          "avoid"
-        ],
-        "paragraph": [
-          {
-            "type": "text",
-            "content": "In today's digital world, you "
-          },
-          {
-            "type": "gap",
-            "answer": "must",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " be proactive about your security. First, you absolutely "
-          },
-          {
-            "type": "gap",
-            "answer": "should",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " create complex passwords, but you "
-          },
-          {
-            "type": "gap",
-            "answer": "shouldn't",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " reuse them across different sites. For critical accounts like banking and email, you "
-          },
-          {
-            "type": "gap",
-            "answer": "enable",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " two-factor authentication; it's one of the most effective defenses. When you get a message that seems urgent, always pause and "
-          },
-          {
-            "type": "gap",
-            "answer": "think",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": ". "
-          },
-          {
-            "type": "gap",
-            "answer": "Be",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " skeptical of any unsolicited requests for personal information. If an email from a service provider seems odd, "
-          },
-          {
-            "type": "gap",
-            "answer": "verify",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " it by logging into your account through a trusted browser bookmark, not the link in the email. Finally, "
-          },
-          {
-            "type": "gap",
-            "answer": "avoid",
-            "placeholder": "_____"
-          },
-          {
-            "type": "text",
-            "content": " connecting to public Wi-Fi for sensitive activities unless you are using a VPN."
-          }
-        ],
-        "feedbackSummary": "Notice the mix of modals ('should', 'must') for giving advice and imperatives ('verify', 'be') for giving direct commands. This is the language of clear instruction."
-      },
-      {
-        "key": "stage2-ranking",
-        "type": "ranking",
-        "title": "Stage 2: Prioritizing Advice",
-        "instructions": "With your group, rank these security actions from 1 (most important) to 6 (least important) for a 15-year-old high school student. Be prepared to justify your choices.",
-        "items": [
-          {
-            "id": "item1",
-            "label": "Using a different, strong password for every online account."
-          },
-          {
-            "id": "item2",
-            "label": "Enabling two-factor authentication (2FA) on social media and gaming accounts."
-          },
-          {
-            "id": "item3",
-            "label": "Regularly updating their phone and computer operating systems."
-          },
-          {
-            "id": "item4",
-            "label": "Ignoring friend/follow requests from people they don't know in real life."
-          },
-          {
-            "id": "item5",
-            "label": "Never sharing personal information like their phone number or home address online."
-          },
-          {
-            "id": "item6",
-            "label": "Being skeptical of online quizzes that ask for personal information (e.g., 'What's your Star Wars name?')."
-          }
-        ],
-        "checkLabel": "Compare Rankings",
-        "feedbackTitle": "Discussion Point",
-        "feedbackSummary": "Does your group's ranking change if the user is an 80-year-old who primarily uses email and Facebook? Why or why not? Discuss."
-      },
-      {
-        "key": "stage1-grouping",
-        "type": "grouping",
-        "title": "Stage 1: The Gray Area - Real or Fake?",
-        "instructions": "These examples are more subtle. Drag each one into the 'Delete Immediately' pile or the 'Investigate Further' pile.",
-        "categories": [
-          {
-            "id": "scam",
-            "label": "Delete Immediately"
-          },
-          {
-            "id": "safe",
-            "label": "Investigate Further"
-          }
-        ],
-        "items": [
-          {
-            "id": "item1",
-            "label": "A well-designed email from 'Spotify' saying 'Your payment method has expired. Please update it now to avoid service interruption.' The link goes to 'spotify-payments.com.'",
-            "category": "scam",
-            "explanation": "The URL is the giveaway. It's a fake domain. Delete."
-          },
-          {
-            "id": "item2",
-            "label": "A text from an unknown number with a blurry picture: 'Hey is this you in this pic? lol [malicious link]'",
-            "category": "scam",
-            "explanation": "Curiosity bait is a classic tactic to get you to click a malicious link. Delete."
-          },
-          {
-            "id": "item3",
-            "label": "An email from 'Microsoft 365' with the subject 'Unusual sign-in activity.' It says someone logged in from another country and asks you to click a button to 'Review recent activity.'",
-            "category": "safe",
-            "explanation": "This could be a legitimate security alert. The safest action is to NOT click the link, but to open a browser and log into your Microsoft account manually to check for alerts."
-          },
-          {
-            "id": "item4",
-            "label": "A direct message on Instagram from a friend: 'OMG I can't believe this video of you! [malicious link]'",
-            "category": "safe",
-            "explanation": "Your friend's account might be hacked. Do not click. Investigate by contacting your friend through a different method (like a text message) to ask if they sent it."
-          }
-        ]
-      },
-      {
-        "key": "stage2-justify",
+        "key": "warmup",
         "type": "content",
-        "title": "Stage 2: Justify Your Decisions",
-        "body": [
-          "Now, discuss your group's choices for the previous activity.",
-          "**For the 'Delete Immediately' items:**",
-          "- What was the single biggest red flag that made the decision easy?",
-          "**For the 'Investigate Further' items:**",
-          "- What makes these messages potentially legitimate?",
-          "- What is the safest possible way to verify them without clicking any links in the message itself?"
-        ],
-        "list": {
-          "style": "bullet",
-          "items": [
-            "Use phrases like: 'We categorized this as a scam because...'",
-            "'The reason we thought this needed investigation was...'",
-            "'To verify this safely, you should...'"
-        ]
-      }
-      },
-      {
-        "key": "digital-task",
-        "type": "process",
-        "title": "Your Task: Create a 'Digital Self-Defense' Infographic",
-        "instructions": "Your group's mission is to create a one-page digital infographic for new international students at your school. It must be clear, concise, and actionable.",
-        "steps": [
-          {
-            "title": "1. Plan & Strategize (5 min)",
-            "description": "Decide on the 5 most critical tips for your audience. Consider their unique vulnerabilities (e.g., dealing with visa/housing websites, being far from home)."
-          },
-          {
-            "title": "2. Draft & Design (15 min)",
-            "description": "Write your tips using strong advice language (imperatives and modals). Define at least two key terms (e.g., 'phishing'). Find one powerful, illustrative image on Pexels. Use a free online tool like Canva to design your infographic."
-          },
-          {
-            "title": "3. Peer Review & Refine (10 min)",
-            "description": "Share your draft with another group. Provide feedback: Is the advice clear? Is the language accurate? Is it visually appealing? Use the feedback to make final improvements."
-          }
-        ]
-      },
-      {
-        "key": "gallery-walk",
-        "type": "content",
-        "title": "Gallery Walk & Feedback",
-        "body": [
-          "Post a link to your finished infographic in the shared class chat/forum.",
-          "You will now have 10 minutes to conduct a 'gallery walk.' View at least two other groups' infographics.",
-          "For each one you view, leave a comment answering these two questions:"
-        ],
-        "list": {
-          "style": "numbered",
-          "items": [
-            "What is the single most memorable or effective tip on their infographic?",
-            "Quote one sentence or phrase that you think is a particularly good use of advice language."
+        "title": "Where are you joining from?",
+        "image": {
+          "src": "https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A view of the earth from space at night, showing city lights across continents."
+        },
+        "activity": {
+          "title": "Let's find out who's in the room!",
+          "description": [
+            "A poll should appear on your screen. Please select the city or region you are joining from today."
           ]
+        }
+      },
+      {
+        "key": "what-is-research",
+        "type": "story",
+        "layout": { "alignment": "center" },
+        "rubric": {
+          "html": "What is <span class='text-underline text-underline-sage'>research?</span>"
+        },
+        "narrative": [
+          "The word can sometimes sound big or difficult. But at its heart, it is very simple."
+        ],
+        "outcome": {
+          "label": "The Simple Truth",
+          "text": "Research is curiosity with a plan."
         },
         "image": {
-          "src": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-          "alt": "A team of diverse colleagues looking at a screen together and collaborating."
+          "src": "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A neon question mark sign glowing brightly in the dark."
         }
       },
       {
-        "key": "digital-reflection",
-        "type": "reflection",
-        "title": "Action Plan & Final Thoughts",
-        "fields": [
-          {
-            "id": "action_plan",
-            "label": "Based on today's lesson, what is ONE specific action you will take this week to improve your personal online security? (e.g., 'I will enable 2FA on my Instagram.')",
-            "placeholder": "My commitment is to..."
-          },
-          {
-            "id": "language_takeaway",
-            "label": "What phrase or language structure from today (e.g., 'You should verify...', 'Be wary of...') will be most useful for you in other contexts?",
-            "placeholder": "The language I'll remember is..."
-          },
-          {
-            "id": "remaining_questions",
-            "label": "What's one question you still have about cybersecurity?",
-            "placeholder": "I'm still curious about..."
-          }
-        ]
-      }
-    ]
-  },
-  "slideTypeShowcase": {
-    "id": "slide-type-showcase",
-    "label": "Slide Type Inspiration Pack",
-    "meta": {
-      "eyebrow": "Facilitation toolkit",
-      "descriptor": "Showcase slides that spark discussion, calm energy, and track progress across a workshop.",
-      "pageTitle": "Slide Type Inspiration Pack"
-    },
-    "sections": [
-      {
-        "title": "Launch",
-        "slideKeys": ["lesson-orientation"]
-      },
-      {
-        "title": "Modelled interactions",
-        "slideKeys": ["mentoring-dialogue", "calm-reset"]
-      },
-      {
-        "title": "Guided thinking",
-        "slideKeys": ["decision-map", "discussion-rounds"]
-      },
-      {
-        "title": "Closure",
-        "slideKeys": ["confidence-check"]
-      }
-    ],
-    "slides": [
-      {
-        "key": "lesson-orientation",
-        "type": "lessonAim",
-        "title": "Session orientation",
-        "headline": "Where are we heading?",
-        "badge": "45 min",
-        "aims": [
-          "Surface existing knowledge and needs.",
-          "Model active listening language.",
-          "Equip mentors with calm-down tools."
-        ],
-        "successCriteria": [
-          "Learners can describe one active-listening move.",
-          "Pairs name at least two grounding prompts they will try."
-        ],
-        "agenda": [
-          "Explore a mentor/mentee dialogue model.",
-          "Practise grounding prompts with partners.",
-          "Plan how to invite reflective questions."
-        ],
-        "tip": "Invite participants to co-create their own aims before revealing yours."
-      },
-      {
-        "key": "mentoring-dialogue",
-        "type": "dialogue",
-        "title": "Mentor language in action",
-        "subtitle": "Notice how tone and body language soften resistance.",
-        "dialogue": [
-          {
-            "speaker": "Mentor Sam",
-            "side": "left",
-            "lines": [
-              "I noticed you paused before sharing. What was happening for you in that moment?"
-            ]
-          },
-          {
-            "speaker": "Mentee Aisha",
-            "side": "right",
-            "lines": [
-              "I was worried my idea would sound naive.",
-              "Everyone else seems so sure already."
-            ],
-            "note": "Invite mentees to narrate their internal dialogue without judgement."
-          },
-          {
-            "speaker": "Mentor Sam",
-            "side": "left",
-            "lines": [
-              "Thank you for trusting us with that.",
-              "Can we try sketching the idea together so we can react to something concrete?"
-            ]
-          }
-        ],
-        "body": [
-          "Ask observers to identify the invitation, validation, and action moves in the exchange."
-        ]
-      },
-      {
-        "key": "calm-reset",
-        "type": "grounding",
-        "title": "Grounding break",
-        "mantra": "Breathe in for four, hold for four, breathe out for six.",
-        "promptTitle": "Choose a reset that works for you",
-        "prompts": [
-          "Drop your shoulders and unclench your jaw.",
-          "Notice five colours around you.",
-          "Place both feet flat on the floor and feel the support.",
-          "Share one word that captures how you want to feel when we resume."
-        ],
-        "timer": "90 seconds",
-        "image": {
-          "src": "https://images.pexels.com/photos/3560044/pexels-photo-3560044.jpeg",
-          "alt": "A calm sunrise over a misty forest."
-        }
-      },
-      {
-        "key": "decision-map",
-        "type": "flowchart",
-        "title": "Escalation decision map",
-        "subtitle": "Guide mentees through tricky conversations with a clear process.",
-        "orientation": "horizontal",
+        "key": "from-question-to-impact",
+        "type": "process",
+        "title": "How Research Creates Change",
         "steps": [
           {
-            "title": "Listen and label",
-            "description": "Reflect back what you heard and name the emotion you notice.",
-            "icon": "fas fa-ear-listen"
+            "icon": "question-circle",
+            "title": "Ask",
+            "description": "It starts with a simple question: 'Why...?' or 'What if...?'."
           },
           {
-            "title": "Assess safety",
-            "description": "Ask if anyone feels at risk and what support they need right now.",
-            "icon": "fas fa-shield-heart"
+            "icon": "search",
+            "title": "Explore",
+            "description": "It uses a clear plan to find answers and understand the world."
           },
           {
-            "title": "Co-create next steps",
-            "description": "Offer two options and invite the mentee to choose or adapt them.",
-            "icon": "fas fa-route"
-          },
-          {
-            "title": "Document & follow up",
-            "description": "Record the decision and schedule a check-in within 48 hours.",
-            "icon": "fas fa-clipboard-check"
+            "icon": "lightbulb",
+            "title": "Impact",
+            "description": "It helps us create positive change for ourselves and our communities."
           }
         ]
       },
       {
-        "key": "discussion-rounds",
-        "type": "questionPrompts",
-        "title": "Dialogue starters",
-        "subtitle": "Use these rounds to keep the group energised and reflective.",
-        "prompts": [
+        "key": "who-is-a-researcher",
+        "type": "content",
+        "layout": { "theme": "sunrise", "className": "layout--spotlight" },
+        "title": "Who Can Be a Researcher?",
+        "image": {
+          "src": "https://images.pexels.com/photos/745045/pexels-photo-745045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "Many diverse hands coming together in the center of a circle."
+        },
+        "body": [
           {
-            "title": "Round 1: Celebrate",
-            "text": "Share one micro-win you've observed in your mentee recently.",
-            "action": "Invite quick snaps or emojis in the chat."
-          },
-          {
-            "title": "Round 2: Stretch",
-            "text": "What is one conversation topic you tend to avoid with mentees? Why?",
-            "stems": [
-              "I notice I hesitate when...",
-              "A question that could open this up is..."
-            ]
-          },
-          {
-            "title": "Round 3: Commit",
-            "text": "Choose a prompt you will try in your next session and pair-share why it matters.",
-            "action": "Partners jot a reminder card before the break."
-          }
-        ]
-      },
-      {
-        "key": "confidence-check",
-        "type": "checkpoint",
-        "title": "Confidence check",
-        "subtitle": "Before we leave, where do you feel solid and where do you want backup?",
-        "checkpoints": [
-          {
-            "title": "I can name our session aims in my own words.",
-            "action": "Thumbs up/down in the room or chat."
-          },
-          {
-            "title": "I have at least two grounding prompts to offer.",
-            "action": "Write them in your notes before you go."
-          },
-          {
-            "title": "I know how to escalate a concern collaboratively.",
-            "action": "Flag a scenario you want to rehearse next time."
+            "html": "The most important quality of a researcher is not genius—it's <span class='fw-bold text-fern'>curiosity</span>. That means <span class='text-underline text-underline-gold fw-bold'>you</span> can be a researcher."
           }
         ],
-        "body": [
-          "Invite participants to mark any items needing more support; use that data to plan follow-up resources."
+        "activity": {
+          "title": "Share Your Curiosity",
+          "description": [
+            "Use the chat box to share one topic you are curious about. It can be anything!"
+          ],
+          "inputs": [
+            { "label": "Examples: 'space', 'psychology', 'ancient history'..." }
+          ]
+        }
+      },
+      {
+        "key": "your-path",
+        "type": "hero",
+        "layout": { "theme": "aurora" },
+        "title": "This Programme is Your First Step",
+        "image": {
+          "src": "https://images.pexels.com/photos/158607/cairn-fog-mystical-background-158607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A misty path marked by stacked stones, leading towards a bright, unclear horizon."
+        }
+      },
+      {
+        "key": "journey-overview",
+        "type": "lessonAim",
+        "title": "Your 11-Month Learning Journey",
+        "badge": "11 Months",
+        "aims": [
+          "This programme is a complete, step-by-step guide from foundational knowledge to designing your own final project."
+        ],
+        "agenda": [
+          "Unit 1: Understanding Qualitative Research",
+          "Unit 2: Qualitative Interviewing",
+          "Unit 3: Focus Groups in Qualitative Research",
+          "Unit 4: Qualitative Data Analysis",
+          "Unit 5: Designing a Qualitative Study"
         ]
+      },
+      {
+        "key": "units-1-2",
+        "type": "content",
+        "title": "Months 1-4: Building Your Foundation",
+        "layout": { "className": "layout--columns" },
+        "body": [
+          "We start at the beginning to make sure you have a strong, confident foundation for your learning."
+        ],
+        "list": [
+          {
+            "icon": "journal-check",
+            "strong": "Unit 1:",
+            "text": "Understand the core principles of qualitative research."
+          },
+          {
+            "icon": "chat-quote",
+            "strong": "Unit 2:",
+            "text": "Learn the practical skill of qualitative interviewing."
+          }
+        ],
+        "image": {
+          "src": "https://images.pexels.com/photos/1293120/pexels-photo-1293120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "Smooth, grey stones stacked carefully on top of each other, representing a solid foundation."
+        }
+      },
+      {
+        "key": "units-3-4",
+        "type": "content",
+        "title": "Months 5-8: Deeper Skills",
+        "layout": { "className": "layout--columns" },
+        "body": [
+          "Next, we build on your foundation with more advanced methods for gathering and understanding information."
+        ],
+        "list": [
+          {
+            "icon": "people",
+            "strong": "Unit 3:",
+            "text": "Learn how to effectively lead Focus Groups."
+          },
+          {
+            "icon": "clipboard-data",
+            "strong": "Unit 4:",
+            "text": "Discover how to analyze data and find meaning in it."
+          }
+        ],
+        "image": {
+          "src": "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A group of colleagues sitting around a table in a bright office, engaged in a discussion."
+        }
+      },
+      {
+        "key": "unit-5",
+        "type": "content",
+        "title": "Months 9-11: Bringing It All Together",
+        "layout": { "className": "layout--columns" },
+        "body": [
+          "In the final module, you will apply everything you have learned to create your own professional research project."
+        ],
+        "list": [
+          {
+            "icon": "award",
+            "strong": "Your Final Output:",
+            "text": "A complete, methodologically sound research study design."
+          },
+          {
+            "icon": "mortarboard",
+            "strong": "Your Outcome:",
+            "text": "Feel confident and ready for postgraduate study."
+          }
+        ],
+        "image": {
+          "src": "https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "Hands pointing at architectural blueprints and plans on a desk."
+        }
+      },
+      {
+        "key": "learning-model",
+        "type": "flowchart",
+        "orientation": "horizontal",
+        "title": "A Supportive Way to Learn",
+        "body": [
+          "We use a 'flipped classroom' model. This means more time for practice and discussion when we are together."
+        ],
+        "nodes": [
+          {
+            "icon": "house-door",
+            "title": "Step 1: Before Class",
+            "description": "Review lectures and reading materials at your own pace."
+          },
+          {
+            "icon": "laptop",
+            "title": "Step 2: During Class",
+            "description": "Use our live time for valuable discussion, activities, and questions."
+          }
+        ]
+      },
+      {
+        "key": "support-system",
+        "type": "grid",
+        "title": "You Are Not Alone on This Journey",
+        "grid": [
+          {
+            "title": "Expert Lecturers",
+            "description": "Our friendly, experienced lecturers are here to guide you."
+          },
+          {
+            "title": "English Support",
+            "description": "Integrated academic English support to help you write and speak with confidence."
+          },
+          {
+            "title": "Certificates of Completion",
+            "description": "Earn a certificate for each unit to celebrate your progress."
+          }
+        ]
+      },
+      {
+        "key": "wellbeing",
+        "type": "story",
+        "layout": { "className": "layout--spotlight" },
+        "image": {
+          "src": "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A friendly and professional woman with glasses, smiling warmly."
+        },
+        "rubric": { "text": "Our Commitment to Your Well-being" },
+        "narrative": [
+          "Your success is important, but your well-being is our highest priority. We are committed to creating a safe and supportive community for everyone."
+        ],
+        "outcome": {
+          "label": "Your Dedicated Support Contact",
+          "text": "Hanadi Olwan, Student Support Lead"
+        }
+      },
+      {
+        "key": "logistics",
+        "type": "cards",
+        "title": "Logistics and Technology",
+        "body": ["Everything is designed to be simple and accessible."],
+        "cards": [
+          {
+            "icon": "pc-display",
+            "heading": "What You Need",
+            "description": "A device with an internet connection. We use Zoom, Google Classroom, and WhatsApp."
+          },
+          {
+            "icon": "camera-reels",
+            "heading": "Never Miss a Class",
+            "description": "All live sessions are recorded and made available for you to watch later."
+          }
+        ]
+      },
+      {
+        "key": "community-intro",
+        "type": "hero",
+        "title": "Meet Your Future Colleagues",
+        "subtitle": "You will learn with and from a community of peers on the same journey as you.",
+        "image": {
+          "src": "https://images.pexels.com/photos/7533347/pexels-photo-7533347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A grid view of several different people in an online video conference call."
+        }
+      },
+      {
+        "key": "community-share",
+        "type": "questionPrompts",
+        "title": "Let's See Who is in the Room",
+        "prompts": [
+          {
+            "title": "Share in the Chat:",
+            "text": "What is your academic background?",
+            "stems": [
+              "Examples: 'Engineering', 'Literature', 'Business', 'Social Sciences'"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ready-to-begin",
+        "type": "hero",
+        "layout": { "theme": "aurora" },
+        "title": "Are You Ready to Begin?",
+        "subtitle": "Your research journey starts today with a single, simple step.",
+        "image": {
+          "src": "https://images.pexels.com/photos/10013081/pexels-photo-10013081.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          "alt": "A person's boot taking the first step onto a wooden walkway leading into a forest."
+        }
+      },
+      {
+        "key": "how-to-register",
+        "type": "process",
+        "title": "Secure Your Place in 3 Easy Steps",
+        "body": [
+          "I will now post the registration link in the chat. We are here to help you if you have any questions."
+        ],
+        "steps": [
+          {
+            "icon": "link-45deg",
+            "title": "Click the Link",
+            "description": "Find the registration link I have posted in the chat box."
+          },
+          {
+            "icon": "input-cursor-text",
+            "title": "Fill the Form",
+            "description": "It's a simple Google Form with a few basic questions."
+          },
+          {
+            "icon": "check2-circle",
+            "title": "Click Submit",
+            "description": "That's it! Your place is secured and we will be in touch."
+          }
+        ]
+      },
+      {
+        "key": "q-and-a",
+        "type": "content",
+        "layout": { "alignment": "center", "theme": "midnight" },
+        "title": "Thank You",
+        "body": [
+          "We are so excited to welcome you to the programme.",
+          {
+            "html": "Any questions? Please ask in the chat. <br> Or contact us at: <span class='fw-bold'>info@almanar.org</span>"
+          }
+        ],
+        "nav": {
+          "nextLabel": "Restart Session",
+          "nextIcon": "arrow-counterclockwise",
+          "nextAction": "restart"
+        }
       }
     ]
   }
