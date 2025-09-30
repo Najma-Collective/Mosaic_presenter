@@ -1,38 +1,97 @@
 # Building lessons in Mosaic Presenter
 
-The Presenter shell reads from the `lessonLibrary` object near the end of `Presenter.html`. Each top-level key inside `lessonLibrary` becomes a selectable template in the **Lesson template** dropdown, and the associated data drives the slides, slide map, and saved notes for that lesson.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L1433-L1516】
+The Presenter shell reads from the `lessonLibrary` object near the end of `Presenter.html`. Each top-level key becomes a selectable template in the **Lesson template** dropdown, and the associated data drives the slides, the slide map, and the saved notes for that lesson.
 
-## 1. Add or update a lesson entry
-1. Open `Presenter.html` and locate the `const lessonLibrary = { ... }` declaration.【F:Presenter.html†L1433-L1446】
-2. Duplicate one of the existing lesson objects (for example `mentoringOrientation`, `eltLesson`, or `questionTypesShowcase`) and give it a new key; that key is what the selector uses internally.【F:Presenter.html†L1433-L1948】
-3. Update the `id`, `label`, and optional `meta` fields:
-   - `id` must be unique and is appended to the notes storage key so each lesson keeps separate annotations.【F:Presenter.html†L1433-L1446】【F:Presenter.html†L2709-L2734】
-   - `label` is the name that appears in the dropdown control.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4355-L4378】
-   - `meta` lets you customise the eyebrow text, descriptor, and browser page title for the active lesson.【F:Presenter.html†L1437-L1443】【F:Presenter.html†L4306-L4342】
+## 1. Lesson templates and metadata
+1. Open `Presenter.html` and locate `const lessonLibrary = { ... }`.
+2. Duplicate one of the existing lesson objects (for example `digitalSelfDefense`, `eltLesson`, or `questionTypesShowcase`) and give it a new key; the key is what the selector uses internally.
+3. Update the top-level fields inside your lesson object:
+   - `id` must be unique and is appended to the notes storage key so each lesson keeps separate annotations.
+   - `label` is the name that appears in the dropdown control.
+   - `meta` contains presentation chrome such as the eyebrow, descriptor, browser page title, and the optional workshop planner described below.
 
-## 2. Organise slide map sections
-Populate the `sections` array to define the headings shown in the slide map. Each section requires a `title` and `slideKeys` list. Keys must match the `key` property on each slide configuration so the slide map can group entries correctly.【F:Presenter.html†L1445-L1471】【F:Presenter.html†L2735-L2814】
+### Workshop planner (collapsible overview)
+Provide a `meta.planner` object if you want a facilitator-friendly workshop plan. The planner is rendered inside a collapsible menu that stays closed on load, showing only the title, duration badge, and a truncated subtitle. When expanded it reveals the full session overview, pacing, sections, and spotlight guidance.
 
-## 3. Configure slides
-Add objects to the `slides` array in the order they should appear. Every slide object needs a unique `key` and `type`. If `type` is omitted the renderer falls back to the standard content layout.【F:Presenter.html†L1472-L1939】【F:Presenter.html†L4255-L4291】
+The planner supports the following keys:
+- `title`, `subtitle`, and `duration` describe the session headline.
+- `pacingTitle` labels the pacing list shown when the menu opens.
+- `pacing` is an array of objects with `label` and optional `duration` for each segment.
+- `sections` is an array where each entry defines a `title` and either an `items` list or a `description` paragraph.
+- `spotlight` surfaces one facilitation reminder as a callout at the bottom of the plan.
 
-### Standard slide types
-- `hero`: Supports `icon`, `title`, `subtitle`, and an `image` object with `src`/`alt` attributes. Ideal for opening slides.【F:Presenter.html†L3258-L3280】【F:Presenter.html†L1472-L1501】
-- `content`: Renders paragraphs, optional imagery, and flexible lists. Provide `body`, `image`, `list`, and `listStyle` as needed.【F:Presenter.html†L3281-L3313】【F:Presenter.html†L1518-L1608】
-- `cards`: Supply a `cards` array where each item can include `icon`, `title`, and `description` to display multiple callouts.【F:Presenter.html†L3963-L4000】【F:Presenter.html†L1609-L1684】
-- `story`: Combines quotes, narrative paragraphs, and optional process/outcome callouts defined on the slide object.【F:Presenter.html†L4001-L4043】【F:Presenter.html†L1685-L1754】
-- `process`: Use for multi-step flows. Add a `steps` array with `title`, `description`, and optional `duration` for each stage.【F:Presenter.html†L4044-L4099】【F:Presenter.html†L1755-L1838】
-- `quiz`: Configure single-answer questions by providing `questions`, each with `id`, `prompt`, `options`, `answer`, and feedback strings. Buttons are wired automatically.【F:Presenter.html†L4100-L4161】【F:Presenter.html†L1502-L1547】
-- `reflection`: Creates rich text areas for planning notes. Pass a `fields` array where each field defines `id`, `label`, and optional `placeholder`. You can also override the navigation via the slide’s `nav` settings.【F:Presenter.html†L4162-L4254】【F:Presenter.html†L1839-L1939】
+## 2. Slide map and navigation
+The `sections` array in each lesson controls the slide map on the left. Every section needs a `title` and a `slideKeys` array. Keys must match the `key` property on slide configurations so the map can group entries correctly.
 
-### Interactive assessment slide types
-- `gapfill`: Build a `paragraph` array that mixes text segments with gap objects. Gaps support `answer`, `options`, `placeholder`, `feedbackTitle`, and `explanation`. Optional `instructions`, `feedbackSummary`, `checkLabel`, and `resetLabel` customise the experience.【F:Presenter.html†L3314-L3463】【F:Presenter.html†L1949-L1995】
-- `ranking`: Provide an `items` array where each entry has an `id`, `label`, `correctRank`, and optional `explanation`. You can seed an `initialOrder`, override control labels, and supply custom instructions.【F:Presenter.html†L3464-L3648】【F:Presenter.html†L1996-L2042】
-- `grouping`: Define `categories` and `items`. Each item references a target category via `item.category` and can include an explanatory string. Placeholders, summaries, and button labels are configurable just like the other activities.【F:Presenter.html†L3649-L3795】【F:Presenter.html†L2043-L2132】
-- `matching`: Set up `columns` and `rows` to create a multiple-choice grid. Each row specifies `correctColumn` and optional `explanation`. Global instructions, feedback summaries, and button labels work the same way.【F:Presenter.html†L3796-L3962】【F:Presenter.html†L2133-L2219】
+Each slide can optionally include a `nav` object to customise on-slide navigation controls. Supported keys include `hidePrev`, `hideNext`, `prevLabel`, `prevIcon`, `nextLabel`, `nextIcon`, `nextVariant` (primary or secondary styling), and `nextAction` (for example `restart` to loop back to the first slide).
 
-## 4. Launch your lesson
-Open `Presenter.html` in a browser and use the **Lesson template** dropdown to select your lesson. The slide deck, slide map, and notes panel refresh instantly when you change templates.【F:Presenter.html†L1381-L1391】【F:Presenter.html†L4311-L4342】
+## 3. Slide configuration essentials
+Add objects to the `slides` array in the order they should appear. Every slide object needs a unique `key` and `type`. If `type` is omitted the renderer falls back to the standard content layout.
 
-## 5. Notes and reusable assets
-Slide notes are stored per-lesson in `localStorage` using the lesson `id`, so switching templates keeps annotations separate. Import/export controls remain available from the toolbar. Images can point to remote URLs or relative paths in the repository; be sure to include descriptive alt text for accessibility.【F:Presenter.html†L2687-L2734】【F:Presenter.html†L1455-L1939】
+Common properties that work across slide types:
+- `layout` lets you change alignment, add layout classes, or apply presentation themes (see Section 5).
+- `image` accepts `{ src, alt }` and is automatically wrapped in the slide’s animation hooks.
+- `body` is an array of paragraphs. You can pass strings or objects with `html` to inject rich markup (for example, `<span class="text-underline text-underline-sage">`...).
+- `list` accepts either a simple array of strings or an array of objects with `icon`, `strong`, and `text` fragments.
+- `activity` attaches a call-to-action block. Provide `title`, `description` paragraphs, optional ordered or unordered `steps`, text `inputs`, and multiple-choice `options`.
+
+## 4. Slide type reference
+### Content-driven layouts
+- `hero`: Opening splash with optional icon, title, subtitle, and hero image.
+- `content`: General-purpose slide supporting copy, imagery, lists, and embedded activity blocks.
+- `grid`: Displays reference columns defined in a `grid` array.
+- `gallery`: Renders a grid of rich cards from `items`, each with image, title, metadata, and description.
+- `reporting`: Provides a recap layout with sections for statements, data tables, or debrief prompts.
+- `cards`: Shows up to four callout cards with icons, headings, and descriptions.
+- `story`: Combines a quote-style rubric, narrative paragraphs, optional imagery, and process/outcome callouts.
+- `process`: Visualises multi-step flows from a `steps` array.
+
+### Interactive assessments and reflections
+- `gapfill`: Build a `paragraph` array mixing text segments with gap objects (`answer`, optional `options`, and `feedback`).
+- `ranking`: Provide an `items` array with `id`, `label`, and an optional `explanation` to rank actions.
+- `grouping`: Define `categories` and `items`; each item references the correct category and can include explanatory text.
+- `matching`: Configure `columns` and `rows`; each row specifies `correctColumn` and optional `explanation`.
+- `quiz`: Configure single-answer questions with `questions`, each containing `options`, the correct `answer`, and feedback strings.
+- `reflection`: Supply a `fields` array where each field defines `id`, `label`, and optional `placeholder` to collect open responses.
+
+## 5. Layout, theming, and typography utilities
+Every slide honours the `layout` object, which supports:
+- `alignment`: `"center"` or `"right"` to reflow content.
+- `className`: a string or array of class names applied to the slide container.
+- `theme`: a string or array that prefixes classes with `theme--` (for example `"sunrise"`).
+
+Available layout helper classes:
+- `layout--columns`: Two-column responsive grid for pairing copy with imagery or callouts.
+- `layout--poster`: Framed poster effect with soft gradients and elevated shadows.
+- `layout--spotlight`: Frosted, spotlighted panel suited for key ideas or case studies.
+- `layout--timeline`: Left-rail timeline with nodes for each paragraph or list item.
+
+Theme surfaces you can mix in via `layout.theme` or `className`:
+- `theme--sunrise`: Warm gradient background with dark green typography.
+- `theme--midnight`: High-contrast twilight surface with light type and softened accents.
+- `theme--aurora`: Layered radial washes for atmospheric storytelling blocks.
+
+Accent components for highlighting content:
+- `accent-chip` and `accent-chip--glow`: Compact pills for metadata or status tags.
+- `accent-card` and `accent-card--frost`: Elevated panels with radial light washes.
+- `text-highlight`: Inline gradient marker useful inside paragraph HTML snippets.
+
+Typography utility classes (combine freely inside `body` HTML, list fragments, or reflection prompts):
+- Size: `text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-xxl`, `text-display`.
+- Weight: `fw-light`, `fw-regular`, `fw-semibold`, `fw-bold`, `fw-black`.
+- Decoration: `text-underline`, `text-underline-sage`, `text-underline-gold`, `text-underline-ink`, `text-uppercase`, `text-italic`, `text-shadow`.
+- Colour: `text-sage`, `text-fern`, `text-amber`, `text-ink`, `text-muted`, `text-soft`.
+
+These utilities enable rich textual contrasts (bold, underline, coloured, large/small) without editing the core styles.
+
+## 6. Interaction scaffolds and micro-interactions
+- All structural elements receive the `animate-on-scroll` class, triggering subtle entry animations as the slide becomes visible.
+- Activity helpers provide built-in controls: `createActivityBlock` renders headings, instructional paragraphs, optional step lists, free-response inputs, and multiple-choice groups; `createActivityControls` attaches “Check” and “Reset” buttons; `createActivityFeedback` manages per-item guidance.
+- Assessment slides expose dedicated evaluators for ranking, grouping, matching, and quiz logic so you only supply data, not algorithms.
+- A highlight toolbar, annotation composer, and popover components underpin the in-slide annotation features.
+
+## 7. Launch, notes, and reusable assets
+- Open `Presenter.html` in a browser and use the **Lesson template** dropdown to load your lesson; the slide deck, slide map, and notes panel refresh instantly when you switch templates.
+- Lesson notes are stored per `id` in `localStorage`, ensuring annotations remain isolated between templates. Import/export buttons in the notes toolbar support backup or sharing.
+- Imagery can point to remote URLs or repository-relative paths—be sure to provide descriptive `alt` text for accessibility.
+- The workshop planner menu can be expanded at any time to review pacing and facilitator moves without leaving the slide flow.

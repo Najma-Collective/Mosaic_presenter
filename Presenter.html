@@ -495,12 +495,14 @@
             --font-display: 'Questrial', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif;
             --font-body: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif;
 
+            --step--2: clamp(0.75rem, 0.7rem + 0.12vw, 0.84rem);
             --step--1: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
             --step-0: clamp(1rem, 0.96rem + 0.22vw, 1.1rem);
             --step-1: clamp(1.125rem, 1.07rem + 0.35vw, 1.3rem);
             --step-2: clamp(1.375rem, 1.28rem + 0.55vw, 1.6rem);
             --step-3: clamp(1.75rem, 1.58rem + 0.95vw, 2.1rem);
             --step-4: clamp(2.25rem, 1.98rem + 1.35vw, 2.7rem);
+            --step-5: clamp(2.85rem, 2.4rem + 1.9vw, 3.6rem);
 
             --space-1: 0.25rem;
             --space-2: 0.5rem;
@@ -812,6 +814,41 @@
             margin: var(--space-6) 0 var(--space-3) 0;
         }
 
+        /* ------------------------------- Typography utility helpers ----------------------------------*/
+        .text-xs { font-size: var(--step--2); }
+        .text-sm { font-size: var(--step--1); }
+        .text-base { font-size: var(--step-0); }
+        .text-lg { font-size: var(--step-1); }
+        .text-xl { font-size: var(--step-2); }
+        .text-xxl { font-size: var(--step-3); }
+        .text-display { font-size: var(--step-5); letter-spacing: -0.01em; }
+        .fw-light { font-weight: 300; }
+        .fw-regular { font-weight: 400; }
+        .fw-semibold { font-weight: 600; }
+        .fw-bold { font-weight: 700; }
+        .fw-black { font-weight: 800; }
+        .text-uppercase { text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; }
+        .text-italic { font-style: italic; }
+        .text-underline { text-decoration-line: underline; text-decoration-thickness: 0.18em; text-underline-offset: 0.22em; }
+        .text-underline-sage { text-decoration-color: var(--secondary-sage); }
+        .text-underline-gold { text-decoration-color: var(--amber); }
+        .text-underline-ink { text-decoration-color: var(--ink); }
+        .text-sage { color: var(--secondary-sage); }
+        .text-fern { color: var(--fern); }
+        .text-amber { color: var(--amber); }
+        .text-ink { color: var(--ink); }
+        .text-muted { color: var(--ink-muted); }
+        .text-soft { color: color-mix(in srgb, var(--soft-white) 90%, #fff 10%); }
+        .text-shadow { text-shadow: 0 4px 18px rgba(34, 41, 32, 0.25); }
+        .text-highlight { background: linear-gradient(120deg, rgba(198, 170, 119, 0.25), rgba(156, 175, 136, 0.35)); padding: 0 0.2em; border-radius: var(--radius-sm); }
+
+        /* ------------------------------- Accent containers ----------------------------------*/
+        .accent-chip { display: inline-flex; align-items: center; gap: var(--space-2); padding: 0.3em 0.8em; border-radius: 999px; background: rgba(122, 132, 113, 0.16); font-weight: 700; font-size: var(--step--1); }
+        .accent-chip--glow { background: linear-gradient(135deg, rgba(198, 170, 119, 0.55), rgba(156, 175, 136, 0.45)); color: var(--deep-forest); box-shadow: 0 6px 16px rgba(198, 170, 119, 0.35); }
+        .accent-card { position: relative; padding: clamp(20px, 3vw, 40px); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--soft-white) 88%, rgba(198, 170, 119, 0.25) 12%); box-shadow: var(--shadow-2); overflow: hidden; }
+        .accent-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(260px 260px at 90% 10%, rgba(198, 170, 119, 0.22), transparent 60%); }
+        .accent-card--frost { background: color-mix(in srgb, rgba(122, 132, 113, 0.12) 40%, white 60%); backdrop-filter: blur(12px); }
+
         .presentation-header {
             position: sticky;
             top: 0;
@@ -966,23 +1003,55 @@
         .presentation-menu__card .presentation-menu__hint {
             line-height: 1.5;
         }
-        .lesson-overview {
-            margin: 0 0 var(--space-6);
-            padding: var(--space-5);
+        .lesson-overview { margin: 0 0 var(--space-6); }
+        .lesson-overview[hidden] { display: none; }
+        .lesson-overview__collapsible {
             border-radius: var(--radius-lg);
-            border: 1px solid rgba(122, 132, 113, 0.14);
+            border: 1px solid rgba(122, 132, 113, 0.18);
             background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
             box-shadow: var(--shadow-1);
-            display: grid;
-            gap: var(--space-4);
+            transition: box-shadow var(--dur-2) var(--ease-ambient), transform var(--dur-2) var(--ease-ambient);
+            overflow: hidden;
         }
-        .lesson-overview[hidden] {
-            display: none;
+        .lesson-overview__collapsible[open] {
+            box-shadow: var(--shadow-2);
+            transform: translateY(-2px);
+        }
+        .lesson-overview__summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            padding: var(--space-3) var(--space-4);
+            list-style: none;
+            cursor: pointer;
+            font-size: var(--step-0);
+            font-weight: 700;
+            color: var(--forest-shadow);
+            transition: background-color var(--dur-2) var(--ease-ambient);
+        }
+        .lesson-overview__summary::-webkit-details-marker { display: none; }
+        .lesson-overview__summary::after {
+            content: "\f107";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: var(--step-1);
+            color: var(--primary-sage);
+            transition: transform var(--dur-2) var(--ease-ambient);
+        }
+        .lesson-overview__summary:hover,
+        .lesson-overview__summary:focus-visible {
+            outline: none;
+            background: rgba(156, 175, 136, 0.12);
+        }
+        .lesson-overview__collapsible[open] .lesson-overview__summary::after {
+            transform: rotate(180deg);
         }
         .lesson-overview__header {
             display: flex;
             flex-direction: column;
             gap: var(--space-2);
+            flex: 1 1 auto;
         }
         .lesson-overview__title {
             margin: 0;
@@ -993,6 +1062,7 @@
         .lesson-overview__meta {
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
             gap: var(--space-2);
             font-size: var(--step--1);
             color: var(--ink-muted);
@@ -1007,6 +1077,30 @@
             color: var(--forest-shadow);
             font-weight: 700;
             font-size: var(--step--1);
+        }
+        .lesson-overview__panel {
+            padding: 0 var(--space-4) var(--space-4);
+            display: grid;
+            gap: var(--space-4);
+        }
+        .lesson-overview__subtitle {
+            margin: 0;
+            font-size: var(--step--1);
+            color: var(--ink-muted);
+        }
+        .lesson-overview__summary-hint {
+            font-size: var(--step--1);
+            font-weight: 500;
+            color: var(--ink-muted);
+            max-width: clamp(180px, 40vw, 420px);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        @media (max-width: 640px) {
+            .lesson-overview__summary { flex-direction: column; align-items: flex-start; }
+            .lesson-overview__summary::after { align-self: flex-end; }
+            .lesson-overview__summary-hint { white-space: normal; max-width: 100%; }
         }
         .lesson-overview__body {
             display: grid;
@@ -1318,6 +1412,35 @@
             margin-bottom: var(--space-6);
         }
         .slide-content.is-centered img { margin-left: auto; margin-right: auto; }
+        .slide-content.is-right-aligned { text-align: right; }
+        .slide-content.is-right-aligned > * { margin-left: auto; }
+        .slide-content.is-right-aligned .activity-block { text-align: left; }
+
+        .slide-content.layout--columns { display: grid; gap: clamp(var(--space-5), 4vw, var(--space-7)); }
+        @media (min-width: 768px) {
+            .slide-content.layout--columns { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+        }
+        .slide-content.layout--columns > *:first-child { order: 0; }
+        .slide-content.layout--columns > img { height: auto; max-height: 360px; }
+
+        .slide-content.layout--poster { padding: clamp(24px, 3vw, 44px); border-radius: var(--radius-xl); background: linear-gradient(135deg, rgba(248, 246, 240, 0.85), rgba(198, 170, 119, 0.25)); box-shadow: var(--shadow-3); position: relative; overflow: hidden; }
+        .slide-content.layout--poster::before { content: ""; position: absolute; inset: -20% 40% auto -20%; height: 140%; background: radial-gradient(280px 280px at 40% 20%, rgba(156, 175, 136, 0.32), transparent 72%); pointer-events: none; }
+        .slide-content.layout--poster > * { position: relative; }
+
+        .slide-content.layout--spotlight { position: relative; padding: clamp(20px, 3vw, 36px); border-radius: var(--radius-lg); background: color-mix(in srgb, rgba(122, 132, 113, 0.16) 35%, #fff 65%); border: 1px solid rgba(122, 132, 113, 0.22); box-shadow: 0 22px 45px rgba(34, 41, 32, 0.12); }
+        .slide-content.layout--spotlight::before { content: ""; position: absolute; inset: 0; background: radial-gradient(320px 220px at 20% 0%, rgba(198, 170, 119, 0.28), transparent 75%); pointer-events: none; mix-blend-mode: multiply; }
+        .slide-content.layout--spotlight > * { position: relative; }
+
+        .slide-content.layout--timeline { display: grid; gap: var(--space-4); padding: clamp(20px, 3vw, 36px); border-left: 4px solid rgba(156, 175, 136, 0.6); }
+        .slide-content.layout--timeline > * { padding-left: var(--space-4); position: relative; }
+        .slide-content.layout--timeline > *::before { content: ""; position: absolute; left: calc(-1 * var(--space-4) - 10px); top: 0.5em; width: 12px; height: 12px; border-radius: 999px; background: var(--secondary-sage); box-shadow: 0 0 0 4px rgba(156, 175, 136, 0.2); }
+
+        .theme--sunrise { background: linear-gradient(140deg, rgba(255, 243, 226, 0.92), rgba(198, 170, 119, 0.45)); color: var(--deep-forest); border-radius: var(--radius-lg); padding: clamp(24px, 3vw, 40px); box-shadow: var(--shadow-2); }
+        .theme--sunrise :where(p, li) { color: inherit; }
+        .theme--midnight { background: linear-gradient(160deg, rgba(34, 41, 32, 0.9), rgba(34, 41, 32, 0.75)); color: var(--soft-white); border-radius: var(--radius-lg); padding: clamp(24px, 3vw, 40px); box-shadow: 0 20px 60px rgba(34, 41, 32, 0.45); }
+        .theme--midnight :where(p, li, h1, h2, h3, h4) { color: inherit; }
+        .theme--midnight .text-muted { color: color-mix(in srgb, var(--soft-white) 65%, rgba(255, 255, 255, 0.72) 35%); }
+        .theme--aurora { background: radial-gradient(220px 220px at 10% 10%, rgba(156, 175, 136, 0.4), transparent 65%), radial-gradient(220px 260px at 90% 15%, rgba(198, 170, 119, 0.36), transparent 70%), color-mix(in srgb, var(--soft-white) 92%, rgba(122, 132, 113, 0.22) 8%); border-radius: var(--radius-xl); padding: clamp(24px, 3vw, 44px); box-shadow: var(--shadow-3); }
 
         .activity-block {
             margin-top: var(--space-7);
@@ -3363,6 +3486,34 @@
             return paragraph;
         }
 
+        function applyLayoutOptions(target, layout) {
+            if (!target || !layout) {
+                return;
+            }
+            const alignment = layout.alignment || layout.align;
+            if (alignment === "center") {
+                target.classList.add("is-centered");
+            }
+            if (alignment === "end" || alignment === "right") {
+                target.classList.add("is-right-aligned");
+            }
+            const rawClassNames = Array.isArray(layout.className)
+                ? layout.className.flatMap((value) => (typeof value === "string" ? value.split(/\s+/) : []))
+                : typeof layout.className === "string"
+                ? layout.className.split(/\s+/)
+                : [];
+            rawClassNames.filter(Boolean).forEach((name) => {
+                target.classList.add(name);
+            });
+            const themes = Array.isArray(layout.theme) ? layout.theme : layout.theme ? [layout.theme] : [];
+            themes
+                .map((theme) => (typeof theme === "string" ? theme.trim() : ""))
+                .filter(Boolean)
+                .forEach((theme) => {
+                    target.classList.add(`theme--${theme}`);
+                });
+        }
+
         function createListElement(items = [], options = "bullets") {
             if (!Array.isArray(items) || !items.length) {
                 return null;
@@ -3614,12 +3765,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
-            if (config.layout && config.layout.alignment === "center") {
-                content.classList.add("is-centered");
-            }
-            if (config.layout && config.layout.className) {
-                content.classList.add(config.layout.className);
-            }
+            applyLayoutOptions(content, config.layout);
             if (config.image) {
                 const img = createImageElement(config.image);
                 if (img) {
@@ -3659,6 +3805,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
             (config.body || []).forEach((paragraph) => {
                 const paragraphElement = createParagraph(paragraph);
                 if (paragraphElement) {
@@ -3706,6 +3853,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
             (config.body || []).forEach((paragraph) => {
                 const paragraphElement = createParagraph(paragraph);
                 if (paragraphElement) {
@@ -3774,6 +3922,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content reporting-layout";
+            applyLayoutOptions(content, config.layout);
             (config.body || []).forEach((paragraph) => {
                 const paragraphElement = createParagraph(paragraph);
                 if (paragraphElement) {
@@ -3869,6 +4018,7 @@
 
             const content = document.createElement("div");
             content.className = "slide-content gapfill-activity";
+            applyLayoutOptions(content, config.layout);
 
             if (config.image) {
                 const img = createImageElement(config.image);
@@ -4019,6 +4169,7 @@
 
             const content = document.createElement("div");
             content.className = "slide-content ranking-activity";
+            applyLayoutOptions(content, config.layout);
 
             if (config.image) {
                 const img = createImageElement(config.image);
@@ -4204,6 +4355,7 @@
 
             const content = document.createElement("div");
             content.className = "slide-content grouping-activity";
+            applyLayoutOptions(content, config.layout);
 
             if (config.image) {
                 const img = createImageElement(config.image);
@@ -4351,6 +4503,7 @@
 
             const content = document.createElement("div");
             content.className = "slide-content matching-activity";
+            applyLayoutOptions(content, config.layout);
 
             if (config.image) {
                 const img = createImageElement(config.image);
@@ -4517,6 +4670,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content card-container";
+            applyLayoutOptions(content, config.layout);
             (config.cards || []).forEach((cardConfig) => {
                 const card = document.createElement("div");
                 card.className = "card animate-on-scroll";
@@ -4556,6 +4710,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
             if (config.image) {
                 const img = createImageElement(config.image);
                 if (img) {
@@ -4599,6 +4754,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
             if (config.image) {
                 const img = createImageElement(config.image);
                 if (img) {
@@ -4648,6 +4804,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content";
+            applyLayoutOptions(content, config.layout);
             (config.questions || []).forEach((question) => {
                 const card = document.createElement("div");
                 card.className = "quiz-card animate-on-scroll";
@@ -4716,6 +4873,7 @@
             }
             const content = document.createElement("div");
             content.className = "slide-content reflection-form";
+            applyLayoutOptions(content, config.layout);
             (config.fields || []).forEach((field, index) => {
                 const wrapper = document.createElement("div");
                 wrapper.className = "reflection-field animate-on-scroll";
@@ -4870,12 +5028,19 @@
                 return;
             }
 
-            const title = document.createElement("h2");
-            title.className = "lesson-overview__title";
-            title.textContent = planner.title || "Lesson overview";
+            const details = document.createElement("details");
+            details.className = "lesson-overview__collapsible";
+            details.setAttribute("data-collapsible", "planner");
+
+            const summary = document.createElement("summary");
+            summary.className = "lesson-overview__summary";
 
             const header = document.createElement("div");
             header.className = "lesson-overview__header";
+
+            const title = document.createElement("h2");
+            title.className = "lesson-overview__title";
+            title.textContent = planner.title || "Lesson overview";
             header.appendChild(title);
 
             if (planner.duration || planner.subtitle) {
@@ -4888,16 +5053,28 @@
                     meta.appendChild(badge);
                 }
                 if (planner.subtitle) {
-                    const subtitle = document.createElement("span");
-                    subtitle.textContent = planner.subtitle;
-                    meta.appendChild(subtitle);
+                    const hint = document.createElement("span");
+                    hint.className = "lesson-overview__summary-hint";
+                    hint.textContent = planner.subtitle;
+                    meta.appendChild(hint);
                 }
                 if (meta.childNodes.length) {
                     header.appendChild(meta);
                 }
             }
 
-            lessonOverview.appendChild(header);
+            summary.appendChild(header);
+            details.appendChild(summary);
+
+            const panel = document.createElement("div");
+            panel.className = "lesson-overview__panel";
+
+            if (planner.subtitle) {
+                const subtitleParagraph = document.createElement("p");
+                subtitleParagraph.className = "lesson-overview__subtitle";
+                subtitleParagraph.textContent = planner.subtitle;
+                panel.appendChild(subtitleParagraph);
+            }
 
             const body = document.createElement("div");
             body.className = "lesson-overview__body";
@@ -4977,13 +5154,19 @@
                 calloutLabel.textContent = "Facilitation spotlight:";
                 callout.appendChild(calloutLabel);
                 callout.appendChild(document.createTextNode(` ${planner.spotlight}`));
-                body.appendChild(callout);
+                panel.appendChild(callout);
             }
 
             if (body.childNodes.length) {
-                lessonOverview.appendChild(body);
+                panel.appendChild(body);
             }
 
+            if (panel.childNodes.length) {
+                details.appendChild(panel);
+            }
+
+            details.open = false;
+            lessonOverview.appendChild(details);
             lessonOverview.hidden = false;
             lessonOverview.setAttribute("aria-hidden", "false");
         }
