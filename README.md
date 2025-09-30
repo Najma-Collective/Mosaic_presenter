@@ -2,6 +2,11 @@
 
 The Presenter shell reads from the `lessonLibrary` object near the end of `Presenter.html`. Each top-level key becomes a selectable template in the **Lesson template** dropdown, and the associated data drives the slides, the slide map, and the saved notes for that lesson.
 
+## Updated workspace layout
+- The slide workspace now spans roughly six-eighths of the viewport width and stands at seven-eighths of the viewport height on desktop screens, keeping every slide visible without requiring internal scrolling.
+- Collaborative text boxes stay docked to the right-hand rail so there is still room for note taking alongside the slide canvas.
+- All facilitator tools—including the lesson selector, session planner, slide map, and notes import/export actions—live inside a compact **Session controls** bar at the top of the slide workspace. Open the menu to adjust your session resources and collapse it again to reclaim vertical space.
+
 ## 1. Lesson templates and metadata
 1. Open `Presenter.html` and locate `const lessonLibrary = { ... }`.
 2. Duplicate one of the existing lesson objects (for example `digitalSelfDefense`, `eltLesson`, or `questionTypesShowcase`) and give it a new key; the key is what the selector uses internally.
