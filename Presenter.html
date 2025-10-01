@@ -1293,6 +1293,13 @@
         border: 1px solid rgba(122, 132, 113, 0.12);
         box-shadow: var(--shadow-2);
       }
+      .slide-content--centered {
+        place-items: center;
+        text-align: center;
+      }
+      .slide-content--centered > * {
+        max-width: min(640px, 82%);
+      }
       @media (min-width: 1024px) {
         .slide-content {
           grid-column: 1 / 2;
@@ -2414,12 +2421,525 @@
         text-decoration: underline;
       }
       
-      /* --- Custom styles for interactive elements --- */
-        .matching-activity {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-4);
-            align-items: start;
+      /* --- Qualitative research deck custom styles --- */
+      .welcome-card {
+        display: grid;
+        gap: var(--space-3);
+        padding: clamp(28px, 5vw, 48px);
+        border-radius: var(--radius-xl);
+        background: linear-gradient(145deg, rgba(248, 246, 240, 0.95), rgba(156, 175, 136, 0.25));
+        box-shadow: var(--shadow-3);
+        border: 1px solid rgba(122, 132, 113, 0.2);
+        align-items: center;
+      }
+      .welcome-card__icon {
+        font-size: clamp(2.4rem, 4vw, 3.2rem);
+        color: var(--secondary-sage);
+      }
+      .welcome-card__title {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(2.6rem, 3.4vw, 3.6rem);
+        color: var(--deep-forest);
+      }
+      .welcome-card__body {
+        margin: 0;
+        font-size: var(--step-1);
+        color: color-mix(in srgb, var(--deep-forest) 70%, white 30%);
+      }
+
+      .full-image-slide {
+        position: relative;
+        min-height: min(70vh, 640px);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        display: grid;
+      }
+      .full-image-slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-image: var(--slide-background);
+        filter: brightness(0.8);
+        transform: scale(1.02);
+      }
+      .full-image-slide__overlay {
+        position: relative;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: clamp(28px, 5vw, 60px);
+        background: linear-gradient(145deg, rgba(46, 53, 42, 0.55), rgba(46, 53, 42, 0.25));
+      }
+      .grounding-card,
+      .closing-card {
+        display: grid;
+        gap: var(--space-3);
+        padding: clamp(26px, 4vw, 42px);
+        border-radius: var(--radius-xl);
+        background: rgba(254, 252, 247, 0.85);
+        box-shadow: var(--shadow-2);
+        text-align: center;
+        color: var(--deep-forest);
+      }
+      .grounding-card__line {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+        font-weight: 600;
+      }
+      .grounding-card__line i {
+        color: var(--secondary-sage);
+        font-size: 1.5em;
+      }
+      .closing-card__icon {
+        font-size: clamp(2.6rem, 4vw, 3.4rem);
+        color: var(--secondary-sage);
+      }
+      .closing-card__title {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 3vw, 3.2rem);
+      }
+      .closing-card__body {
+        margin: 0;
+        font-size: var(--step-1);
+        color: var(--forest-shadow);
+      }
+
+      .participant-table-wrapper {
+        overflow-x: auto;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-1);
+      }
+      .participant-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 640px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .participant-table th,
+      .participant-table td {
+        padding: var(--space-3) var(--space-4);
+        border: 1px solid rgba(122, 132, 113, 0.16);
+        text-align: left;
+      }
+      .participant-table th {
+        font-size: var(--step-1);
+        color: var(--deep-forest);
+        background: color-mix(in srgb, var(--warm-cream) 75%, white 25%);
+      }
+      .participant-table input {
+        width: 100%;
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(122, 132, 113, 0.35);
+        font-size: var(--step-0);
+        font-family: var(--font-body);
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .participant-table input:focus {
+        outline: none;
+        box-shadow: var(--ring);
+        border-color: var(--secondary-sage);
+      }
+
+      .curiosity-carousel {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: var(--space-4);
+      }
+      .carousel-viewport {
+        overflow: hidden;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-2);
+        background: rgba(255, 255, 255, 0.85);
+        max-width: clamp(280px, 70vw, 640px);
+        margin: 0 auto;
+      }
+      .carousel-track {
+        display: flex;
+        gap: 0;
+        transition: transform var(--dur-3) var(--ease-ambient);
+      }
+      .curiosity-slide {
+        flex: 0 0 100%;
+        max-width: 100%;
+        display: grid;
+        gap: var(--space-3);
+        padding: var(--space-4);
+        background: rgba(255, 255, 255, 0.85);
+      }
+      .curiosity-slide img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-1);
+      }
+      .curiosity-slide figcaption {
+        margin: 0;
+        font-weight: 600;
+        color: var(--deep-forest);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
+      .carousel-control {
+        width: var(--target-min);
+        height: var(--target-min);
+        border-radius: 50%;
+        border: none;
+        background: color-mix(in srgb, var(--secondary-sage) 70%, white 30%);
+        color: white;
+        font-size: 1.1rem;
+        display: grid;
+        place-items: center;
+        box-shadow: var(--shadow-2);
+        cursor: pointer;
+        transition: transform var(--dur-1) var(--ease-ambient), box-shadow var(--dur-1) var(--ease-ambient);
+      }
+      .carousel-control:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-3);
+      }
+      .carousel-control:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: var(--shadow-1);
+      }
+      .carousel-dots {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        gap: var(--space-2);
+        margin-top: var(--space-3);
+      }
+      .carousel-dots button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(122, 132, 113, 0.3);
+        cursor: pointer;
+        transition: background var(--dur-1) var(--ease-ambient), transform var(--dur-1) var(--ease-ambient);
+      }
+      .carousel-dots button[aria-current="true"] {
+        background: var(--secondary-sage);
+        transform: scale(1.2);
+      }
+
+      .speech-bubbles {
+        display: grid;
+        gap: var(--space-4);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .speech-bubble {
+        position: relative;
+        display: grid;
+        gap: var(--space-3);
+        padding: clamp(18px, 3vw, 26px);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(160deg, rgba(248, 246, 240, 0.95), rgba(156, 175, 136, 0.2));
+        border: 1px solid rgba(122, 132, 113, 0.2);
+        box-shadow: var(--shadow-1);
+      }
+      .speech-bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: clamp(32px, 20%, 80px);
+        width: 24px;
+        height: 24px;
+        background: inherit;
+        border: inherit;
+        border-radius: 4px;
+        transform: rotate(45deg);
+      }
+      .speech-bubble i {
+        font-size: 1.4rem;
+        color: var(--secondary-sage);
+      }
+      .speech-bubble p {
+        margin: 0;
+        font-weight: 600;
+        color: var(--deep-forest);
+      }
+      .speech-bubble__attribution {
+        font-size: var(--step--1);
+        color: var(--ink-muted);
+      }
+
+      .reflection-inputs,
+      .motivation-inputs,
+      .interest-inputs {
+        display: grid;
+        gap: var(--space-3);
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+      .reflection-input,
+      .motivation-input,
+      .interest-input {
+        padding: var(--space-3);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(122, 132, 113, 0.18);
+        background: rgba(255, 255, 255, 0.85);
+        font-family: var(--font-body);
+        font-size: var(--step-0);
+        resize: vertical;
+        min-height: 90px;
+        box-shadow: var(--shadow-1);
+      }
+      .reflection-input:nth-child(1) { background: rgba(198, 170, 119, 0.18); }
+      .reflection-input:nth-child(2) { background: rgba(156, 175, 136, 0.18); }
+      .reflection-input:nth-child(3) { background: rgba(184, 197, 166, 0.18); }
+      .reflection-input:nth-child(4) { background: rgba(122, 132, 113, 0.15); }
+      .reflection-input:nth-child(5) { background: rgba(47, 58, 43, 0.12); color: var(--soft-white); }
+      .motivation-input:nth-child(odd) { background: rgba(156, 175, 136, 0.18); }
+      .motivation-input:nth-child(even) { background: rgba(198, 170, 119, 0.18); }
+      .interest-input:nth-child(odd) { background: rgba(184, 197, 166, 0.18); }
+      .interest-input:nth-child(even) { background: rgba(156, 175, 136, 0.14); }
+      textarea:focus {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+
+      .knowledge-cards,
+      .approach-grid,
+      .module-cards,
+      .ethics-grid,
+      .toolkit-grid,
+      .insight-steps,
+      .step-cards {
+        display: grid;
+        gap: var(--space-4);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .info-card,
+      .mindset-card,
+      .approach-card,
+      .module-card,
+      .ethics-card,
+      .toolkit-card,
+      .insight-step,
+      .step-card {
+        display: grid;
+        gap: var(--space-3);
+        padding: clamp(18px, 3vw, 26px);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(122, 132, 113, 0.16);
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: var(--shadow-1);
+      }
+      .info-card i,
+      .mindset-card i,
+      .approach-card i,
+      .module-card i,
+      .ethics-card i,
+      .toolkit-card i,
+      .insight-step__badge,
+      .step-card__icon {
+        color: var(--secondary-sage);
+        font-size: 1.8rem;
+      }
+      .mindset-card h3,
+      .approach-card h3,
+      .module-card h3,
+      .ethics-card h3,
+      .toolkit-card h3,
+      .insight-step h3,
+      .step-card h3 {
+        margin: 0;
+        font-size: var(--step-1);
+        color: var(--deep-forest);
+      }
+      .mindset-card p,
+      .info-card p,
+      .approach-card p,
+      .module-card p,
+      .ethics-card p,
+      .toolkit-card p,
+      .insight-step p,
+      .step-card p {
+        margin: 0;
+        color: var(--ink-muted);
+      }
+      .insight-step {
+        text-align: left;
+        padding-top: var(--space-5);
+      }
+      .insight-step__badge {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(156, 175, 136, 0.25);
+      }
+
+      .mindset-grid {
+        display: grid;
+        gap: var(--space-4);
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .mindset-card {
+        background: linear-gradient(160deg, rgba(248, 246, 240, 0.9), rgba(156, 175, 136, 0.2));
+      }
+
+      .keyword-explorer {
+        display: grid;
+        gap: var(--space-3);
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .keyword-btn {
+        border: 1px solid rgba(122, 132, 113, 0.2);
+        border-radius: var(--radius-lg);
+        padding: var(--space-3);
+        background: rgba(255, 255, 255, 0.8);
+        font-weight: 700;
+        color: var(--deep-forest);
+        cursor: pointer;
+        transition: background var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+      }
+      .keyword-btn:hover {
+        background: var(--hover-sage);
+        box-shadow: var(--shadow-1);
+      }
+      .keyword-btn.is-selected {
+        background: color-mix(in srgb, var(--secondary-sage) 80%, white 20%);
+        color: white;
+        box-shadow: var(--shadow-2);
+      }
+      .keyword-definition {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--space-3);
+        align-items: center;
+        padding: clamp(18px, 3vw, 24px);
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(122, 132, 113, 0.18);
+        box-shadow: var(--shadow-1);
+        font-weight: 600;
+        color: var(--deep-forest);
+      }
+      .keyword-definition i {
+        font-size: 1.6rem;
+        color: var(--secondary-sage);
+      }
+
+      .module-quiz-layout {
+        display: grid;
+        gap: var(--space-5);
+      }
+      @media (min-width: 960px) {
+        .module-quiz-layout {
+          grid-template-columns: minmax(0, 3fr) minmax(220px, 1fr);
+          align-items: start;
+        }
+      }
+      .module-quiz p {
+        font-weight: 600;
+        color: var(--deep-forest);
+      }
+      .module-quiz select {
+        margin-left: var(--space-3);
+        min-width: 140px;
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(122, 132, 113, 0.35);
+        font-family: var(--font-body);
+      }
+      .module-reference {
+        background: rgba(248, 246, 240, 0.85);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+        border: 1px solid rgba(122, 132, 113, 0.16);
+        box-shadow: var(--shadow-1);
+      }
+      .module-reference h3 {
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
+      .module-reference ul {
+        margin: 0;
+        padding-left: var(--space-5);
+        color: var(--ink-muted);
+        display: grid;
+        gap: var(--space-2);
+      }
+
+      .qa-table-wrapper {
+        overflow-x: auto;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-1);
+      }
+      .qa-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 560px;
+        background: rgba(255, 255, 255, 0.92);
+      }
+      .qa-table th,
+      .qa-table td {
+        border: 1px solid rgba(122, 132, 113, 0.18);
+        padding: var(--space-3);
+        text-align: left;
+      }
+      .qa-table th {
+        background: color-mix(in srgb, var(--warm-cream) 80%, white 20%);
+        font-size: var(--step-1);
+        color: var(--deep-forest);
+      }
+      .qa-table textarea {
+        width: 100%;
+        min-height: 100px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(122, 132, 113, 0.25);
+        padding: var(--space-2) var(--space-3);
+        font-family: var(--font-body);
+        font-size: var(--step-0);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .step-card {
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .step-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba(156, 175, 136, 0.18), transparent 65%);
+        pointer-events: none;
+      }
+      .step-card__icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+        background: color-mix(in srgb, var(--secondary-sage) 70%, white 30%);
+        color: white;
+        box-shadow: var(--shadow-2);
+        font-size: 1.6rem;
+      }
+
+      .matching-activity {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--space-4);
+          align-items: start;
         }
         .matching-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); }
         .match-item {
@@ -2558,436 +3078,496 @@
                 </header>
 
                 <div id="slides-root">
-                    <!-- SLIDE 1: Title Slide -->
+                    <!-- SLIDE 1: Welcome -->
                     <div class="slide active" id="slide-1">
-                        <header class="session-hero">
-                            <div class="session-hero__content">
-                                <h1 class="session-hero__title">The Eco-Activist's Toolkit</h1>
-                                <p class="session-hero__descriptor text-lead text-measure">Learning to make a difference, one step at a time.</p>
-                                <div class="session-hero__meta">
-                                    <span class="session-hero__badge"><i class="fa-solid fa-earth-americas"></i> B2 Level</span>
-                                    <span class="session-hero__badge"><i class="fa-solid fa-bullhorn"></i> Eco-Activism</span>
+                        <div class="slide-content slide-content--centered welcome-slide">
+                            <div class="welcome-card">
+                                <div class="welcome-card__icon" aria-hidden="true">
+                                    <i class="fa-solid fa-hand-sparkles"></i>
                                 </div>
+                                <h2 class="welcome-card__title">Welcome, dear students.</h2>
+                                <p class="welcome-card__body">We'll begin when everyone has arrived.</p>
+                                <p class="welcome-card__body">Thank you for your patience.</p>
                             </div>
-                            <figure class="session-hero__media">
-                                <img src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Community volunteers planting trees together in a sunny park.">
-                            </figure>
-                        </header>
+                        </div>
                     </div>
 
-                    <!-- SLIDE 2: Dialogic Lead-In -->
+                    <!-- SLIDE 2: Grounding Exercise -->
                     <div class="slide" id="slide-2">
-                        <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-comments"></i> Let's Talk About Our Planet</h2>
-                            <p class="section-intro__descriptor text-measure">In pairs, discuss the following questions. Be ready to share your ideas with the class.</p>
-                            
-                            <!-- Activity Type: Open-ended discussion -->
-                            <div class="question-prompts">
-                                <div class="question-card">
-                                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Most Urgent Problem</h4>
-                                    <p>What do you think is the most urgent environmental problem facing the world today? Why?</p>
-                                </div>
-                                <div class="question-card">
-                                    <h4><i class="fa-solid fa-leaf"></i> Going "Green"</h4>
-                                    <p>Have you ever tried to live a more "green" lifestyle? What changes did you make?</p>
-                                </div>
-                                <div class="question-card">
-                                    <h4><i class="fa-solid fa-person-rays"></i> The word "Activist"</h4>
-                                    <p>What does the word "activist" mean to you? Does it have a positive or negative connotation?</p>
-                                </div>
-                                <div class="question-card">
-                                    <h4><i class="fa-solid fa-image"></i> Protest Image</h4>
-                                    <p>Look at the image of the climate protest. What emotions or ideas come to mind when you see it?</p>
+                        <div class="full-image-slide" style="--slide-background: url('https://images.pexels.com/photos/1276204/pexels-photo-1276204.jpeg?auto=compress&cs=tinysrgb&h=900');">
+                            <div class="full-image-slide__overlay">
+                                <div class="grounding-card">
+                                    <div class="grounding-card__line">
+                                        <i class="fa-solid fa-feather-pointed" aria-hidden="true"></i>
+                                        <span>Take a deep breath in. Hold. Slowly release.</span>
+                                    </div>
+                                    <div class="grounding-card__line">
+                                        <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                                        <span>Take one more deep breath in. Hold. Slowly release.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 3: Vocabulary Matching -->
+                    <!-- SLIDE 3: Who's in the Room -->
                     <div class="slide" id="slide-3">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-layer-group"></i> Key Campaign Vocabulary</h2>
-                            <div class="section-intro">
-                                <h3 class="section-intro__title">Match the Core Concepts</h3>
-                                <p class="section-intro__descriptor text-measure">Match the words to their definitions. Click a word, then click its definition.</p>
-                            </div>
-                            <div class="matching-activity" id="matching-activity-1">
-                                <ul class="matching-list">
-                                    <li class="match-item" data-match="1">1. Petition</li>
-                                    <li class="match-item" data-match="2">2. Boycott</li>
-                                    <li class="match-item" data-match="3">3. Protest</li>
-                                    <li class="match-item" data-match="4">4. Conservation</li>
-                                    <li class="match-item" data-match="5">5. Awareness</li>
-                                </ul>
-                                <ul class="matching-list">
-                                    <li class="match-item" data-match="2">a. To refuse to buy, use, or participate in something as a form of protest.</li>
-                                    <li class="match-item" data-match="3">b. A public event where people show their opposition to something.</li>
-                                    <li class="match-item" data-match="5">c. Knowledge or perception of a situation or fact.</li>
-                                    <li class="match-item" data-match="4">d. The protection of animals, plants, and natural resources.</li>
-                                    <li class="match-item" data-match="1">e. A formal written request, typically signed by many people, appealing to authority.</li>
-                                </ul>
-                            </div>
-                            <div class="feedback"></div>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 4: Contextual Practice -->
-                    <div class="slide" id="slide-4">
-                        <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-book-open-reader"></i> Words in Action</h2>
-                            <p class="section-intro__descriptor text-measure">Choose the best word to complete each sentence.</p>
-                            <div class="interactive-module__steps" id="mcq-activity-1">
-                                <p>6. The main goal of their campaign is to raise _______ about the dangers of single-use plastics.
-                                    <select data-answer="awareness"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
-                                </p>
-                                <p>7. Thousands of people joined the _______ in the city centre to demand government action on climate change.
-                                    <select data-answer="protest"><option>Select...</option><option>boycott</option><option>protest</option><option>conservation</option></select>
-                                </p>
-                                <p>8. Many consumers are starting to _______ brands that use unsustainable palm oil in their products.
-                                    <select data-answer="boycott"><option>Select...</option><option>boycott</option><option>protest</option><option>petition</option></select>
-                                </p>
-                                <p>9. The online _______ to save the local forest has already gathered over 50,000 signatures.
-                                    <select data-answer="petition"><option>Select...</option><option>awareness</option><option>conservation</option><option>petition</option></select>
-                                </p>
-                                <p>10. The national park is dedicated to the _______ of endangered species and their habitats.
-                                    <select data-answer="conservation"><option>Select...</option><option>boycott</option><option>protest</option><option>conservation</option></select>
-                                </p>
-                            </div>
-                            <div class="activity-actions">
-                                <button class="activity-btn" onclick="checkSelectAnswers('mcq-activity-1')">Check Answers</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 5: Task 1 - Ranking Actions -->
-                    <div class="slide" id="slide-5">
-                        <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-arrow-up-9-1"></i> What's Most Effective?</h2>
-                            <p class="section-intro__descriptor text-measure">With a partner, rank these actions from 1 (most effective) to 5 (least effective) for creating real change. Drag and drop to reorder. Be prepared to justify your ranking.</p>
-                            
-                            <!-- Activity Type: Ranking and Justification -->
-                            <ol class="ranking-list" id="ranking-list-1">
-                                <li class="ranking-item" draggable="true"><i class="fa-solid fa-grip-vertical rank-handle"></i> <span class="rank-number">1.</span> Signing an online petition.</li>
-                                <li class="ranking-item" draggable="true"><i class="fa-solid fa-grip-vertical rank-handle"></i> <span class="rank-number">2.</span> Organizing a public protest.</li>
-                                <li class="ranking-item" draggable="true"><i class="fa-solid fa-grip-vertical rank-handle"></i> <span class="rank-number">3.</span> Starting a boycott of a major company.</li>
-                                <li class="ranking-item" draggable="true"><i class="fa-solid fa-grip-vertical rank-handle"></i> <span class="rank-number">4.</span> Volunteering for a conservation group.</li>
-                                <li class="ranking-item" draggable="true"><i class="fa-solid fa-grip-vertical rank-handle"></i> <span class="rank-number">5.</span> Creating a social media campaign to raise awareness.</li>
-                            </ol>
-                            <div class="callout-card">
-                                <h4 class="callout-card__title">Justify Your Choice</h4>
-                                <p class="callout-card__body">Example: "We think a <strong>boycott</strong> is most effective because it directly affects a company's profits, which forces them to listen."</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 6: Classifying Actions -->
-                    <div class="slide" id="slide-6">
-                        <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-diagram-project"></i> Sort the Strategies</h2>
-                            <div class="section-intro">
-                                <h3 class="section-intro__title">Types of Action</h3>
-                                <p class="section-intro__descriptor text-measure">Drag the actions from the bank into the correct category.</p>
-                            </div>
-                            <div id="drag-drop-activity-1">
-                                <div class="draggable-bank">
-                                    <div class="draggable" draggable="true" data-category="political">lobbying politicians</div>
-                                    <div class="draggable" draggable="true" data-category="community">organizing a beach clean-up</div>
-                                    <div class="draggable" draggable="true" data-category="political">writing to an MP</div>
-                                    <div class="draggable" draggable="true" data-category="consumer">choosing fair-trade coffee</div>
-                                    <div class="draggable" draggable="true" data-category="community">starting a community garden</div>
-                                    <div class="draggable" draggable="true" data-category="consumer">avoiding fast fashion</div>
-                                </div>
-                                <div class="drop-zone-container">
-                                    <div class="drop-zone" data-category="political"><h4>Political Action</h4></div>
-                                    <div class="drop-zone" data-category="community"><h4>Community Action</h4></div>
-                                    <div class="drop-zone" data-category="consumer"><h4>Consumer Action</h4></div>
-                                </div>
-                            </div>
-                            <div class="activity-actions">
-                                <button class="activity-btn" onclick="checkDragDrop('drag-drop-activity-1')">Check Answers</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 7: Collocation Practice -->
-                    <div class="slide" id="slide-7">
-                        <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-spell-check"></i> Speak Like an Activist</h2>
-                            <div class="section-intro">
-                                <h3 class="section-intro__title">Common Collocations</h3>
-                                <p class="section-intro__descriptor text-measure">Choose the correct verb to complete each phrase.</p>
-                            </div>
-                            <div class="interactive-module__steps" id="collocation-activity-1">
-                                <p>7. <select data-answer="Launch"><option>Select...</option><option>Launch</option><option>Hold</option><option>Write</option></select> a campaign</p>
-                                <p>8. <select data-answer="Stage"><option>Select...</option><option>Stage</option><option>Raise</option><option>Write</option></select> a demonstration</p>
-                                <p>9. <select data-answer="Hold"><option>Select...</option><option>Hold</option><option>Launch</option><option>Lobby</option></select> a company accountable</p>
-                                <p>10. <select data-answer="Distribute"><option>Select...</option><option>Distribute</option><option>Stage</option><option>Raise</option></select> leaflets</p>
-                            </div>
-                            <div class="activity-actions">
-                                <button class="activity-btn" onclick="checkSelectAnswers('collocation-activity-1')">Check Answers</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SLIDE 8: Task 2 - Personal Activist Profile -->
-                    <div class="slide" id="slide-8">
-                        <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-user-check"></i> What Kind of Activist Are You?</h2>
-                            <p class="section-intro__descriptor text-measure">Rate how likely you would be to do each action. Then, discuss your choices with a partner, explaining why some actions appeal to you more than others.</p>
-                            
-                            <!-- Activity Type: Matrix Grid completion followed by personalized discussion -->
-                            <div class="data-table">
-                                <table>
+                            <h2 class="slide-title"><i class="fa-solid fa-people-group"></i> Who's in the Room?</h2>
+                            <p class="section-intro__descriptor text-measure">Capture our learning community. Use the table to note student perspectives and professional experiences.</p>
+                            <div class="participant-table-wrapper">
+                                <table class="participant-table">
                                     <thead>
                                         <tr>
-                                            <th>Action</th>
-                                            <th class="data-table__rating">Very Likely</th>
-                                            <th class="data-table__rating">Perhaps</th>
-                                            <th class="data-table__rating">Unlikely</th>
+                                            <th><i class="fa-solid fa-user-graduate"></i> I'm a student studying...</th>
+                                            <th><i class="fa-solid fa-briefcase"></i> I'm a professional working as...</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Write to an MP</td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action1" value="very-likely" aria-label="Write to an MP - very likely"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action1" value="perhaps" aria-label="Write to an MP - perhaps"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action1" value="unlikely" aria-label="Write to an MP - unlikely"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Launch an online campaign</td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action2" value="very-likely" aria-label="Launch an online campaign - very likely"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action2" value="perhaps" aria-label="Launch an online campaign - perhaps"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action2" value="unlikely" aria-label="Launch an online campaign - unlikely"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Boycott a brand</td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action3" value="very-likely" aria-label="Boycott a brand - very likely"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action3" value="perhaps" aria-label="Boycott a brand - perhaps"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action3" value="unlikely" aria-label="Boycott a brand - unlikely"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Organize a community clean-up</td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action4" value="very-likely" aria-label="Organize a community clean-up - very likely"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action4" value="perhaps" aria-label="Organize a community clean-up - perhaps"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action4" value="unlikely" aria-label="Organize a community clean-up - unlikely"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Stage a peaceful demonstration</td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action5" value="very-likely" aria-label="Stage a peaceful demonstration - very likely"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action5" value="perhaps" aria-label="Stage a peaceful demonstration - perhaps"></td>
-                                            <td class="data-table__rating"><input type="radio" class="data-table__choice" name="action5" value="unlikely" aria-label="Stage a peaceful demonstration - unlikely"></td>
-                                        </tr>
+                                        <tr><td><input type="text" placeholder="Student 1"></td><td><input type="text" placeholder="Professional 1"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 2"></td><td><input type="text" placeholder="Professional 2"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 3"></td><td><input type="text" placeholder="Professional 3"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 4"></td><td><input type="text" placeholder="Professional 4"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 5"></td><td><input type="text" placeholder="Professional 5"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 6"></td><td><input type="text" placeholder="Professional 6"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 7"></td><td><input type="text" placeholder="Professional 7"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 8"></td><td><input type="text" placeholder="Professional 8"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 9"></td><td><input type="text" placeholder="Professional 9"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 10"></td><td><input type="text" placeholder="Professional 10"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 11"></td><td><input type="text" placeholder="Professional 11"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 12"></td><td><input type="text" placeholder="Professional 12"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 13"></td><td><input type="text" placeholder="Professional 13"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 14"></td><td><input type="text" placeholder="Professional 14"></td></tr>
+                                        <tr><td><input type="text" placeholder="Student 15"></td><td><input type="text" placeholder="Professional 15"></td></tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 9: Case Study - The Riverwood Cleanup -->
+                    <!-- SLIDE 4: Sparking Curiosity -->
+                    <div class="slide" id="slide-4">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-lightbulb"></i> Sparking Curiosity</h2>
+                            <p class="section-intro__descriptor text-measure">Explore real-world storytellers who rely on qualitative insights. Use the carousel arrows to browse.</p>
+                            <div class="curiosity-carousel" data-carousel>
+                                <button class="carousel-control" type="button" data-carousel-prev aria-label="Previous story">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <div class="carousel-viewport">
+                                    <div class="carousel-track" data-carousel-track>
+                                        <figure class="curiosity-slide" data-index="0">
+                                            <img src="https://images.pexels.com/photos/1181375/pexels-photo-1181375.jpeg?auto=compress&cs=tinysrgb&h=750" alt="An interviewer listening carefully to a guest during a recorded conversation.">
+                                            <figcaption><i class="fa-solid fa-microphone"></i> Interviewer uncovering lived experiences</figcaption>
+                                        </figure>
+                                        <figure class="curiosity-slide" data-index="1">
+                                            <img src="https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&h=750" alt="A journalist taking notes during an outdoor press briefing.">
+                                            <figcaption><i class="fa-solid fa-newspaper"></i> Journalist chasing nuance beyond headlines</figcaption>
+                                        </figure>
+                                        <figure class="curiosity-slide" data-index="2">
+                                            <img src="https://images.pexels.com/photos/261949/pexels-photo-261949.jpeg?auto=compress&cs=tinysrgb&h=750" alt="A writer drafting ideas in a bright studio space.">
+                                            <figcaption><i class="fa-solid fa-pen-nib"></i> Writer shaping compelling narratives</figcaption>
+                                        </figure>
+                                        <figure class="curiosity-slide" data-index="3">
+                                            <img src="https://images.pexels.com/photos/712971/pexels-photo-712971.jpeg?auto=compress&cs=tinysrgb&h=750" alt="A researcher observing a community activity outdoors.">
+                                            <figcaption><i class="fa-solid fa-person-walking"></i> Field researcher witnessing context</figcaption>
+                                        </figure>
+                                        <figure class="curiosity-slide" data-index="4">
+                                            <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&h=750" alt="A diverse focus group seated in discussion.">
+                                            <figcaption><i class="fa-solid fa-people-arrows"></i> Facilitator guiding a focus group</figcaption>
+                                        </figure>
+                                        <figure class="curiosity-slide" data-index="5">
+                                            <img src="https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&h=750" alt="Research notes being organised on a desk.">
+                                            <figcaption><i class="fa-solid fa-note-sticky"></i> Analyst clustering emergent themes</figcaption>
+                                        </figure>
+                                        <figure class="curiosity-slide" data-index="6">
+                                            <img src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&h=750" alt="A portable audio recorder placed on a table.">
+                                            <figcaption><i class="fa-solid fa-headphones"></i> Storyteller capturing rich audio diaries</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                                <button class="carousel-control" type="button" data-carousel-next aria-label="Next story">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                                <div class="carousel-dots" data-carousel-dots></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 5: Real-World Research -->
+                    <div class="slide" id="slide-5">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-quote-left"></i> Real-World Research</h2>
+                            <p class="section-intro__descriptor text-measure">These voices demonstrate how qualitative research shapes practice. What stands out to you?</p>
+                            <div class="speech-bubbles">
+                                <article class="speech-bubble">
+                                    <i class="fa-solid fa-hospital"></i>
+                                    <p>"Our patient interviews revealed routines we never knew were barriers to care."</p>
+                                    <span class="speech-bubble__attribution">— Clinic director</span>
+                                </article>
+                                <article class="speech-bubble">
+                                    <i class="fa-solid fa-school"></i>
+                                    <p>"Shadowing teachers helped us redesign the schedule to honour student energy."</p>
+                                    <span class="speech-bubble__attribution">— School principal</span>
+                                </article>
+                                <article class="speech-bubble">
+                                    <i class="fa-solid fa-city"></i>
+                                    <p>"Residents' walking stories mapped safety gaps we couldn't see in the data."</p>
+                                    <span class="speech-bubble__attribution">— Urban planner</span>
+                                </article>
+                                <article class="speech-bubble">
+                                    <i class="fa-solid fa-hand-holding-heart"></i>
+                                    <p>"Listening circles reframed our program from 'helping' to 'partnering.'"</p>
+                                    <span class="speech-bubble__attribution">— Non-profit lead</span>
+                                </article>
+                            </div>
+                            <div class="reflection-inputs" aria-label="Audience reflections">
+                                <textarea class="reflection-input" rows="2" placeholder="Reflection 1"></textarea>
+                                <textarea class="reflection-input" rows="2" placeholder="Reflection 2"></textarea>
+                                <textarea class="reflection-input" rows="2" placeholder="Reflection 3"></textarea>
+                                <textarea class="reflection-input" rows="2" placeholder="Reflection 4"></textarea>
+                                <textarea class="reflection-input" rows="2" placeholder="Reflection 5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 6: What is Qualitative Research? -->
+                    <div class="slide" id="slide-6">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-compass"></i> What is Qualitative Research?</h2>
+                            <p class="section-intro__descriptor text-measure">Anchor our shared understanding with three essentials.</p>
+                            <div class="knowledge-cards">
+                                <article class="info-card">
+                                    <i class="fa-solid fa-comments"></i>
+                                    <h3>Meaning-making</h3>
+                                    <p>Investigates how people interpret experiences, language, and symbols in their contexts.</p>
+                                </article>
+                                <article class="info-card">
+                                    <i class="fa-solid fa-users"></i>
+                                    <h3>Context matters</h3>
+                                    <p>Looks closely at environments, relationships, and histories shaping participants' stories.</p>
+                                </article>
+                                <article class="info-card">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                    <h3>Iterative learning</h3>
+                                    <p>Alternates between gathering insights and refining questions to follow emerging themes.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 7: The Qualitative Mindset -->
+                    <div class="slide" id="slide-7">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-brain"></i> The Qualitative Mindset</h2>
+                            <p class="section-intro__descriptor text-measure">Blend stance, skill, and practice. Use the prompts to guide discussion.</p>
+                            <div class="mindset-grid">
+                                <article class="mindset-card">
+                                    <h3><i class="fa-solid fa-eye"></i> Observe generously</h3>
+                                    <p>Notice gestures, pauses, and environments. What do they tell you about meaning?</p>
+                                </article>
+                                <article class="mindset-card">
+                                    <h3><i class="fa-solid fa-ear-listen"></i> Listen deeply</h3>
+                                    <p>Invite stories with open questions. Reflect back to ensure understanding.</p>
+                                </article>
+                                <article class="mindset-card">
+                                    <h3><i class="fa-solid fa-scale-balanced"></i> Hold complexity</h3>
+                                    <p>Document tensions without rushing to tidy conclusions. Complexity is data.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 8: Your Motivation -->
+                    <div class="slide" id="slide-8">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-heart"></i> Your Motivation</h2>
+                            <p class="section-intro__descriptor text-measure">Type in real time as students share why qualitative research matters to them.</p>
+                            <div class="motivation-inputs" aria-label="Motivation responses">
+                                <textarea class="motivation-input" rows="2" placeholder="Motivation 1"></textarea>
+                                <textarea class="motivation-input" rows="2" placeholder="Motivation 2"></textarea>
+                                <textarea class="motivation-input" rows="2" placeholder="Motivation 3"></textarea>
+                                <textarea class="motivation-input" rows="2" placeholder="Motivation 4"></textarea>
+                                <textarea class="motivation-input" rows="2" placeholder="Motivation 5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 9: Key Words for Our Journey -->
                     <div class="slide" id="slide-9">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-people-group"></i> The Riverwood Guardians</h2>
-                            <div class="section-intro">
-                                <h3 class="section-intro__title">Community Case Study</h3>
-                                <p class="section-intro__descriptor text-measure">Read how one town coordinated different actions to protect their river.</p>
+                            <h2 class="slide-title"><i class="fa-solid fa-key"></i> Key Words for Our Journey</h2>
+                            <p class="section-intro__descriptor text-measure">Select a concept to anchor our language. One choice stays highlighted until you pick another.</p>
+                            <div class="keyword-explorer" data-choice-group>
+                                <button type="button" class="keyword-btn" data-definition="Ethics keeps participants safe, honoured, and informed at every step.">A. Ethics</button>
+                                <button type="button" class="keyword-btn" data-definition="Positionality helps us name how our identities shape what we notice.">B. Positionality</button>
+                                <button type="button" class="keyword-btn" data-definition="Triangulation cross-checks insights using multiple data sources.">C. Triangulation</button>
+                                <button type="button" class="keyword-btn" data-definition="Thick description paints vivid scenes so others can interpret findings.">D. Thick Description</button>
                             </div>
-                            <div class="callout-card">
-                                <h4 class="callout-card__title"><i class="fa-solid fa-water"></i> Riverwood at a Glance</h4>
-                                <p class="callout-card__body">The town of Riverwood faced a polluted river caused by a local factory. A citizen group, the "Riverwood Guardians," organized weekly clean-ups to raise awareness, gathered 10,000 signatures on a petition demanding better filters, and lobbied politicians with scientific evidence. After six months of pressure, the factory installed cleaner technology, proving how coordinated action can deliver results.</p>
+                            <div class="keyword-definition" id="keyword-definition" aria-live="polite">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Select a keyword to reveal a working definition.</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 10: Campaign Snapshot -->
+                    <!-- SLIDE 10: Approaches at a Glance -->
                     <div class="slide" id="slide-10">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-table-columns"></i> Capture the Campaign</h2>
-                            <p class="section-intro__descriptor text-measure">Use details from the case study to complete each prompt. Keep your responses concise and specific.</p>
-                            <div class="response-grid" id="campaign-snapshot-1">
-                                <div class="response-grid__field">
-                                    <label class="response-grid__label" for="snapshot-who">Who was involved?</label>
-                                    <input type="text" id="snapshot-who" class="text-input" data-answer="Riverwood Guardians" placeholder="Name the group or people">
-                                </div>
-                                <div class="response-grid__field">
-                                    <label class="response-grid__label" for="snapshot-problem">What was the issue?</label>
-                                    <input type="text" id="snapshot-problem" class="text-input" data-answer="river was polluted" placeholder="Summarise the challenge">
-                                </div>
-                                <div class="response-grid__field">
-                                    <label class="response-grid__label" for="snapshot-start">When did it start?</label>
-                                    <input type="text" id="snapshot-start" class="text-input" data-answer="2022" placeholder="Add a time reference">
-                                </div>
-                                <div class="response-grid__field">
-                                    <label class="response-grid__label" for="snapshot-methods">Which actions were used?</label>
-                                    <input type="text" id="snapshot-methods" class="text-input" data-answer="clean-ups, petition, lobbying" placeholder="List the key methods">
-                                </div>
-                                <div class="response-grid__field">
-                                    <label class="response-grid__label" for="snapshot-result">What was the result?</label>
-                                    <input type="text" id="snapshot-result" class="text-input" data-answer="factory installed cleaner technology" placeholder="Describe the outcome">
-                                </div>
+                            <h2 class="slide-title"><i class="fa-solid fa-sitemap"></i> Approaches at a Glance</h2>
+                            <p class="section-intro__descriptor text-measure">Use the cards to summarise how each approach contributes to qualitative insight.</p>
+                            <div class="approach-grid">
+                                <article class="approach-card">
+                                    <i class="fa-solid fa-people-line"></i>
+                                    <h3>Ethnography</h3>
+                                    <p>Immerses the researcher in daily life to understand culture from within.</p>
+                                </article>
+                                <article class="approach-card">
+                                    <i class="fa-solid fa-seedling"></i>
+                                    <h3>Grounded Theory</h3>
+                                    <p>Builds theory from data through constant comparison of codes and categories.</p>
+                                </article>
+                                <article class="approach-card">
+                                    <i class="fa-solid fa-person-rays"></i>
+                                    <h3>Phenomenology</h3>
+                                    <p>Explores the essence of lived experience across participants.</p>
+                                </article>
+                                <article class="approach-card">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    <h3>Participatory Action</h3>
+                                    <p>Partners with communities to co-create knowledge and change.</p>
+                                </article>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 11: Reading for Detail -->
+                    <!-- SLIDE 11: Course Modules -->
                     <div class="slide" id="slide-11">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Check Your Understanding</h2>
-                            <p class="section-intro__descriptor text-measure">Answer the questions about the Riverwood campaign.</p>
-                            <div class="interactive-module__steps" id="mcq-activity-2">
-                                <p>6. What was the first action the Riverwood Guardians took?
-                                    <select data-answer="c"><option>Select...</option><option value="a">a) They started a petition.</option><option value="b">b) They lobbied politicians.</option><option value="c">c) They organized clean-ups.</option></select>
-                                </p>
-                                <p>7. The main purpose of the petition was to:
-                                    <select data-answer="b"><option>Select...</option><option value="a">a) Raise awareness.</option><option value="b">b) Demand the factory install filters.</option><option value="c">c) Get media attention.</option></select>
-                                </p>
-                                <p>8. What did they use when lobbying politicians?
-                                    <select data-answer="b"><option>Select...</option><option value="a">a) Media articles.</option><option value="b">b) Scientific evidence.</option><option value="c">c) The petition signatures.</option></select>
-                                </p>
-                                <p>9. How long did the campaign last?
-                                    <select data-answer="b"><option>Select...</option><option value="a">a) One year.</option><option value="b">b) Six months.</option><option value="c">c) A few weeks.</option></select>
-                                </p>
-                                <p>10. The campaign's success shows that:
-                                    <select data-answer="c"><option>Select...</option><option value="a">a) Lobbying is the only effective method.</option><option value="b">b) Factories are always willing to change.</option><option value="c">c) Persistent community action can work.</option></select>
-                                </p>
-                            </div>
-                            <div class="activity-actions">
-                                <button class="activity-btn" onclick="checkSelectAnswers('mcq-activity-2')">Check Answers</button>
+                            <h2 class="slide-title"><i class="fa-solid fa-layer-group"></i> Course Modules</h2>
+                            <p class="section-intro__descriptor text-measure">Here is our roadmap for the term. Keep these modules visible as we move through the course.</p>
+                            <div class="module-cards">
+                                <article class="module-card">
+                                    <h3><i class="fa-solid fa-map-location-dot"></i> Module 1</h3>
+                                    <p>Framing research questions with curiosity and care.</p>
+                                </article>
+                                <article class="module-card">
+                                    <h3><i class="fa-solid fa-user-pen"></i> Module 2</h3>
+                                    <p>Designing ethical recruitment and informed consent.</p>
+                                </article>
+                                <article class="module-card">
+                                    <h3><i class="fa-solid fa-microphone-lines"></i> Module 3</h3>
+                                    <p>Conducting interviews, focus groups, and observations.</p>
+                                </article>
+                                <article class="module-card">
+                                    <h3><i class="fa-solid fa-highlighter"></i> Module 4</h3>
+                                    <p>Coding data and developing themes with rigour.</p>
+                                </article>
+                                <article class="module-card">
+                                    <h3><i class="fa-solid fa-chart-line"></i> Module 5</h3>
+                                    <p>Translating insights into action and storytelling.</p>
+                                </article>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 12: Task 3 - Interview an Activist -->
+                    <!-- SLIDE 12: Let's Check Our Understanding -->
                     <div class="slide" id="slide-12">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-microphone-lines"></i> Behind the Campaign</h2>
-                            <p class="section-intro__descriptor text-measure">Work in pairs. Student A: You are a journalist. Student B: You are a member of the Riverwood Guardians. The journalist will interview the activist about the campaign. Use the prompts to help you. Swap roles after 5 minutes.</p>
-                            
-                            <!-- Activity Type: Role-play -->
-                            <div class="chat-prompts layout--columns">
-                                <div class="chat-message">
-                                    <h4 class="chat-message__sender">Journalist (Student A)</h4>
-                                    <ul class="chat-message__body">
-                                        <li>What was the biggest challenge you faced?</li>
-                                        <li>Which method do you think was most effective? Why?</li>
-                                        <li>What advice would you give to other communities?</li>
-                                        <li>How did you keep your group motivated?</li>
-                                    </ul>
+                            <h2 class="slide-title"><i class="fa-solid fa-clipboard-question"></i> Let's Check Our Understanding</h2>
+                            <p class="section-intro__descriptor text-measure">Use the modules as a reference while you respond to the comprehension checks.</p>
+                            <div class="module-quiz-layout">
+                                <div class="module-quiz" id="module-quiz">
+                                    <p>1. Which module emphasises participant wellbeing?
+                                        <select data-answer="Module 2"><option>Select...</option><option>Module 1</option><option>Module 2</option><option>Module 3</option><option>Module 4</option><option>Module 5</option></select>
+                                    </p>
+                                    <p>2. Where do we practise turning themes into stories?
+                                        <select data-answer="Module 5"><option>Select...</option><option>Module 1</option><option>Module 2</option><option>Module 3</option><option>Module 4</option><option>Module 5</option></select>
+                                    </p>
+                                    <p>3. Which module trains our interviewing techniques?
+                                        <select data-answer="Module 3"><option>Select...</option><option>Module 1</option><option>Module 2</option><option>Module 3</option><option>Module 4</option><option>Module 5</option></select>
+                                    </p>
                                 </div>
-                                <div class="chat-message">
-                                    <h4 class="chat-message__sender">Activist (Student B)</h4>
-                                    <ul class="chat-message__body">
-                                        <li>To begin with, we felt...</li>
-                                        <li>The key to our success was...</li>
-                                        <li>It was difficult, but we managed to...</li>
-                                        <li>My advice would be to never give up and to...</li>
+                                <aside class="module-reference">
+                                    <h3><i class="fa-solid fa-book-open"></i> Course Modules</h3>
+                                    <ul>
+                                        <li>Module 1 — Framing research questions</li>
+                                        <li>Module 2 — Ethical recruitment</li>
+                                        <li>Module 3 — Fieldwork techniques</li>
+                                        <li>Module 4 — Coding and analysis</li>
+                                        <li>Module 5 — Insight storytelling</li>
                                     </ul>
-                                </div>
+                                </aside>
+                            </div>
+                            <div class="activity-actions">
+                                <button class="activity-btn" onclick="checkSelectAnswers('module-quiz')">Check Answers</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 13: Planning the Conversation -->
+                    <!-- SLIDE 13: Your Interests -->
                     <div class="slide" id="slide-13">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-people-arrows"></i> Sequence the Strategy Talk</h2>
-                            <p class="section-intro__descriptor text-measure">Put the sentences in order to build a logical planning conversation.</p>
-                            <ul class="ordering-list" id="ordering-list-1">
-                                <li class="order-item" draggable="true" data-order="4"><i class="fa-solid fa-grip-vertical order-handle"></i> B: I agree. So, we should focus on raising awareness first.</li>
-                                <li class="order-item" draggable="true" data-order="2"><i class="fa-solid fa-grip-vertical order-handle"></i> A: How about we start a petition to ban plastic bags in our town?</li>
-                                <li class="order-item" draggable="true" data-order="3"><i class="fa-solid fa-grip-vertical order-handle"></i> B: That's a good idea, but maybe we should start with something smaller.</li>
-                                <li class="order-item" draggable="true" data-order="1"><i class="fa-solid fa-grip-vertical order-handle"></i> A: Okay, so the first issue to tackle is plastic waste.</li>
-                                <li class="order-item" draggable="true" data-order="5"><i class="fa-solid fa-grip-vertical order-handle"></i> A: Exactly. We could create some posters for local shops.</li>
-                            </ul>
-                            <div class="activity-actions">
-                                <button class="activity-btn" onclick="checkOrdering('ordering-list-1')">Check Order</button>
-                                <div class="feedback"></div>
+                            <h2 class="slide-title"><i class="fa-solid fa-compass-drafting"></i> Your Interests</h2>
+                            <p class="section-intro__descriptor text-measure">Document topics learners hope to explore during the course.</p>
+                            <div class="interest-inputs" aria-label="Interest responses">
+                                <textarea class="interest-input" rows="2" placeholder="Interest 1"></textarea>
+                                <textarea class="interest-input" rows="2" placeholder="Interest 2"></textarea>
+                                <textarea class="interest-input" rows="2" placeholder="Interest 3"></textarea>
+                                <textarea class="interest-input" rows="2" placeholder="Interest 4"></textarea>
+                                <textarea class="interest-input" rows="2" placeholder="Interest 5"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 14: Functional Language Focus -->
+                    <!-- SLIDE 14: Ethics in Practice -->
                     <div class="slide" id="slide-14">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-language"></i> Choose the Best Phrase</h2>
-                            <p class="section-intro__descriptor text-measure">Complete each sentence with the most appropriate planning phrase.</p>
-                            <div class="gap-fill-box">
-                                <p>Phrases:</p>
-                                <span>What if we...</span>
-                                <span>We need to consider...</span>
-                                <span>My main concern is...</span>
-                                <span>I suggest that...</span>
-                                <span>Another point is that...</span>
-                            </div>
-                            <div class="interactive-module__steps" id="gap-fill-1">
-                                <p>6. <select data-answer="My main concern is..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we don't have enough volunteers.</p>
-                                <p>7. <select data-answer="We need to consider..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> the budget for printing materials.</p>
-                                <p>8. <select data-answer="I suggest that..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we create a social media page first.</p>
-                                <p>9. <select data-answer="What if we..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> organized a community litter pick?</p>
-                                <p>10. <select data-answer="Another point is that..."><option>Select...</option><option>What if we...</option><option>We need to consider...</option><option>My main concern is...</option><option>I suggest that...</option><option>Another point is that...</option></select> we need permission from the council for some activities.</p>
-                            </div>
-                            <div class="activity-actions">
-                                <button class="activity-btn" onclick="checkSelectAnswers('gap-fill-1')">Check Answers</button>
+                            <h2 class="slide-title"><i class="fa-solid fa-scale-balanced"></i> Ethics in Practice</h2>
+                            <p class="section-intro__descriptor text-measure">Use these prompts to discuss how we'll protect participants and ourselves.</p>
+                            <div class="ethics-grid">
+                                <article class="ethics-card">
+                                    <h3><i class="fa-solid fa-user-shield"></i> Respect</h3>
+                                    <p>How will we honour names, pronouns, and cultural practices during fieldwork?</p>
+                                </article>
+                                <article class="ethics-card">
+                                    <h3><i class="fa-solid fa-lock"></i> Confidentiality</h3>
+                                    <p>What systems will we use to store data safely and share only what is consented?</p>
+                                </article>
+                                <article class="ethics-card">
+                                    <h3><i class="fa-solid fa-hands-holding"></i> Care</h3>
+                                    <p>How will we debrief participants and ourselves after emotionally heavy sessions?</p>
+                                </article>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 15: Task 4 - Your Eco-Action Plan -->
+                    <!-- SLIDE 15: Data Collection Toolkit -->
                     <div class="slide" id="slide-15">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-clipboard-list"></i> Design Your Campaign</h2>
-                            <p class="section-intro__descriptor text-measure">In small groups, choose a local environmental issue (e.g., too much traffic, not enough recycling bins, a park in need of care). Use the framework below to create a simple action plan for a campaign. Prepare to present your main ideas to the class.</p>
-                            
-                            <!-- Activity Type: Collaborative Project Planning and Presentation -->
-                            <div class="note-card">
-                                <h3 class="note-card__header"><i class="fa-solid fa-pen-ruler"></i> Our Campaign Plan</h3>
-                                <div class="layout-grid">
-                                    <div class="layout-grid__column">
-                                        <label for="issue"><strong>The Issue:</strong> What is the problem? Why is it important?</label>
-                                        <textarea id="issue" placeholder="e.g., Not enough recycling bins on High Street..."></textarea>
-                                        
-                                        <label for="goal"><strong>Campaign Goal:</strong> What is your specific, achievable goal?</label>
-                                        <textarea id="goal" placeholder="e.g., To get 3 new recycling bins installed on High Street."></textarea>
-                                        
-                                        <label for="target"><strong>Target Audience:</strong> Who are you trying to influence?</label>
-                                        <textarea id="target" placeholder="e.g., The local council, a specific business, the public..."></textarea>
-                                    </div>
-                                    <div class="layout-grid__column">
-                                        <label for="name"><strong>Campaign Name & Slogan:</strong></label>
-                                        <textarea id="name" placeholder="e.g., High Street Recycles! / A greener street for a greener town."></textarea>
-                                        
-                                        <label for="actions"><strong>Action Plan (Methods):</strong> What 2-3 actions will you take?</label>
-                                        <textarea id="actions" placeholder="Use language from the lesson: petition, raise awareness, lobby, organize, etc..."></textarea>
-                                    </div>
-                                </div>
+                            <h2 class="slide-title"><i class="fa-solid fa-toolbox"></i> Data Collection Toolkit</h2>
+                            <p class="section-intro__descriptor text-measure">Pair each method with a classroom example to show its strength.</p>
+                            <div class="toolkit-grid">
+                                <article class="toolkit-card">
+                                    <h3><i class="fa-solid fa-comments"></i> Semi-structured interviews</h3>
+                                    <p>Students explore family food traditions to understand identity and change.</p>
+                                </article>
+                                <article class="toolkit-card">
+                                    <h3><i class="fa-solid fa-people-group"></i> Focus groups</h3>
+                                    <p>Community organisers co-create guidelines for safer public transit.</p>
+                                </article>
+                                <article class="toolkit-card">
+                                    <h3><i class="fa-solid fa-camera-retro"></i> Photo elicitation</h3>
+                                    <p>Learners capture workplace artefacts to spark dialogue about culture.</p>
+                                </article>
+                                <article class="toolkit-card">
+                                    <h3><i class="fa-solid fa-book-open"></i> Reflective journals</h3>
+                                    <p>Participants log field notes to trace their shifting interpretations.</p>
+                                </article>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLIDE 16: Lesson Reflection -->
+                    <!-- SLIDE 16: From Data to Insight -->
                     <div class="slide" id="slide-16">
                         <div class="slide-content">
-                            <h2 class="slide-title"><i class="fa-solid fa-lightbulb"></i> Final Thoughts</h2>
-                            <p class="section-intro__descriptor text-measure">Individually, think about these questions. Share one thought with your partner.</p>
-                            
-                            <!-- Activity Type: Individual Reflection -->
-                            <div class="reflection-grid">
-                                <div class="reflection-card">
-                                    <h3 class="reflection-card__title">New Language</h3>
-                                    <p class="reflection-card__body">What was the most interesting new word or phrase you learned today?</p>
-                                </div>
-                                <div class="reflection-card">
-                                    <h3 class="reflection-card__title">Confidence</h3>
-                                    <p class="reflection-card__body">Do you feel more confident discussing environmental issues in English?</p>
-                                </div>
-                                <div class="reflection-card">
-                                    <h3 class="reflection-card__title">Next Step</h3>
-                                    <p class="reflection-card__body">What is one small "eco-activist" step you could take in your own life this week?</p>
+                            <h2 class="slide-title"><i class="fa-solid fa-chart-simple"></i> From Data to Insight</h2>
+                            <p class="section-intro__descriptor text-measure">Trace the journey from raw transcripts to actionable stories.</p>
+                            <div class="insight-steps">
+                                <article class="insight-step">
+                                    <span class="insight-step__badge"><i class="fa-solid fa-file-lines"></i></span>
+                                    <h3>Capture</h3>
+                                    <p>Transcribe or annotate recordings and field notes with precision.</p>
+                                </article>
+                                <article class="insight-step">
+                                    <span class="insight-step__badge"><i class="fa-solid fa-tags"></i></span>
+                                    <h3>Code</h3>
+                                    <p>Label meaningful excerpts, then cluster codes into evolving categories.</p>
+                                </article>
+                                <article class="insight-step">
+                                    <span class="insight-step__badge"><i class="fa-solid fa-layer-group"></i></span>
+                                    <h3>Synthesise</h3>
+                                    <p>Surface patterns, tensions, and questions for further exploration.</p>
+                                </article>
+                                <article class="insight-step">
+                                    <span class="insight-step__badge"><i class="fa-solid fa-bullseye"></i></span>
+                                    <h3>Share</h3>
+                                    <p>Craft narratives, visuals, and recommendations tailored to stakeholders.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 17: Your Questions -->
+                    <div class="slide" id="slide-17">
+                        <div class="slide-content">
+                            <h2 class="slide-title"><i class="fa-solid fa-circle-question"></i> Your Questions</h2>
+                            <p class="section-intro__descriptor text-measure">Log questions as they surface and capture the answers we co-create.</p>
+                            <div class="qa-table-wrapper">
+                                <table class="qa-table">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="fa-solid fa-question"></i> Question</th>
+                                            <th><i class="fa-solid fa-message"></i> Answer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td><textarea rows="2" placeholder="Question 1"></textarea></td><td><textarea rows="2" placeholder="Answer 1"></textarea></td></tr>
+                                        <tr><td><textarea rows="2" placeholder="Question 2"></textarea></td><td><textarea rows="2" placeholder="Answer 2"></textarea></td></tr>
+                                        <tr><td><textarea rows="2" placeholder="Question 3"></textarea></td><td><textarea rows="2" placeholder="Answer 3"></textarea></td></tr>
+                                        <tr><td><textarea rows="2" placeholder="Question 4"></textarea></td><td><textarea rows="2" placeholder="Answer 4"></textarea></td></tr>
+                                        <tr><td><textarea rows="2" placeholder="Question 5"></textarea></td><td><textarea rows="2" placeholder="Answer 5"></textarea></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 18: Let's Get Started! -->
+                    <div class="slide" id="slide-18">
+                        <div class="slide-content slide-content--centered">
+                            <h2 class="slide-title"><i class="fa-solid fa-rocket"></i> Let's Get Started!</h2>
+                            <p class="section-intro__descriptor text-measure">Follow these steps to register for the collaborative research studio.</p>
+                            <div class="step-cards">
+                                <article class="step-card">
+                                    <div class="step-card__icon"><i class="fa-solid fa-comments"></i></div>
+                                    <h3>Step 1</h3>
+                                    <p>Open the class chat channel and say hello to the cohort.</p>
+                                </article>
+                                <article class="step-card">
+                                    <div class="step-card__icon"><i class="fa-solid fa-link"></i></div>
+                                    <h3>Step 2</h3>
+                                    <p>Click the registration link shared in today's session notes.</p>
+                                </article>
+                                <article class="step-card">
+                                    <div class="step-card__icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                                    <h3>Step 3</h3>
+                                    <p>Fill out the form with your project idea and availability.</p>
+                                </article>
+                                <article class="step-card">
+                                    <div class="step-card__icon"><i class="fa-solid fa-paper-plane"></i></div>
+                                    <h3>Step 4</h3>
+                                    <p>Submit, then check your email for confirmation and next actions.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 19: Thank You -->
+                    <div class="slide" id="slide-19">
+                        <div class="full-image-slide" style="--slide-background: url('https://images.pexels.com/photos/733174/pexels-photo-733174.jpeg?auto=compress&cs=tinysrgb&h=900');">
+                            <div class="full-image-slide__overlay">
+                                <div class="closing-card">
+                                    <div class="closing-card__icon" aria-hidden="true">
+                                        <i class="fa-solid fa-mountain-sun"></i>
+                                    </div>
+                                    <h2 class="closing-card__title">Thank you for your presence.</h2>
+                                    <p class="closing-card__body">Carry this grounded energy into your next conversation, and notice the stories waiting to be heard.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- SLIDE NAVIGATION -->
                 <div class="slide-status-bar">
                     <div class="slide-status-bar__progress">
@@ -2996,7 +3576,7 @@
                         </div>
                     </div>
                     <div class="slide-status-bar__row">
-                        <p class="slide-status-bar__count" id="slide-counter">Slide 1 of 16</p>
+                          <p class="slide-status-bar__count" id="slide-counter">Slide 1 of 19</p>
                         <div class="slide-status-bar__actions">
                             <button class="activity-btn secondary" id="prev-btn" disabled><i class="fa-solid fa-arrow-left"></i> Previous</button>
                             <button class="activity-btn" id="next-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
@@ -3736,125 +4316,100 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initializeActivities() {
-        initializeMatching();
-        enableDragSort('ranking-list-1');
-        enableDragSort('ordering-list-1');
-        initializeDragDropCategories();
+        initializeCuriosityCarousels();
+        initializeKeywordGroups();
     }
 
-    function initializeMatching() {
-        const matchingActivity = document.getElementById('matching-activity-1');
-        if (!matchingActivity || matchingActivity.dataset.initialized === 'true') return;
+    function initializeCuriosityCarousels() {
+        const carousels = (slidesRoot || document).querySelectorAll('[data-carousel]');
+        carousels.forEach(carousel => {
+            if (!carousel || carousel.dataset.bound === 'true') return;
+            const track = carousel.querySelector('[data-carousel-track]');
+            const slides = track ? Array.from(track.children) : [];
+            if (!track || slides.length === 0) {
+                carousel.dataset.bound = 'true';
+                return;
+            }
 
-        const items = matchingActivity.querySelectorAll('.match-item');
-        let selected = null;
+            const prevBtn = carousel.querySelector('[data-carousel-prev]');
+            const nextBtn = carousel.querySelector('[data-carousel-next]');
+            const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+            let currentIndex = 0;
 
-        items.forEach(item => {
-            item.addEventListener('click', () => {
-                if (!selected) {
-                    selected = item;
-                    item.classList.add('selected');
-                } else {
-                    if (selected.dataset.match === item.dataset.match && selected !== item) {
-                        selected.classList.add('correct');
-                        item.classList.add('correct');
-                        selected.classList.remove('selected');
-                        selected.style.pointerEvents = 'none';
-                        item.style.pointerEvents = 'none';
-                        selected = null;
-                    } else {
-                        selected.classList.add('incorrect');
-                        item.classList.add('incorrect');
-                        setTimeout(() => {
-                            if (selected) {
-                                selected.classList.remove('incorrect', 'selected');
-                            }
-                            item.classList.remove('incorrect');
-                            selected = null;
-                        }, 800);
+            const dots = [];
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    dot.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateCarousel();
+                    });
+                    dots.push(dot);
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            function updateCarousel() {
+                currentIndex = Math.max(0, Math.min(currentIndex, slides.length - 1));
+                const targetSlide = slides[currentIndex];
+                const offset = targetSlide ? targetSlide.offsetLeft : 0;
+                track.style.transform = `translateX(-${offset}px)`;
+                if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
+                dots.forEach((dot, index) => {
+                    dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+                });
+            }
+
+            prevBtn?.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex -= 1;
+                    updateCarousel();
+                }
+            });
+
+            nextBtn?.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex += 1;
+                    updateCarousel();
+                }
+            });
+
+            window.addEventListener('resize', updateCarousel);
+
+            carousel.dataset.bound = 'true';
+            updateCarousel();
+        });
+    }
+
+    function initializeKeywordGroups() {
+        const groups = (slidesRoot || document).querySelectorAll('[data-choice-group]');
+        groups.forEach(group => {
+            if (group.dataset.bound === 'true') return;
+            const buttons = Array.from(group.querySelectorAll('button'));
+            const definitionBox = group.closest('.slide')?.querySelector('.keyword-definition span');
+            const defaultDefinition = definitionBox?.textContent || '';
+
+            buttons.forEach(button => {
+                button.setAttribute('aria-pressed', 'false');
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => {
+                        btn.classList.remove('is-selected');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    button.classList.add('is-selected');
+                    button.setAttribute('aria-pressed', 'true');
+                    if (definitionBox) {
+                        definitionBox.textContent = button.dataset.definition || defaultDefinition;
                     }
-                }
+                });
             });
+
+            group.dataset.bound = 'true';
         });
-
-        matchingActivity.dataset.initialized = 'true';
-    }
-
-    function enableDragSort(listId) {
-        const list = document.getElementById(listId);
-        if (!list || list.dataset.dragSortBound === 'true') return;
-
-        let draggingItem = null;
-
-        list.querySelectorAll('li').forEach(item => {
-            item.addEventListener('dragstart', event => {
-                draggingItem = event.target;
-                event.dataTransfer.effectAllowed = 'move';
-            });
-
-            item.addEventListener('dragover', event => {
-                event.preventDefault();
-                const targetItem = event.target.closest('li');
-                if (!draggingItem || !targetItem || draggingItem === targetItem) return;
-
-                const bounding = targetItem.getBoundingClientRect();
-                const offset = bounding.y + bounding.height / 2;
-                if (event.clientY - offset > 0) {
-                    targetItem.after(draggingItem);
-                } else {
-                    targetItem.before(draggingItem);
-                }
-                updateRankingNumbers(listId);
-            });
-        });
-
-        list.dataset.dragSortBound = 'true';
-    }
-
-    function updateRankingNumbers(listId) {
-        const list = document.getElementById(listId);
-        if (!list) return;
-        const items = list.querySelectorAll('.rank-number');
-        items.forEach((num, index) => {
-            num.textContent = `${index + 1}.`;
-        });
-    }
-
-    function initializeDragDropCategories() {
-        const container = document.getElementById('drag-drop-activity-1');
-        if (!container || container.dataset.dragBound === 'true') return;
-
-        const draggables = container.querySelectorAll('.draggable');
-        const dropZones = container.querySelectorAll('.drop-zone');
-
-        draggables.forEach(draggable => {
-            draggable.addEventListener('dragstart', () => {
-                draggable.classList.add('dragging');
-            });
-            draggable.addEventListener('dragend', () => {
-                draggable.classList.remove('dragging');
-            });
-        });
-
-        dropZones.forEach(zone => {
-            zone.addEventListener('dragover', event => {
-                event.preventDefault();
-                const draggable = container.querySelector('.dragging');
-                if (draggable) {
-                    zone.appendChild(draggable);
-                }
-            });
-
-            zone.addEventListener('drop', event => {
-                event.preventDefault();
-                const draggable = container.querySelector('.dragging');
-                if (draggable) {
-                    zone.appendChild(draggable);
-                }
-            });
-        });
-
-        container.dataset.dragBound = 'true';
     }
 });
 
@@ -3869,44 +4424,6 @@ function checkSelectAnswers(containerId) {
         select.style.backgroundColor = isCorrect ? '#e9f5ec' : '#fbe9eb';
         if (!isCorrect) allCorrect = false;
     });
-}
-
-function checkDragDrop(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    const dropZones = container.querySelectorAll('.drop-zone');
-    dropZones.forEach(zone => {
-        const items = zone.querySelectorAll('.draggable');
-        items.forEach(item => {
-            const isCorrect = item.dataset.category === zone.dataset.category;
-            item.style.borderColor = isCorrect ? '#28a745' : '#dc3545';
-            item.style.backgroundColor = isCorrect ? '#e9f5ec' : '#fbe9eb';
-        });
-    });
-}
-
-function checkOrdering(listId) {
-    const list = document.getElementById(listId);
-    if (!list) return;
-    const items = list.querySelectorAll('li');
-    let allCorrect = true;
-    items.forEach((item, index) => {
-        const isCorrect = parseInt(item.dataset.order) === (index + 1);
-        item.style.borderColor = isCorrect ? '#28a745' : '#dc3545';
-        item.style.backgroundColor = isCorrect ? '#e9f5ec' : '#fbe9eb';
-        if (!isCorrect) allCorrect = false;
-    });
-    const feedbackEl = list.parentElement.querySelector('.feedback');
-    if (feedbackEl) {
-        feedbackEl.style.display = 'block';
-        if (allCorrect) {
-            feedbackEl.textContent = 'Perfect! The conversation is in the correct order.';
-            feedbackEl.className = 'feedback correct';
-        } else {
-            feedbackEl.textContent = 'Not quite right. Try reordering the sentences.';
-            feedbackEl.className = 'feedback incorrect';
-        }
-    }
 }
 </script>
 
