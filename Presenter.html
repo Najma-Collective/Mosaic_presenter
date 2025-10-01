@@ -3,905 +3,357 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>An Introduction to Qualitative Research</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <title>Presenter Deck</title>
   <style>
     :root {
-      --bg: #f4f2ec;
-      --surface: #ffffff;
-      --surface-soft: #f8f6ef;
-      --ink: #2f3329;
-      --ink-muted: #5c6455;
-      --accent: #8aa77b;
-      --accent-strong: #5c7d53;
-      --highlight: #e7dac3;
-      --shadow: 0 10px 30px rgba(36, 42, 32, 0.08);
-      --radius: 20px;
-      --radius-sm: 12px;
-      --space-1: 0.5rem;
-      --space-2: 0.75rem;
-      --space-3: 1rem;
-      --space-4: 1.5rem;
-      --space-5: 2rem;
-      --space-6: 3rem;
-      font-size: 16px;
+      --primary-sage: #7a8471;
+      --secondary-sage: #9caf88;
+      --tertiary-sage: #b8c5a6;
+      --warm-cream: #f8f6f0;
+      --soft-white: #fefcf7;
+      --forest-shadow: #5a6b52;
+      --border-sage: rgba(122, 132, 113, 0.2);
+      --hover-sage: rgba(156, 175, 136, 0.15);
+      --deep-forest: #3e4a3a;
+      --moss: #6e7a67;
+      --fern: #8fa081;
+      --dried-clay: #d9cdb4;
+      --amber: #c6aa77;
+      --ink: #2f3a2b;
+      --ink-muted: #5a6b52;
+      --radius-xl: 28px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --shadow-1: 0 12px 36px rgba(47, 58, 43, 0.16);
+      --shadow-2: 0 20px 60px rgba(62, 74, 58, 0.18);
+      --transition-medium: 420ms cubic-bezier(0.22, 0.8, 0.36, 1);
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Nunito", system-ui, sans-serif;
-      line-height: 1.6;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: "Playfair Display", "Nunito", serif;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--ink);
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      margin: 0 0 var(--space-3);
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      margin: 0 0 var(--space-2);
-    }
-
-    h3 {
-      font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-      margin: 0 0 var(--space-2);
-    }
-
-    p {
-      margin: 0 0 var(--space-2);
-    }
-
-    a {
-      color: var(--accent-strong);
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      font-weight: 700;
-      font-size: 0.8rem;
-      color: rgba(47, 51, 41, 0.6);
-      margin: 0;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-top: var(--space-2);
-      margin-bottom: 0.35rem;
-    }
-
-    textarea {
-      font-family: "Nunito", system-ui, sans-serif;
-      font-size: 1rem;
-      width: 100%;
-      resize: vertical;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-      border-radius: var(--radius-sm);
-    }
-
-    .page-shell {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: var(--space-5) var(--space-3) var(--space-6);
-      display: grid;
-      gap: var(--space-5);
-    }
-
-    header.presentation-header {
-      background: linear-gradient(135deg, rgba(138, 167, 123, 0.18), rgba(231, 218, 195, 0.28));
-      padding: var(--space-5);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      display: grid;
-      gap: var(--space-3);
-    }
-
-    .intro-text {
-      max-width: 60ch;
-      font-size: 1.05rem;
-      color: var(--ink-muted);
-    }
-
-    nav.part-nav {
+      min-height: 100vh;
       display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-      padding: var(--space-3);
-      border-radius: var(--radius);
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      align-items: center;
+      justify-content: center;
+      padding: clamp(24px, 6vw, 64px);
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--forest-shadow);
+      background:
+        radial-gradient(1200px 1200px at -10% -10%, rgba(156, 175, 136, 0.14), transparent 60%),
+        radial-gradient(1100px 900px at 110% 10%, rgba(198, 170, 119, 0.12), transparent 65%),
+        linear-gradient(135deg, var(--warm-cream) 0%, color-mix(in srgb, var(--soft-white), #ffffff 20%) 100%);
     }
 
-    nav.part-nav a {
-      text-decoration: none;
-      padding: 0.55rem 1.1rem;
-      border-radius: 999px;
-      background: rgba(138, 167, 123, 0.12);
-      color: var(--accent-strong);
-      font-weight: 600;
-    }
-
-    nav.part-nav a:hover,
-    nav.part-nav a:focus {
-      background: var(--accent-strong);
-      color: white;
-    }
-
-    section.part {
-      display: grid;
-      gap: var(--space-4);
-      padding: var(--space-4);
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .part > header {
-      border-bottom: 1px solid rgba(92, 100, 85, 0.16);
-      padding-bottom: var(--space-2);
-    }
-
-    .part > header p {
-      margin: 0;
-      color: var(--ink-muted);
-      font-size: 1rem;
+    main.deck {
+      width: min(1200px, 100%);
+      height: min(720px, 100vh - clamp(48px, 12vw, 128px));
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--soft-white);
+      box-shadow: var(--shadow-2);
+      isolation: isolate;
     }
 
     .slide {
-      border-radius: var(--radius);
-      padding: var(--space-4);
-      background: var(--surface-soft);
-      display: grid;
-      gap: var(--space-3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slide::before {
-      content: attr(data-slide-id);
       position: absolute;
-      top: 1.2rem;
-      right: 1.4rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: rgba(92, 100, 85, 0.45);
-      text-transform: uppercase;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5%;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(36px) scale(1.02);
+      transition: opacity var(--transition-medium), transform var(--transition-medium);
     }
 
-    .slide h3 {
-      margin: 0;
+    .slide[data-active="true"] {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0) scale(1);
     }
 
-    .slide figure {
-      margin: 0;
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .full-bleed-image {
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
-    .full-bleed-image img {
-      border-radius: 0;
-    }
-
-    .grounding-text p {
-      font-size: 1.05rem;
-      color: var(--ink-muted);
-    }
-
-    .two-column {
-      display: grid;
-      gap: var(--space-3);
-    }
-
-    .two-column .column {
-      background: white;
-      border-radius: var(--radius-sm);
-      padding: var(--space-3);
-      border: 1px solid rgba(92, 100, 85, 0.15);
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .two-column h4 {
-      margin: 0;
-      font-size: 1.15rem;
-    }
-
-    .carousel {
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .carousel-track {
-      display: grid;
-      grid-auto-flow: column;
-      gap: var(--space-2);
-      overflow-x: auto;
-      padding-bottom: 0.5rem;
-      scroll-snap-type: x mandatory;
-    }
-
-    .carousel-track figure {
-      min-width: 180px;
-      scroll-snap-align: start;
-      background: white;
-      padding: var(--space-2);
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(92, 100, 85, 0.15);
-    }
-
-    .grid-visual,
-    .icon-grid,
-    .speech-bubble-grid {
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .grid-visual {
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    }
-
-    .grid-visual figure,
-    .speech-bubble-grid article,
-    .icon-grid article {
-      background: white;
-      border-radius: var(--radius-sm);
-      padding: var(--space-2);
-      border: 1px solid rgba(92, 100, 85, 0.12);
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .speech-bubble {
-      background: linear-gradient(135deg, rgba(138, 167, 123, 0.12), rgba(231, 218, 195, 0.24));
-      padding: var(--space-2);
-      border-radius: var(--radius-sm);
-      font-style: italic;
-    }
-
-    .question-box {
-      background: rgba(92, 100, 85, 0.08);
-      border-radius: var(--radius-sm);
-      padding: var(--space-3);
-      font-weight: 600;
-    }
-
-    .icon-centre {
-      justify-self: center;
-      width: clamp(120px, 25vw, 160px);
-    }
-
-    .quiz-layout {
-      display: grid;
-      gap: var(--space-3);
-    }
-
-    .quiz-instructions {
-      background: white;
-      padding: var(--space-3);
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(92, 100, 85, 0.15);
-    }
-
-    .quiz-item {
-      background: rgba(138, 167, 123, 0.1);
-      border-radius: var(--radius-sm);
-      padding: var(--space-3);
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .quiz-options {
-      display: grid;
-      gap: var(--space-1);
-    }
-
-    table {
+    .workspace {
+      position: relative;
       width: 100%;
-      border-collapse: collapse;
-      border-radius: var(--radius-sm);
+      height: 100%;
+      border-radius: var(--radius-lg);
+      background: var(--soft-white);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-sage) 60%, transparent);
       overflow: hidden;
-      background: white;
-      box-shadow: inset 0 0 0 1px rgba(92, 100, 85, 0.12);
+      isolation: isolate;
+      z-index: 0;
     }
 
-    thead {
-      background: rgba(138, 167, 123, 0.2);
+    .workspace::before,
+    .workspace::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    th, td {
-      text-align: left;
-      padding: 0.75rem 1rem;
-      vertical-align: top;
-      border-bottom: 1px solid rgba(92, 100, 85, 0.12);
+    .design-1 {
+      background: linear-gradient(135deg, var(--soft-white), color-mix(in srgb, var(--secondary-sage) 35%, var(--soft-white)) 100%);
     }
 
-    tbody tr:last-child td {
-      border-bottom: none;
+    .design-1 .workspace::before {
+      inset: 4% 5% 8% 5%;
+      border-radius: var(--radius-md);
+      background: color-mix(in srgb, var(--soft-white) 88%, var(--secondary-sage) 12%);
+      box-shadow: 0 32px 60px rgba(122, 132, 113, 0.18), inset 0 0 0 1px color-mix(in srgb, var(--border-sage) 40%, transparent);
     }
 
-    .list-card {
-      background: white;
-      border-radius: var(--radius-sm);
-      padding: var(--space-3);
-      border: 1px solid rgba(92, 100, 85, 0.15);
-      display: grid;
-      gap: var(--space-2);
+    .design-2 {
+      background: linear-gradient(150deg, color-mix(in srgb, var(--amber) 28%, var(--soft-white)), var(--soft-white));
     }
 
-    .list-card ul {
-      margin: 0;
-      padding-left: 1.25rem;
-      display: grid;
-      gap: 0.4rem;
+    .design-2 .workspace::before {
+      width: clamp(220px, 32%, 320px);
+      aspect-ratio: 1;
+      top: 10%;
+      right: 12%;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--amber) 24%, transparent);
     }
 
-    .icon-list {
-      display: grid;
-      gap: var(--space-2);
+    .design-2 .workspace::after {
+      width: clamp(200px, 28%, 260px);
+      height: clamp(200px, 28%, 260px);
+      bottom: 12%;
+      left: 14%;
+      border-radius: 38% 62% 58% 42% / 48% 52% 46% 54%;
+      background: color-mix(in srgb, var(--dried-clay) 40%, transparent);
     }
 
-    .icon-list article {
-      display: grid;
-      gap: var(--space-1);
-      padding: var(--space-2);
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(92, 100, 85, 0.1);
-      background: white;
+    .design-3 {
+      background: linear-gradient(120deg, color-mix(in srgb, var(--tertiary-sage) 45%, var(--soft-white)), var(--soft-white));
     }
 
-    .icon-list strong {
-      font-size: 1.05rem;
+    .design-3 .workspace::before {
+      inset: 5% 7% 6% 7%;
+      border-radius: var(--radius-md);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--forest-shadow) 18%, transparent);
     }
 
-    .interactive-table {
-      background: white;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(92, 100, 85, 0.12);
-      padding: var(--space-3);
-      overflow-x: auto;
+    .design-3 .workspace::after {
+      width: clamp(160px, 22%, 200px);
+      aspect-ratio: 1;
+      bottom: 12%;
+      right: 16%;
+      border-radius: 44% 56% 52% 48% / 54% 46% 56% 44%;
+      background: color-mix(in srgb, var(--moss) 28%, transparent);
     }
 
-    .interactive-table table {
-      min-width: 360px;
-      box-shadow: none;
+    .design-4 {
+      background: linear-gradient(160deg, color-mix(in srgb, var(--dried-clay) 45%, var(--soft-white)), var(--soft-white));
     }
 
-    .instructions-list {
-      display: grid;
-      gap: 0.75rem;
-      padding-left: 1.25rem;
+    .design-4 .workspace::before {
+      inset: 5% 8% 6% 8%;
+      border-radius: var(--radius-lg);
+      border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--soft-white) 45%, transparent);
     }
 
-    footer.presentation-footer {
-      text-align: center;
-      color: var(--ink-muted);
-      font-size: 0.95rem;
-      padding: var(--space-4) 0;
+    .design-4 .workspace::after {
+      width: clamp(220px, 30%, 280px);
+      aspect-ratio: 1;
+      top: 16%;
+      right: 16%;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--amber) 24%, transparent);
     }
 
-    @media (min-width: 720px) {
-      .two-column {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .design-5 {
+      background: linear-gradient(140deg, color-mix(in srgb, var(--fern) 42%, var(--soft-white)), var(--soft-white));
+    }
 
-      .icon-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+    .design-5 .workspace::before {
+      inset: 7% 14% 8% 10%;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--fern) 26%, transparent);
+    }
 
-      .speech-bubble-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .design-5 .workspace::after {
+      width: clamp(180px, 26%, 240px);
+      height: clamp(180px, 26%, 240px);
+      bottom: 12%;
+      right: 18%;
+      border-radius: 48% 52% 60% 40% / 42% 58% 38% 62%;
+      background: color-mix(in srgb, var(--secondary-sage) 28%, transparent);
+    }
+
+    .design-6 {
+      background: linear-gradient(145deg, color-mix(in srgb, var(--tertiary-sage) 24%, var(--soft-white)), var(--soft-white));
+    }
+
+    .design-6 .workspace::before {
+      inset: 5% 8% 6% 8%;
+      border-radius: var(--radius-lg);
+      border: 1px solid color-mix(in srgb, var(--moss) 26%, transparent);
+    }
+
+    .design-6 .workspace::after {
+      width: clamp(240px, 34%, 320px);
+      aspect-ratio: 1;
+      top: 12%;
+      left: 14%;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--secondary-sage) 26%, transparent);
+    }
+
+    .design-7 {
+      background: linear-gradient(135deg, color-mix(in srgb, var(--secondary-sage) 18%, var(--soft-white)), var(--soft-white));
+    }
+
+    .design-7 .workspace::before {
+      inset: 7% 12% 7% 12%;
+      border-radius: 32% 68% 60% 40% / 42% 58% 48% 52%;
+      background: color-mix(in srgb, var(--hover-sage) 60%, transparent);
+    }
+
+    .design-7 .workspace::after {
+      inset: 6% 10% 74% 10%;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--forest-shadow) 18%, transparent);
+    }
+
+    .design-8 {
+      background: linear-gradient(150deg, color-mix(in srgb, var(--tertiary-sage) 32%, var(--soft-white)), var(--soft-white));
+    }
+
+    .design-8 .workspace::before {
+      width: clamp(200px, 28%, 260px);
+      aspect-ratio: 1;
+      top: 18%;
+      left: 18%;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--hover-sage) 70%, transparent);
+    }
+
+    .design-8 .workspace::after {
+      inset: 7% 10% 8% 12%;
+      border-radius: var(--radius-md);
+      background: color-mix(in srgb, var(--soft-white) 86%, var(--tertiary-sage) 14%);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-sage) 50%, transparent);
+    }
+
+    .design-9 {
+      background: linear-gradient(155deg, color-mix(in srgb, var(--dried-clay) 38%, var(--soft-white)), var(--soft-white));
+    }
+
+    .design-9 .workspace::before {
+      inset: 6% 12% 9% 12%;
+      border-radius: var(--radius-lg);
+      box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--amber) 28%, transparent);
+    }
+
+    .design-9 .workspace::after {
+      width: clamp(220px, 30%, 280px);
+      aspect-ratio: 1;
+      bottom: 14%;
+      right: 14%;
+      border-radius: 42% 58% 56% 44% / 50% 46% 54% 50%;
+      background: color-mix(in srgb, var(--amber) 24%, transparent);
+    }
+
+    .design-10 {
+      background: linear-gradient(140deg, color-mix(in srgb, var(--fern) 30%, var(--soft-white)), var(--soft-white));
+    }
+
+    .design-10 .workspace::before {
+      inset: 5% 10% 10% 10%;
+      border-radius: var(--radius-lg);
+      border: 1px solid color-mix(in srgb, var(--primary-sage) 30%, transparent);
+    }
+
+    .design-10 .workspace::after {
+      width: clamp(220px, 30%, 280px);
+      aspect-ratio: 1;
+      top: 18%;
+      left: 18%;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--secondary-sage) 24%, transparent);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide {
+        transition: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="presentation-header">
-      <div>
-        <p class="eyebrow">Course Presentation</p>
-        <h1>An Introduction to Qualitative Research</h1>
-      </div>
-      <p class="intro-text">
-        A complete facilitator view of the welcome session, course journey, and next steps for future qualitative researchers. Each slide card summarises the on-screen visuals, audience prompts, and presenter guidance.
-      </p>
-    </header>
-
-    <nav aria-label="Presentation parts" class="part-nav">
-      <a href="#part1">Part 1 · We Are All Researchers</a>
-      <a href="#part2">Part 2 · What You Will Learn</a>
-      <a href="#part3">Part 3 · Support &amp; Next Steps</a>
-    </nav>
-
-    <section class="part" id="part1">
-      <header>
-        <h2>Part 1 · The Introduction — We Are All Researchers</h2>
-        <p>Invite learners into the theme, build connection, and surface their prior experiences.</p>
-      </header>
-
-      <article class="slide" id="slide1" data-slide-id="Slide 1">
-        <h3>Welcome &amp; Grounding Exercise</h3>
-        <figure class="full-bleed-image">
-          <img src="pexels-calming-nature-image.jpg" alt="A serene landscape." />
-        </figure>
-        <div class="grounding-text">
-          <p>Welcome, dear students. We'll begin when everyone has arrived.</p>
-          <p>Thank you for your patience.</p>
-          <p>Take a deep breath in.</p>
-          <p>Hold.</p>
-          <p>Slowly release.</p>
-          <p>Take one more deep breath in.</p>
-          <p>Hold.</p>
-          <p>Slowly release.</p>
-        </div>
-      </article>
-
-      <article class="slide" id="slide2" data-slide-id="Slide 2">
-        <h3>A Little About You — Who's in the Room?</h3>
-        <div class="two-column">
-          <div class="column">
-            <h4>I'm a student studying...</h4>
-            <p>(Space for audience answers)</p>
-          </div>
-          <div class="column">
-            <h4>I'm a professional working as...</h4>
-            <p>(Space for audience answers)</p>
-          </div>
-        </div>
-        <aside class="list-card">
-          <strong>Presenter note</strong>
-          <p>Invite participants to share in the chat or aloud whether they are currently studying or working, and give a short description of their focus.</p>
-        </aside>
-      </article>
-
-      <article class="slide" id="slide3" data-slide-id="Slide 3">
-        <h3>Sparking Curiosity — What do these people have in common?</h3>
-        <div class="carousel">
-          <div class="carousel-track" role="list">
-            <figure role="listitem">
-              <img src="pexels-interviewer.jpg" alt="An interviewer." />
-              <figcaption>Interviewer</figcaption>
-            </figure>
-            <figure role="listitem">
-              <img src="pexels-journalist.jpg" alt="A journalist." />
-              <figcaption>Journalist</figcaption>
-            </figure>
-            <figure role="listitem">
-              <img src="pexels-writer.jpg" alt="A writer." />
-              <figcaption>Writer</figcaption>
-            </figure>
-            <figure role="listitem">
-              <img src="pexels-filmmaker.jpg" alt="A filmmaker." />
-              <figcaption>Filmmaker</figcaption>
-            </figure>
-            <figure role="listitem">
-              <img src="pexels-community-leader.jpg" alt="A community leader speaking." />
-              <figcaption>Community Leader</figcaption>
-            </figure>
-            <figure role="listitem">
-              <img src="pexels-businessperson.jpg" alt="A businessperson." />
-              <figcaption>Businessperson</figcaption>
-            </figure>
-            <figure role="listitem">
-              <img src="pexels-student-studying.jpg" alt="A student studying." />
-              <figcaption>Student Researcher</figcaption>
-            </figure>
-          </div>
-        </div>
-        <div class="question-box">Who are these people, and what does their job involve?</div>
-      </article>
-
-      <article class="slide" id="slide4" data-slide-id="Slide 4">
-        <h3>The Researchers Among Us</h3>
-        <div class="grid-visual">
-          <figure>
-            <img src="pexels-interviewer.jpg" alt="An interviewer." />
-            <figcaption>Interview planning &amp; listening</figcaption>
-          </figure>
-          <figure>
-            <img src="pexels-journalist.jpg" alt="A journalist." />
-            <figcaption>Journalistic investigation</figcaption>
-          </figure>
-          <figure>
-            <img src="pexels-writer.jpg" alt="A writer." />
-            <figcaption>Writers gathering stories</figcaption>
-          </figure>
-          <figure>
-            <img src="pexels-filmmaker.jpg" alt="A filmmaker." />
-            <figcaption>Filmmakers documenting lives</figcaption>
-          </figure>
-          <figure>
-            <img src="pexels-community-leader.jpg" alt="A community leader speaking." />
-            <figcaption>Community leaders gathering insight</figcaption>
-          </figure>
-          <figure>
-            <img src="pexels-businessperson.jpg" alt="A businessperson." />
-            <figcaption>Business innovators understanding markets</figcaption>
-          </figure>
-          <figure>
-            <img src="pexels-student-studying.jpg" alt="A student studying." />
-            <figcaption>Students conducting academic research</figcaption>
-          </figure>
-        </div>
-        <div class="question-box">What do they typically need to research?</div>
-      </article>
-
-      <article class="slide" id="slide5" data-slide-id="Slide 5">
-        <h3>Real-World Research</h3>
-        <p>Read these examples and invite learners to connect to their own experiences.</p>
-        <div class="speech-bubble-grid">
-          <article>
-            <img src="pexels-filmmaker.jpg" alt="A filmmaker." />
-            <div class="speech-bubble">“I spent a year researching the life of Elias Khoury for my film. I interviewed his family and colleagues and read his diaries.”</div>
-          </article>
-          <article>
-            <img src="pexels-businessperson.jpg" alt="A businessperson." />
-            <div class="speech-bubble">“We opened a tech hub in Ramallah, but we had to do a lot of market research before and throughout the first year. A lot of focus groups and interviews.”</div>
-          </article>
-          <article>
-            <img src="pexels-community-leader.jpg" alt="A community leader speaking." />
-            <div class="speech-bubble">“We had an issue with unemployment in our town, so we got the community together, investigated the problem, and started testing solutions. Two years later, we have a busy training centre!”</div>
-          </article>
-          <article>
-            <img src="pexels-student-studying.jpg" alt="A student studying." />
-            <div class="speech-bubble">“I’m doing my MPhil in urban geography, and I’m studying how local theatre groups use urban spaces for their creative projects. I’ve been part of their community for a few months. I’m learning so much about how they work!”</div>
-          </article>
-        </div>
-        <div class="question-box">Have you or anyone you know done similar projects?</div>
-      </article>
-
-      <article class="slide" id="slide6" data-slide-id="Slide 6">
-        <h3>The Core Idea</h3>
-        <figure class="icon-centre">
-          <img src="icon-world.svg" alt="An icon of the world or a diverse group of people." />
-        </figure>
-        <p class="question-box">We Are All Researchers.</p>
-      </article>
-
-      <article class="slide" id="slide7" data-slide-id="Slide 7">
-        <h3>Your Research Journey</h3>
-        <div class="question-box">
-          What research projects have you done at school, college, university, or in your community? Consider both formal studies and everyday investigations like finding the best local restaurant.
-        </div>
-      </article>
-
-      <article class="slide" id="slide8" data-slide-id="Slide 8">
-        <h3>Your Motivation</h3>
-        <figure class="icon-centre">
-          <img src="pexels-thoughtful-person.jpg" alt="An image of a person looking thoughtful." />
-        </figure>
-        <div class="question-box">Why do you want to do this course?</div>
-        <label for="motivation-input">Add audience responses</label>
-        <textarea id="motivation-input" rows="3" placeholder="Audience answers" style="padding: var(--space-2); border-radius: var(--radius-sm); border: 1px solid rgba(92,100,85,0.3);"></textarea>
-      </article>
+  <main class="deck" aria-label="Presentation deck with 10 blank slides">
+    <section class="slide design-1" data-index="0">
+      <div class="workspace" aria-hidden="true"></div>
     </section>
-
-    <section class="part" id="part2">
-      <header>
-        <h2>Part 2 · The Course — What You Will Learn</h2>
-        <p>Clarify expectations and illuminate how the programme builds skill and confidence.</p>
-      </header>
-
-      <article class="slide" id="slide9" data-slide-id="Slide 9">
-        <h3>Key Words for Our Journey — What's the Word?</h3>
-        <div class="quiz-layout">
-          <div class="quiz-instructions">
-            <h4>Your Task: Choose the Right Word</h4>
-            <p>Read each meaning carefully and choose the correct word from the two options (A or B).</p>
-          </div>
-          <div class="quiz-item">
-            <p><strong>Definition:</strong> “The rules about what is right and wrong in research. It means being fair and making sure you don't harm the people you study.”</p>
-            <div class="quiz-options">
-              <span>A. Ethics</span>
-              <span>B. Theory</span>
-            </div>
-          </div>
-          <div class="quiz-item">
-            <p><strong>Definition:</strong> “A type of research that explores ideas, feelings, and experiences. It uses words, stories, and pictures, not just numbers.”</p>
-            <div class="quiz-options">
-              <span>A. Analysis</span>
-              <span>B. Qualitative</span>
-            </div>
-          </div>
-          <div class="quiz-item">
-            <p><strong>Definition:</strong> “The process of looking closely at the information you collected to find patterns, themes, and important ideas.”</p>
-            <div class="quiz-options">
-              <span>A. Analysis</span>
-              <span>B. Qualitative</span>
-            </div>
-          </div>
-          <div class="quiz-item">
-            <p><strong>Definition:</strong> “A big idea or a set of ideas that helps you understand your topic. It's like a map that guides your research.”</p>
-            <div class="quiz-options">
-              <span>A. Ethics</span>
-              <span>B. Theory</span>
-            </div>
-          </div>
-          <div class="quiz-item">
-            <p><strong>Definition:</strong> “A specific way to do analysis where you look for repeated ideas or topics (called 'themes') in your interviews or notes.”</p>
-            <div class="quiz-options">
-              <span>A. Thematic Analysis</span>
-              <span>B. Qualitative</span>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="slide" id="slide10" data-slide-id="Slide 10">
-        <h3>Your Course Journey — From Curiosity to Capability</h3>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Unit</th>
-              <th scope="col">Timeline</th>
-              <th scope="col">Topic</th>
-              <th scope="col">What You'll Learn (In Simple Terms)</th>
-              <th scope="col">Key Skills You'll Gain</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Months 1-2</td>
-              <td>Understanding Qualitative Research</td>
-              <td>Learn the basics of “qualitative” research (exploring ideas and experiences) and how it differs from research that uses numbers.</td>
-              <td>Describe key features of qualitative research.<br />Know when to use this type of research.<br />Understand how “theory” guides your work.</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Months 3-4</td>
-              <td>The Art of the Interview</td>
-              <td>Master one-to-one interviewing, a core research skill. We’ll cover how to plan, arrange, and conduct great interviews, even on sensitive topics.</td>
-              <td>Explain when and how to use interviews.<br />Design an effective interview guide.<br />Set up and conduct a professional interview.</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Months 5-6</td>
-              <td>Research Ethics</td>
-              <td>Discover how to conduct research responsibly and ethically, ensuring you protect the people you are working with.</td>
-              <td>(Learning outcomes to be tailored and confirmed by the lecturer.)</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Months 7-8</td>
-              <td>Analysing Your Data</td>
-              <td>Learn how to find patterns and meaning in the information you've gathered. You'll get hands-on practice analysing real qualitative data.</td>
-              <td>Describe different approaches to analysis.<br />Understand and perform a “thematic” analysis.<br />Ensure your analysis is thorough and reliable.</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Months 9-11</td>
-              <td>Designing Your Own Study</td>
-              <td>Put everything together to design your own qualitative research study from start to finish, from the first question to the final plan.</td>
-              <td>Write clear and focused research questions.<br />Plan a complete qualitative research study.<br />Present a compelling summary of your study design.</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-
-      <article class="slide" id="slide11" data-slide-id="Slide 11">
-        <h3>Course Modules at a Glance</h3>
-        <div class="list-card">
-          <strong>For Your Reference: Our Course Modules</strong>
-          <ul>
-            <li>Unit 1: Understanding Qualitative Research</li>
-            <li>Unit 2: The Art of the Interview</li>
-            <li>Unit 3: Research Ethics</li>
-            <li>Unit 4: Analysing Your Data</li>
-            <li>Unit 5: Designing Your Own Study</li>
-          </ul>
-        </div>
-        <aside class="list-card">
-          <strong>Presenter note</strong>
-          <p>Offer this quick overview before checking understanding on the next slide.</p>
-        </aside>
-      </article>
-
-      <article class="slide" id="slide12" data-slide-id="Slide 12">
-        <h3>Let's Check Our Understanding — A Quick Quiz</h3>
-        <figure class="icon-centre">
-          <img src="pexels-thoughtful-person.jpg" alt="An image of a person looking thoughtful." />
-        </figure>
-        <div class="list-card">
-          <strong>Presenter asks:</strong>
-          <ul>
-            <li>Which unit introduces the fundamentals of the course?</li>
-            <li>When do you focus on analysing research?</li>
-            <li>When do we learn about how to avoid causing harm in our work?</li>
-            <li>When do we put all our skills into practice to design a project?</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="slide" id="slide13" data-slide-id="Slide 13">
-        <h3>Your Interests — What Are You Most Excited About?</h3>
-        <p>Revisit the course roadmap and invite learners to share their curiosity.</p>
-        <table aria-describedby="slide10">
-          <thead>
-            <tr>
-              <th scope="col">Unit</th>
-              <th scope="col">Timeline</th>
-              <th scope="col">Topic</th>
-              <th scope="col">Key Skills You'll Gain</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Months 1-2</td>
-              <td>Understanding Qualitative Research</td>
-              <td>Describe key features · Know when to use qualitative research · Understand theory</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Months 3-4</td>
-              <td>The Art of the Interview</td>
-              <td>Explain interview use · Design guides · Conduct professional interviews</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Months 5-6</td>
-              <td>Research Ethics</td>
-              <td>Protect participants · Align with ethical standards</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Months 7-8</td>
-              <td>Analysing Your Data</td>
-              <td>Explore approaches · Practise thematic analysis · Ensure reliability</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Months 9-11</td>
-              <td>Designing Your Own Study</td>
-              <td>Write questions · Plan a study · Present your design</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="question-box">Which unit sounds the most interesting to you, and why?</div>
-      </article>
+    <section class="slide design-2" data-index="1">
+      <div class="workspace" aria-hidden="true"></div>
     </section>
-
-    <section class="part" id="part3">
-      <header>
-        <h2>Part 3 · Support, Benefits &amp; Next Steps</h2>
-        <p>Demonstrate wrap-around support and guide learners toward enrolment.</p>
-      </header>
-
-      <article class="slide" id="slide14" data-slide-id="Slide 14">
-        <h3>Dedicated Language Support — We're Here to Help You Succeed</h3>
-        <figure class="icon-centre">
-          <img src="icon-writing-support.svg" alt="An icon representing writing, language, or support." />
-        </figure>
-        <div class="list-card">
-          <p><strong>EAP Support:</strong> We provide English for Academic Purposes (EAP) support throughout the course.</p>
-          <p><strong>Structure:</strong> Each lesson is 90 minutes long, with an additional 30 minutes of homework.</p>
-          <p><strong>Our Goal:</strong> We will help you understand and analyse the advanced academic texts you will read.</p>
-        </div>
-      </article>
-
-      <article class="slide" id="slide15" data-slide-id="Slide 15">
-        <h3>Assessment and Certification — Marking Your Progress</h3>
-        <div class="icon-grid">
-          <article>
-            <img src="icon-book.svg" alt="A book icon." />
-            <strong>Monthly Assessments</strong>
-            <p>Every month, you’ll produce work that we will assess to track your progress.</p>
-          </article>
-          <article>
-            <img src="icon-script.svg" alt="A script icon." />
-            <strong>Certificates</strong>
-            <p>You will receive a Certificate of Completion for every module.</p>
-          </article>
-          <article>
-            <img src="icon-presentation.svg" alt="A presentation icon." />
-            <strong>Final Project</strong>
-            <p>At the end of the course, you will produce a major research project and earn a Final Certificate.</p>
-          </article>
-        </div>
-      </article>
-
-      <article class="slide" id="slide16" data-slide-id="Slide 16">
-        <h3>How Will This Course Benefit You? — Your Future, Enhanced</h3>
-        <div class="icon-list">
-          <article>
-            <img src="icon-university.svg" alt="University icon." />
-            <strong>Boost University Applications &amp; Scholarship Essays</strong>
-          </article>
-          <article>
-            <img src="icon-postgraduate.svg" alt="Postgraduate studies icon." />
-            <strong>Prepare for Postgraduate Studies (Master's, PhD)</strong>
-          </article>
-          <article>
-            <img src="icon-critical-thinking.svg" alt="Critical thinking icon." />
-            <strong>Gain Critical Thinking &amp; Analytical Skills for Any Career</strong>
-          </article>
-        </div>
-      </article>
-
-      <article class="slide" id="slide17" data-slide-id="Slide 17">
-        <h3>Your Questions — Q&amp;A</h3>
-        <p>Pause and invite questions before sharing the enrolment link.</p>
-        <div class="interactive-table">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Question</th>
-                <th scope="col">Answer</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <aside class="list-card">
-          <strong>Presenter note</strong>
-          <p>Welcome any questions and capture the highlights so everyone can refer back.</p>
-        </aside>
-      </article>
-
-      <article class="slide" id="slide18" data-slide-id="Slide 18">
-        <h3>Let's Get Started! — Ready to Join?</h3>
-        <ol class="instructions-list">
-          <li>Please open the chat window.</li>
-          <li>I will send a link to a Google Form.</li>
-          <li>If you want to join the course, please take the next 15–20 minutes to fill in the form.</li>
-        </ol>
-      </article>
-
-      <article class="slide" id="slide19" data-slide-id="Slide 19">
-        <h3>Thank You &amp; Closing Moment</h3>
-        <figure class="full-bleed-image">
-          <img src="pexels-calming-nature-image.jpg" alt="A serene landscape." />
-        </figure>
-        <div class="grounding-text">
-          <p>Let's take one final, deep breath together.</p>
-          <p>Breathe in... and out.</p>
-          <p>Thank you for your time and curiosity today.</p>
-        </div>
-        <footer>
-          (Contact information or next steps at the bottom of the slide.)
-        </footer>
-      </article>
+    <section class="slide design-3" data-index="2">
+      <div class="workspace" aria-hidden="true"></div>
     </section>
+    <section class="slide design-4" data-index="3">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+    <section class="slide design-5" data-index="4">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+    <section class="slide design-6" data-index="5">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+    <section class="slide design-7" data-index="6">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+    <section class="slide design-8" data-index="7">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+    <section class="slide design-9" data-index="8">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+    <section class="slide design-10" data-index="9">
+      <div class="workspace" aria-hidden="true"></div>
+    </section>
+  </main>
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let current = 0;
 
-    <footer class="presentation-footer">
-      All images sourced from Pexels.com
-    </footer>
-  </div>
+    function showSlide(index) {
+      slides.forEach((slide, idx) => {
+        slide.dataset.active = String(idx === index);
+      });
+    }
+
+    function move(offset) {
+      current = (current + offset + slides.length) % slides.length;
+      showSlide(current);
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        move(1);
+      }
+
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        move(-1);
+      }
+    });
+
+    showSlide(current);
+  </script>
 </body>
 </html>
