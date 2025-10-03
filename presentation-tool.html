@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELT Presentation Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!--
+  README FOR LESSON GENERATION LLM
+
+  Welcome! You are generating content for the 'Presenter.html' slide deck. To ensure your lesson content renders correctly and without visual errors, please adhere to the following guidelines precisely.
+
+  **GENERAL RULES:**
+  1.  **Text Overspill:** Be concise. This template is not designed for paragraphs of text. Use bullet points and short sentences. If content is too long for one slide, split it across two or more slides.
+  2.  **Structure Adherence:** Every slide is a `<section>` element. The first class attribute MUST define the slide type (e.g., `<section class="slide-aims">`).
+  3.  **Content Areas:** Inside each slide `<section>`, place content within the predefined `<div>` containers (e.g., `<div class="title">`, `<div class="rubric">`, `<div class="content">`). Do not add content outside of these.
+
+  **SLIDE-SPECIFIC GUIDELINES:**
+
+  - **`slide-title`**:
+    - Use `<h1>` for the main title and `<h2>` for the subtitle.
+    - Example: `<div class="content"><h1>Lesson 5: Present Perfect</h1><h2>An Introduction</h2></div>`
+
+  - **`slide-aims`**:
+    - Title: "Lesson Aims", "Objectives", etc.
+    - Rubric: "By the end of this lesson, you will be able to..."
+    - Content: Use a `<ul>` with no more than 5 `<li>` items.
+
+  - **`slide-text-image-left/right`**:
+    - The content `<div>` will be split into two child `<div>`s: `class="text-container"` and `class="image-container"`.
+    - In `image-container`, use an `<img>` tag with a placeholder source: `<img src="https://via.placeholder.com/400x300" alt="Describe image here">`.
+    - Keep text in `text-container` to a maximum of 4 short bullet points or one short paragraph (under 60 words).
+
+  - **`slide-full-bleed-image`**:
+    - Specify the background image in the section tag: `style="background-image: url('https://via.placeholder.com/800x600');"`.
+    - The content `<div>` is for a text overlay. Use an `<h1>` or `<h2>` and keep it under 15 words.
+
+  - **`slide-gap-fill`**:
+    - Title: e.g., "Complete the Sentences".
+    - Rubric: "Fill in the gaps with the correct word."
+    - Content: Provide text inside a `<p>` tag. To create a blank, use a `<span>` with the class 'gap': `I went to the <span class="gap"></span> yesterday.` Or use an input: `<input type="text" class="gap-input" />`.
+
+  - **`slide-multiple-choice`**:
+    - Title: The question itself.
+    - Content: Use a `<ul>` with the class `mc-options`. Each `<li>` is a clickable option.
+    - Example: `<ul class="mc-options"><li>Option A</li><li>Option B</li></ul>`
+
+  - **`slide-classify` / `slide-matching`**:
+    - The content area will have two `div`s: `class="column-a"` and `class="column-b"`.
+    - Each column should contain a `<ul>` of items to be matched. Use an equal number of `<li>` items in each list.
+
+  - **`slide-grouping`**:
+    - The content area has two parts: `<div class="categories">` and `<div class="word-bank">`.
+    - In `categories`, create divs for each category: `<div class="category-box">Fruits</div>`.
+    - In `word-bank`, create divs for each word: `<div class="word-item" draggable="true">Apple</div>`.
+
+  - **`slide-pelmanism`**:
+    - The content area is a single `<div class="pelmanism-grid">`.
+    - For each card, provide a `<div class="card">` with two children: `<div class="front">?</div>` and `<div class="back">Matching Content</div>`. Create pairs. For an 8-card grid, you will need 4 pairs.
+
+  - **`slide-role-card-pair`**:
+    - The content area has two `div`s: `class="role-card"` for Student A and another `class="role-card"` for Student B.
+    - Inside each card, use `<h4>` for the role (e.g., "Student A: The Customer") and a `<p>` for the instructions.
+
+  - **`slide-embed`**:
+    - Title: "Video Activity" or similar.
+    - Rubric: "Watch the video and answer the questions on the next slide."
+    - Content: Place an `<iframe>` tag here. Use a standard YouTube embed code as a placeholder.
+
+  By following these rules, you will create well-structured lessons that are visually appealing and functionally robust.
+  -->
+  <style>
+    :root {
+      --bg: #f4f2ec;
+      --surface: #ffffff;
+      --surface-soft: #f8f6ef;
+      --ink: #2f3329;
+      --ink-muted: #5c6455;
+      --accent: #8aa77b;
+      --accent-strong: #5c7d53;
+      --highlight: #e7dac3;
+      --shadow: 0 10px 30px rgba(36, 42, 32, 0.08);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --space-1: 0.5rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --space-6: 3rem;
+      font-size: 16px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Nunito", system-ui, sans-serif;
+      line-height: 1.6;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Playfair Display", "Nunito", serif;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      margin: 0 0 var(--space-3);
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin: 0 0 var(--space-2);
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+      margin: 0 0 var(--space-2);
+    }
+
+    p {
+      margin: 0 0 var(--space-2);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    a {
+      color: var(--accent-strong);
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.12);
+    }
+
+    th, td {
+      padding: 0.65rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(92, 125, 83, 0.12);
+    }
+
+    th {
+      background: rgba(138, 167, 123, 0.16);
+      font-weight: 700;
+    }
+
+    .presentation-shell {
+      position: relative;
+      display: grid;
+      grid-template-columns: 3fr 1.2fr;
+      gap: var(--space-4);
+      padding: var(--space-4);
+      height: 100vh;
+    }
+
+    .slides-wrapper {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .slides-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+
+    .slides-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .slide-indicator {
+      font-weight: 600;
+      color: var(--accent-strong);
+    }
+
+    .navigation-hint {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-left: auto;
+      margin-right: var(--space-3);
+    }
+
+    .slides {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-auto-rows: auto;
+      gap: var(--space-3);
+      background: var(--surface-soft);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+      height: 100%;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .slide.active {
+      display: grid;
+    }
+
+    .slide .title,
+    .slide .rubric,
+    .slide .content {
+      grid-column: span 12;
+    }
+
+    .slide .title h2,
+    .slide .title h1 {
+      margin: 0;
+    }
+
+    .slide .rubric {
+      font-weight: 600;
+      color: var(--ink-muted);
+      background: rgba(138, 167, 123, 0.14);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .slide .content {
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.08);
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .slide-title .content {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      gap: var(--space-2);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .slide-title .content h1 {
+      font-size: clamp(3rem, 5vw, 4rem);
+      color: var(--accent-strong);
+    }
+
+    .slide-title .content h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--ink-muted);
+    }
+
+    .slide-full-bleed-image {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .slide-full-bleed-image .content {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      align-self: flex-end;
+      border-radius: var(--radius);
+      color: white;
+    }
+
+    .slide-text-image-left .content,
+    .slide-text-image-right .content,
+    .slide-two-column .content,
+    .slide-three-column .content {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .slide-text-image-left .text-container,
+    .slide-text-image-right .text-container {
+      grid-column: span 6;
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .slide-text-image-left .image-container,
+    .slide-text-image-right .image-container {
+      grid-column: span 6;
+      align-self: center;
+    }
+
+    .slide-text-image-right .text-container {
+      order: 1;
+    }
+
+    .slide-text-image-right .image-container {
+      order: 2;
+    }
+
+    .slide-text-image-left .text-container {
+      order: 2;
+    }
+
+    .slide-text-image-left .image-container {
+      order: 1;
+    }
+
+    .slide-two-column .content > div {
+      grid-column: span 6;
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.08);
+    }
+
+    .slide-three-column .content > div {
+      grid-column: span 4;
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.08);
+    }
+
+    .slide-section-divider .content {
+      display: grid;
+      place-items: center;
+      background: rgba(138, 167, 123, 0.16);
+      color: var(--accent-strong);
+      font-size: clamp(2rem, 4vw, 3rem);
+      border-radius: var(--radius);
+      box-shadow: none;
+      padding: var(--space-5);
+      text-align: center;
+    }
+
+    .slide-gap-fill .gap {
+      display: inline-block;
+      min-width: 6ch;
+      border-bottom: 2px dotted rgba(92, 125, 83, 0.4);
+      margin: 0 0.25rem;
+    }
+
+    .gap-input {
+      border: none;
+      border-bottom: 2px solid rgba(92, 125, 83, 0.5);
+      background: transparent;
+      padding: 0.25rem 0.5rem;
+      min-width: 6ch;
+      font-size: 1rem;
+    }
+
+    .mc-options {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .mc-options li {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(138, 167, 123, 0.12);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .mc-options li:hover {
+      background: rgba(92, 125, 83, 0.22);
+    }
+
+    .slide-classify .content,
+    .slide-grouping .content {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .slide-classify .column-a,
+    .slide-classify .column-b {
+      grid-column: span 6;
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.08);
+    }
+
+    .slide-grouping .categories {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-2);
+    }
+
+    .category-box {
+      background: rgba(138, 167, 123, 0.18);
+      padding: var(--space-3);
+      border-radius: var(--radius-sm);
+      min-height: 110px;
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.12);
+      font-weight: 600;
+    }
+
+    .slide-grouping .word-bank {
+      grid-column: span 12;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .word-item {
+      padding: 0.4rem 0.75rem;
+      background: var(--surface);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      cursor: grab;
+    }
+
+    .category-box.drop-target {
+      outline: 3px dashed rgba(92, 125, 83, 0.45);
+    }
+
+    .pelmanism-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-2);
+    }
+
+    .pelmanism-grid .card {
+      position: relative;
+      perspective: 1000px;
+      height: 120px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .pelmanism-grid .card-inner {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .pelmanism-grid .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .pelmanism-grid .front,
+    .pelmanism-grid .back {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-sm);
+      background: rgba(138, 167, 123, 0.18);
+      backface-visibility: hidden;
+      font-weight: 700;
+    }
+
+    .pelmanism-grid .back {
+      background: var(--surface);
+      transform: rotateY(180deg);
+    }
+
+    .role-card {
+      background: var(--surface-soft);
+      padding: var(--space-3);
+      border-radius: var(--radius);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.12);
+    }
+
+    .slide-role-card-pair .content {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .slide-role-card-pair .role-card {
+      grid-column: span 6;
+    }
+
+    .slide-vocabulary-focus .content {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .vocab-primary {
+      grid-column: span 12;
+      background: rgba(138, 167, 123, 0.16);
+      padding: var(--space-3);
+      border-radius: var(--radius);
+      text-align: center;
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 700;
+    }
+
+    .vocab-details {
+      grid-column: span 8;
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .vocab-image {
+      grid-column: span 4;
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.08);
+    }
+
+    .scramble-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .scramble-piece {
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(138, 167, 123, 0.18);
+      cursor: grab;
+      user-select: none;
+      box-shadow: var(--shadow);
+    }
+
+    .annotations-panel {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .annotations-panel header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+
+    .annotations-panel h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .annotations-list {
+      flex: 1;
+      overflow-y: auto;
+      display: grid;
+      gap: var(--space-3);
+      padding-right: var(--space-1);
+    }
+
+    .annotation-card {
+      background: var(--surface-soft);
+      border-left: 4px solid var(--accent-strong);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      box-shadow: inset 0 0 0 1px rgba(92, 125, 83, 0.1);
+      position: relative;
+    }
+
+    .annotation-card .snippet {
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .annotation-card .note-text {
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+    }
+
+    .connector-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    mark[data-annotation-id] {
+      padding: 0.1rem 0.15rem;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    .control-panel {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      z-index: 4;
+      display: flex;
+      gap: var(--space-1);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 0.25rem 0.5rem;
+      box-shadow: var(--shadow);
+      align-items: center;
+    }
+
+    .control-panel button {
+      border: none;
+      background: rgba(138, 167, 123, 0.18);
+      color: var(--accent-strong);
+      font-weight: 700;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .control-panel button:hover {
+      background: rgba(92, 125, 83, 0.3);
+    }
+
+    .add-note-btn {
+      position: fixed;
+      padding: 0.35rem 0.75rem;
+      background: var(--accent-strong);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: var(--shadow);
+      z-index: 5;
+    }
+
+    .add-note-btn.hidden {
+      display: none;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(36, 42, 32, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-4);
+      max-width: 420px;
+      width: 90%;
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .color-options {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .color-option {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .color-option input {
+      opacity: 0;
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+    }
+
+    .color-option span {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+
+    .color-option input:checked + span {
+      box-shadow: 0 0 0 3px rgba(92, 125, 83, 0.45);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-2);
+    }
+
+    .modal-actions button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .modal-actions .save-btn {
+      background: var(--accent-strong);
+      color: white;
+    }
+
+    .modal-actions .cancel-btn {
+      background: rgba(138, 167, 123, 0.18);
+      color: var(--accent-strong);
+    }
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: var(--radius-sm);
+    }
+
+    @media (max-width: 1200px) {
+      .presentation-shell {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr) 320px;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      body {
+        overflow: auto;
+      }
+
+      .annotations-panel {
+        min-height: 320px;
+      }
+
+      .slides-wrapper {
+        min-height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="presentation-shell">
+    <svg class="connector-layer" id="connector-layer"></svg>
+    <div class="slides-wrapper">
+      <div class="control-panel">
+        <button id="save-presentation" aria-label="Save presentation">Save</button>
+        <button id="load-presentation" aria-label="Load presentation">Load</button>
+        <input type="file" id="load-input" accept="application/json" hidden>
+      </div>
+      <div class="slides-header">
+        <h3>Lesson Slides</h3>
+        <div class="navigation-hint">Use ← → keys</div>
+        <div class="slide-indicator" id="slide-indicator">Slide 1 of 20</div>
+      </div>
+      <div class="slides" id="slides" tabindex="0">
+        <section class="slide slide-title" data-slide-index="0">
+          <div class="content">
+            <h1>Exploring Descriptive Language</h1>
+            <h2>Upper-Intermediate English</h2>
+          </div>
+        </section>
+
+        <section class="slide slide-aims" data-slide-index="1">
+          <div class="title"><h2>Lesson Aims</h2></div>
+          <div class="rubric">By the end of this lesson, you will be able to...</div>
+          <div class="content">
+            <ul>
+              <li>Identify vivid descriptive vocabulary in short texts.</li>
+              <li>Evaluate how sensory language shapes tone.</li>
+              <li>Create descriptive sentences using precise adjectives.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide slide-text-image-right" data-slide-index="2">
+          <div class="title"><h2>Model Text Snapshot</h2></div>
+          <div class="rubric">Read the excerpt and note the language that appeals to the senses.</div>
+          <div class="content">
+            <div class="text-container">
+              <p>The market buzzed with life as vendors called out, their voices blending with the aroma of toasted spices.</p>
+              <ul>
+                <li>Highlight the verbs that create movement.</li>
+                <li>Which adjectives appeal to smell or sound?</li>
+              </ul>
+            </div>
+            <div class="image-container">
+              <img src="https://via.placeholder.com/400x300" alt="Busy street market">
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-text-image-left" data-slide-index="3">
+          <div class="title"><h2>Noticing Details</h2></div>
+          <div class="rubric">Compare the two sentences and decide which is more vivid.</div>
+          <div class="content">
+            <div class="image-container">
+              <img src="https://via.placeholder.com/400x300" alt="Mountain landscape">
+            </div>
+            <div class="text-container">
+              <ul>
+                <li>The mountain was tall.</li>
+                <li>The jagged peak sliced into the cloudless sky.</li>
+                <li>Which description paints the clearest picture?</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-two-column" data-slide-index="4">
+          <div class="title"><h2>Describing with Senses</h2></div>
+          <div class="rubric">Match sensory categories with descriptive phrases.</div>
+          <div class="content">
+            <div>
+              <h3>Sense</h3>
+              <ul>
+                <li>Sight</li>
+                <li>Sound</li>
+                <li>Smell</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Example Phrase</h3>
+              <ul>
+                <li>Glimmering city lights</li>
+                <li>Distant waves crashing</li>
+                <li>Sweet citrus breeze</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-three-column" data-slide-index="5">
+          <div class="title"><h2>Adjective Upgrade</h2></div>
+          <div class="rubric">Choose the most expressive alternative for each basic adjective.</div>
+          <div class="content">
+            <div>
+              <h3>Basic</h3>
+              <ul>
+                <li>Big</li>
+                <li>Nice</li>
+                <li>Cold</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Option A</h3>
+              <ul>
+                <li>Immense</li>
+                <li>Pleasant</li>
+                <li>Chilly</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Option B</h3>
+              <ul>
+                <li>Monumental</li>
+                <li>Delightful</li>
+                <li>Freezing</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-full-bleed-image" data-slide-index="6" style="background-image: url('https://via.placeholder.com/1200x700');">
+          <div class="content">
+            <h2>"Words paint worlds."</h2>
+          </div>
+        </section>
+
+        <section class="slide slide-table" data-slide-index="7">
+          <div class="title"><h2>Descriptive Language Toolkit</h2></div>
+          <div class="rubric">Use the table to review collocations with descriptive adjectives.</div>
+          <div class="content">
+            <table>
+              <thead>
+                <tr><th>Adjective</th><th>Common Collocation</th><th>Example</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Vibrant</td><td>Vibrant hues</td><td>The artist chose vibrant hues for the mural.</td></tr>
+                <tr><td>Fragrant</td><td>Fragrant blossoms</td><td>Fragrant blossoms drifted through the open window.</td></tr>
+                <tr><td>Whispering</td><td>Whispering breeze</td><td>A whispering breeze rustled the trees.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="slide slide-diagram-flowchart" data-slide-index="8">
+          <div class="title"><h2>Building a Descriptive Paragraph</h2></div>
+          <div class="rubric">Follow the flowchart to plan your writing.</div>
+          <div class="content">
+            <img src="https://via.placeholder.com/900x400" alt="Flowchart for descriptive writing steps">
+          </div>
+        </section>
+
+        <section class="slide slide-embed" data-slide-index="9">
+          <div class="title"><h2>Video Inspiration</h2></div>
+          <div class="rubric">Watch the video and note three sensory phrases you hear.</div>
+          <div class="content">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video placeholder" allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <section class="slide slide-section-divider" data-slide-index="10">
+          <div class="content">Guided Practice</div>
+        </section>
+
+        <section class="slide slide-gap-fill" data-slide-index="11">
+          <div class="title"><h2>Complete the Sentences</h2></div>
+          <div class="rubric">Fill in the gaps with the descriptive words from the box.</div>
+          <div class="content">
+            <p>The <span class="gap"></span> sunset spilled across the sky like molten gold.</p>
+            <p>A <span class="gap"></span> aroma drifted from the bakery doorway.</p>
+            <p>The forest floor was carpeted with <span class="gap"></span> leaves.</p>
+          </div>
+        </section>
+
+        <section class="slide slide-multiple-choice" data-slide-index="12">
+          <div class="title"><h2>Which sentence is most descriptive?</h2></div>
+          <div class="rubric">Choose the option that creates the clearest image.</div>
+          <div class="content">
+            <ul class="mc-options">
+              <li>A bird sat on the branch.</li>
+              <li>A tiny robin perched on the frost-tipped branch.</li>
+              <li>The bird was very small.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide slide-classify" data-slide-index="13">
+          <div class="title"><h2>Classify the Expressions</h2></div>
+          <div class="rubric">Sort each phrase according to its sensory focus.</div>
+          <div class="content">
+            <div class="column-a">
+              <h3>Visual Imagery</h3>
+              <ul>
+                <li>Glittering shoreline</li>
+                <li>Silver mist</li>
+              </ul>
+            </div>
+            <div class="column-b">
+              <h3>Auditory Imagery</h3>
+              <ul>
+                <li>Thundering applause</li>
+                <li>Soft lullaby</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-grouping" data-slide-index="14">
+          <div class="title"><h2>Group the Vocabulary</h2></div>
+          <div class="rubric">Drag each word into the most suitable sensory category.</div>
+          <div class="content">
+            <div class="categories">
+              <div class="category-box" data-category="sight">Sight</div>
+              <div class="category-box" data-category="sound">Sound</div>
+              <div class="category-box" data-category="smell">Smell</div>
+            </div>
+            <div class="word-bank">
+              <div class="word-item" draggable="true">dazzling</div>
+              <div class="word-item" draggable="true">mellow</div>
+              <div class="word-item" draggable="true">pungent</div>
+              <div class="word-item" draggable="true">sparkling</div>
+              <div class="word-item" draggable="true">echoing</div>
+              <div class="word-item" draggable="true">fragrant</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-pelmanism" data-slide-index="15">
+          <div class="title"><h2>Pelmanism: Match the Pairs</h2></div>
+          <div class="rubric">Flip the cards to pair each adjective with its image.</div>
+          <div class="content">
+            <div class="pelmanism-grid">
+              <div class="card" data-pair="1">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Radiant</div>
+                </div>
+              </div>
+              <div class="card" data-pair="1">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Sunlit valley</div>
+                </div>
+              </div>
+              <div class="card" data-pair="2">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Aromatic</div>
+                </div>
+              </div>
+              <div class="card" data-pair="2">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Freshly baked bread</div>
+                </div>
+              </div>
+              <div class="card" data-pair="3">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Thunderous</div>
+                </div>
+              </div>
+              <div class="card" data-pair="3">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Waterfall roar</div>
+                </div>
+              </div>
+              <div class="card" data-pair="4">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Velvety</div>
+                </div>
+              </div>
+              <div class="card" data-pair="4">
+                <div class="card-inner">
+                  <div class="front">?</div>
+                  <div class="back">Rose petal</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-role-card-single" data-slide-index="16">
+          <div class="title"><h2>Role Card: Tour Guide</h2></div>
+          <div class="rubric">Use descriptive language to guide visitors through the art gallery.</div>
+          <div class="content">
+            <div class="role-card">
+              <p><strong>Character:</strong> Gallery Guide</p>
+              <p><strong>Situation:</strong> Leading a group through an evening exhibition.</p>
+              <p><strong>Task:</strong> Describe three paintings using sensory details.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-role-card-pair" data-slide-index="17">
+          <div class="title"><h2>Role Play Cards</h2></div>
+          <div class="rubric">Students work in pairs to role-play a travel review interview.</div>
+          <div class="content">
+            <div class="role-card">
+              <h4>Student A: Travel Blogger</h4>
+              <p>Describe your favourite destination using at least three sensory phrases.</p>
+            </div>
+            <div class="role-card">
+              <h4>Student B: Podcast Host</h4>
+              <p>Ask follow-up questions to elicit vivid descriptions for your listeners.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-vocabulary-focus" data-slide-index="18">
+          <div class="title"><h2>Vocabulary Focus</h2></div>
+          <div class="rubric">Study the word and prepare to use it in a descriptive sentence.</div>
+          <div class="content">
+            <div class="vocab-primary">LUMINOUS</div>
+            <div class="vocab-details">
+              <p><strong>Definition:</strong> Giving off light; bright or radiant.</p>
+              <p><strong>Part of Speech:</strong> Adjective</p>
+              <p><strong>Example:</strong> The luminous lanterns floated above the river.</p>
+            </div>
+            <div class="vocab-image">
+              <img src="https://via.placeholder.com/250x250" alt="Glowing lanterns">
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-sentence-scramble" data-slide-index="19">
+          <div class="title"><h2>Sentence Scramble</h2></div>
+          <div class="rubric">Reorder the pieces to create a descriptive sentence.</div>
+          <div class="content">
+            <div class="scramble-container" id="scramble-container">
+              <div class="scramble-piece" draggable="true">across the harbour</div>
+              <div class="scramble-piece" draggable="true">Lanterns shimmered</div>
+              <div class="scramble-piece" draggable="true">casting golden ripples</div>
+              <div class="scramble-piece" draggable="true">on the dark water</div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <button class="add-note-btn hidden" id="add-note-btn">+ Add Note</button>
+    </div>
+    <aside class="annotations-panel" aria-label="Annotations">
+      <header>
+        <h3>Annotations</h3>
+        <span id="annotation-count">0</span>
+      </header>
+      <div class="annotations-list" id="annotations-list"></div>
+    </aside>
+  </div>
+
+  <div class="modal-backdrop" id="annotation-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal">
+      <h3>Add Annotation</h3>
+      <div class="color-options" id="color-options">
+        <label class="color-option" style="background: transparent;">
+          <input type="radio" name="highlight-color" value="#fde68a" checked>
+          <span style="background:#fde68a;"></span>
+        </label>
+        <label class="color-option" style="background: transparent;">
+          <input type="radio" name="highlight-color" value="#fca5a5">
+          <span style="background:#fca5a5;"></span>
+        </label>
+        <label class="color-option" style="background: transparent;">
+          <input type="radio" name="highlight-color" value="#86efac">
+          <span style="background:#86efac;"></span>
+        </label>
+        <label class="color-option" style="background: transparent;">
+          <input type="radio" name="highlight-color" value="#93c5fd">
+          <span style="background:#93c5fd;"></span>
+        </label>
+        <label class="color-option" style="background: transparent;">
+          <input type="radio" name="highlight-color" value="#fbcfe8">
+          <span style="background:#fbcfe8;"></span>
+        </label>
+      </div>
+      <label for="annotation-text">Your note</label>
+      <textarea id="annotation-text" rows="4" placeholder="Add guidance or a prompt..."></textarea>
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" id="cancel-annotation">Cancel</button>
+        <button type="button" class="save-btn" id="save-annotation">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slidesEl = document.getElementById('slides');
+    const presentationShell = document.querySelector('.presentation-shell');
+    const slidesWrapper = document.querySelector('.slides-wrapper');
+    let slides = [];
+    const indicator = document.getElementById('slide-indicator');
+    const annotationsList = document.getElementById('annotations-list');
+    const annotationCount = document.getElementById('annotation-count');
+    const connectorLayer = document.getElementById('connector-layer');
+    const addNoteBtn = document.getElementById('add-note-btn');
+    const modal = document.getElementById('annotation-modal');
+    const cancelAnnotationBtn = document.getElementById('cancel-annotation');
+    const saveAnnotationBtn = document.getElementById('save-annotation');
+    const annotationTextArea = document.getElementById('annotation-text');
+    const saveBtn = document.getElementById('save-presentation');
+    const loadBtn = document.getElementById('load-presentation');
+    const loadInput = document.getElementById('load-input');
+
+    let currentSlide = 0;
+    let pendingRange = null;
+    let annotationData = [];
+
+    function refreshSlides() {
+      slides = Array.from(slidesEl.querySelectorAll('.slide'));
+      slides.forEach((slide, idx) => {
+        slide.dataset.slideIndex = idx;
+        slide.addEventListener('scroll', updateConnectors);
+      });
+    }
+
+    function showSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+      if (slides[currentSlide]) {
+        slides[currentSlide].classList.remove('active');
+      }
+      currentSlide = index;
+      if (slides[currentSlide]) {
+        slides[currentSlide].classList.add('active');
+        slides[currentSlide].scrollTop = 0;
+      }
+      indicator.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+      updateConnectors();
+    }
+
+    refreshSlides();
+    if (slides.length) {
+      slides[0].classList.add('active');
+    }
+
+    function handleKeydown(event) {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        showSlide(Math.min(currentSlide + 1, slides.length - 1));
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        showSlide(Math.max(currentSlide - 1, 0));
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+
+    function getSelectionRangeWithinSlides() {
+      const selection = window.getSelection();
+      if (!selection || selection.isCollapsed) return null;
+      const range = selection.getRangeAt(0).cloneRange();
+      const commonAncestor = range.commonAncestorContainer;
+      const slide = commonAncestor.nodeType === 1 ? commonAncestor.closest('.slide') : commonAncestor.parentElement && commonAncestor.parentElement.closest('.slide');
+      if (!slide) return null;
+      return { range, slide };
+    }
+
+    function hideAddNoteButton() {
+      addNoteBtn.classList.add('hidden');
+      addNoteBtn.style.top = '-9999px';
+      addNoteBtn.style.left = '-9999px';
+    }
+
+    slidesEl.addEventListener('mouseup', () => {
+      setTimeout(() => {
+        const result = getSelectionRangeWithinSlides();
+        if (!result) {
+          hideAddNoteButton();
+          return;
+        }
+        const { range } = result;
+        const rect = range.getBoundingClientRect();
+        if (!rect || (rect.width === 0 && rect.height === 0)) {
+          hideAddNoteButton();
+          return;
+        }
+        const top = Math.max(rect.top - 36, 0);
+        const left = Math.max(rect.left, 0);
+        addNoteBtn.style.top = `${top}px`;
+        addNoteBtn.style.left = `${left}px`;
+        addNoteBtn.classList.remove('hidden');
+        pendingRange = range;
+      }, 0);
+    });
+
+    addNoteBtn.addEventListener('click', () => {
+      if (!pendingRange) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      annotationTextArea.value = '';
+      annotationTextArea.focus();
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      annotationTextArea.value = '';
+      hideAddNoteButton();
+      pendingRange = null;
+    }
+
+    cancelAnnotationBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    function getSelectedColor() {
+      const checked = modal.querySelector('input[name="highlight-color"]:checked');
+      return checked ? checked.value : '#fde68a';
+    }
+
+    function createAnnotationCard({ id, text, snippet, color, slideIndex }) {
+      const card = document.createElement('article');
+      card.className = 'annotation-card';
+      card.dataset.annotationId = id;
+      card.dataset.slideIndex = slideIndex;
+      card.style.borderLeftColor = color;
+
+      const snippetEl = document.createElement('div');
+      snippetEl.className = 'snippet';
+      snippetEl.textContent = snippet;
+
+      const noteEl = document.createElement('div');
+      noteEl.className = 'note-text';
+      noteEl.textContent = text;
+
+      card.appendChild(snippetEl);
+      card.appendChild(noteEl);
+      annotationsList.appendChild(card);
+
+      annotationCount.textContent = annotationsList.children.length;
+      return card;
+    }
+
+    function updateConnectors() {
+      if (!connectorLayer) return;
+      const shellRect = presentationShell.getBoundingClientRect();
+      connectorLayer.setAttribute('width', shellRect.width);
+      connectorLayer.setAttribute('height', shellRect.height);
+      connectorLayer.setAttribute('viewBox', `0 0 ${shellRect.width} ${shellRect.height}`);
+      connectorLayer.innerHTML = '';
+      annotationData.forEach((item) => {
+        const mark = slidesEl.querySelector(`mark[data-annotation-id="${item.id}"]`);
+        const card = annotationsList.querySelector(`.annotation-card[data-annotation-id="${item.id}"]`);
+        if (!mark || !card) return;
+        const markRect = mark.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        const startX = markRect.right - shellRect.left;
+        const startY = markRect.top + markRect.height / 2 - shellRect.top;
+        const endX = cardRect.left - shellRect.left;
+        const endY = cardRect.top + cardRect.height / 2 - shellRect.top;
+
+        line.setAttribute('x1', startX);
+        line.setAttribute('y1', startY);
+        line.setAttribute('x2', endX);
+        line.setAttribute('y2', endY);
+        line.setAttribute('stroke', item.color);
+        line.setAttribute('stroke-width', '2');
+        line.setAttribute('stroke-linecap', 'round');
+        connectorLayer.appendChild(line);
+      });
+    }
+
+    function addAnnotation() {
+      if (!pendingRange) return;
+      const color = getSelectedColor();
+      const text = annotationTextArea.value.trim();
+      const snippet = pendingRange.toString().trim().slice(0, 80);
+      if (!snippet) {
+        closeModal();
+        return;
+      }
+      const id = `ann-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      const mark = document.createElement('mark');
+      mark.dataset.annotationId = id;
+      mark.dataset.color = color;
+      mark.style.backgroundColor = color;
+      mark.textContent = pendingRange.toString();
+
+      try {
+        pendingRange.deleteContents();
+        pendingRange.insertNode(mark);
+      } catch (error) {
+        console.error('Unable to create annotation', error);
+        closeModal();
+        return;
+      }
+
+      const slide = mark.closest('.slide');
+      const slideIndex = slide ? parseInt(slide.dataset.slideIndex, 10) : currentSlide;
+
+      const data = { id, text, snippet: mark.textContent, color, slideIndex };
+      annotationData.push(data);
+      createAnnotationCard(data);
+      closeModal();
+      updateConnectors();
+    }
+
+    saveAnnotationBtn.addEventListener('click', addAnnotation);
+
+    function rebuildAnnotationList() {
+      annotationsList.innerHTML = '';
+      annotationData.forEach((item) => {
+        createAnnotationCard(item);
+      });
+      annotationCount.textContent = annotationsList.children.length;
+      updateConnectors();
+    }
+
+    window.addEventListener('resize', updateConnectors);
+    document.addEventListener('scroll', updateConnectors, true);
+
+    function savePresentation() {
+      const data = {
+        slidesHTML: slidesEl.innerHTML,
+        annotationData,
+        currentSlide,
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'elt-presentation.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function enableDragAndDrop() {
+      const wordItems = slidesEl.querySelectorAll('.word-item');
+      const categoryBoxes = slidesEl.querySelectorAll('.category-box');
+
+      wordItems.forEach((item) => {
+        item.addEventListener('dragstart', (event) => {
+          event.dataTransfer.setData('text/plain', item.textContent);
+          event.dataTransfer.effectAllowed = 'move';
+          item.classList.add('dragging');
+        });
+        item.addEventListener('dragend', () => {
+          item.classList.remove('dragging');
+        });
+      });
+
+      categoryBoxes.forEach((box) => {
+        box.addEventListener('dragover', (event) => {
+          event.preventDefault();
+          event.dataTransfer.dropEffect = 'move';
+          box.classList.add('drop-target');
+        });
+        box.addEventListener('dragleave', () => {
+          box.classList.remove('drop-target');
+        });
+        box.addEventListener('drop', (event) => {
+          event.preventDefault();
+          const dragged = slidesEl.querySelector('.word-item.dragging');
+          if (dragged) {
+            box.appendChild(dragged);
+          }
+          box.classList.remove('drop-target');
+          updateConnectors();
+        });
+      });
+    }
+
+    function enableScramble() {
+      const container = document.getElementById('scramble-container');
+      if (!container) return;
+      const pieces = container.querySelectorAll('.scramble-piece');
+      pieces.forEach((piece) => {
+        piece.addEventListener('dragstart', (event) => {
+          event.dataTransfer.setData('text/plain', piece.textContent);
+          event.dataTransfer.setData('application/x-piece-id', piece.dataset.id || piece.textContent);
+          piece.classList.add('dragging');
+        });
+        piece.addEventListener('dragend', () => {
+          piece.classList.remove('dragging');
+        });
+      });
+
+      container.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        const dragging = container.querySelector('.scramble-piece.dragging');
+        if (!dragging) return;
+        const afterElement = getDragAfterElement(container, event.clientX);
+        if (afterElement == null) {
+          container.appendChild(dragging);
+        } else {
+          container.insertBefore(dragging, afterElement);
+        }
+        updateConnectors();
+      });
+    }
+
+    function getDragAfterElement(container, x) {
+      const elements = [...container.querySelectorAll('.scramble-piece:not(.dragging)')];
+      return elements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = x - box.left - box.width / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset, element: child };
+        }
+        return closest;
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function restoreEvents() {
+      refreshSlides();
+      slidesEl.querySelectorAll('.card').forEach((card) => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('flipped');
+        });
+      });
+      enableDragAndDrop();
+      enableScramble();
+    }
+
+    restoreEvents();
+    showSlide(0);
+
+    function loadPresentationFromFile(file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          if (!parsed || !parsed.slidesHTML) {
+            throw new Error('Invalid file format');
+          }
+          slidesEl.innerHTML = parsed.slidesHTML;
+          annotationData = Array.isArray(parsed.annotationData)
+            ? parsed.annotationData.map((item) => ({ ...item }))
+            : [];
+          currentSlide = parsed.currentSlide || 0;
+          connectorLayer.innerHTML = '';
+          restoreEvents();
+          rebuildAnnotationList();
+          if (!slides.length) {
+            return;
+          }
+          currentSlide = Math.min(currentSlide, slides.length - 1);
+          slides.forEach((slide, idx) => {
+            if (idx === currentSlide) {
+              slide.classList.add('active');
+            } else {
+              slide.classList.remove('active');
+            }
+          });
+          showSlide(currentSlide);
+        } catch (error) {
+          alert('Unable to load presentation: ' + error.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    saveBtn.addEventListener('click', savePresentation);
+    loadBtn.addEventListener('click', () => loadInput.click());
+    loadInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        loadPresentationFromFile(file);
+      }
+      event.target.value = '';
+    });
+
+    slidesEl.addEventListener('scroll', updateConnectors);
+    annotationsList.addEventListener('scroll', updateConnectors);
+
+    annotationData = [];
+    rebuildAnnotationList();
+  </script>
+</body>
+</html>
