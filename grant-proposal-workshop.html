@@ -491,6 +491,205 @@
             font-size: var(--step-1);
         }
 
+        .shared-space {
+            display: grid;
+            gap: var(--space-4);
+            background: linear-gradient(160deg, rgba(248, 246, 240, 0.82), rgba(184, 197, 166, 0.14));
+            border-radius: var(--radius-lg);
+            padding: clamp(20px, 2.5vw, 32px);
+            border: 1px solid rgba(122, 132, 113, 0.18);
+            box-shadow: var(--shadow-1);
+        }
+
+        .shared-space-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: var(--space-3);
+        }
+
+        .shared-space-title-group {
+            display: grid;
+            gap: var(--space-2);
+        }
+
+        .shared-space-kicker {
+            margin: 0;
+            font-size: var(--step--1);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--moss);
+            font-weight: 700;
+        }
+
+        .shared-space-title {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+            color: var(--deep-forest);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .shared-space-subtitle {
+            margin: 0;
+            font-size: var(--step-0);
+            color: var(--ink-muted);
+            max-width: 60ch;
+        }
+
+        .chip-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(90, 107, 82, 0.28);
+            background: color-mix(in srgb, var(--soft-white) 85%, white 15%);
+            color: var(--deep-forest);
+            padding: 0.5rem 1rem;
+            font-size: var(--step--1);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+
+        .chip-button:hover,
+        .chip-button:focus-visible {
+            transform: translateY(-1px);
+            box-shadow: var(--ring);
+        }
+
+        .chip-button.ghost {
+            background: transparent;
+            border-color: rgba(90, 107, 82, 0.18);
+            color: inherit;
+            font-size: 0.75rem;
+        }
+
+        .idea-board {
+            display: grid;
+            gap: var(--space-4);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .idea-card {
+            position: relative;
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-1);
+            display: grid;
+            gap: var(--space-3);
+            min-height: 200px;
+            border: 1px solid rgba(90, 107, 82, 0.22);
+            isolation: isolate;
+        }
+
+        .idea-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            opacity: 0.16;
+        }
+
+        .idea-card[data-theme="sage"] {
+            background: linear-gradient(155deg, rgba(122, 132, 113, 0.18), rgba(248, 246, 240, 0.92));
+        }
+
+        .idea-card[data-theme="sage"]::after {
+            background: radial-gradient(120% 120% at 0% 0%, rgba(122, 132, 113, 0.55), transparent 70%);
+        }
+
+        .idea-card[data-theme="amber"] {
+            background: linear-gradient(155deg, rgba(198, 170, 119, 0.22), rgba(248, 244, 234, 0.92));
+            border-color: rgba(198, 170, 119, 0.35);
+        }
+
+        .idea-card[data-theme="amber"]::after {
+            background: radial-gradient(120% 120% at 0% 0%, rgba(198, 170, 119, 0.5), transparent 70%);
+        }
+
+        .idea-card[data-theme="teal"] {
+            background: linear-gradient(155deg, rgba(91, 138, 118, 0.22), rgba(240, 248, 246, 0.92));
+            border-color: rgba(91, 138, 118, 0.35);
+        }
+
+        .idea-card[data-theme="teal"]::after {
+            background: radial-gradient(120% 120% at 0% 0%, rgba(91, 138, 118, 0.5), transparent 70%);
+        }
+
+        .idea-card[data-theme="moss"] {
+            background: linear-gradient(155deg, rgba(110, 122, 103, 0.22), rgba(245, 247, 242, 0.92));
+            border-color: rgba(110, 122, 103, 0.35);
+        }
+
+        .idea-card[data-theme="moss"]::after {
+            background: radial-gradient(120% 120% at 0% 0%, rgba(110, 122, 103, 0.5), transparent 70%);
+        }
+
+        .idea-card[data-theme="cream"] {
+            background: linear-gradient(155deg, rgba(217, 205, 180, 0.22), rgba(254, 252, 247, 0.94));
+            border-color: rgba(217, 205, 180, 0.35);
+        }
+
+        .idea-card[data-theme="cream"]::after {
+            background: radial-gradient(120% 120% at 0% 0%, rgba(217, 205, 180, 0.5), transparent 70%);
+        }
+
+        .idea-card-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: var(--space-2);
+        }
+
+        .idea-card-label {
+            font-family: var(--font-display);
+            font-size: var(--step-1);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--deep-forest);
+        }
+
+        .idea-card-subtitle {
+            margin: 0;
+            font-size: var(--step--1);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--moss);
+        }
+
+        .idea-text {
+            min-height: 120px;
+            padding: var(--space-3);
+            border-radius: var(--radius);
+            border: 1px dashed rgba(90, 107, 82, 0.35);
+            background: color-mix(in srgb, var(--soft-white) 90%, white 10%);
+            font-family: var(--font-body);
+            font-size: var(--step-0);
+            color: var(--forest-shadow);
+            line-height: 1.6;
+            transition: border-color var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+
+        .idea-text:focus {
+            outline: none;
+            border-color: var(--secondary-sage);
+            box-shadow: var(--ring);
+            background: color-mix(in srgb, var(--soft-white) 95%, white 5%);
+        }
+
+        .idea-text:empty::before {
+            content: attr(data-placeholder);
+            color: color-mix(in srgb, var(--forest-shadow) 40%, white 60%);
+            font-style: italic;
+        }
+
         .title_page_content {
             display: flex;
             flex-direction: column;
@@ -806,7 +1005,43 @@
                         </tr>
                     </table>
                     <p><strong>Discuss the final question:</strong> Fatima says, "If we got that grant, we would have a bigger budget." Why does she say this? (To express a real possibility or a hypothetical one?)</p>
-                    <textarea class="note-area" placeholder="Summarize your team's conclusion here..."></textarea>
+                    <div class="shared-space" role="group" aria-label="Decision wall for breakout rooms">
+                        <div class="shared-space-header">
+                            <div class="shared-space-title-group">
+                                <p class="shared-space-kicker">Whole-group capture</p>
+                                <h3 class="shared-space-title">Decision Wall</h3>
+                                <p class="shared-space-subtitle">Record each breakout team's conclusion so you can compare perspectives when everyone returns to the main room.</p>
+                            </div>
+                            <button type="button" class="chip-button" data-add-card="decision-wall-board">+ Add team card</button>
+                        </div>
+                        <div class="idea-board" id="decision-wall-board" data-board data-card-title="Team" data-card-subtitle="Key takeaway" data-placeholder="What was this team's conclusion about the funding option?">
+                            <article class="idea-card" data-card data-theme="sage">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Team 1</span>
+                                    <button type="button" class="chip-button ghost" data-cycle-theme aria-label="Change highlight for Team 1">🎨 Highlight</button>
+                                </header>
+                                <p class="idea-card-subtitle">Key takeaway</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Team 1 conclusion" data-placeholder="Summarize Team 1's recommendation..."></div>
+                            </article>
+                            <article class="idea-card" data-card data-theme="amber">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Team 2</span>
+                                    <button type="button" class="chip-button ghost" data-cycle-theme aria-label="Change highlight for Team 2">🎨 Highlight</button>
+                                </header>
+                                <p class="idea-card-subtitle">Key takeaway</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Team 2 conclusion" data-placeholder="Summarize Team 2's recommendation..."></div>
+                            </article>
+                            <article class="idea-card" data-card data-theme="teal">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Team 3</span>
+                                    <button type="button" class="chip-button ghost" data-cycle-theme aria-label="Change highlight for Team 3">🎨 Highlight</button>
+                                </header>
+                                <p class="idea-card-subtitle">Key takeaway</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Team 3 conclusion" data-placeholder="Summarize Team 3's recommendation..."></div>
+                            </article>
+                        </div>
+                        <p class="shared-space-subtitle">Tip: Invite one spokesperson per team to dictate while you type, or assign a student "scribe" to fill a card.</p>
+                    </div>
                 </div>
             </div>
 
@@ -858,7 +1093,61 @@
                         </span><span>Decision Sprint (3 mins)</span></h3>
                         <p><strong>Scenario:</strong> Your project partner in Gaza has a weak internet connection and needs a quick decision.</p>
                         <p><strong>Task:</strong> Discuss and decide: "If we spent our last $1,000 on new laptops, what would be the main benefit? But if we spent it on advertising, what would be the main benefit?" Decide together what you would do.</p>
-                        <textarea class="note-area" placeholder="Record the decision you reach with your partner..."></textarea>
+                        <div class="shared-space" role="group" aria-label="Trade-off gallery for decision making">
+                            <div class="shared-space-header">
+                                <div class="shared-space-title-group">
+                                    <p class="shared-space-kicker">Shared reasoning map</p>
+                                    <h3 class="shared-space-title">Trade-off Gallery</h3>
+                                    <p class="shared-space-subtitle">Capture the strongest benefits and cautions for each option, then synthesize a final recommendation.</p>
+                                </div>
+                            </div>
+                            <div class="idea-board">
+                                <article class="idea-card" data-card data-theme="amber">
+                                    <header class="idea-card-header">
+                                        <span class="idea-card-label">Laptops</span>
+                                    </header>
+                                    <p class="idea-card-subtitle">Key benefit</p>
+                                    <div class="idea-text" contenteditable="true" role="textbox" aria-label="Benefit of investing in laptops" data-placeholder="What positive outcome do laptops unlock immediately?"></div>
+                                </article>
+                                <article class="idea-card" data-card data-theme="cream">
+                                    <header class="idea-card-header">
+                                        <span class="idea-card-label">Laptops</span>
+                                    </header>
+                                    <p class="idea-card-subtitle">Watch-out</p>
+                                    <div class="idea-text" contenteditable="true" role="textbox" aria-label="Risk of investing in laptops" data-placeholder="Note any risks or opportunity costs for laptops..."></div>
+                                </article>
+                                <article class="idea-card" data-card data-theme="teal">
+                                    <header class="idea-card-header">
+                                        <span class="idea-card-label">Advertising</span>
+                                    </header>
+                                    <p class="idea-card-subtitle">Key benefit</p>
+                                    <div class="idea-text" contenteditable="true" role="textbox" aria-label="Benefit of investing in advertising" data-placeholder="What immediate gains come from advertising?"></div>
+                                </article>
+                                <article class="idea-card" data-card data-theme="moss">
+                                    <header class="idea-card-header">
+                                        <span class="idea-card-label">Advertising</span>
+                                    </header>
+                                    <p class="idea-card-subtitle">Watch-out</p>
+                                    <div class="idea-text" contenteditable="true" role="textbox" aria-label="Risk of investing in advertising" data-placeholder="Capture any concerns or trade-offs for advertising..."></div>
+                                </article>
+                            </div>
+                            <div class="idea-board" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                                <article class="idea-card" data-card data-theme="sage">
+                                    <header class="idea-card-header">
+                                        <span class="idea-card-label">Final Decision</span>
+                                    </header>
+                                    <p class="idea-card-subtitle">What we'll do</p>
+                                    <div class="idea-text" contenteditable="true" role="textbox" aria-label="Final decision" data-placeholder="Synthesize the plan you will report back..."></div>
+                                </article>
+                                <article class="idea-card" data-card data-theme="amber">
+                                    <header class="idea-card-header">
+                                        <span class="idea-card-label">Rationale</span>
+                                    </header>
+                                    <p class="idea-card-subtitle">Why it works</p>
+                                    <div class="idea-text" contenteditable="true" role="textbox" aria-label="Reason for final decision" data-placeholder="Capture the conditional sentence you'll share (If..., we would...)."></div>
+                                </article>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1138,14 +1427,49 @@
                         </svg>
                     </span><span>Reflection & Exit</span></h2>
                     <p class="rubric">In the chatbox, please answer one of these questions.</p>
-                    <ul>
-                        <li>What part of today's main task was the most challenging for you?</li>
-                        <li>How and why might the language in a grant proposal change depending on whether the donor is local (from Palestine) or international (from Germany)? Think about formality, focus on data vs. community stories, etc.</li>
-                        <li>What is one new vocabulary word from today that you want to remember and use?</li>
-                    </ul>
-                    <div class="interactive-card reflection-prompt">
-                        <label for="reflection-response" style="font-weight:700; color:var(--deep-forest);">Draft your chat response before sharing it live:</label>
-                        <textarea id="reflection-response" class="note-area" placeholder="Type your reflection here..."></textarea>
+                    <div class="shared-space" role="group" aria-label="Reflection studio">
+                        <div class="shared-space-header">
+                            <div class="shared-space-title-group">
+                                <p class="shared-space-kicker">Exit ticket prep</p>
+                                <h3 class="shared-space-title">Reflection Studio</h3>
+                                <p class="shared-space-subtitle">Pre-write exemplar responses so you can model language or capture ideas that emerge during the discussion.</p>
+                            </div>
+                        </div>
+                        <div class="idea-board">
+                            <article class="idea-card" data-card data-theme="sage">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Prompt 1</span>
+                                </header>
+                                <p class="idea-card-subtitle">Challenge highlight</p>
+                                <p style="margin:0; font-weight:600; color:var(--deep-forest);">What part of today's main task was the most challenging for you?</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Reflection on challenge" data-placeholder="Capture a sample response or key words you hear..."></div>
+                            </article>
+                            <article class="idea-card" data-card data-theme="amber">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Prompt 2</span>
+                                </header>
+                                <p class="idea-card-subtitle">Audience awareness</p>
+                                <p style="margin:0; font-weight:600; color:var(--deep-forest);">How and why might the language in a grant proposal change depending on whether the donor is local (from Palestine) or international (from Germany)?</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Reflection on adapting language" data-placeholder="Note contrasts in tone, evidence, or storytelling..."></div>
+                            </article>
+                            <article class="idea-card" data-card data-theme="teal">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Prompt 3</span>
+                                </header>
+                                <p class="idea-card-subtitle">Vocabulary anchor</p>
+                                <p style="margin:0; font-weight:600; color:var(--deep-forest);">What is one new vocabulary word from today that you want to remember and use?</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Reflection on vocabulary" data-placeholder="List standout vocabulary with an example sentence..."></div>
+                            </article>
+                        </div>
+                        <div class="idea-board" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                            <article class="idea-card" data-card data-theme="cream">
+                                <header class="idea-card-header">
+                                    <span class="idea-card-label">Chat-ready</span>
+                                </header>
+                                <p class="idea-card-subtitle">Message to post</p>
+                                <div class="idea-text" contenteditable="true" role="textbox" aria-label="Chat-ready response" data-placeholder="Draft the model chat message you'll share with the class..."></div>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1178,7 +1502,7 @@
 
             function updateNav() {
                 currentSlide = Math.max(0, Math.min(currentSlide, totalSlides - 1));
-                
+
                 prevBtn.disabled = currentSlide === 0;
                 nextBtn.disabled = currentSlide === totalSlides - 1;
 
@@ -1191,6 +1515,84 @@
                     progressBar.style.transform = `scaleX(${progress})`;
                 }
             }
+
+            const themePalette = ['sage', 'amber', 'teal', 'moss', 'cream'];
+
+            function cycleTheme(card) {
+                if (!card) return;
+                const currentTheme = card.dataset.theme || themePalette[0];
+                const currentIndex = themePalette.indexOf(currentTheme);
+                const nextTheme = themePalette[(currentIndex + 1) % themePalette.length] || themePalette[0];
+                card.dataset.theme = nextTheme;
+            }
+
+            function createIdeaCard(board) {
+                const baseTitle = board.dataset.cardTitle || 'Idea';
+                const placeholder = board.dataset.placeholder || 'Capture the idea that surfaced...';
+                const subtitle = board.dataset.cardSubtitle || 'Key takeaway';
+                const existingCards = board.querySelectorAll('[data-card]').length;
+                const labelText = `${baseTitle} ${existingCards + 1}`;
+
+                const card = document.createElement('article');
+                card.className = 'idea-card';
+                card.dataset.card = '';
+                card.dataset.theme = themePalette[existingCards % themePalette.length];
+
+                const header = document.createElement('header');
+                header.className = 'idea-card-header';
+
+                const label = document.createElement('span');
+                label.className = 'idea-card-label';
+                label.textContent = labelText;
+
+                const highlightBtn = document.createElement('button');
+                highlightBtn.type = 'button';
+                highlightBtn.className = 'chip-button ghost';
+                highlightBtn.dataset.cycleTheme = '';
+                highlightBtn.setAttribute('aria-label', `Change highlight for ${labelText}`);
+                highlightBtn.textContent = '🎨 Highlight';
+
+                header.append(label, highlightBtn);
+
+                const subtitleEl = document.createElement('p');
+                subtitleEl.className = 'idea-card-subtitle';
+                subtitleEl.textContent = subtitle;
+
+                const textField = document.createElement('div');
+                textField.className = 'idea-text';
+                textField.contentEditable = 'true';
+                textField.setAttribute('role', 'textbox');
+                textField.setAttribute('aria-label', `${labelText} notes`);
+                textField.dataset.placeholder = placeholder;
+
+                card.append(header, subtitleEl, textField);
+                board.appendChild(card);
+
+                if (typeof textField.focus === 'function') {
+                    try {
+                        textField.focus({ preventScroll: false });
+                    } catch (error) {
+                        textField.focus();
+                    }
+                }
+            }
+
+            document.querySelectorAll('[data-add-card]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const boardId = button.dataset.addCard;
+                    const targetBoard = document.getElementById(boardId);
+                    if (!targetBoard) return;
+                    createIdeaCard(targetBoard);
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                const trigger = event.target.closest('[data-cycle-theme]');
+                if (!trigger) return;
+                event.preventDefault();
+                const card = trigger.closest('[data-card]');
+                cycleTheme(card);
+            });
 
             nextBtn.addEventListener('click', () => {
                 if (currentSlide < totalSlides - 1) {
