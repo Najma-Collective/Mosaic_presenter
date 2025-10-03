@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Securing Funding: A Grant Proposal Workshop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;800&family=Questrial&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================================
+           Organic Sage UI — Mobile-first, stable, and soothing
+           Palette preserved; accessibility + mobile ergonomics improved.
+           ===================================================================== */
+
+        /* -------------------------------
+           Design tokens
+        ----------------------------------*/
+        :root {
+          /* Core palette (yours, kept) */
+          --primary-sage: #7A8471;
+          --secondary-sage: #9CAF88;
+          --tertiary-sage: #B8C5A6;
+          --warm-cream: #F8F6F0;
+          --soft-white: #FEFCF7;
+          --forest-shadow: #5A6B52;
+          --border-sage: rgba(122, 132, 113, 0.20);
+          --hover-sage: rgba(156, 175, 136, 0.15);
+
+          /* Extended palette for depth */
+          --deep-forest: #3E4A3A;
+          --moss: #6E7A67;
+          --fern: #8FA081;
+          --dried-clay: #D9CDB4;
+          --amber: #C6AA77;
+          --ink: #2F3A2B;
+          --ink-muted: #5A6B52;
+
+          /* Typography */
+          --font-display: 'Questrial', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif;
+          --font-body: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+          /* Fluid typography scale */
+          --step--1: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
+          --step-0:  clamp(1rem,     0.96rem + 0.22vw, 1.1rem);
+          --step-1:  clamp(1.125rem, 1.07rem + 0.35vw, 1.3rem);
+          --step-2:  clamp(1.375rem, 1.28rem + 0.55vw, 1.6rem);
+          --step-3:  clamp(1.75rem,  1.58rem + 0.95vw, 2.1rem);
+          --step-4:  clamp(2.25rem,  1.98rem + 1.35vw, 2.7rem);
+
+          /* Rhythm */
+          --space-1: 0.25rem;
+          --space-2: 0.5rem;
+          --space-3: 0.75rem;
+          --space-4: 1rem;
+          --space-5: 1.25rem;
+          --space-6: 1.5rem;
+          --space-7: 2rem;
+          --space-8: 2.5rem;
+          --space-9: 3rem;
+
+          /* Shape + elevation */
+          --radius-sm: 10px;
+          --radius: 16px;
+          --radius-lg: 20px;
+          --radius-xl: 28px;
+
+          --shadow-1: 0 1px 2px rgba(34, 41, 32, 0.05), 0 2px 8px rgba(34, 41, 32, 0.06);
+          --shadow-2: 0 4px 18px rgba(34, 41, 32, 0.08), 0 12px 28px rgba(34, 41, 32, 0.06);
+          --shadow-3: 0 10px 40px rgba(34, 41, 32, 0.10), 0 20px 60px rgba(34, 41, 32, 0.08);
+
+          /* Focus ring (AA contrast on cream/white) */
+          --ring: 0 0 0 3px color-mix(in oklab, var(--soft-white) 60%, transparent), 0 0 0 5px color-mix(in srgb, var(--secondary-sage), #2F3A2B 15%);
+
+          /* Motion */
+          --ease-ambient: cubic-bezier(.2,.8,.2,1);
+          --dur-1: 120ms;
+          --dur-2: 200ms;
+          --dur-3: 320ms;
+
+          /* Mobile-safe touch target */
+          --target-min: 44px;
+
+          /* Container max */
+          --container-max: 900px;
+        }
+
+        /* -------------------------------
+           Global reset / mobile stability
+        ----------------------------------*/
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+
+        html {
+          -webkit-text-size-adjust: 100%; /* iOS font scaling fix */
+          text-size-adjust: 100%;
+          hanging-punctuation: first last;
+        }
+
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          min-height: 100dvh; /* mobile address bar safe */
+          font-family: var(--font-body);
+          font-size: var(--step-0);
+          line-height: 1.6;
+          color: var(--forest-shadow);
+          background:
+            radial-gradient(1200px 1200px at -10% -10%, #FFFFFF 0%, transparent 50%),
+            radial-gradient(1200px 1000px at 110% 10%, #FFF8F0 0%, transparent 50%),
+            linear-gradient(135deg, #F8F6F0 0%, #F5F3ED 100%);
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+          overflow-x: hidden;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+          html { scroll-behavior: smooth; }
+        }
+
+        :where(p, h1, h2, h3, h4, h5, h6) {
+          text-wrap: pretty;
+          overflow-wrap: anywhere;
+        }
+
+        img, svg, video, canvas, audio, iframe {
+          display: block;
+          max-width: 100%;
+          height: auto;
+        }
+
+        a { color: var(--primary-sage); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+        a:hover { color: var(--deep-forest); }
+
+        .visually-hidden {
+          position: absolute !important;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
+        /* -------------------------------
+           App shell
+        ----------------------------------*/
+        #app-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: max(var(--space-7), env(safe-area-inset-top)) var(--space-4) var(--space-7);
+          width: 100%;
+          min-height: 100dvh;
+          background:
+            radial-gradient(800px 600px at 20% 0%, rgba(156,175,136,0.08) 0%, transparent 70%),
+            radial-gradient(700px 500px at 80% 100%, rgba(90,107,82,0.06) 0%, transparent 65%);
+        }
+
+        #activity-container {
+          width: 100%;
+          max-width: var(--container-max);
+          background: color-mix(in srgb, var(--soft-white) 88%, white 12%);
+          padding: clamp(24px, 3.2vw, 48px);
+          border-radius: var(--radius-lg);
+          border: 1px solid rgba(122, 132, 113, 0.12);
+          box-shadow: var(--shadow-2);
+          position: relative;
+          isolation: isolate;
+          container-type: inline-size;
+          display: grid;
+          gap: var(--space-6);
+        }
+
+        @supports (backdrop-filter: blur(6px)) {
+          #activity-container {
+            background: color-mix(in srgb, var(--soft-white) 76%, white 24%);
+            backdrop-filter: blur(6px) saturate(1.02);
+          }
+        }
+
+        #activity-container::before {
+          content: "";
+          position: absolute;
+          inset: -1px;
+          border-radius: inherit;
+          background:
+            radial-gradient(1200px 200px at 50% -5%, rgba(156,175,136,0.12), transparent 60%),
+            radial-gradient(800px 1000px at 50% 110%, rgba(122,132,113,0.08), transparent 70%);
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        .screen.hidden { display: none !important; }
+
+        /* -------------------------------
+           Slide Layouts & Typography
+        ----------------------------------*/
+        .slide-content { min-height: 450px; display: grid; gap: var(--space-5); }
+        .columns { display: flex; flex-wrap: wrap; gap: var(--space-7); }
+        .column { flex: 1; min-width: 280px; display: grid; gap: var(--space-3); }
+
+        h1 {
+          font-family: var(--font-display);
+          font-size: var(--step-4);
+          letter-spacing: 0.2px;
+          color: var(--forest-shadow);
+          margin: 0 0 var(--space-2) 0;
+          text-align: center;
+        }
+
+        h2 {
+          font-family: var(--font-display);
+          font-size: var(--step-3);
+          color: var(--deep-forest);
+          margin-bottom: var(--space-4);
+          text-align: center;
+        }
+
+        h3 {
+          font-family: var(--font-display);
+          font-size: var(--step-2);
+          color: var(--forest-shadow);
+          margin: var(--space-6) 0 var(--space-3) 0;
+        }
+
+        .icon-title {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--space-3);
+        }
+
+        .icon-heading {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-3);
+        }
+
+        .icon-badge {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 999px;
+          display: inline-grid;
+          place-items: center;
+          background: linear-gradient(135deg, rgba(156,175,136,0.4), rgba(90,107,82,0.28));
+          color: var(--deep-forest);
+          box-shadow: var(--shadow-1);
+        }
+
+        .icon-badge svg {
+          width: 1.35rem;
+          height: 1.35rem;
+          stroke: currentColor;
+          fill: none;
+          stroke-width: 1.6;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .icon-badge.icon-emerald,
+        .list-icon.icon-emerald { color: var(--primary-sage); }
+        .icon-badge.icon-gold,
+        .list-icon.icon-gold { color: var(--amber); }
+        .icon-badge.icon-forest,
+        .list-icon.icon-forest { color: var(--deep-forest); }
+        .icon-badge.icon-moss,
+        .list-icon.icon-moss { color: var(--moss); }
+        .icon-badge.icon-cream,
+        .list-icon.icon-cream { color: var(--dried-clay); }
+        .icon-badge.icon-teal,
+        .list-icon.icon-teal { color: #5b8a76; }
+
+        .rubric {
+          font-family: var(--font-body);
+          font-size: var(--step-0);
+          font-weight: 500;
+          color: var(--secondary-sage);
+          margin: var(--space-4) 0 var(--space-6) 0;
+          padding: var(--space-3) var(--space-4);
+          background: var(--hover-sage);
+          border-left: 4px solid var(--tertiary-sage);
+          border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+
+        ul, ol {
+            padding-left: var(--space-6);
+            margin-bottom: var(--space-4);
+            display: grid;
+            gap: var(--space-3);
+        }
+        li { margin-bottom: 0; }
+
+        .icon-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .icon-list li {
+            position: relative;
+            padding-left: 3.25rem;
+        }
+
+        .icon-list .list-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(160deg, rgba(156,175,136,0.32), rgba(90,107,82,0.28));
+            box-shadow: var(--shadow-1);
+            color: var(--deep-forest);
+        }
+
+        .icon-list .list-icon svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-6) 0;
+            box-shadow: var(--shadow-1);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+        th, td {
+            padding: var(--space-4);
+            text-align: left;
+            border-bottom: 1px solid var(--border-sage);
+        }
+        th {
+            background-color: var(--hover-sage);
+            color: var(--primary-sage);
+            font-weight: 700;
+        }
+        tr:last-child td { border-bottom: none; }
+        td:empty { background-color: rgba(0,0,0,0.02); }
+
+        td[contenteditable="true"] {
+            background: color-mix(in srgb, var(--soft-white) 80%, white 20%);
+            transition: box-shadow var(--dur-2) var(--ease-ambient), transform var(--dur-2) var(--ease-ambient);
+        }
+
+        td[contenteditable="true"]:focus {
+            outline: none;
+            box-shadow: var(--ring);
+            transform: translateY(-1px);
+        }
+
+        .interactive-card {
+            background: linear-gradient(160deg, rgba(248,246,240,0.85), rgba(184,197,166,0.2));
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-1);
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .highlight-sage {
+            color: var(--primary-sage);
+            font-weight: 700;
+        }
+
+        .breath-sequence {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .breath-sequence ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            justify-content: center;
+        }
+
+        .breath-step {
+            min-width: 110px;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, rgba(156,175,136,0.22), rgba(248,246,240,0.9));
+            text-align: center;
+            font-weight: 700;
+            color: var(--deep-forest);
+            box-shadow: var(--shadow-1);
+        }
+
+        .inline-blank {
+            display: inline-block;
+            min-width: 5.5ch;
+            border-bottom: 2px solid color-mix(in srgb, var(--primary-sage) 70%, white 30%);
+            padding: 0 var(--space-1);
+            margin: 0 var(--space-1);
+            color: var(--deep-forest);
+            font-weight: 600;
+            font-size: 1.05em;
+            cursor: text;
+        }
+
+        .inline-blank:focus {
+            outline: none;
+            box-shadow: 0 2px 0 color-mix(in srgb, var(--amber) 80%, white 20%);
+        }
+
+        .inline-blank:empty::before {
+            content: attr(data-placeholder);
+            color: color-mix(in srgb, var(--forest-shadow) 40%, white 60%);
+            font-weight: 400;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(122, 132, 113, 0.18);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(122,132,113,0.95), rgba(184,197,166,0.95));
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: transform var(--dur-3) var(--ease-ambient);
+        }
+
+        .note-area {
+            width: 100%;
+            min-height: 120px;
+            border: 1px solid var(--border-sage);
+            border-radius: var(--radius);
+            padding: var(--space-3);
+            background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+            font-family: var(--font-body);
+            font-size: var(--step-0);
+            color: var(--forest-shadow);
+            transition: border-color var(--dur-2) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient);
+        }
+
+        .note-area:focus {
+            outline: none;
+            border-color: var(--secondary-sage);
+            box-shadow: var(--ring);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .prompt-card {
+            border: 1px solid var(--border-sage);
+            border-radius: var(--radius);
+            padding: var(--space-4);
+            background: color-mix(in srgb, var(--soft-white) 92%, white 8%);
+            box-shadow: var(--shadow-1);
+            display: grid;
+            gap: var(--space-3);
+        }
+
+        .prompt-card p {
+            margin: 0;
+            font-size: var(--step-0);
+            line-height: 1.7;
+        }
+
+        .prompt-title {
+            font-weight: 700;
+            color: var(--deep-forest);
+            font-size: var(--step-1);
+        }
+
+        .title_page_content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            min-height: 450px;
+            gap: var(--space-4);
+        }
+
+        .title_page_content p {
+            max-width: 38ch;
+            color: var(--ink-muted);
+        }
+
+        /* -------------------------------
+           Buttons
+        ----------------------------------*/
+        .activity-btn {
+          min-height: var(--target-min);
+          padding: 12px 20px;
+          border-radius: 12px;
+          border: 1px solid var(--primary-sage);
+          background: linear-gradient(180deg, color-mix(in srgb, var(--primary-sage) 92%, white 8%), var(--primary-sage));
+          color: #fff;
+          font-weight: 700;
+          font-size: 1rem;
+          letter-spacing: 0.2px;
+          cursor: pointer;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+          user-select: none;
+          transition: transform var(--dur-1) var(--ease-ambient), box-shadow var(--dur-2) var(--ease-ambient), background var(--dur-2) var(--ease-ambient), border-color var(--dur-2) var(--ease-ambient), opacity var(--dur-1) var(--ease-ambient);
+          box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 16px rgba(90, 107, 82, 0.20);
+        }
+
+        .activity-btn:hover {
+          background: linear-gradient(180deg, color-mix(in srgb, var(--forest-shadow) 92%, white 8%), var(--forest-shadow));
+          transform: translateY(-1px);
+          box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 10px 20px rgba(90, 107, 82, 0.22);
+        }
+
+        .activity-btn:active {
+          transform: translateY(0);
+          box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 10px rgba(90, 107, 82, 0.20);
+        }
+
+        .activity-btn:focus-visible {
+          outline: none;
+          box-shadow: var(--ring), 0 8px 16px rgba(90, 107, 82, 0.20);
+        }
+
+        .activity-btn:disabled,
+        .activity-btn[disabled] {
+          background: var(--tertiary-sage);
+          border-color: var(--tertiary-sage);
+          color: color-mix(in srgb, #fff 70%, var(--soft-white) 30%);
+          cursor: not-allowed;
+          opacity: 0.8;
+          transform: none;
+          box-shadow: none;
+        }
+
+        .activity-btn.secondary {
+          background: transparent;
+          color: var(--primary-sage);
+          border-color: color-mix(in srgb, var(--tertiary-sage) 70%, var(--primary-sage) 30%);
+          box-shadow: none;
+        }
+
+        .activity-btn.secondary:hover { background-color: var(--hover-sage); }
+
+        .activity-btn.secondary:focus-visible {
+          outline: none;
+          box-shadow: var(--ring);
+        }
+
+        .button-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .button-icon svg {
+          width: 1.1rem;
+          height: 1.1rem;
+          stroke: currentColor;
+          fill: none;
+          stroke-width: 1.8;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .controls {
+          margin-top: var(--space-7);
+          display: flex;
+          justify-content: space-between;
+          gap: var(--space-3);
+          align-items: center;
+        }
+
+        #slide-counter {
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: var(--deep-forest);
+        }
+
+        .reflection-prompt textarea {
+            min-height: 140px;
+        }
+
+        @container (min-width: 680px) {
+            .slide-content { min-height: 520px; }
+        }
+
+        @media (max-width: 720px) {
+            .icon-title {
+                flex-direction: column;
+            }
+            .icon-heading {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app-wrapper">
+        <div id="activity-container">
+            <div class="progress-track" role="presentation">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <!-- Slide 1: Title Page -->
+            <div id="slide-1" class="screen">
+                <div class="slide-content title_page_content">
+                    <span class="icon-badge icon-gold" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="3" x2="12" y2="6"></line>
+                            <line x1="12" y1="18" x2="12" y2="21"></line>
+                            <line x1="3" y1="12" x2="6" y2="12"></line>
+                            <line x1="18" y1="12" x2="21" y2="12"></line>
+                        </svg>
+                    </span>
+                    <h1>Securing Funding: A Grant Proposal Workshop</h1>
+                    <h2 class="icon-title"><span class="icon-badge icon-teal" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="4" y="5" width="16" height="11" rx="1.8"></rect>
+                            <line x1="2.5" y1="18" x2="21.5" y2="18"></line>
+                            <line x1="9" y1="21" x2="15" y2="21"></line>
+                        </svg>
+                    </span><span>Digital Literacy for Nablus Youth</span></h2>
+                    <p>Navigate this workshop using the buttons below and capture your insights directly on each slide.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Grounding Activity -->
+            <div id="slide-2" class="screen hidden">
+                 <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-emerald" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 16c2-1.5 4-2.5 8-2.5s6 1 8 2.5"></path>
+                            <path d="M6 12c1.4-1.8 3.6-3 6-3s4.6 1.2 6 3"></path>
+                            <path d="M9 8c1-1.6 2-3 3-4 1 1 2 2.4 3 4"></path>
+                        </svg>
+                    </span><span>Grounding Activity</span></h2>
+                    <p class="rubric">Let's begin with a moment of calm.</p>
+                    <div class="columns">
+                        <div class="column interactive-card">
+                            <h3 class="icon-heading"><span class="icon-badge icon-moss" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 12c2-2.5 5-4 8-4s6 1.5 8 4"></path>
+                                    <path d="M7 15c1.2-1.6 3-2.5 5-2.5s3.8 0.9 5 2.5"></path>
+                                </svg>
+                            </span><span>Breathe In.</span></h3>
+                            <div class="breath-sequence">
+                                <p><span class="highlight-sage">Focus:</span> Roll your shoulders back, soften your jaw, and let your inhale rise for <span class="highlight-sage">four steady counts</span>.</p>
+                                <ul>
+                                    <li class="breath-step">Inhale ×4</li>
+                                    <li class="breath-step">Hold ×4</li>
+                                    <li class="breath-step">Exhale ×4</li>
+                                </ul>
+                            </div>
+                            <h3 class="icon-heading"><span class="icon-badge icon-forest" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 15c2 1.4 4.2 2.1 8 2.1s6-0.7 8-2.1"></path>
+                                    <path d="M6 11c1.4 1.7 3.6 2.7 6 2.7s4.6-1 6-2.7"></path>
+                                </svg>
+                            </span><span>Breathe Out.</span></h3>
+                            <p>As you exhale, imagine releasing any tension that could distract you. Let the breath carry it away and return to a <span class="highlight-sage">calm, collaborative mindset</span>.</p>
+                        </div>
+                        <div class="column">
+                            <img src="https://images.pexels.com/photos/3228685/pexels-photo-3228685.jpeg" alt="A calm person meditating with mountains in the background." style="border-radius: var(--radius-lg);">
+                        </div>
+                    </div>
+                    <p style="text-align:center; font-weight:600; color:var(--deep-forest);">Repeat this 4-4-4 rhythm twice to settle before moving on.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Lesson Aims -->
+            <div id="slide-3" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-gold" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 10l9-5 9 5-9 5-9-5z"></path>
+                            <path d="M5 11.5v3.5l7 4 7-4v-3.5"></path>
+                        </svg>
+                    </span><span>Lesson Aims</span></h2>
+                    <p class="rubric">By the end of this lesson, you will be able to...</p>
+                    <ul class="icon-list">
+                        <li>
+                            <span class="list-icon icon-emerald" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="6"></circle>
+                                    <line x1="15.5" y1="15.5" x2="21" y2="21"></line>
+                                </svg>
+                            </span>
+                            <span>Analyze and compare two different grant proposal templates.</span>
+                        </li>
+                        <li>
+                            <span class="list-icon icon-gold" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 4c3.5 0 6 2.1 6 5.5 0 2-0.9 3.3-2.6 4.5l-3.4 2.5-3.4-2.5C6.9 12.8 6 11.5 6 9.5 6 6.1 8.5 4 12 4z"></path>
+                                    <path d="M12 16v4"></path>
+                                </svg>
+                            </span>
+                            <span>Use the second conditional to discuss hypothetical situations and justify decisions.</span>
+                        </li>
+                        <li>
+                            <span class="list-icon icon-forest" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 15c2-3 4.5-4.5 8-4.5s6 1.5 8 4.5"></path>
+                                    <path d="M6 11c1.5-2 3.5-3 6-3s4.5 1 6 3"></path>
+                                </svg>
+                            </span>
+                            <span>Use connected speech to improve pronunciation and fluency.</span>
+                        </li>
+                        <li>
+                            <span class="list-icon icon-teal" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M6 12l3 3 9-9"></path>
+                                    <path d="M4 16c2 1.8 4.5 3 8 3s6-1.2 8-3"></path>
+                                </svg>
+                            </span>
+                            <span>Collaborate with a team to choose a funding strategy and present your reasoning.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 4: Pre-task A -->
+            <div id="slide-4" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-forest" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="8"></circle>
+                            <path d="M12 7l2 5-5 2z"></path>
+                        </svg>
+                    </span><span>Pre-task A: Activation - Community Needs</span></h2>
+                    <p class="rubric">Work in your breakout rooms for 4 minutes. Discuss the following questions. Be ready to share one key idea in the chat when you return.</p>
+                    <div class="card-grid" role="group" aria-label="Pre-task A discussion prompts">
+                        <div class="prompt-card">
+                            <p class="prompt-title">What are some of the biggest challenges for young people in Nablus today when it comes to education and employment?</p>
+                            <textarea class="note-area" aria-label="Response: challenges for young people in Nablus" placeholder="Type your group's ideas about current challenges..."></textarea>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-title">How could improving digital literacy skills (e.g., coding, social media marketing, online research) help them overcome these challenges?</p>
+                            <textarea class="note-area" aria-label="Response: impact of digital literacy skills" placeholder="Capture how digital literacy could help..."></textarea>
+                        </div>
+                        <div class="prompt-card">
+                            <p class="prompt-title">If you were to start a new community project, what would it be?</p>
+                            <textarea class="note-area" aria-label="Response: new community project idea" placeholder="Describe the community project you would launch..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Listening Task -->
+            <div id="slide-5" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-forest" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 6h16"></path>
+                            <path d="M6 10h12"></path>
+                            <path d="M8 14h8"></path>
+                            <path d="M10 18h4"></path>
+                        </svg>
+                    </span><span>Activity: Listening to a Model</span></h2>
+                    <p class="rubric">You will listen to a dialogue between two NGO workers, Fatima and Yousef. First, listen to understand their final decision. Second, in breakout rooms, use the table to analyze each option.</p>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>EU Culture Grant</th>
+                            <th>Local Business Fund</th>
+                        </tr>
+                        <tr>
+                            <td>Advantage</td>
+                            <td contenteditable="true" aria-label="EU Culture Grant Advantage"></td>
+                            <td contenteditable="true" aria-label="Local Business Fund Advantage"></td>
+                        </tr>
+                        <tr>
+                            <td>Disadvantage</td>
+                            <td contenteditable="true" aria-label="EU Culture Grant Disadvantage"></td>
+                            <td contenteditable="true" aria-label="Local Business Fund Disadvantage"></td>
+                        </tr>
+                    </table>
+                    <p><strong>Discuss the final question:</strong> Fatima says, "If we got that grant, we would have a bigger budget." Why does she say this? (To express a real possibility or a hypothetical one?)</p>
+                    <textarea class="note-area" placeholder="Summarize your team's conclusion here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Slide 6: Language Focus - Analyze the Form -->
+            <div id="slide-6" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-gold" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="4" y="4" width="16" height="4" rx="1.5"></rect>
+                            <rect x="4" y="10" width="16" height="4" rx="1.5"></rect>
+                            <rect x="4" y="16" width="16" height="4" rx="1.5"></rect>
+                        </svg>
+                    </span><span>Activity: Language Focus - Second Conditional</span></h2>
+                    <p class="rubric">Examine the model sentences closely before you craft your own rule.</p>
+                    <div class="interactive-card">
+                        <h3 class="icon-heading"><span class="icon-badge icon-emerald" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="8"></circle>
+                                <path d="M12 4v8l4 2"></path>
+                            </svg>
+                        </span><span>Analyze the Form</span></h3>
+                        <p>Look at these sentences and complete the rule for talking about hypothetical situations:</p>
+                        <ul>
+                            <li>If we <strong>got</strong> that grant, we <strong>would have</strong> a bigger budget.</li>
+                            <li>If we <strong>applied</strong> for it, we <strong>would need</strong> to hire a consultant.</li>
+                        </ul>
+                        <p><strong>Rule:</strong> If + past simple, ... would + <strong>base verb</strong></p>
+                        <textarea class="note-area" placeholder="Write your explanation of the rule in your own words..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Language Focus - Communicative Practice -->
+            <div id="slide-7" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-teal" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 5h10a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H7l-3 3V8a3 3 0 0 1 3-3z"></path>
+                            <path d="M14 13h6v6l-3-3h-3z"></path>
+                        </svg>
+                    </span><span>Activity: Communicative Practice</span></h2>
+                    <p class="rubric">Use the structure to negotiate a decision quickly with your partner.</p>
+                    <div class="interactive-card">
+                        <h3 class="icon-heading"><span class="icon-badge icon-forest" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 12h6l2-3 2 3h6"></path>
+                                <path d="M6 16h12"></path>
+                            </svg>
+                        </span><span>Decision Sprint (3 mins)</span></h3>
+                        <p><strong>Scenario:</strong> Your project partner in Gaza has a weak internet connection and needs a quick decision.</p>
+                        <p><strong>Task:</strong> Discuss and decide: "If we spent our last $1,000 on new laptops, what would be the main benefit? But if we spent it on advertising, what would be the main benefit?" Decide together what you would do.</p>
+                        <textarea class="note-area" placeholder="Record the decision you reach with your partner..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Pronunciation - Notice the Sound -->
+            <div id="slide-8" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-cream" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 8c2-1.5 4.5-2.5 8-2.5s6 1 8 2.5"></path>
+                            <path d="M4 12c2-1.5 4.5-2.5 8-2.5s6 1 8 2.5"></path>
+                            <path d="M4 16c2-1.5 4.5-2.5 8-2.5s6 1 8 2.5"></path>
+                        </svg>
+                    </span><span>Activity: Pronunciation - Connected Speech</span></h2>
+                    <p class="rubric">Tune your ear to linking before you take it into conversation.</p>
+                    <div class="interactive-card">
+                        <h3 class="icon-heading"><span class="icon-badge icon-moss" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12a7 7 0 0 1 7-7"></path>
+                                <path d="M12 5a7 7 0 0 1 7 7"></path>
+                                <path d="M12 19v-7"></path>
+                            </svg>
+                        </span><span>Notice the Sound</span></h3>
+                        <p>Listen. Notice how the final consonant of one word links to the vowel at the start of the next word.</p>
+                        <ul>
+                            <li>based‿on</li>
+                            <li>an‿outcome</li>
+                            <li>in‿addition</li>
+                        </ul>
+                        <textarea class="note-area" placeholder="Describe what you hear or add your own linking examples..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Pronunciation - Dialogue Practice -->
+            <div id="slide-9" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-teal" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 5h9a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3H8l-3 3V8a3 3 0 0 1 3-3z"></path>
+                            <path d="M14 11h5v6l-3-3h-2z"></path>
+                        </svg>
+                    </span><span>Activity: Connected Speech Dialogue</span></h2>
+                    <p class="rubric">Apply the linking you heard by rehearsing short clarifying exchanges.</p>
+                    <div class="interactive-card">
+                        <h3 class="icon-heading"><span class="icon-badge icon-forest" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 9h10"></path>
+                                <path d="M4 13h8"></path>
+                                <path d="M4 17h6"></path>
+                                <path d="M14 9h6v6l-3-2-3 2z"></path>
+                            </svg>
+                        </span><span>Rehearsal Notes</span></h3>
+                        <p><strong>Task:</strong> Work with a partner. Use the phrases to have short clarification dialogues.</p>
+                        <p><strong>Example:</strong><br/>
+                           Student A: The donor wants the report tomorrow.<br/>
+                           Student B: Is that <strong>based‿on</strong> an email you received?<br/>
+                           Student A: Yes, the email just arrived.</p>
+                        <p><strong>Use these ideas for Student A:</strong></p>
+                        <ul>
+                            <li>We need to change the project plan. (Student B asks about <strong>an‿outcome</strong>)</li>
+                            <li>The application is due on Sunday. (Student B asks about <strong>in‿addition</strong>)</li>
+                        </ul>
+                        <textarea class="note-area" placeholder="Write the dialogue you create with your partner..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Main Task -->
+            <div id="slide-10" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-emerald" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 7h16l-8 12z"></path>
+                            <circle cx="12" cy="7" r="2.5"></circle>
+                        </svg>
+                    </span><span>Activity: Main Task - Choosing a Grant Proposal</span></h2>
+                    <p class="rubric">You are a team in a new NGO. In your breakout room, analyze the grant options, decide on the best one, and prepare your justification.</p>
+                    <div class="columns">
+                        <div class="column interactive-card">
+                            <h3 class="icon-heading"><span class="icon-badge icon-gold" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="8" r="4"></circle>
+                                    <path d="M3 20c2-3.5 5.5-5.5 9-5.5s7 2 9 5.5"></path>
+                                </svg>
+                            </span><span>Scenario:</span></h3>
+                            <p>You are part of a team at a new youth-led NGO in Nablus. Your project provides digital literacy training for university graduates to help them find freelance work. You need to secure funding.</p>
+                            <textarea class="note-area" placeholder="Note the needs of your community and stakeholders..."></textarea>
+                        </div>
+                        <div class="column interactive-card">
+                            <h3 class="icon-heading"><span class="icon-badge icon-teal" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="4" y="4" width="16" height="12" rx="2"></rect>
+                                    <path d="M8 8h8"></path>
+                                    <path d="M8 12h6"></path>
+                                </svg>
+                            </span><span>Your Task (10 minutes in breakout rooms):</span></h3>
+                            <ol>
+                                <li><strong>Access the documents:</strong> Your teacher will post a link to a Google Doc in the chat.</li>
+                                <li><strong>Analyze:</strong> Use the comparison table in the document to analyze the pros and cons of Template A (Al-Quds Innovation Fund) and Template B (Digital Futures Foundation).</li>
+                                <li><strong>Decide:</strong> As a group, choose the template that is a better fit for your project.</li>
+                                <li><strong>Prepare:</strong> Prepare a 2-minute justification for your choice. You must use the second conditional. For example: "We chose Template A. If we used Template B, we would have to..."</li>
+                            </ol>
+                            <textarea class="note-area" placeholder="Draft the key points of your justification here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Google Doc Table -->
+            <div id="slide-11" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-gold" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 19v-8"></path>
+                            <path d="M10 19v-12"></path>
+                            <path d="M16 19v-6"></path>
+                            <path d="M4 19h16"></path>
+                        </svg>
+                    </span><span>Google Doc: Comparison Table</span></h2>
+                    <p class="rubric">Use this table to analyze the two funding options.</p>
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Template A: Al-Quds Innovation Fund (Local)</th>
+                            <th>Template B: Digital Futures Foundation (International)</th>
+                        </tr>
+                        <tr>
+                            <td>Funding Amount</td>
+                            <td contenteditable="true" aria-label="Template A Funding Amount">Up to $10,000</td>
+                            <td contenteditable="true" aria-label="Template B Funding Amount">Up to $50,000</td>
+                        </tr>
+                        <tr>
+                            <td>Application Deadline</td>
+                            <td contenteditable="true" aria-label="Template A Application Deadline">In 2 weeks</td>
+                            <td contenteditable="true" aria-label="Template B Application Deadline">In 3 months</td>
+                        </tr>
+                        <tr>
+                            <td>Reporting Requirements</td>
+                            <td contenteditable="true" aria-label="Template A Reporting Requirements">Short quarterly reports</td>
+                            <td contenteditable="true" aria-label="Template B Reporting Requirements">Detailed monthly reports with financial audits</td>
+                        </tr>
+                        <tr>
+                            <td>Focus Area</td>
+                            <td contenteditable="true" aria-label="Template A Focus Area">Must show direct benefit to the local Nablus economy</td>
+                            <td contenteditable="true" aria-label="Template B Focus Area">Must align with global digital skills trends</td>
+                        </tr>
+                    </table>
+                    <textarea class="note-area" placeholder="Add any additional comparison criteria or questions..."></textarea>
+                </div>
+            </div>
+
+            <!-- Slide 12: Discussion Task -->
+            <div id="slide-12" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-forest" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 5h9a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H8l-3 3V8a3 3 0 0 1 3-3z"></path>
+                            <path d="M14 11h5v6l-3-3h-2z"></path>
+                        </svg>
+                    </span><span>Activity: Justify & Discuss</span></h2>
+                    <p class="rubric">You will be paired with another group. Take turns presenting and listening. Your goal is collaborative discussion, not debate.</p>
+                    <div class="columns">
+                        <div class="column interactive-card">
+                            <h3 class="icon-heading"><span class="icon-badge icon-gold" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 7h8l2 3 2-3h4"></path>
+                                    <path d="M6 13h12"></path>
+                                </svg>
+                            </span><span>Group 1: Present for 2 minutes.</span></h3>
+                            <h3 class="icon-heading"><span class="icon-badge icon-emerald" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 4a4 4 0 0 1 4 4c0 2-1.5 3.5-4 5.5-2.5-2-4-3.5-4-5.5a4 4 0 0 1 4-4z"></path>
+                                    <path d="M5 20a7 7 0 0 1 7-7"></path>
+                                </svg>
+                            </span><span>Group 2: Listen for strengths.</span></h3>
+                            <ul>
+                                <li>Find one thing you agree with in their reasoning.</li>
+                                <li>Use these prompts to start a discussion:
+                                    <ul>
+                                        <li>"Tell me more about..." (e.g., ...why you weren't worried about the reporting.)</li>
+                                        <li>"I wonder if..." (e.g., ...if you had more time, you would make the same decision.)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="column interactive-card">
+                            <h3 class="icon-heading"><span class="icon-badge icon-teal" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 7h12l-2-2"></path>
+                                    <path d="M20 17H8l2 2"></path>
+                                </svg>
+                            </span><span>Then, swap roles.</span></h3>
+                            <p><strong>Contingency Plan:</strong></p>
+                            <p>If you finish early, discuss: What would be the biggest challenge in implementing the project with the funding you chose?</p>
+                            <textarea class="note-area" placeholder="Capture insights you hear from the other group..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Homework Grammar -->
+            <div id="slide-13" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-gold" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 5h16v14H4z"></path>
+                            <path d="M8 9h8"></path>
+                            <path d="M8 13h6"></path>
+                        </svg>
+                    </span><span>Homework Practice: Grammar Focus</span></h2>
+                    <p class="rubric">Please complete the 4 activities in the document shared by your teacher. Use these spaces to test your answers before submitting.</p>
+                    <p><strong>Instructions:</strong> Complete the sentences with the correct form of the verb in brackets.</p>
+                    <ol>
+                        <li>If our NGO (have) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for have" data-placeholder="type here"></span> more staff, we (apply) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for apply" data-placeholder="type here"></span> for both grants.</li>
+                        <li>We (be) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for be" data-placeholder="type here"></span> more successful if we (get) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for get" data-placeholder="type here"></span> the international funding.</li>
+                        <li>If the deadline (be) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for be (deadline)" data-placeholder="type here"></span> sooner, we (not have) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for not have" data-placeholder="type here"></span> enough time.</li>
+                        <li>What (you / do) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for you do" data-placeholder="type here"></span> if the donor (ask) <span class="inline-blank" contenteditable="true" role="textbox" aria-label="Verb form for ask" data-placeholder="type here"></span> for more information?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Slide 14: Homework Vocabulary -->
+            <div id="slide-14" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-emerald" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 7h16"></path>
+                            <path d="M4 12h10"></path>
+                            <path d="M4 17h6"></path>
+                        </svg>
+                    </span><span>Homework Practice: Vocabulary</span></h2>
+                    <p class="rubric">Match the terms (a-d) with their definitions (1-4). Use the inline spaces for your letters.</p>
+                    <p>a. Grant proposal, b. Deliverable, c. Funding stream, d. Measurable outcome</p>
+                    <ol>
+                        <li>A specific, tangible product or service that is provided as a result of a project.<span class="inline-blank" contenteditable="true" role="textbox" aria-label="Matching letter for definition 1" data-placeholder="a-d"></span></li>
+                        <li>A source of money for an organization (e.g., a specific grant, donations).<span class="inline-blank" contenteditable="true" role="textbox" aria-label="Matching letter for definition 2" data-placeholder="a-d"></span></li>
+                        <li>A formal document written to request funding.<span class="inline-blank" contenteditable="true" role="textbox" aria-label="Matching letter for definition 3" data-placeholder="a-d"></span></li>
+                        <li>A quantifiable result that shows the project's impact.<span class="inline-blank" contenteditable="true" role="textbox" aria-label="Matching letter for definition 4" data-placeholder="a-d"></span></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Slide 15: Homework Language Use -->
+            <div id="slide-15" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-teal" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 5h12v4H5z"></path>
+                            <path d="M5 11h14v4H5z"></path>
+                            <path d="M5 17h10v4H5z"></path>
+                        </svg>
+                    </span><span>Homework Practice: Language Use</span></h2>
+                    <p class="rubric">Rewrite each sentence using the second conditional. Use the examples to guide your structure.</p>
+                    <p><strong>Instructions:</strong> Rewrite the sentences using the second conditional.</p>
+                    <ol>
+                        <li><strong>We don't have a big budget, so we can't hire another project manager.</strong><br/><em>If we had a big budget, we would hire another project manager.</em></li>
+                        <li>The application is complex, so we need more time to complete it.
+                            <textarea class="note-area" placeholder="Rewrite this sentence using the second conditional..."></textarea>
+                        </li>
+                        <li>Our project doesn't focus on global trends, so we can't apply for that grant.
+                            <textarea class="note-area" placeholder="Rewrite this sentence using the second conditional..."></textarea>
+                        </li>
+                        <li>I am not the director, so I don't make the final decision.
+                            <textarea class="note-area" placeholder="Rewrite this sentence using the second conditional..."></textarea>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Slide 16: Reflection -->
+            <div id="slide-16" class="screen hidden">
+                <div class="slide-content">
+                    <h2 class="icon-title"><span class="icon-badge icon-cream" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3l2.2 4.6 5.1.7-3.7 3.6.9 5.1-4.5-2.4-4.5 2.4.9-5.1-3.7-3.6 5.1-.7z"></path>
+                        </svg>
+                    </span><span>Reflection & Exit</span></h2>
+                    <p class="rubric">In the chatbox, please answer one of these questions.</p>
+                    <ul>
+                        <li>What part of today's main task was the most challenging for you?</li>
+                        <li>How and why might the language in a grant proposal change depending on whether the donor is local (from Palestine) or international (from Germany)? Think about formality, focus on data vs. community stories, etc.</li>
+                        <li>What is one new vocabulary word from today that you want to remember and use?</li>
+                    </ul>
+                    <div class="interactive-card reflection-prompt">
+                        <label for="reflection-response" style="font-weight:700; color:var(--deep-forest);">Draft your chat response before sharing it live:</label>
+                        <textarea id="reflection-response" class="note-area" placeholder="Type your reflection here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="controls">
+                <button id="prev-btn" class="activity-btn secondary"><span class="button-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"></path></svg></span>Previous</button>
+                <span id="slide-counter"></span>
+                <button id="next-btn" class="activity-btn">Next<span class="button-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg></span></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.screen');
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            const progressBar = document.getElementById('progress-bar');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('hidden', i !== index);
+                });
+                updateNav();
+            }
+
+            function updateNav() {
+                currentSlide = Math.max(0, Math.min(currentSlide, totalSlides - 1));
+                
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+
+                if (slideCounter) {
+                   slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+                }
+
+                if (progressBar) {
+                    const progress = (currentSlide + 1) / totalSlides;
+                    progressBar.style.transform = `scaleX(${progress})`;
+                }
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Initialize
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
